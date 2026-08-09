@@ -1,0 +1,391 @@
+protocol:
+  name: BNCI2014_001 Conditional Geometry Anatomy V1
+  version: "1.0"
+  freeze_date: "2026-08-09"
+  timezone: Asia/Seoul
+  seed: 20260809
+  base_commit: f76785d4c06ddc3cf2f1f7a6310d4fb153a19ba9
+  branch: pilot/conditional-geometry-anatomy-v1
+  protocol_path: docs/PROTOCOL_CONDITIONAL_GEOMETRY_V1.md
+  protocol_sha256: ff7143dca8408a73233321fc7219358e48f2336bad0cb63f4e76f8988e77ecce
+  confirmatory_designation: STRICT_CONFIRMATORY
+  prior_non_anatomy_session1_access: true
+  prior_session1_conditional_object_analysis: false
+
+project:
+  output_dir: outputs/bnci2014_001_conditional_geometry_v1
+  cache_dir: cache/bnci2014_001_conditional_geometry_v1
+  discovery_snapshot_dirs:
+    - objects/discovery
+    - tables/discovery
+    - nulls/discovery
+  confirmatory_snapshot_dirs:
+    - objects/confirmatory
+    - tables/confirmatory
+    - nulls/confirmatory
+
+dataset:
+  name: BNCI2014_001
+  discovery_session: 0train
+  confirmatory_session: 1test
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  classes: [left_hand, right_hand, feet, tongue]
+  runs: ["0", "1", "2", "3", "4", "5"]
+  split_runs:
+    A: ["0", "1", "2"]
+    B: ["3", "4", "5"]
+    F: ["0", "1", "2", "3", "4", "5"]
+  eeg_channels:
+    - Fz
+    - FC3
+    - FC1
+    - FCz
+    - FC2
+    - FC4
+    - C5
+    - C3
+    - C1
+    - Cz
+    - C2
+    - C4
+    - C6
+    - CP3
+    - CP1
+    - CPz
+    - CP2
+    - CP4
+    - P1
+    - Pz
+    - P2
+    - POz
+
+preprocessing:
+  bandpass_hz: [8.0, 32.0]
+  epoch_tmin_seconds: 0.0
+  epoch_tmax_seconds: 3.996
+  source_event_interval_seconds: [2.0, 6.0]
+  observed_source_epoch_seconds: [2.0, 5.996]
+  sampling_frequency_hz: 250.0
+  samples_per_trial: 1000
+  resample_hz: null
+  baseline: null
+  covariance_estimator: oas
+  covariance_implementation: pyriemann.estimation.Covariances
+  covariance_backend: sklearn.covariance.oas
+  epoch_cache_dtype: float32
+  covariance_dtype: float64
+  extra_regularization: none
+  eigenvalue_clipping: false
+  symmetrize_covariance: true
+  representation: WHOLE
+  window5_forbidden: true
+
+expected_data:
+  sessions_total: 2
+  trials_per_session: 2592
+  trials_two_sessions: 5184
+  trials_per_subject_session: 288
+  trials_per_subject_session_class: 72
+  runs_per_subject_session: 6
+  trials_per_subject_session_run: 48
+  trials_per_subject_session_run_class: 12
+  split_trials_per_subject:
+    A: 144
+    B: 144
+    F: 288
+  split_trials_per_subject_class:
+    A: 36
+    B: 36
+    F: 72
+  covariance_shape_per_session: [2592, 22, 22]
+  metadata_columns:
+    - covariance_index
+    - sample_index
+    - subject
+    - session
+    - run
+    - trial_id
+    - run_trial_id
+    - trial_uid
+    - class_label
+
+v1_discovery_inputs:
+  paths:
+    frozen_config: outputs/bnci2014_001/frozen_config.yaml
+    dataset_metadata: outputs/bnci2014_001/tables/dataset_metadata.json
+    covariance_summary: outputs/bnci2014_001/tables/covariance_summary.json
+    covariance_sanity: outputs/bnci2014_001/tables/covariance_sanity.csv
+    covariances: cache/bnci2014_001/covariances.npz
+    whole_metadata: cache/bnci2014_001/whole_metadata.csv
+    prepared_epochs: cache/bnci2014_001/prepared_epochs.npz
+    prepared_metadata: cache/bnci2014_001/prepared_metadata.csv
+  hashes:
+    frozen_config_sha256: 41f1ad7b2d80a07ab19436de5ec547dfe63d86a320f06dfd05953620944cb232
+    dataset_metadata_sha256: 57667014302ac6f559fbaa337b20165e849291235621dd8a20d3345360090b30
+    covariance_summary_sha256: 8c57cff5decd012b51dea4215b95fe1ace87d7db6cb0d44fb101c6d915b1a094
+    covariance_sanity_sha256: d4a81b8c15fbbbd1f230a14e7a79482884efb43dabcbda0bc0c95345e6bbc070
+    covariances_file_sha256: c6bd774ac5b3b53c497381433bcc7974af3b54b850a0ac0539aa2f797f6fa997
+    whole_array_content_sha256: 3be57ea13767a407030a7b56541d07a7f4ce4ccbc1f0579720245413067f36a4
+    whole_metadata_sha256: 285eaf926fbfcec8f1228c3fd660b0b0e9ce209a7c5a13d0acd6b4eabdba0a6e
+    prepared_epochs_sha256: 5f59e0cbd18fcd7540715eac685ba997e6fd98fcb8c97f0b237bc07627f4a010
+    prepared_metadata_sha256: 4ce1ce3f6af630dfb8b3ce486900e0d859a00a8f71485ea89a9e6c76305d39ae
+  fallback:
+    covariance_identity_only: true
+    prepared_inputs_must_match: true
+    raw_or_moabb_preunlock_forbidden: true
+    cache_filename: discovery_whole_recomputed.npz
+    metadata_filename: discovery_metadata_recomputed.csv
+
+confirmatory_inputs:
+  raw_moabb_dir: cache/moabb_data
+  raw_files:
+    - subject: 1
+      path: cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A01E.mat
+      bytes: 43772146
+      sha256: 53d415f39c3d7b0c88b894d7b08d99bcdfe855ede63831d3691af1a45607fb62
+    - subject: 2
+      path: cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A02E.mat
+      bytes: 44218409
+      sha256: d63c454005d3a9b41d8440629482e855afc823339bdd0b5721842a7ee9cc7b12
+    - subject: 3
+      path: cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A03E.mat
+      bytes: 42316292
+      sha256: d4229267ec7624fa8bd3af5cbebac17f415f7c722de6cb676748f8cb3b717d97
+    - subject: 4
+      path: cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A04E.mat
+      bytes: 41730824
+      sha256: 81916dff2c12997974ba50ffc311da006ea66e525010d010765f0047e771c86a
+    - subject: 5
+      path: cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A05E.mat
+      bytes: 44392496
+      sha256: 8b357470865610c28b2f1d351beac247a56a856f02b2859d650736eb2ef77808
+    - subject: 6
+      path: cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A06E.mat
+      bytes: 43395510
+      sha256: bf67a40621b74b6af7a986c2f6edfff7fc2bbbca237aadd07b575893032998d1
+    - subject: 7
+      path: cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A07E.mat
+      bytes: 42242294
+      sha256: b9aaec73dcee002fab84ee98e938039a67bf6a3cbf4fc86d5d8df198cfe4c323
+    - subject: 8
+      path: cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A08E.mat
+      bytes: 46282127
+      sha256: 0eedbd89790c7d621c8eef68065ddecf80d437bbbcf60321d9253e2305f294f7
+    - subject: 9
+      path: cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A09E.mat
+      bytes: 44780912
+      sha256: 5d79649a42df9d51215def8ffbdaf1c3f76c54b88b9bbaae721e8c6fd972cc36
+  ordered_manifest_sha256: 3a89a5c702847c6be49e127988c82d710c95e8ff003c2372e7a3b009ea227853
+  total_bytes: 393131010
+  cache_covariances: cache/bnci2014_001_conditional_geometry_v1/confirmatory_whole_covariances.npz
+  cache_metadata: cache/bnci2014_001_conditional_geometry_v1/confirmatory_whole_metadata.csv
+  unlock_filename: outputs/bnci2014_001_conditional_geometry_v1/confirmatory_unlock.json
+
+geometry:
+  primary: AIRM
+  secondary: LE
+  class_order: [left_hand, right_hand, feet, tongue]
+  d_upper_triangle_indices: [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]]
+  g_svec_off_diagonal_scale: sqrt2
+  mean_riemann:
+    implementation: pyriemann.geometry.mean.mean_riemann
+    tol: 1.0e-9
+    maxiter: 100
+    init: null
+    independent_residual: true
+  mean_logeuclid:
+    implementation: pyriemann.geometry.mean.mean_logeuclid
+    custom_closed_form_crosscheck: true
+  shape_degeneracy:
+    epsilon_multiplier: 100.0
+  permutation_rank_tolerance: 1.0e-12
+  permutation_order: python_lexicographic
+  template_aggregation: normalize_sum_of_unit_subject_shapes
+
+hard_gates:
+  finite_nonfinite_count_max: 0
+  symmetry_relative_error_max: 1.0e-12
+  min_eigenvalue_strictly_greater_than: 0.0
+  condition_number_max: 1.0e12
+  airm_karcher_residual_max: 1.0e-7
+  d_centering_relative_error_max: 1.0e-10
+  g_direct_whitened_relative_error_max: 1.0e-10
+  orthogonal_d_relative_error_max: 1.0e-10
+  orthogonal_g_relative_error_max: 1.0e-10
+  permutation_equivariance_relative_error_max: 1.0e-10
+  le_mean_relative_error_max: 1.0e-10
+  le_d_g_identity_relative_error_max: 1.0e-10
+  all_required_rows_must_pass: true
+
+rng:
+  bit_generator: PCG64DXSM
+  seed_sequence_fields: [master_seed, family_tag, phase_tag, replicate_index]
+  replicate_index_base: 0
+  family_tags:
+    label_destruction: 1101
+    semantic_permutation: 1201
+    oracle_rank: 1301
+    subject_bootstrap: 1401
+    orthogonal_gauge: 1501
+  phase_tags:
+    discovery: 0
+    confirmatory: 1
+    paired_common: 2
+  canonical_draw_order: [subject, run]
+
+nulls:
+  label_destruction:
+    replicates: 1999
+    permutation_unit: subject_session_run
+    preserve_label_multiset: true
+    same_plan_airm_le: true
+    batch_size: 8
+    checkpoint_every: 25
+  semantic_permutation:
+    replicates: 100000
+    permutation_pool: all_24_S4_including_identity
+    independent_by_source_subject: true
+    same_subject_permutation_across_splits_geometries_objects: true
+    same_plan_discovery_confirmatory: true
+    batch_size: 5000
+    checkpoint_every_batches: 1
+  oracle_rank:
+    replicates: 1000000
+    candidate_pool: all_24_S4
+    independent_random_true_candidate_by_subject: true
+    same_plan_discovery_confirmatory: true
+    batch_size: 25000
+    checkpoint_every_batches: 1
+  monte_carlo:
+    p_value: plus_one_one_sided_greater_equal
+    effect: observed_minus_null_median
+
+unrelated_reference:
+  enumerate_all_derangements: true
+  expected_derangements: 133496
+  decision_role: descriptive_only
+
+statistics:
+  subject_count: 9
+  group_statistic: median
+  bootstrap:
+    replicates: 20000
+    unit: subject
+    replacement: true
+    statistic: median
+    ci_quantiles: [0.025, 0.975]
+    quantile_method: linear
+    votes_in_decision: false
+  influence:
+    formula: leave_one_subject_out_statistic_minus_full_statistic
+    scope: cached_subject_scores_no_template_refit
+    votes_in_decision: false
+
+stages:
+  objects: [D, G]
+  family_alpha:
+    D: 0.025
+    G: 0.025
+  fixed_sequence: [R, S, P]
+  pass_rule:
+    discovery_effect_strictly_greater_than: 0.0
+    confirmatory_effect_strictly_greater_than: 0.0
+    confirmatory_p_less_equal: 0.025
+    all_hard_gates_pass: true
+  downstream_after_failure: DESCRIPTIVE_ONLY
+  reliability:
+    discovery: cosine_A_B
+    confirmatory: cosine_A_B
+    null: label_destruction
+  shared:
+    discovery: source_A_to_target_B_and_source_B_to_target_A_mean
+    confirmatory: fixed_discovery_F_template_to_target_confirmatory_A_B_mean
+    null: independent_source_subject_semantic_permutation
+  oracle:
+    discovery: source_A_template_target_B_and_source_B_template_target_A_candidate_score_mean
+    confirmatory: fixed_discovery_F_template_to_target_confirmatory_F
+    null: random_true_candidate_rank
+
+decision:
+  primary_geometry: AIRM
+  terminal:
+    both_chains_pass: GO_STRONG
+    d_only_pass: GO_METRIC_ONLY
+    g_only_pass: STOP_TANGENT_ONLY
+    neither_pass: STOP_NO_SHARED_GEOMETRY
+    numerical_failure: UNASSESSED_NUMERICAL_FAILURE
+    data_failure: UNASSESSED_DATA_CONTRACT_FAILURE
+    degenerate_failure: UNASSESSED_DEGENERATE_GEOMETRY
+  le_robustness_labels:
+    identical_chain_pair: AIRM+LE CONSISTENT
+    airm_pass_without_opposite_le_only: AIRM-SPECIFIC
+    airm_both_fail_any_le_pass: LE-ONLY — DOES NOT RESCUE AIRM FAILURE
+    crossed_pattern: AIRM/LE DISCORDANT
+
+outputs:
+  required_root_files:
+    - manifest.json
+    - git_provenance.json
+    - environment.json
+    - confirmatory_unlock.json
+  required_tables:
+    - dataset_contract.csv
+    - covariance_sanity.csv
+    - airm_mean_convergence.csv
+    - le_mean_correctness.csv
+    - centering_isometry_gate.csv
+    - orthogonal_gauge_gate.csv
+    - degenerate_geometry_audit.csv
+    - D_shape_vectors.csv
+    - G_shape_vectors.csv
+    - absolute_geometry_scales.csv
+    - radius_angle_summary.csv
+    - within_subject_reliability.csv
+    - label_destruction_subject_summary.csv
+    - label_destruction_group_summary.csv
+    - unrelated_subject_derangement_summary.csv
+    - loso_templates.csv
+    - cross_subject_shared_geometry.csv
+    - semantic_permutation_null_summary.csv
+    - oracle_permutation_all_24_scores.csv
+    - oracle_permutation_subject_summary.csv
+    - oracle_permutation_group_summary.csv
+    - discovery_confirmatory_comparison.csv
+    - airm_le_robustness.csv
+    - hypothesis_chain_status.csv
+    - subject_bootstrap_summary.csv
+    - leave_one_subject_out_influence.csv
+  required_objects:
+    - airm_marginal_means.npz
+    - airm_class_means.npz
+    - le_marginal_means.npz
+    - le_class_means.npz
+    - D_matrices.npz
+    - G_matrices.npz
+  required_nulls:
+    - label_destruction_group_statistics.npz
+    - semantic_permutation_group_statistics.npz
+    - oracle_rank_null.npz
+  decision_file: confirmatory_decision.json
+  report_file: report/conditional_geometry_anatomy_v1.md
+  report_title: "# BNCI2014_001 Conditional Geometry Anatomy v1"
+  figure_stems:
+    - figure_1_within_subject_reliability
+    - figure_2_reliability_label_null
+    - figure_3_same_vs_unrelated
+    - figure_4_shared_template_similarity
+    - figure_5_D_heatmaps
+    - figure_6_G_heatmaps
+    - figure_7_oracle_permutation_scores
+    - figure_8_oracle_rank_margin
+    - figure_9_subject_forest_influence
+    - figure_10_airm_le_stage_effects
+
+artifact_policy:
+  raw_eeg_tracked: false
+  epoch_cache_tracked: false
+  covariance_cache_tracked: false
+  checkpoint_cache_tracked: false
+  compact_required_null_npz_may_be_tracked: true
+  max_tracked_file_bytes: 95000000
+  discovery_snapshots_immutable_after_unlock: true

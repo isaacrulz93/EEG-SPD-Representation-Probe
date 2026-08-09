@@ -1,0 +1,27 @@
+{
+  "captured_at_utc": "2026-08-09T14:33:56.969944+00:00",
+  "config_sha256": "ca0178be9c5fd168509f48974d2b3e1bbc91b2ba4e8e9e320299fd98dcf765e8",
+  "cpu_count": 10,
+  "os": {
+    "machine": "arm64",
+    "platform": "macOS-26.5.2-arm64-arm-64bit"
+  },
+  "packages": {
+    "mne": "1.12.1",
+    "moabb": "1.5.0",
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "pyriemann": "0.12",
+    "pyyaml": "6.0.3",
+    "scikit_learn": "1.9.0",
+    "scipy": "1.18.0"
+  },
+  "protocol_name": "BNCI2014_001 Conditional Geometry Anatomy V1",
+  "protocol_sha256": "ff7143dca8408a73233321fc7219358e48f2336bad0cb63f4e76f8988e77ecce",
+  "protocol_version": "1.0",
+  "python": {
+    "executable": "/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/.venv/bin/python",
+    "implementation": "CPython",
+    "version": "3.12.8"
+  }
+}
