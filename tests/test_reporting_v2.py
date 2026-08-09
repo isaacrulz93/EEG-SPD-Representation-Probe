@@ -471,3 +471,86 @@ def test_06_secondary_mdm_failure_and_missing_rows_do_not_block_primary_report(
     assert failures.notes.str.contains("MISSING_AFTER_SECONDARY_FAILURE").any()
     assert "synthetic convergence" in result.report_text
     assert "MDM is secondary and does not vote in Q1–Q3" in result.report_text
+
+
+def test_07_primary_failed_row_generates_technical_report_without_available_case_verdict(
+    synthetic_inputs, tmp_path: Path
+) -> None:
+    tables, gate, config = synthetic_inputs
+    tables = {name: frame.copy() for name, frame in tables.items()}
+    t1 = tables["loso_logistic_transductive.csv"]
+    failed_mask = (t1.target_subject == 3) & (t1.geometry == "AIRM")
+    assert failed_mask.sum() == 1
+    t1.loc[failed_mask, "status"] = "FAILED"
+    t1.loc[failed_mask, "convergence_warning"] = True
+    t1.loc[failed_mask, "warning_messages"] = '["STOP: synthetic primary convergence"]'
+    failed_numeric = [
+        "balanced_accuracy",
+        "accuracy",
+        "macro_f1",
+        *(f"recall_{label}" for label in CLASS_ORDER),
+        *(
+            f"confusion_{truth}__{prediction}"
+            for truth in CLASS_ORDER
+            for prediction in CLASS_ORDER
+        ),
+    ]
+    t1.loc[failed_mask, failed_numeric] = np.nan
+    t1.loc[failed_mask, "confusion_matrix_json"] = pd.NA
+
+    output_root = tmp_path / "outputs" / "bnci2014_001_geometry_v2"
+    result = create_reporting_outputs(
+        tables,
+        gate,
+        config,
+        config_sha256=CONFIG_SHA,
+        tables_dir=output_root / "tables",
+        figures_dir=output_root / "figures",
+        report_path=output_root / "report" / "geometry_audit_v2.md",
+    )
+    technical = config["verdicts"]["technical_failure_verdict"]
+    assert result.verdicts.technical_failure is True
+    assert (result.verdicts.q1, result.verdicts.q2, result.verdicts.q3) == (
+        technical,
+        technical,
+        technical,
+    )
+    assert len(result.verdicts.primary_failures) == 1
+    assert result.verdicts.primary_failures.iloc[0].to_dict() == {
+        "source_table": "loso_logistic_transductive.csv",
+        "subject": 3,
+        "geometry": "AIRM",
+        "protocol": "T1",
+        "split": "ALL",
+        "convergence_warning": True,
+        "warning_messages": '["STOP: synthetic primary convergence"]',
+    }
+    assert not (result.summary.row_type == "paired_delta_aggregate").any()
+    decisions = result.summary[result.summary.row_type == "decision_verdict"]
+    assert decisions.verdict.eq(technical).all()
+    assert decisions.formula.str.contains("NOT COMPUTED").all()
+    assert len(result.summary[result.summary.row_type == "primary_logistic_failure"]) == 1
+    airm_ba = result.summary[
+        (result.summary.row_type == "aggregate_metric")
+        & (result.summary.source_table == "loso_logistic_transductive.csv")
+        & (result.summary.geometry == "AIRM")
+        & (result.summary.metric == "balanced_accuracy")
+    ].iloc[0]
+    assert airm_ba["n"] == 8
+    assert "(8/9)" in airm_ba.notes
+
+    figure_1 = result.figure_sources["figure_1_loso_ba_by_subject"]
+    failed_source = figure_1[figure_1.subject == 3].iloc[0]
+    assert failed_source.AIRM_status == "FAILED"
+    assert pd.isna(failed_source.AIRM)
+    figure_2 = result.figure_sources["figure_2_paired_delta_vs_raw"]
+    failed_pair = figure_2[figure_2.subject == 3].iloc[0]
+    assert failed_pair.pair_status_AIRM_vs_RAW == "FAILED"
+    assert pd.isna(failed_pair.delta_AIRM_vs_RAW)
+    assert "STOP: synthetic primary convergence" in result.report_text
+    assert "no 8/9 available-case verdict is permitted" in result.report_text
+    assert "UNASSESSED — TECHNICAL FAILURE" in result.report_text
+    assert (
+        result.verdicts.next_experiment
+        == "preregistered numerical-convergence audit of the fixed unscaled logistic decoder"
+    )

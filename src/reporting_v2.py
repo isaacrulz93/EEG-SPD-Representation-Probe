@@ -89,6 +89,8 @@ class FrozenVerdicts:
     t2_ba: pd.DataFrame
     subject_deltas: pd.DataFrame
     next_experiment: str
+    technical_failure: bool
+    primary_failures: pd.DataFrame
 
 
 @dataclass(frozen=True)
@@ -253,11 +255,28 @@ def _validate_result_table(
         raise ReportingContractError(f"{name} protocol must be exactly {protocol}")
     if set(result["split"].astype(str)) != set(splits):
         raise ReportingContractError(f"{name} splits must be exactly {splits}")
-    if not result["status"].astype(str).eq("PASS").all():
-        raise ReportingContractError(f"{name} contains a non-PASS row")
-    if _strict_bool(result["convergence_warning"], name=f"{name}.convergence_warning").any():
-        raise ReportingContractError(f"{name} contains a convergence warning")
-    _metric_contract(result, name)
+    statuses = set(result["status"].astype(str))
+    if not statuses.issubset({"PASS", "FAILED"}):
+        raise ReportingContractError(f"{name} has invalid primary statuses: {statuses}")
+    passed_rows = result[result["status"].astype(str) == "PASS"]
+    if not passed_rows.empty:
+        if _strict_bool(
+            passed_rows["convergence_warning"],
+            name=f"{name}.convergence_warning",
+        ).any():
+            raise ReportingContractError(
+                f"{name} has a PASS row with a convergence warning"
+            )
+        _metric_contract(passed_rows, name)
+    failed_rows = result[result["status"].astype(str) == "FAILED"]
+    if not failed_rows.empty:
+        for column in (*PRIMARY_METRICS, *RECALL_COLUMNS, *CONFUSION_COLUMNS):
+            numeric = pd.to_numeric(failed_rows[column], errors="coerce")
+            present = numeric.notna()
+            if present.any():
+                raise ReportingContractError(
+                    f"{name}.{column} must be NA for FAILED primary rows"
+                )
     expected = {
         (subject, geometry, metric, split)
         for subject in subjects
@@ -465,11 +484,20 @@ def validate_reporting_inputs(
         config_sha256=config_sha256,
         seed=seed,
     )
-    _assert_t2_ba_aggregate(
-        normalized["loso_logistic_calibration.csv"],
-        tolerance=float(config["evaluation"]["T2"]["equivalent_flat_mean_tolerance"]),
-        name="loso_logistic_calibration",
-    )
+    logistic_t2 = normalized["loso_logistic_calibration.csv"]
+    complete_logistic_groups = [
+        group
+        for _, group in logistic_t2.groupby(
+            ["target_subject", "geometry", "native_metric"], sort=False
+        )
+        if group["status"].astype(str).eq("PASS").all()
+    ]
+    if complete_logistic_groups:
+        _assert_t2_ba_aggregate(
+            pd.concat(complete_logistic_groups, ignore_index=True),
+            tolerance=float(config["evaluation"]["T2"]["equivalent_flat_mean_tolerance"]),
+            name="loso_logistic_calibration",
+        )
     normalized["loso_mdm_transductive.csv"] = _validate_secondary_mdm_table(
         tables["loso_mdm_transductive.csv"],
         "loso_mdm_transductive",
@@ -667,6 +695,50 @@ def _ba_pivot(frame: pd.DataFrame, split: str) -> pd.DataFrame:
     return pivot.sort_index().reset_index()
 
 
+def _status_pivot(frame: pd.DataFrame, split: str) -> pd.DataFrame:
+    selected = frame[frame["split"].astype(str) == split]
+    pivot = selected.pivot(
+        index="target_subject", columns="geometry", values="status"
+    ).reindex(columns=GEOMETRIES)
+    pivot.index.name = "subject"
+    return pivot.sort_index().reset_index()
+
+
+def primary_failure_inventory(
+    t1_primary: pd.DataFrame, t2_primary: pd.DataFrame
+) -> pd.DataFrame:
+    """Return every recorded primary FAILED row without imputing its metrics."""
+
+    records: list[dict[str, Any]] = []
+    for source_table, frame in (
+        ("loso_logistic_transductive.csv", t1_primary),
+        ("loso_logistic_calibration.csv", t2_primary),
+    ):
+        failed = frame[frame["status"].astype(str) == "FAILED"]
+        for _, row in failed.iterrows():
+            records.append(
+                {
+                    "source_table": source_table,
+                    "subject": int(row["target_subject"]),
+                    "geometry": str(row["geometry"]),
+                    "protocol": str(row["protocol"]),
+                    "split": str(row["split"]),
+                    "convergence_warning": bool(row["convergence_warning"]),
+                    "warning_messages": str(row["warning_messages"]),
+                }
+            )
+    columns = (
+        "source_table",
+        "subject",
+        "geometry",
+        "protocol",
+        "split",
+        "convergence_warning",
+        "warning_messages",
+    )
+    return pd.DataFrame.from_records(records, columns=columns)
+
+
 def compute_frozen_verdicts(
     t1_primary: pd.DataFrame,
     t2_primary: pd.DataFrame,
@@ -676,16 +748,61 @@ def compute_frozen_verdicts(
 
     t1 = _ba_pivot(t1_primary, "ALL")
     t2 = _ba_pivot(t2_primary, "AGGREGATE")
+    t1_status = _status_pivot(t1_primary, "ALL")
+    t2_status = _status_pivot(t2_primary, "AGGREGATE")
     if list(t1["subject"]) != list(range(1, 10)) or not t1["subject"].equals(t2["subject"]):
         raise ReportingContractError("verdict inputs must contain paired subjects 1..9")
+    if not t1["subject"].equals(t1_status["subject"]) or not t2["subject"].equals(
+        t2_status["subject"]
+    ):
+        raise ReportingContractError("primary metric/status subject alignment failed")
     tolerance = float(config["verdicts"]["sign_tolerance"])
     deltas = pd.DataFrame({"subject": t1["subject"].astype(int)})
     for geometry in ("LE", "AIRM", "EA"):
-        delta = t1[geometry].to_numpy(dtype=float) - t1["RAW"].to_numpy(dtype=float)
+        available = t1_status["RAW"].eq("PASS") & t1_status[geometry].eq("PASS")
+        raw_delta = (
+            t1[geometry].to_numpy(dtype=float) - t1["RAW"].to_numpy(dtype=float)
+        )
+        delta = np.where(available.to_numpy(dtype=bool), raw_delta, np.nan)
         deltas[f"delta_{geometry}_vs_RAW"] = delta
         deltas[f"category_{geometry}_vs_RAW"] = [
-            _category(float(value), tolerance) for value in delta
+            (
+                _category(float(value), tolerance)
+                if is_available
+                else "unassessed_technical_failure"
+            )
+            for value, is_available in zip(delta, available, strict=True)
         ]
+        deltas[f"pair_status_{geometry}_vs_RAW"] = np.where(
+            available.to_numpy(dtype=bool), "PASS", "FAILED"
+        )
+
+    primary_failures = primary_failure_inventory(t1_primary, t2_primary)
+    if not primary_failures.empty:
+        technical_verdict = str(config["verdicts"]["technical_failure_verdict"])
+        failure_records = primary_failures.to_dict(orient="records")
+        operands = {
+            question: {
+                "calculation_status": "NOT_COMPUTED",
+                "reason": "one_or_more_primary_logistic_rows_failed",
+                "primary_failed_row_count": int(len(primary_failures)),
+                "failed_rows": failure_records,
+                "available_case_verdict_prohibited": True,
+            }
+            for question in ("Q1", "Q2", "Q3")
+        }
+        return FrozenVerdicts(
+            q1=technical_verdict,
+            q2=technical_verdict,
+            q3=technical_verdict,
+            operands=operands,
+            t1_ba=t1,
+            t2_ba=t2,
+            subject_deltas=deltas,
+            next_experiment="preregistered numerical-convergence audit of the fixed unscaled logistic decoder",
+            technical_failure=True,
+            primary_failures=primary_failures,
+        )
 
     q1_cfg = config["verdicts"]["Q1"]
     q1_geometry: dict[str, dict[str, Any]] = {}
@@ -793,6 +910,8 @@ def compute_frozen_verdicts(
         t2_ba=t2,
         subject_deltas=deltas,
         next_experiment=next_experiment,
+        technical_failure=False,
+        primary_failures=primary_failures,
     )
 
 
@@ -934,8 +1053,7 @@ def build_geometry_summary(
     )
     for filename, protocol, split in aggregate_specs:
         selected = tables[filename][tables[filename]["split"].astype(str) == split]
-        if filename.startswith("loso_mdm_"):
-            selected = selected[selected["status"].astype(str) == "PASS"]
+        selected = selected[selected["status"].astype(str) == "PASS"]
         group_columns = ["decoder", "geometry", "native_metric"]
         for keys, group in selected.groupby(group_columns, sort=True, dropna=False):
             decoder, geometry, native_metric = keys
@@ -953,7 +1071,9 @@ def build_geometry_summary(
                         "notes": (
                             "PASS secondary rows only; failures/missing rows are separate inventory records"
                             if filename.startswith("loso_mdm_")
-                            else "nine-subject primary aggregate"
+                            else (
+                                f"PASS primary rows only ({len(group)}/9); no available-case verdict is computed after any primary failure"
+                            )
                         ),
                         **_stats(group[metric]),
                     }
@@ -1016,6 +1136,25 @@ def build_geometry_summary(
             }
         )
 
+    for failure in verdicts.primary_failures.itertuples(index=False):
+        rows.append(
+            {
+                **base,
+                "row_type": "primary_logistic_failure",
+                "source_table": failure.source_table,
+                "protocol": failure.protocol,
+                "decoder": "logistic",
+                "geometry": failure.geometry,
+                "subject": int(failure.subject),
+                "comparator": failure.split,
+                "pass_flag": False,
+                "notes": (
+                    "PRIMARY FAILED; Q1-Q3 unassessed: "
+                    f"{failure.warning_messages}"
+                ),
+            }
+        )
+
     for row in verdicts.subject_deltas.itertuples(index=False):
         for geometry in ("LE", "AIRM", "EA"):
             rows.append(
@@ -1033,29 +1172,35 @@ def build_geometry_summary(
                     "comparator": "RAW",
                     "delta": float(getattr(row, f"delta_{geometry}_vs_RAW")),
                     "sign_category": str(getattr(row, f"category_{geometry}_vs_RAW")),
+                    "notes": (
+                        "descriptive subject pair only; primary technical failure prohibits aggregate/frozen verdict"
+                        if verdicts.technical_failure
+                        else "paired subject operand for frozen verdict"
+                    ),
                 }
             )
-    for geometry in ("LE", "AIRM", "EA"):
-        values = verdicts.subject_deltas[f"delta_{geometry}_vs_RAW"]
-        categories = verdicts.subject_deltas[f"category_{geometry}_vs_RAW"]
-        rows.append(
-            {
-                **base,
-                "row_type": "paired_delta_aggregate",
-                "source_table": "loso_logistic_transductive.csv",
-                "question": "Q1/Q2" if geometry in {"LE", "AIRM"} else "descriptive",
-                "protocol": "T1",
-                "decoder": "logistic",
-                "geometry": geometry,
-                "native_metric": "euclidean_log_svec",
-                "metric": "balanced_accuracy",
-                "comparator": "RAW",
-                **_stats(values),
-                "improved_subjects": int(categories.eq("improved").sum()),
-                "worsened_subjects": int(categories.eq("worsened").sum()),
-                "tied_subjects": int(categories.eq("tied").sum()),
-            }
-        )
+    if not verdicts.technical_failure:
+        for geometry in ("LE", "AIRM", "EA"):
+            values = verdicts.subject_deltas[f"delta_{geometry}_vs_RAW"]
+            categories = verdicts.subject_deltas[f"category_{geometry}_vs_RAW"]
+            rows.append(
+                {
+                    **base,
+                    "row_type": "paired_delta_aggregate",
+                    "source_table": "loso_logistic_transductive.csv",
+                    "question": "Q1/Q2" if geometry in {"LE", "AIRM"} else "descriptive",
+                    "protocol": "T1",
+                    "decoder": "logistic",
+                    "geometry": geometry,
+                    "native_metric": "euclidean_log_svec",
+                    "metric": "balanced_accuracy",
+                    "comparator": "RAW",
+                    **_stats(values),
+                    "improved_subjects": int(categories.eq("improved").sum()),
+                    "worsened_subjects": int(categories.eq("worsened").sum()),
+                    "tied_subjects": int(categories.eq("tied").sum()),
+                }
+            )
 
     formulas = {
         "Q1": "For LE and AIRM separately: mean(BA_g-BA_RAW)>=0.01 AND improved_subjects>=6; combine the two pass flags.",
@@ -1085,7 +1230,11 @@ def build_geometry_summary(
                     sort_keys=True,
                     separators=(",", ":"),
                 ),
-                "formula": formulas[question],
+                "formula": (
+                    "NOT COMPUTED: primary logistic technical failure prohibits available-case verdicts."
+                    if verdicts.technical_failure
+                    else formulas[question]
+                ),
             }
         )
     summary = pd.DataFrame.from_records(rows)
@@ -1099,6 +1248,9 @@ def build_figure_sources(
     tables: Mapping[str, pd.DataFrame], verdicts: FrozenVerdicts
 ) -> dict[str, pd.DataFrame]:
     figure_1 = verdicts.t1_ba.copy()
+    t1_status = _status_pivot(tables["loso_logistic_transductive.csv"], "ALL")
+    for geometry in GEOMETRIES:
+        figure_1[f"{geometry}_status"] = t1_status[geometry].astype(str)
     figure_2 = verdicts.subject_deltas.copy()
     figure_3 = verdicts.t1_ba.merge(
         verdicts.t2_ba,
@@ -1106,6 +1258,10 @@ def build_figure_sources(
         suffixes=("_T1", "_T2"),
         validate="one_to_one",
     )
+    t2_status = _status_pivot(tables["loso_logistic_calibration.csv"], "AGGREGATE")
+    for geometry in GEOMETRIES:
+        figure_3[f"{geometry}_status_T1"] = t1_status[geometry].astype(str)
+        figure_3[f"{geometry}_status_T2"] = t2_status[geometry].astype(str)
     means = tables["geometry_mean_comparison.csv"]
     figure_4 = means[
         (means["protocol"].astype(str) == "T1")
@@ -1200,11 +1356,31 @@ def _plot_figures(sources: Mapping[str, pd.DataFrame], figures_dir: Path) -> Non
     fig, ax = plt.subplots(figsize=(8.4, 4.8))
     for geometry in GEOMETRIES:
         ax.plot(frame["subject"], frame[geometry], marker="o", label=geometry, color=colors[geometry])
+        failed = frame[f"{geometry}_status"].ne("PASS")
+        if failed.any():
+            ax.scatter(
+                frame.loc[failed, "subject"],
+                np.full(int(failed.sum()), 0.03),
+                marker="x",
+                s=60,
+                linewidths=1.8,
+                color=colors[geometry],
+            )
     ax.set(xlabel="Target subject", ylabel="Balanced accuracy", title="Primary logistic T1")
     ax.set_xticks(subjects)
     ax.set_ylim(0.0, 1.0)
     ax.grid(alpha=0.25)
     ax.legend(ncol=4, frameon=False)
+    failed_total = sum(int(frame[f"{geometry}_status"].ne("PASS").sum()) for geometry in GEOMETRIES)
+    if failed_total:
+        ax.text(
+            0.01,
+            0.98,
+            f"FAILED primary rows: {failed_total} (x at y=0.03)",
+            transform=ax.transAxes,
+            va="top",
+            color="#b2182b",
+        )
     _save_figure(fig, figures_dir / f"{FIGURE_STEMS[0]}.png")
 
     frame = sources[FIGURE_STEMS[1]]
@@ -1218,10 +1394,33 @@ def _plot_figures(sources: Mapping[str, pd.DataFrame], figures_dir: Path) -> Non
             label=f"{geometry} - RAW",
             color=colors[geometry],
         )
+        unavailable = frame[f"pair_status_{geometry}_vs_RAW"].ne("PASS")
+        if unavailable.any():
+            ax.scatter(
+                frame.loc[unavailable, "subject"],
+                np.zeros(int(unavailable.sum())),
+                marker="x",
+                s=60,
+                linewidths=1.8,
+                color=colors[geometry],
+            )
     ax.set(xlabel="Target subject", ylabel="Paired BA delta", title="Primary logistic T1")
     ax.set_xticks(subjects)
     ax.grid(alpha=0.25)
     ax.legend(ncol=3, frameon=False)
+    unavailable_total = sum(
+        int(frame[f"pair_status_{geometry}_vs_RAW"].ne("PASS").sum())
+        for geometry in ("LE", "AIRM", "EA")
+    )
+    if unavailable_total:
+        ax.text(
+            0.01,
+            0.98,
+            f"Unavailable failed pairs: {unavailable_total} (x at zero; no verdict)",
+            transform=ax.transAxes,
+            va="top",
+            color="#b2182b",
+        )
     _save_figure(fig, figures_dir / f"{FIGURE_STEMS[1]}.png")
 
     frame = sources[FIGURE_STEMS[2]]
@@ -1233,12 +1432,42 @@ def _plot_figures(sources: Mapping[str, pd.DataFrame], figures_dir: Path) -> Non
             ax.plot([subject - 0.10, subject + 0.10], [first, second], color="#bdbdbd", linewidth=0.8)
         ax.scatter(subjects - 0.10, t1, label="T1", color="#9467bd", s=22)
         ax.scatter(subjects + 0.10, t2, label="T2", color="#ff7f0e", s=22)
-        ax.axhline(t1.mean(), color="#9467bd", linestyle="--", linewidth=1.0)
-        ax.axhline(t2.mean(), color="#ff7f0e", linestyle=":", linewidth=1.2)
+        failed_t1 = frame[f"{geometry}_status_T1"].ne("PASS").to_numpy()
+        failed_t2 = frame[f"{geometry}_status_T2"].ne("PASS").to_numpy()
+        if failed_t1.any():
+            ax.scatter(
+                subjects[failed_t1] - 0.10,
+                np.full(int(failed_t1.sum()), 0.03),
+                marker="x",
+                s=55,
+                color="#b2182b",
+            )
+        if failed_t2.any():
+            ax.scatter(
+                subjects[failed_t2] + 0.10,
+                np.full(int(failed_t2.sum()), 0.03),
+                marker="x",
+                s=55,
+                color="#b2182b",
+            )
+        if np.isfinite(t1).any():
+            ax.axhline(np.nanmean(t1), color="#9467bd", linestyle="--", linewidth=1.0)
+        if np.isfinite(t2).any():
+            ax.axhline(np.nanmean(t2), color="#ff7f0e", linestyle=":", linewidth=1.2)
         ax.set_title(geometry)
         ax.set_ylim(0.0, 1.0)
         ax.set_xticks(subjects)
         ax.grid(alpha=0.20)
+        failure_count = int(failed_t1.sum() + failed_t2.sum())
+        if failure_count:
+            ax.text(
+                0.03,
+                0.96,
+                f"FAILED: {failure_count}",
+                transform=ax.transAxes,
+                va="top",
+                color="#b2182b",
+            )
     axes[0, 0].legend(frameon=False)
     fig.supxlabel("Target subject")
     fig.supylabel("Balanced accuracy")
@@ -1301,6 +1530,10 @@ def _aggregate_markdown(frame: pd.DataFrame, *, split: str) -> str:
     for (geometry, native_metric), group in selected.groupby(
         ["geometry", "native_metric"], sort=True
     ):
+        group = group[group["status"].astype(str) == "PASS"]
+        if group.empty:
+            rows.append([geometry, native_metric, "0/9", "NA", "NA", "NA", "NA"])
+            continue
         ba = _stats(group["balanced_accuracy"])
         accuracy = _stats(group["accuracy"])
         f1 = _stats(group["macro_f1"])
@@ -1308,6 +1541,7 @@ def _aggregate_markdown(frame: pd.DataFrame, *, split: str) -> str:
             [
                 geometry,
                 native_metric,
+                f"{len(group)}/9",
                 f"{ba['mean']:.4f} ± {ba['std_ddof1']:.4f}",
                 f"{accuracy['mean']:.4f} ± {accuracy['std_ddof1']:.4f}",
                 f"{f1['mean']:.4f} ± {f1['std_ddof1']:.4f}",
@@ -1315,7 +1549,7 @@ def _aggregate_markdown(frame: pd.DataFrame, *, split: str) -> str:
             ]
         )
     return _md_table(
-        ("Geometry", "Native metric", "BA mean ± SD", "Accuracy mean ± SD", "Macro-F1 mean ± SD", "BA median [min, max]"),
+        ("Geometry", "Native metric", "PASS subjects", "BA mean ± SD", "Accuracy mean ± SD", "Macro-F1 mean ± SD", "BA median [min, max]"),
         rows,
     )
 
@@ -1388,6 +1622,25 @@ def render_report(
     leakage = tables["v1_leakage_audit.csv"]
     domain = tables["domain_shift_diagnostics.csv"]
     correctness = tables["geometry_correctness.csv"]
+    primary_failures = verdicts.primary_failures
+    if primary_failures.empty:
+        primary_failure_detail = "Primary logistic failures: 0."
+    else:
+        primary_failure_detail = (
+            f"Primary logistic failures: {len(primary_failures)} row(s).\n\n"
+            + _md_table(
+                ("Subject", "Geometry", "Protocol", "Split", "Warning"),
+                primary_failures[
+                    [
+                        "subject",
+                        "geometry",
+                        "protocol",
+                        "split",
+                        "warning_messages",
+                    ]
+                ].itertuples(index=False, name=None),
+            )
+        )
     mdm_failures = secondary_mdm_failure_inventory(
         tables, config["dataset"]["subjects"]
     )
@@ -1475,20 +1728,21 @@ def render_report(
         )
 
     delta_rows = []
-    for geometry in ("LE", "AIRM", "EA"):
-        values = verdicts.subject_deltas[f"delta_{geometry}_vs_RAW"]
-        categories = verdicts.subject_deltas[f"category_{geometry}_vs_RAW"]
-        stats = _stats(values)
-        delta_rows.append(
-            [
-                geometry,
-                stats["mean"],
-                stats["std_ddof1"],
-                int(categories.eq("improved").sum()),
-                int(categories.eq("worsened").sum()),
-                int(categories.eq("tied").sum()),
-            ]
-        )
+    if not verdicts.technical_failure:
+        for geometry in ("LE", "AIRM", "EA"):
+            values = verdicts.subject_deltas[f"delta_{geometry}_vs_RAW"]
+            categories = verdicts.subject_deltas[f"category_{geometry}_vs_RAW"]
+            stats = _stats(values)
+            delta_rows.append(
+                [
+                    geometry,
+                    stats["mean"],
+                    stats["std_ddof1"],
+                    int(categories.eq("improved").sum()),
+                    int(categories.eq("worsened").sum()),
+                    int(categories.eq("tied").sum()),
+                ]
+            )
 
     q1_operands = verdicts.operands["Q1"]
     q2_operands = verdicts.operands["Q2"]
@@ -1570,10 +1824,12 @@ def render_report(
         (
             REPORT_HEADINGS[6],
             _aggregate_markdown(t1, split="ALL")
-            + "\n\nAll values aggregate nine target-subject rows (SD uses `ddof=1`). T1 centered target means "
+            + "\n\nAggregates use PASS target-subject rows only, show the denominator, and use `ddof=1` for SD. T1 centered target means "
             "use the same 288 unlabeled target covariates that are evaluated; this is transductive label-free "
             "target centering, not inductive evaluation. "
-            f"[Figure 1](../figures/{FIGURE_STEMS[0]}.png), [paired deltas](../figures/{FIGURE_STEMS[1]}.png).",
+            f"[Figure 1](../figures/{FIGURE_STEMS[0]}.png), [paired deltas](../figures/{FIGURE_STEMS[1]}.png).\n\n"
+            + primary_failure_detail
+            + ("\n\nPASS-only descriptive aggregates above are incomplete and do not support a frozen verdict." if verdicts.technical_failure else ""),
         )
     )
     sections.append(
@@ -1583,7 +1839,8 @@ def render_report(
             + "\n\nEach subject-level primary row pools the two deterministic A/B held-out-run evaluations. "
             "Target center-fit and evaluation trial UIDs are disjoint within each split; source data and decoder "
             "are identical to T1. "
-            f"[Figure 3](../figures/{FIGURE_STEMS[2]}.png) and [source CSV](../figures/{FIGURE_STEMS[2]}.csv).",
+            f"[Figure 3](../figures/{FIGURE_STEMS[2]}.png) and [source CSV](../figures/{FIGURE_STEMS[2]}.csv)."
+            + ("\n\nPASS-only descriptive aggregates are shown with denominators; no 8/9 available-case verdict is permitted." if verdicts.technical_failure else ""),
         )
     )
     sections.append(
@@ -1620,9 +1877,13 @@ def render_report(
     sections.append(
         (
             REPORT_HEADINGS[10],
-            _md_table(
-                ("Geometry", "Mean T1 BA delta vs RAW", "SD", "Improved", "Worsened", "Tied"),
-                delta_rows,
+            (
+                "Paired-delta aggregates were not computed because a primary technical failure prohibits available-case verdicts."
+                if verdicts.technical_failure
+                else _md_table(
+                    ("Geometry", "Mean T1 BA delta vs RAW", "SD", "Improved", "Worsened", "Tied"),
+                    delta_rows,
+                )
             )
             + "\n\n"
             + _md_table(
@@ -1633,27 +1894,36 @@ def render_report(
                     ("Q3", verdicts.q3, json.dumps(q3_operands, sort_keys=True, separators=(",", ":"))),
                 ),
             )
-            + "\n\nRules were applied to unrounded subject-level BA: Q1 requires both mean delta `>=0.01` and "
-            "at least `6/9` improved subjects for each geometry; Q2 is supported by any preregistered geometry "
-            "difference condition; Q3 is potentially important if either LE or AIRM has absolute T1/T2 mean BA "
-            "difference `>=0.02`. [Machine-readable summary](../tables/geometry_v2_summary.csv).",
+            + (
+                "\n\nThe frozen Q1–Q3 formulas were not evaluated. All three verdicts are the configured technical-failure verdict; failed rows were not imputed and no available-case threshold was used."
+                if verdicts.technical_failure
+                else "\n\nRules were applied to unrounded subject-level BA: Q1 requires both mean delta `>=0.01` and at least `6/9` improved subjects for each geometry; Q2 is supported by any preregistered geometry difference condition; Q3 is potentially important if either LE or AIRM has absolute T1/T2 mean BA difference `>=0.02`."
+            )
+            + " [Machine-readable summary](../tables/geometry_v2_summary.csv).",
         )
     )
 
     justified: list[str] = []
-    if verdicts.q1 == "ROBUSTLY SUPPORTED":
+    if verdicts.technical_failure:
+        justified.append(
+            "No primary geometry-effect or protocol-sensitivity conclusion is justified: the complete primary grid contains at least one FAILED row."
+        )
+        justified.append(
+            "PASS-only scores are descriptive diagnostics with explicit denominators, not an 8/9 substitute for the frozen nine-subject verdict."
+        )
+    elif verdicts.q1 == "ROBUSTLY SUPPORTED":
         justified.append("Both LE and AIRM passed the frozen Q1 mean-delta and subject-count criteria.")
     elif verdicts.q1 == "GEOMETRY-SENSITIVE-MIXED":
         justified.append("Exactly one of LE/AIRM passed Q1; improvement is geometry-sensitive under this pilot.")
     else:
         justified.append("Neither LE nor AIRM passed both Q1 criteria; robust improvement is not supported.")
-    if verdicts.q2 == "SUPPORTED":
+    if not verdicts.technical_failure and verdicts.q2 == "SUPPORTED":
         justified.append("At least one frozen Q2 operand crossed threshold, so the conclusion is geometry-sensitive.")
-    else:
+    elif not verdicts.technical_failure:
         justified.append("No frozen Q2 operand crossed threshold; material LE/AIRM dependence was not detected here.")
-    if verdicts.q3 == "POTENTIALLY IMPORTANT":
+    if not verdicts.technical_failure and verdicts.q3 == "POTENTIALLY IMPORTANT":
         justified.append("At least one centered geometry changed by at least 0.02 mean BA between T1 and T2.")
-    else:
+    elif not verdicts.technical_failure:
         justified.append("Both centered geometries changed by less than 0.02 mean BA between T1 and T2.")
     sections.append((REPORT_HEADINGS[11], "\n\n".join(justified)))
     sections.append(

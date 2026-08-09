@@ -83,6 +83,8 @@ def main() -> int:
         "classification_gate_pass": gate["classification_gate_pass"],
         "classification_failed": result.classification_failed,
         "fatal_error": result.fatal_error,
+        "primary_status": result.primary_status,
+        "primary_failure_count": result.primary_failure_count,
         "secondary_status": result.secondary_status,
         "secondary_failure_count": result.secondary_failure_count,
         "logistic_T1_rows": len(result.logistic_transductive),
@@ -93,8 +95,9 @@ def main() -> int:
         "sample_id_audit_rows": len(result.sample_id_audit),
     }
     print(json.dumps(summary, indent=2, sort_keys=True, ensure_ascii=False))
-    if result.classification_failed:
-        raise RuntimeError(result.fatal_error)
+    # Recorded convergence failures are scientific outputs, not structural
+    # exceptions.  Returning zero lets the frozen pipeline reach leakage audit
+    # and the report, where Q1-Q3 must be marked technical/unassessed.
     return 0
 
 

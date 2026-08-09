@@ -119,6 +119,7 @@ RESULT_COLUMNS = (
     "warning_messages",
     "status",
     "primary_run_status",
+    "primary_failure_count",
     "secondary_run_status",
     "secondary_failure_count",
 )
@@ -185,12 +186,14 @@ class LosoV2Result:
     domain_shift_diagnostics: pd.DataFrame
     sample_id_audit: pd.DataFrame
     fatal_error: str | None = None
+    primary_failure_count: int = 0
+    primary_status: str = "PASS"
     secondary_failure_count: int = 0
     secondary_status: str = "PASS"
 
     @property
     def classification_failed(self) -> bool:
-        return self.fatal_error is not None
+        return self.fatal_error is not None or self.primary_status == "FAILED"
 
 
 @dataclass(frozen=True)
@@ -398,18 +401,24 @@ def _finalize(
     audit_rows: list[pd.DataFrame],
     *,
     fatal_error: str | None,
+    primary_failure_count: int,
     secondary_failure_count: int,
     secondary_status: str,
 ) -> LosoV2Result:
     if secondary_status not in {"PASS", "FAILED", "NOT_RUN"}:
         raise ValueError(f"invalid secondary status: {secondary_status!r}")
-    primary_status = "FAILED" if fatal_error is not None else "PASS"
+    primary_status = (
+        "FAILED"
+        if fatal_error is not None or int(primary_failure_count) > 0
+        else "PASS"
+    )
     result_frames = {
         key: _frame(rows[key], RESULT_COLUMNS)
         for key in ("log_t1", "log_t2", "mdm_t1", "mdm_t2")
     }
     for frame in result_frames.values():
         frame["primary_run_status"] = primary_status
+        frame["primary_failure_count"] = int(primary_failure_count)
         frame["secondary_run_status"] = secondary_status
         frame["secondary_failure_count"] = int(secondary_failure_count)
     return LosoV2Result(
@@ -424,6 +433,8 @@ def _finalize(
             else pd.DataFrame()
         ),
         fatal_error=fatal_error,
+        primary_failure_count=int(primary_failure_count),
+        primary_status=primary_status,
         secondary_failure_count=int(secondary_failure_count),
         secondary_status=secondary_status,
     )
@@ -710,6 +721,82 @@ def _mdm_failure_audit(
         warning_messages=tuple(str(value) for value in warning_messages),
         n_iter_max=None,
     )
+
+
+def _failed_logistic_condition_rows(
+    config: Mapping[str, Any],
+    config_hash: str,
+    partition: LosoPartition,
+    geometry: str,
+    splits: Sequence[CalibrationSplit],
+    states: Mapping[str, TargetTransform],
+    source_feature_hash: str,
+    source_label_hash: str,
+    feature_config_hash: str,
+    model: Any,
+    audit: FitAudit,
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Materialize all four rows without scoring a nonconverged model."""
+
+    t1_inputs = common_log_svec_features(states["ALL"].covariances)
+    t1_identity = _identity_fields(partition, geometry, "T1", None)
+    t1_base = _base_result_row(
+        config,
+        config_hash,
+        partition,
+        geometry,
+        "logistic",
+        "euclidean_log_svec",
+        t1_identity,
+        source_feature_hash,
+        source_label_hash,
+        array_sha256(t1_inputs),
+        feature_config_hash,
+        model,
+        audit,
+    )
+    t2_rows: list[dict[str, Any]] = []
+    split_inputs: list[np.ndarray] = []
+    for split in splits:
+        inputs = common_log_svec_features(states[split.name].covariances)
+        split_inputs.append(inputs)
+        identity = _identity_fields(partition, geometry, "T2", split)
+        base = _base_result_row(
+            config,
+            config_hash,
+            partition,
+            geometry,
+            "logistic",
+            "euclidean_log_svec",
+            identity,
+            source_feature_hash,
+            source_label_hash,
+            array_sha256(inputs),
+            feature_config_hash,
+            model,
+            audit,
+        )
+        t2_rows.append(_failed_row(base))
+    aggregate_identity = _identity_fields(
+        partition, geometry, "T2", None, aggregate=True
+    )
+    aggregate_base = _base_result_row(
+        config,
+        config_hash,
+        partition,
+        geometry,
+        "logistic",
+        "euclidean_log_svec",
+        aggregate_identity,
+        source_feature_hash,
+        source_label_hash,
+        array_sha256(np.concatenate(split_inputs)),
+        feature_config_hash,
+        model,
+        audit,
+    )
+    t2_rows.append(_failed_row(aggregate_base))
+    return _failed_row(t1_base), t2_rows
 
 
 def _failed_mdm_condition_rows(
@@ -1223,8 +1310,10 @@ def run_primary_loso(
     )
     logistic_parameters = _logistic_config(cfg)
 
-    # Primary logistic is completed first.  A convergence warning creates a
-    # FAILED row and returns immediately, before any secondary classifier fit.
+    # Primary logistic is completed first.  A convergence warning invalidates
+    # the shared source model for T1 and both T2 halves, but independent frozen
+    # conditions continue so the technical-failure grid remains complete.
+    primary_failure_count = 0
     for target in targets:
         partition = partitions[target]
         splits = splits_by_target[target]
@@ -1261,19 +1350,23 @@ def run_primary_loso(
                 fit_audit,
             )
             if fit_audit.convergence_warning:
-                rows["log_t1"].append(_failed_row(base))
-                fatal = (
-                    f"FAILED logistic convergence warning for target={target}, "
-                    f"geometry={geometry}: {fit_audit.warning_messages}"
+                failed_t1, failed_t2 = _failed_logistic_condition_rows(
+                    cfg,
+                    config_hash,
+                    partition,
+                    geometry,
+                    splits,
+                    states,
+                    source_feature_hash,
+                    source_label_hash,
+                    feature_config_hash,
+                    model,
+                    fit_audit,
                 )
-                return _finalize(
-                    rows,
-                    domain_rows,
-                    audit_rows,
-                    fatal_error=fatal,
-                    secondary_failure_count=0,
-                    secondary_status="NOT_RUN",
-                )
+                rows["log_t1"].append(failed_t1)
+                rows["log_t2"].extend(failed_t2)
+                primary_failure_count += 1
+                continue
             _, t1_metrics = _evaluate(
                 model,
                 t1_inputs,
@@ -1640,6 +1733,7 @@ def run_primary_loso(
         domain_rows,
         audit_rows,
         fatal_error=None,
+        primary_failure_count=primary_failure_count,
         secondary_failure_count=secondary_failure_count,
         secondary_status=secondary_status,
     )

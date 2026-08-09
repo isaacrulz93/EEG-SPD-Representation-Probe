@@ -304,7 +304,7 @@ def test_gate_requires_exact_json_boolean_and_required_csv_pass(tmp_path: Path) 
         )
 
 
-def test_convergence_warning_creates_failed_row_and_aborts(
+def test_primary_warning_records_exact_four_rows_and_continues_without_scoring(
     monkeypatch: pytest.MonkeyPatch, synthetic_data: V2WholeData
 ) -> None:
     class DummyModel:
@@ -312,33 +312,68 @@ def test_convergence_warning_creates_failed_row_and_aborts(
         intercept_ = np.zeros(4, dtype=np.float64)
         classes_ = np.asarray(CLASSES)
 
+        def predict(self, inputs):
+            raise AssertionError("a nonconverged model must never be scored")
+
+    original_fit = loso_module.fit_source_logistic
+    fit_count = 0
+
     def warning_fit(features, labels, **kwargs):
-        return DummyModel(), FitAudit(
-            decoder="logistic",
-            config_hash="f" * 64,
-            n_train=len(features),
-            n_features=features.shape[1],
-            convergence_warning=True,
-            warning_messages=("synthetic convergence warning",),
-            n_iter_max=5000,
-        )
+        nonlocal fit_count
+        fit_count += 1
+        if fit_count == 1:
+            return DummyModel(), FitAudit(
+                decoder="logistic",
+                config_hash="f" * 64,
+                n_train=len(features),
+                n_features=features.shape[1],
+                convergence_warning=True,
+                warning_messages=("synthetic convergence warning",),
+                n_iter_max=5000,
+            )
+        return original_fit(features, labels, **kwargs)
 
     monkeypatch.setattr("src.loso_v2.fit_source_logistic", warning_fit)
     result = run_primary_loso(
         synthetic_data,
         _config(),
         target_subjects=(1,),
-        geometries=("RAW",),
+        geometries=("RAW", "LE"),
         include_mdm=True,
-        compute_domain_diagnostics=False,
+        compute_domain_diagnostics=True,
     )
     assert result.classification_failed
-    assert len(result.logistic_transductive) == 1
-    assert result.logistic_transductive.iloc[0].status == "FAILED"
-    assert bool(result.logistic_transductive.iloc[0].convergence_warning)
-    assert result.logistic_calibration.empty
-    assert result.mdm_transductive.empty
-    assert "synthetic convergence warning" in str(result.fatal_error)
+    assert result.fatal_error is None
+    assert result.primary_status == "FAILED"
+    assert result.primary_failure_count == 1
+    assert len(result.logistic_transductive) == 2
+    assert len(result.logistic_calibration) == 6
+
+    combined = pd.concat(
+        [result.logistic_transductive, result.logistic_calibration],
+        ignore_index=True,
+    )
+    failed = combined[combined.geometry == "RAW"]
+    passed = combined[combined.geometry == "LE"]
+    assert len(failed) == 4
+    assert set(failed.split) == {"ALL", "A", "B", "AGGREGATE"}
+    assert (failed.status == "FAILED").all()
+    assert failed.balanced_accuracy.isna().all()
+    assert failed.prediction_sha256.isna().all()
+    assert failed.convergence_warning.astype(bool).all()
+    assert failed.fitted_model_sha256.nunique() == 1
+    assert failed.source_feature_sha256.nunique() == 1
+    assert len(passed) == 4
+    assert (passed.status == "PASS").all()
+    assert passed.balanced_accuracy.notna().all()
+    assert set(combined.primary_run_status) == {"FAILED"}
+    assert set(combined.primary_failure_count) == {1}
+    assert set(combined.secondary_run_status) == {"PASS"}
+    assert result.secondary_status == "PASS"
+    assert len(result.domain_shift_diagnostics) == 9
+    assert len(result.mdm_transductive) == 3
+    assert len(result.mdm_calibration) == 9
+    assert (result.mdm_transductive.status == "PASS").all()
 
 
 def test_mdm_only_warning_is_recorded_but_primary_is_preserved(
