@@ -1,0 +1,9 @@
+representation,target,accuracy_mean,accuracy_std,chance_level,n_folds,n_trials,n_points,aggregation,pooled_oof_point_accuracy,any_convergence_warning,model,c,max_iter,standard_scaler,space
+whole_raw,class,0.5659722222222222,0.012177576558834701,0.25,5,2592,2592,single_covariance,0.5659722222222222,False,"LogisticRegression(penalty='l2', solver='lbfgs')",1.0,5000,False,log_svec_253d_unscaled
+whole_raw,subject,0.9996141975308642,0.0008281733249999357,0.1111111111111111,5,2592,2592,single_covariance,0.9996141975308642,False,"LogisticRegression(penalty='l2', solver='lbfgs')",1.0,5000,False,log_svec_253d_unscaled
+whole_centered,class,0.6118827160493827,0.01435657518647107,0.25,5,2592,2592,single_covariance,0.6118827160493827,False,"LogisticRegression(penalty='l2', solver='lbfgs')",1.0,5000,False,log_svec_253d_unscaled
+whole_centered,subject,0.012345679012345678,0.005982141943135517,0.1111111111111111,5,2592,2592,single_covariance,0.012345679012345678,False,"LogisticRegression(penalty='l2', solver='lbfgs')",1.0,5000,False,log_svec_253d_unscaled
+window5_raw,class,0.5879629629629629,0.01519132528924189,0.25,5,2592,12960,trial_mean_probability,0.435570987654321,False,"LogisticRegression(penalty='l2', solver='lbfgs')",1.0,5000,False,log_svec_253d_unscaled
+window5_raw,subject,1.0,0.0,0.1111111111111111,5,2592,12960,trial_mean_probability,0.9963734567901235,False,"LogisticRegression(penalty='l2', solver='lbfgs')",1.0,5000,False,log_svec_253d_unscaled
+window5_centered,class,0.621141975308642,0.016562040374842147,0.25,5,2592,12960,trial_mean_probability,0.4575617283950617,False,"LogisticRegression(penalty='l2', solver='lbfgs')",1.0,5000,False,log_svec_253d_unscaled
+window5_centered,subject,0.016203703703703703,0.01014628729814822,0.1111111111111111,5,2592,12960,trial_mean_probability,0.04197530864197531,False,"LogisticRegression(penalty='l2', solver='lbfgs')",1.0,5000,False,log_svec_253d_unscaled
