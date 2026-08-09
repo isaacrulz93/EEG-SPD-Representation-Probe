@@ -178,3 +178,44 @@ Stage 10 is a hard gate. A failed geometry check returns nonzero, and the
 one-command runner stops before fitting any classifier. V2 writes only below
 `outputs/bnci2014_001_geometry_v2/`; the V1 cache is validated by fixed hashes
 and reused read-only when it matches the frozen preprocessing contract.
+
+## Trajectory Anatomy v0
+
+The `pilot/trajectory-anatomy-v0` branch asks whether the same five local SPD
+states contain class information as an unordered finite metric space
+(`BAG_CANON_D10`) and whether chronological labels add information
+(`PATH_D10`). It is a representation-falsification pilot, not a trajectory
+model. AIRM is primary and Log-Euclidean geometry is a fixed secondary repeat;
+session `1test` is not accessed.
+
+The preregistered definitions, numerical gates, 199 order-shuffle replicates,
+199 within-subject×run label permutations, and frozen verdict rules are in
+[`PROTOCOL_TRAJECTORY_ANATOMY_V0.md`](docs/PROTOCOL_TRAJECTORY_ANATOMY_V0.md).
+Reproduce the discovery run in this exact order:
+
+```bash
+.venv/bin/python scripts/20_build_trajectory_features_v0.py --config configs/bnci2014_001_trajectory_v0.yaml
+.venv/bin/python scripts/21_run_trajectory_discovery_v0.py --config configs/bnci2014_001_trajectory_v0.yaml
+.venv/bin/python scripts/23_make_trajectory_report_v0.py --config configs/bnci2014_001_trajectory_v0.yaml
+```
+
+Stage 20 is a hard geometry/data gate. Stage 21 is not admitted unless that
+persisted gate and all frozen provenance hashes pass. All V0 outputs are
+isolated below `outputs/bnci2014_001_trajectory_v0/`; V1 covariances are reused
+read-only after exact contract validation.
+
+Discovery snapshot:
+
+- All 2,592 trials and 12,960 local covariances passed the data/geometry gate;
+  no covariance, trial, subject, or null replicate was dropped.
+- AIRM PATH_D10 LOSO balanced accuracy was 0.2616 mean / 0.2604 median;
+  BAG_CANON_D10 was 0.2654 mean / 0.2639 median.
+- The order-shuffle effect was 0.0000 (`p=0.515`). Label-null effects were
+  0.0104 for PATH (`p=0.155`) and 0.0139 for BAG (`p=0.135`).
+- Run-half subject-ID balanced accuracy was 0.3449 for PATH and 0.3611 for
+  BAG, versus chance 0.1111. This is subject information in relative local
+  geometry, not evidence of class transfer or successful domain adaptation.
+- Frozen verdict: `STOP_LOCAL_TRAJECTORY_V0`.
+
+The complete negative-result interpretation and its single next step are in
+[`trajectory_anatomy_v0.md`](outputs/bnci2014_001_trajectory_v0/report/trajectory_anatomy_v0.md).
