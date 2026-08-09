@@ -1,0 +1,44 @@
+{
+  "estimator": "oas",
+  "estimator_implementation": "pyriemann.estimation.Covariances(estimator='oas'); pyRiemann delegates to sklearn.covariance.oas",
+  "extra_regularization": "none",
+  "n_windows": 5,
+  "oas_assume_centered": false,
+  "remainder_policy": "require_exact_division",
+  "sanity": {
+    "WHOLE": {
+      "count": 2592,
+      "inf_count": 0,
+      "max_condition_number": 7539.416953914898,
+      "max_eigenvalue": 3.2464986284681337e-09,
+      "max_symmetry_error": 0.0,
+      "min_eigenvalue": 4.0468769381754756e-14,
+      "nan_count": 0,
+      "non_spd_count": 0,
+      "spd_count": 2592
+    },
+    "WINDOW5": {
+      "count": 12960,
+      "inf_count": 0,
+      "max_condition_number": 1977.5879193762473,
+      "max_eigenvalue": 6.545911621210231e-09,
+      "max_symmetry_error": 0.0,
+      "min_eigenvalue": 8.112917602659012e-14,
+      "nan_count": 0,
+      "non_spd_count": 0,
+      "spd_count": 12960
+    }
+  },
+  "symmetrized": true,
+  "whole_shape": [
+    2592,
+    22,
+    22
+  ],
+  "window5_shape": [
+    12960,
+    22,
+    22
+  ],
+  "window_samples": 200
+}
