@@ -1,0 +1,334 @@
+protocol:
+  name: BNCI2014_001 WHOLE-SPD Geometry Audit V2
+  version: "2.0"
+  freeze_date: "2026-08-09"
+  timezone: Asia/Seoul
+  seed: 20260809
+  primary_metric: balanced_accuracy
+  protocol_path: docs/PROTOCOL_GEOMETRY_V2.md
+  protocol_sha256: d0cd84cc5942a5e285ab11f018d2a6dfeb63a73a619d39901ca5d4396fcfd682
+  base_commit: 1af54c7a69161853654dc2bb1f959d1bf3d3593e
+
+project:
+  output_dir: outputs/bnci2014_001_geometry_v2
+  cache_dir: cache/bnci2014_001_geometry_v2
+
+v1_inputs:
+  root: .
+  paths:
+    frozen_config: outputs/bnci2014_001/frozen_config.yaml
+    dataset_metadata: outputs/bnci2014_001/tables/dataset_metadata.json
+    covariance_summary: outputs/bnci2014_001/tables/covariance_summary.json
+    covariance_sanity: outputs/bnci2014_001/tables/covariance_sanity.csv
+    covariances: cache/bnci2014_001/covariances.npz
+    whole_metadata: cache/bnci2014_001/whole_metadata.csv
+    prepared_epochs: cache/bnci2014_001/prepared_epochs.npz
+    prepared_metadata: cache/bnci2014_001/prepared_metadata.csv
+  hashes:
+    frozen_config_sha256: 41f1ad7b2d80a07ab19436de5ec547dfe63d86a320f06dfd05953620944cb232
+    dataset_metadata_sha256: 57667014302ac6f559fbaa337b20165e849291235621dd8a20d3345360090b30
+    covariance_summary_sha256: 8c57cff5decd012b51dea4215b95fe1ace87d7db6cb0d44fb101c6d915b1a094
+    covariance_sanity_sha256: d4a81b8c15fbbbd1f230a14e7a79482884efb43dabcbda0bc0c95345e6bbc070
+    covariances_file_sha256: c6bd774ac5b3b53c497381433bcc7974af3b54b850a0ac0539aa2f797f6fa997
+    whole_array_content_sha256: 3be57ea13767a407030a7b56541d07a7f4ce4ccbc1f0579720245413067f36a4
+    whole_metadata_sha256: 285eaf926fbfcec8f1228c3fd660b0b0e9ce209a7c5a13d0acd6b4eabdba0a6e
+    prepared_epochs_sha256: 5f59e0cbd18fcd7540715eac685ba997e6fd98fcb8c97f0b237bc07627f4a010
+    prepared_metadata_sha256: 4ce1ce3f6af630dfb8b3ce486900e0d859a00a8f71485ea89a9e6c76305d39ae
+  npz_keys:
+    covariances: [whole, window5, channel_names]
+    prepared_epochs: [X, y, channel_names, sampling_frequency_hz]
+  fallback:
+    enabled: true
+    batch_size: 256
+    covariances_filename: whole_covariances_recomputed.npz
+    metadata_filename: whole_metadata_recomputed.csv
+    provenance_filename: data_provenance.json
+    required_versions:
+      numpy: 2.5.1
+      scikit-learn: 1.9.0
+      pyriemann: "0.12"
+
+dataset:
+  name: BNCI2014_001
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  primary_session_key: 0train
+  primary_session_number: 1
+  available_sessions: [0train, 1test]
+  classes: [left_hand, right_hand, feet, tongue]
+  eeg_channels:
+    - Fz
+    - FC3
+    - FC1
+    - FCz
+    - FC2
+    - FC4
+    - C5
+    - C3
+    - C1
+    - Cz
+    - C2
+    - C4
+    - C6
+    - CP3
+    - CP1
+    - CPz
+    - CP2
+    - CP4
+    - P1
+    - Pz
+    - P2
+    - POz
+  output_eeg_channels: 22
+  output_eog_channels: 0
+  signal_units: volts
+  source_mat_signal_units: microvolts
+  moabb_unit_conversion: microvolts_to_volts
+
+preprocessing:
+  epoch_tmin_seconds: 0.0
+  epoch_tmax_seconds: 3.996
+  source_event_interval_seconds: [2.0, 6.0]
+  observed_source_epoch_seconds: [2.0, 5.996]
+  bandpass_hz: [8.0, 32.0]
+  resample_hz: null
+  baseline: null
+  sampling_frequency_hz: 250.0
+  samples_per_trial: 1000
+
+representation:
+  input_eeg_dtype: float32
+  covariance_dtype: float64
+  covariance_estimator: oas
+  covariance_implementation: pyriemann.estimation.Covariances
+  covariance_backend: sklearn.covariance.oas
+  oas_assume_centered: false
+  symmetrize_covariance: true
+  covariance_extra_regularization: none
+  eigenvalue_clipping: false
+  standard_scaler: false
+  coordinate_dimension: 253
+  svec_off_diagonal_scale: sqrt2
+
+expected_data:
+  eeg_shape: [2592, 22, 1000]
+  whole_covariance_shape: [2592, 22, 22]
+  trials_total: 2592
+  trials_per_subject: 288
+  trials_per_run: 48
+  trials_per_subject_class: 72
+  trials_per_subject_run_class: 12
+  runs: ["0", "1", "2", "3", "4", "5"]
+  run_trial_ids: [1, 48]
+  subject_trial_ids: [1, 288]
+  covariance_npz_key: whole
+  metadata_columns:
+    - covariance_index
+    - sample_index
+    - subject
+    - session
+    - run
+    - trial_id
+    - run_trial_id
+    - trial_uid
+    - class_label
+  prepared_metadata_columns:
+    - sample_index
+    - subject
+    - session
+    - run
+    - trial_id
+    - run_trial_id
+    - trial_uid
+    - class_label
+
+geometry:
+  geometries:
+    G0: RAW
+    G1: LE
+    G2: AIRM
+    G3: EA
+  ea_fixed_name: Arithmetic-mean congruence control
+  numeric_dtype: float64
+  matrix_functions: symmetric_evd
+  symmetrize_matrix_function_outputs: true
+  silently_clip_eigenvalues: false
+  airm_mean:
+    implementation: pyriemann.geometry.mean.mean_riemann
+    tol: 1.0e-9
+    maxiter: 100
+    init: null
+    independently_recompute_karcher_residual: true
+  isometry_pairs:
+    pairs_per_subject: 64
+    unique_unordered: true
+    candidate_order: canonical_trial_uid
+    selection: sha256_digest_ascending
+    digest_fields: [seed, subject, uid_i, uid_j]
+    share_pairs_between_le_and_airm: true
+  hard_gate:
+    all_required_rows_must_pass: true
+    finite_nonfinite_count_max: 0
+    symmetry_relative_error_max: 1.0e-12
+    minimum_eigenvalue_strictly_greater_than: 0.0
+    condition_number_max: 1.0e12
+    evd_reconstruction_relative_error_max: 5.0e-12
+    log_exp_roundtrip_relative_error_max: 1.0e-10
+    inverse_root_whitening_relative_error_max: 1.0e-10
+    g1_custom_official_mean_relative_error_max: 1.0e-10
+    g1_v1_coordinate_max_absolute_error_max: 1.0e-10
+    g1_v1_coordinate_relative_l2_error_max: 1.0e-10
+    g1_v1_reconstructed_matrix_relative_error_max: 1.0e-10
+    g1_fitted_mean_residual_max: 1.0e-10
+    g1_isometry_absolute_error_max: 1.0e-10
+    g1_isometry_relative_error_max: 1.0e-10
+    g2_karcher_residual_max: 1.0e-7
+    g2_fitted_mean_residual_max: 1.0e-7
+    g2_isometry_absolute_error_max: 1.0e-10
+    g2_isometry_relative_error_max: 1.0e-10
+    g3_fitted_mean_relative_error_max: 1.0e-10
+    tlcenter_crosscheck_distance_max: 1.0e-7
+    tlcenter_api_unavailable_status: SKIPPED_API_UNAVAILABLE
+    api_iteration_status: NA_API_UNAVAILABLE
+
+evaluation:
+  stable_sort_key: [subject, session, run, trial_id, trial_uid]
+  trial_uid_hash:
+    algorithm: sha256
+    serialization: sorted_full_trial_uid_list
+  loso:
+    target_subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    source_subject_count: 8
+    source_center_fit_n_per_subject: 288
+    source_center_fit_scope: all_subject_0train_whole_trials
+    fit_source_subject_centers_separately: true
+  T1:
+    fixed_name: transductive label-free target centering
+    target_mean_fit_n: 288
+    target_evaluation_n: 288
+    fit_uids_equal_evaluation_uids: true
+    transductive_overlap: true
+    raw_overlap_value: not_applicable
+  T2:
+    fixed_name: calibration-to-held-out-run target centering
+    split_A:
+      calibration_runs: [0, 1, 2]
+      evaluation_runs: [3, 4, 5]
+    split_B:
+      calibration_runs: [3, 4, 5]
+      evaluation_runs: [0, 1, 2]
+    target_calibration_n: 144
+    target_evaluation_n: 144
+    target_calibration_per_class: 36
+    target_evaluation_per_class: 36
+    transductive_overlap: false
+    require_uid_disjointness: true
+    require_identical_source_features_between_splits: true
+    require_identical_classifier_config_between_splits: true
+    subject_then_split_averaging: true
+    equivalent_flat_mean_tolerance: 1.0e-12
+  aggregation:
+    subject_macro_mean: true
+    subject_sd_ddof: 1
+
+classifiers:
+  primary_logistic:
+    model: multinomial_l2_logistic_regression
+    C: 1.0
+    solver: lbfgs
+    max_iter: 5000
+    tol: 1.0e-4
+    class_weight: null
+    random_state: 20260809
+    standard_scaler: false
+    normalization: false
+    pca: false
+    tuning: false
+    convergence_warning_status: FAILED
+  metrics:
+    primary: balanced_accuracy
+    secondary: [accuracy, macro_f1, per_class_recall, confusion_matrix]
+    metric_bounds: [0.0, 1.0]
+    confusion_matrix_shape: [4, 4]
+    class_order: [left_hand, right_hand, feet, tongue]
+  secondary_mdm:
+    votes_in_primary_verdict: false
+    G1:
+      centered_metric: logeuclid
+      raw_comparator_metric: logeuclid
+    G2:
+      centered_metric: riemann
+      raw_comparator_metric: riemann
+    G3:
+      centered_metric: riemann
+      interpretation: arithmetic_control_only
+
+v1_leakage_audit:
+  folds: 5
+  seed: 20260809
+  assignment: deterministic_subject_class_stratified_trial_group
+  conditions: [v1_all_sample, fold_safe]
+  primary_metric: balanced_accuracy
+  benchmark_centered_whole_accuracy: 0.6119
+  benchmark_is_threshold: false
+
+verdicts:
+  required_primary_classifier: logistic
+  sign_tolerance: 1.0e-12
+  technical_failure_verdict: UNASSESSED — TECHNICAL FAILURE
+  Q1:
+    name: geometry-robust improvement
+    mean_delta_min: 0.01
+    improved_subjects_min: 6
+    subjects_total: 9
+    both_pass: ROBUSTLY SUPPORTED
+    exactly_one_pass: GEOMETRY-SENSITIVE-MIXED
+    neither_pass: NOT SUPPORTED
+  Q2:
+    name: LE/AIRM geometry dependence
+    mean_delta_difference_min: 0.02
+    opposite_sign_supports: true
+    subject_sign_disagreements_min: 4
+    subjects_total: 9
+    any_condition_pass: SUPPORTED
+    no_condition_pass: NOT SUPPORTED
+  Q3:
+    name: T1/T2 protocol sensitivity
+    absolute_mean_ba_difference_min: 0.02
+    any_geometry_pass: POTENTIALLY IMPORTANT
+    no_geometry_pass: SMALL IN THIS PILOT
+
+outputs:
+  tables_dir: outputs/bnci2014_001_geometry_v2/tables
+  figures_dir: outputs/bnci2014_001_geometry_v2/figures
+  report_path: outputs/bnci2014_001_geometry_v2/report/geometry_audit_v2.md
+  required_tables:
+    - geometry_correctness.csv
+    - geometry_mean_comparison.csv
+    - loso_logistic_transductive.csv
+    - loso_logistic_calibration.csv
+    - loso_mdm_transductive.csv
+    - loso_mdm_calibration.csv
+    - v1_leakage_audit.csv
+    - domain_shift_diagnostics.csv
+    - geometry_v2_summary.csv
+  required_figure_stems:
+    - figure_1_loso_ba_by_subject
+    - figure_2_paired_delta_vs_raw
+    - figure_3_t1_vs_t2_ba
+    - figure_4_le_vs_airm_centers
+    - figure_5_v1_leakage_audit
+  report_sections:
+    - Motivation
+    - Frozen protocol
+    - Geometry definitions
+    - Geometry correctness
+    - LE vs AIRM Fréchet means
+    - V1 leakage audit
+    - LOSO transductive results
+    - Calibration-to-held-out-run results
+    - Metric-native MDM sanity check
+    - Marginal domain diagnostics
+    - Frozen decision-rule verdicts
+    - What is actually justified
+    - What is NOT justified
+    - Single recommended next experiment

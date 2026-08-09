@@ -146,3 +146,35 @@ next experiment are in the
 - Separability: [`separability_metrics.csv`](outputs/bnci2014_001/tables/separability_metrics.csv)
 - Linear probes: [`linear_probe_metrics.csv`](outputs/bnci2014_001/tables/linear_probe_metrics.csv)
 - Figures: [`outputs/bnci2014_001/figures/`](outputs/bnci2014_001/figures/)
+
+## Geometry audit V2 (branch-only pilot)
+
+The `pilot/geometry-audit-v2` branch adds a preregistered WHOLE-covariance
+audit without changing the V1 experiment or its outputs. It compares RAW,
+Log-Euclidean Fréchet centering, AIRM Fréchet congruence centering, and an
+arithmetic-mean congruence control under leakage-safe LOSO evaluation. The
+primary protocol is transductive label-free target centering; complementary
+run halves provide the calibration-to-held-out-run secondary protocol.
+
+The frozen definitions, tolerances, leakage barriers, table schemas, and
+decision rules are in
+[`PROTOCOL_GEOMETRY_V2.md`](docs/PROTOCOL_GEOMETRY_V2.md). Run the stages in
+order:
+
+```bash
+.venv/bin/python scripts/10_geometry_correctness_v2.py --config configs/bnci2014_001_geometry_v2.yaml
+.venv/bin/python scripts/11_loso_alignment_v2.py --config configs/bnci2014_001_geometry_v2.yaml
+.venv/bin/python scripts/12_v1_leakage_audit.py --config configs/bnci2014_001_geometry_v2.yaml
+.venv/bin/python scripts/13_geometry_report_v2.py --config configs/bnci2014_001_geometry_v2.yaml
+```
+
+Or execute the same fixed sequence with:
+
+```bash
+.venv/bin/python scripts/run_geometry_v2.py --config configs/bnci2014_001_geometry_v2.yaml
+```
+
+Stage 10 is a hard gate. A failed geometry check returns nonzero, and the
+one-command runner stops before fitting any classifier. V2 writes only below
+`outputs/bnci2014_001_geometry_v2/`; the V1 cache is validated by fixed hashes
+and reused read-only when it matches the frozen preprocessing contract.
