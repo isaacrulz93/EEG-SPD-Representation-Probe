@@ -212,3 +212,17 @@ These alternatives are kept separate: evidence for local states (A) does not by 
 ## 13. Recommended next experiment
 
 Run exactly one locked replication on BNCI2014_001 session 2: change only the session selector and output/cache namespace, then execute the identical 22-channel, 8–32 Hz, 0–3.996 s, OAS WHOLE/WINDOW5, log-svec, subject-centering, embedding, diagnostic, and verdict pipeline with the same seed and thresholds. Do not use session-1 results to alter preprocessing, windows, probes, or verdict rules. The purpose is solely to test whether the session-1 conclusions reproduce.
+
+### Repository publication status
+
+The independent local Git repository and requested milestone history were completed on `main`, but a private GitHub repository and push could not be completed in this run because the `gh` executable was not installed and no authenticated `origin` remote existed. No GitHub account setting, credential, or SSH key was created or changed. The largest tracked artifact was about 2.3 MB (13.3 MB tracked in total); raw EEG and numerical caches remained ignored.
+
+Minimum commands from the current machine state:
+
+```bash
+brew install gh
+gh auth login
+cd ~/EEG-SPD-Representation-Probe
+gh repo create EEG-SPD-Representation-Probe --private --source=. --remote=origin
+git push -u origin main
+```
