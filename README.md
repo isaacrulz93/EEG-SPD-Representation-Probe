@@ -22,7 +22,8 @@ visualization; every quantitative diagnostic is computed in the original
   interval 2.000--5.996 s), 1,000 samples at 250 Hz. The MNE-inclusive final
   sample at 6.000 s is excluded up front so the common analyzed interval is
   exactly divisible into five equal windows.
-- Filter: 8--30 Hz through MOABB `MotorImagery`; no resampling and no baseline.
+- Filter: 8--32 Hz (the fixed MOABB `MotorImagery` default); no resampling and
+  no baseline.
 - Covariance: OAS shrinkage for both WHOLE and WINDOW5, followed only by
   numerical symmetrization. No extra eigenvalue clipping or tuned ridge.
 - WINDOW5: five ordered, non-overlapping 200-sample windows. Exact division is
@@ -91,4 +92,3 @@ after the primary run and are also available in
 - Separability: `outputs/bnci2014_001/tables/separability_metrics.csv`
 - Linear probes: `outputs/bnci2014_001/tables/linear_probe_metrics.csv`
 - Figures: `outputs/bnci2014_001/figures/`
-

@@ -1,0 +1,33 @@
+{
+  "captured_at_utc": "2026-08-09T06:15:17.756298+00:00",
+  "compute": {
+    "apple_mps_available": false,
+    "cpu_count": 10,
+    "cuda_available": false,
+    "cuda_device_count": 0,
+    "cuda_runtime_version": null
+  },
+  "os": {
+    "machine": "arm64",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "release": "25.5.0",
+    "system": "Darwin"
+  },
+  "packages": {
+    "matplotlib": "3.11.1",
+    "mne": "1.12.1",
+    "moabb": "1.5.0",
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "pyriemann": "0.12",
+    "pyyaml": "6.0.3",
+    "scikit_learn": "1.9.0",
+    "scipy": "1.18.0",
+    "torch": null
+  },
+  "python": {
+    "executable": "/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/.venv/bin/python",
+    "implementation": "CPython",
+    "version": "3.12.8"
+  }
+}

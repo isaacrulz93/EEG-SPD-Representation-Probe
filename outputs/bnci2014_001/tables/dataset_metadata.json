@@ -1,0 +1,197 @@
+{
+  "array_shape": [
+    2592,
+    22,
+    1000
+  ],
+  "bandpass_hz": [
+    8.0,
+    32.0
+  ],
+  "baseline": null,
+  "cached_epoch_dtype": "float32",
+  "channel_types": [
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg",
+    "eeg"
+  ],
+  "classes_observed": [
+    "feet",
+    "left_hand",
+    "right_hand",
+    "tongue"
+  ],
+  "config_sha256": "41f1ad7b2d80a07ab19436de5ec547dfe63d86a320f06dfd05953620944cb232",
+  "dataset": "BNCI2014_001",
+  "eeg_channels": [
+    "Fz",
+    "FC3",
+    "FC1",
+    "FCz",
+    "FC2",
+    "FC4",
+    "C5",
+    "C3",
+    "C1",
+    "Cz",
+    "C2",
+    "C4",
+    "C6",
+    "CP3",
+    "CP1",
+    "CPz",
+    "CP2",
+    "CP4",
+    "P1",
+    "Pz",
+    "P2",
+    "POz"
+  ],
+  "epoch_time_interval_observed_source_seconds": [
+    2.0,
+    5.996
+  ],
+  "epoch_time_interval_relative_to_mi_cue_seconds": [
+    0.0,
+    3.996
+  ],
+  "moabb_unit_conversion": "microvolts_to_volts",
+  "n_classes": 4,
+  "n_eeg_channels": 22,
+  "n_eog_channels_output": 0,
+  "n_sessions_available": 2,
+  "n_sessions_observed": 1,
+  "n_subjects": 9,
+  "n_trials": 2592,
+  "primary_session_number": 1,
+  "resample_hz": null,
+  "runs_per_subject": {
+    "1": 6,
+    "2": 6,
+    "3": 6,
+    "4": 6,
+    "5": 6,
+    "6": 6,
+    "7": 6,
+    "8": 6,
+    "9": 6
+  },
+  "samples_per_trial": 1000,
+  "sampling_frequency_hz": 250.0,
+  "sessions_available": [
+    "0train",
+    "1test"
+  ],
+  "sessions_observed": [
+    "0train"
+  ],
+  "signal_units": "volts",
+  "source_event_interval_seconds": [
+    2.0,
+    6.0
+  ],
+  "source_mat_signal_units": "microvolts",
+  "subjects": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "trials_per_class": {
+    "feet": 648,
+    "left_hand": 648,
+    "right_hand": 648,
+    "tongue": 648
+  },
+  "trials_per_subject": {
+    "1": 288,
+    "2": 288,
+    "3": 288,
+    "4": 288,
+    "5": 288,
+    "6": 288,
+    "7": 288,
+    "8": 288,
+    "9": 288
+  },
+  "trials_per_subject_class": {
+    "1": {
+      "feet": 72,
+      "left_hand": 72,
+      "right_hand": 72,
+      "tongue": 72
+    },
+    "2": {
+      "feet": 72,
+      "left_hand": 72,
+      "right_hand": 72,
+      "tongue": 72
+    },
+    "3": {
+      "feet": 72,
+      "left_hand": 72,
+      "right_hand": 72,
+      "tongue": 72
+    },
+    "4": {
+      "feet": 72,
+      "left_hand": 72,
+      "right_hand": 72,
+      "tongue": 72
+    },
+    "5": {
+      "feet": 72,
+      "left_hand": 72,
+      "right_hand": 72,
+      "tongue": 72
+    },
+    "6": {
+      "feet": 72,
+      "left_hand": 72,
+      "right_hand": 72,
+      "tongue": 72
+    },
+    "7": {
+      "feet": 72,
+      "left_hand": 72,
+      "right_hand": 72,
+      "tongue": 72
+    },
+    "8": {
+      "feet": 72,
+      "left_hand": 72,
+      "right_hand": 72,
+      "tongue": 72
+    },
+    "9": {
+      "feet": 72,
+      "left_hand": 72,
+      "right_hand": 72,
+      "tongue": 72
+    }
+  }
+}
