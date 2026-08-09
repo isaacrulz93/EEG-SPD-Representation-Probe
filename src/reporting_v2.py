@@ -665,7 +665,7 @@ def validate_reporting_inputs(
         (subject, geometry, metric, protocol, split)
         for subject in subjects
         for geometry, metric in domain_specs
-        for protocol, splits in (("T1", ("ALL",)), ("T2", ("A", "B", "AGGREGATE")))
+        for protocol, splits in (("T1", ("ALL",)), ("T2", ("A", "B")))
         for split in splits
     }
     _assert_exact_keys(

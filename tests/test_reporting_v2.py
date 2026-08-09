@@ -230,7 +230,7 @@ def _domain_table() -> pd.DataFrame:
     rows: list[dict[str, object]] = []
     for subject in range(1, 10):
         for geometry, metric in MDM_SPECS:
-            for protocol, splits in (("T1", ("ALL",)), ("T2", ("A", "B", "AGGREGATE"))):
+            for protocol, splits in (("T1", ("ALL",)), ("T2", ("A", "B"))):
                 for split in splits:
                     rows.append(
                         {
@@ -352,7 +352,7 @@ def test_04_gate_and_complete_input_grid_are_hard_requirements(synthetic_inputs)
     assert len(validated["loso_logistic_calibration.csv"]) == 108
     assert len(validated["loso_mdm_transductive.csv"]) == 45
     assert len(validated["loso_mdm_calibration.csv"]) == 135
-    assert len(validated["domain_shift_diagnostics.csv"]) == 180
+    assert len(validated["domain_shift_diagnostics.csv"]) == 135
 
     failed_gate = dict(gate, classification_gate_pass="true")
     with pytest.raises(ReportingContractError, match="not exactly true"):
