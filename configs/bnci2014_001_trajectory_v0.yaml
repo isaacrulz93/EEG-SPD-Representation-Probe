@@ -1,0 +1,278 @@
+project:
+  name: EEG-SPD-Representation-Probe
+  experiment_name: Trajectory Anatomy v0
+  protocol_version: "0.0"
+  protocol_path: docs/PROTOCOL_TRAJECTORY_ANATOMY_V0.md
+  protocol_sha256: 16062edc068a8287bee1abc97d00ab9d6b15f9fcb29f76225e391594474ed75e
+  base_commit: f76785d4c06ddc3cf2f1f7a6310d4fb153a19ba9
+  seed: 20260809
+  output_dir: outputs/bnci2014_001_trajectory_v0
+  local_cache_dir: cache/bnci2014_001_trajectory_v0
+
+v1_inputs:
+  source_config:
+    path: configs/bnci2014_001_5window.yaml
+    sha256: 41f1ad7b2d80a07ab19436de5ec547dfe63d86a320f06dfd05953620944cb232
+  frozen_config:
+    path: outputs/bnci2014_001/frozen_config.yaml
+    sha256: 41f1ad7b2d80a07ab19436de5ec547dfe63d86a320f06dfd05953620944cb232
+  covariances:
+    path: cache/bnci2014_001/covariances.npz
+    file_sha256: c6bd774ac5b3b53c497381433bcc7974af3b54b850a0ac0539aa2f797f6fa997
+    window5_content_sha256: c3bd7e98d988ac408ea5cadd1f749a452ce9831a4ff7df89dde588cefbcd3643
+    whole_content_sha256: 3be57ea13767a407030a7b56541d07a7f4ce4ccbc1f0579720245413067f36a4
+    channel_names_content_sha256: bab9759ed585017a36835110add9362af84db8aa23e0a5f02aedacce63909932
+  window5_metadata:
+    path: cache/bnci2014_001/window5_metadata.csv
+    sha256: c0fb099a53a6b3678f4c4795fc6769b41f44dba8616bceb148c23264f2116009
+  whole_metadata:
+    path: cache/bnci2014_001/whole_metadata.csv
+    sha256: 285eaf926fbfcec8f1228c3fd660b0b0e9ce209a7c5a13d0acd6b4eabdba0a6e
+  prepared_epochs:
+    path: cache/bnci2014_001/prepared_epochs.npz
+    file_sha256: 5f59e0cbd18fcd7540715eac685ba997e6fd98fcb8c97f0b237bc07627f4a010
+    x_content_sha256: 0ea4250cd215c0049fac050ae0dbae60d81a4ab3e8d0335b12b33e29092b3972
+  prepared_metadata:
+    path: cache/bnci2014_001/prepared_metadata.csv
+    sha256: 4ce1ce3f6af630dfb8b3ce486900e0d859a00a8f71485ea89a9e6c76305d39ae
+  covariance_summary:
+    path: outputs/bnci2014_001/tables/covariance_summary.json
+    sha256: 8c57cff5decd012b51dea4215b95fe1ace87d7db6cb0d44fb101c6d915b1a094
+  dataset_metadata:
+    path: outputs/bnci2014_001/tables/dataset_metadata.json
+    sha256: 57667014302ac6f559fbaa337b20165e849291235621dd8a20d3345360090b30
+  fallback_policy: exact_prepared_hashes_then_recompute_v0_cache_only
+
+dataset:
+  name: BNCI2014_001
+  allowed_session: 0train
+  forbidden_session: 1test
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  runs: [0, 1, 2, 3, 4, 5]
+  classes: [left_hand, right_hand, feet, tongue]
+  expected_trials: 2592
+  expected_trials_per_subject: 288
+  expected_trials_per_subject_class: 72
+  expected_trials_per_subject_run: 48
+  expected_trials_per_subject_run_class: 12
+  expected_trial_uid_set_sha256: 8573ef084f1508f8a9049dd30c960770ebf13fb63928229d2b59cbd2e1edebae
+  eeg_channels:
+    - Fz
+    - FC3
+    - FC1
+    - FCz
+    - FC2
+    - FC4
+    - C5
+    - C3
+    - C1
+    - Cz
+    - C2
+    - C4
+    - C6
+    - CP3
+    - CP1
+    - CPz
+    - CP2
+    - CP4
+    - P1
+    - Pz
+    - P2
+    - POz
+
+preprocessing:
+  bandpass_hz: [8.0, 32.0]
+  epoch_tmin_seconds: 0.0
+  epoch_tmax_seconds: 3.996
+  sampling_frequency_hz: 250.0
+  samples_per_trial: 1000
+  resample_hz: null
+  baseline: null
+  covariance_estimator: oas
+  covariance_dtype: float64
+  extra_diagonal_loading: none
+  eigenvalue_clipping: false
+
+window5:
+  n_windows: 5
+  samples_per_window: 200
+  overlap_samples: 0
+  remainder_policy: require_exact_division
+  chronological_order: [1, 2, 3, 4, 5]
+  expected_covariance_shape: [12960, 22, 22]
+  expected_trial_tensor_shape: [2592, 5, 22, 22]
+
+geometry:
+  primary: airm
+  secondary: logeuclid
+  airm_mean:
+    tol: 1.0e-9
+    maxiter: 100
+    normalized_karcher_residual_max: 1.0e-7
+  hard_gate:
+    symmetry_relative_error_max: 1.0e-12
+    condition_number_max: 1.0e12
+    distance_symmetry_absolute_error_max: 1.0e-10
+    distance_diagonal_absolute_error_max: 1.0e-12
+    distance_negative_tolerance: 1.0e-12
+    triangle_absolute_tolerance: 1.0e-10
+    triangle_relative_tolerance: 1.0e-10
+    centering_isometry_absolute_error_max: 1.0e-10
+    centering_isometry_relative_error_max: 1.0e-10
+    bag_invariance_absolute_error_max: 1.0e-12
+    path_endpoint_absolute_tolerance: 1.0e-10
+    path_endpoint_relative_tolerance: 1.0e-10
+    zero_length_epsilon: 1.0e-12
+    efficiency_bound_tolerance: 1.0e-12
+    angle_bound_tolerance: 1.0e-12
+    cosine_domain_tolerance: 1.0e-10
+    deviation_negative_tolerance: 1.0e-12
+    geodesic_endpoint_relative_error_max: 1.0e-10
+    ss_closure_relative_error_max: 1.0e-10
+  bag_validation:
+    trial_rule: smallest_trial_id_per_subject_class
+    expected_trials: 36
+    permutations: 120
+  centering_isometry:
+    trials: all
+    fit_from: whole_covariance_subject_airm_mean
+    classification_use: false
+
+representations:
+  path_d10_columns: [d12, d13, d14, d15, d23, d24, d25, d34, d35, d45]
+  bag_canon_columns: [bag01, bag02, bag03, bag04, bag05, bag06, bag07, bag08, bag09, bag10]
+  bag_sorted_columns: [sorted01, sorted02, sorted03, sorted04, sorted05, sorted06, sorted07, sorted08, sorted09, sorted10]
+  scalar_columns:
+    - total_path_length
+    - endpoint_distance
+    - efficiency
+    - excess
+    - mean_turn
+    - max_turn
+    - mean_geodesic_deviation
+    - max_geodesic_deviation
+    - frechet_variance
+    - frechet_radius_mean
+    - diameter
+  descriptive_scalar_columns: [s1, s2, s3, s4, theta2, theta3, theta4, dev2, dev3, dev4]
+
+class_probe:
+  split: leave_one_subject_out
+  primary_metric: balanced_accuracy
+  secondary_metrics: [accuracy, macro_f1, per_class_recall]
+  scaler: StandardScaler
+  scaler_fit_scope: source_only
+  classifier: multinomial_logistic_regression
+  c: 1.0
+  solver: lbfgs
+  max_iter: 5000
+  tol: 1.0e-4
+  random_state: 20260809
+  class_weight: null
+  tuning: false
+  observed_conditions:
+    - [AIRM, PATH_D10]
+    - [AIRM, BAG_CANON_D10]
+    - [AIRM, BAG_SORTED_D10]
+    - [AIRM, SCALARS_11]
+    - [LE, PATH_D10]
+    - [LE, BAG_CANON_D10]
+    - [LE, SCALARS_11]
+
+nulls:
+  order_shuffle:
+    replicates: 199
+    seedsequence_entropy: [20260809, 340682622290]
+    stream_tag_hex: "0x4F52444552"
+    nonidentity_permutation_indices: [1, 119]
+    trial_order: ascending_sample_index
+    conditions:
+      - [AIRM, PATH_D10]
+      - [LE, PATH_D10]
+  label_destruction:
+    replicates: 199
+    seedsequence_entropy: [20260809, 327512376652]
+    stream_tag_hex: "0x4C4142454C"
+    grouping: subject_x_run
+    group_order: numeric_subject_then_run
+    trial_order: ascending_sample_index
+    shared_conditions:
+      - [AIRM, PATH_D10]
+      - [AIRM, BAG_CANON_D10]
+  monte_carlo:
+    statistic: median_subject_balanced_accuracy
+    sidedness: greater_or_equal
+    plus_one: true
+    alpha: 0.05
+
+subject_probe:
+  target: subject
+  chance: 0.1111111111111111
+  directions:
+    A_TO_B:
+      train_runs: [0, 1, 2]
+      evaluation_runs: [3, 4, 5]
+    B_TO_A:
+      train_runs: [3, 4, 5]
+      evaluation_runs: [0, 1, 2]
+  representations: [PATH_D10, BAG_CANON_D10, SCALARS_11]
+  geometry: AIRM
+
+factor_decomposition:
+  geometries: [AIRM, LE]
+  n_subjects: 9
+  n_classes: 4
+  n_per_cell: 72
+  eta_squared_denominator: ss_total
+  uses_trial_level_p_values: false
+
+controls:
+  local_barycenter:
+    geometry: AIRM
+    decoder: MDM
+    metric: riemann
+    role: secondary
+  whole_1000:
+    geometry: AIRM
+    decoder: MDM
+    metric: riemann
+    role: estimator_regime_confounded_context
+
+figures:
+  dpi: 180
+  format: [png, pdf, csv]
+  stems:
+    - figure_1_class_loso_ba
+    - figure_2_order_shuffle_null
+    - figure_3_label_destruction_null
+    - figure_4_scalar_eta2
+    - figure_5_scalars_by_class
+    - figure_6_scalars_by_subject
+    - figure_7_subject_probe
+    - figure_8_airm_le_robustness
+
+verdicts:
+  h_path_class:
+    effect_comparator: greater_than_zero
+    p_value_max: 0.05
+  h_bag_class:
+    effect_comparator: greater_than_zero
+    p_value_max: 0.05
+  h_order:
+    effect_comparator: greater_than_zero
+    p_value_max: 0.05
+    median_path_minus_bag_comparator: greater_than_zero
+  allowed:
+    - GO_TRAJECTORY_ORDER
+    - GO_UNORDERED_DISTRIBUTION
+    - MIXED_TRAJECTORY_SIGNAL
+    - STOP_LOCAL_TRAJECTORY_V0
+    - UNASSESSED
+  numerical_failure_status: "UNASSESSED — NUMERICAL/DATA FAILURE"
+  technical_failure_status: "UNASSESSED—PROTOCOL/TECHNICAL FAILURE"
+
+runtime:
+  python_executable: .venv/bin/python
+  n_jobs: 1
+  blas_threads: 1
+  result_adaptation: forbidden

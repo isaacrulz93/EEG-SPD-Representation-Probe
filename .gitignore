@@ -22,8 +22,11 @@ data/raw/
 *tsne*cache*
 *t-SNE*cache*
 
+# Small, preregistered Trajectory Anatomy v0 null-summary artifacts
+!outputs/bnci2014_001_trajectory_v0/nulls/order_shuffle_group_stats.npz
+!outputs/bnci2014_001_trajectory_v0/nulls/label_null_group_stats.npz
+
 # Local scratch files
 *.tmp
 *.temp
 *.log
-
