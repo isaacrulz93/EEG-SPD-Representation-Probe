@@ -1,0 +1,46 @@
+{
+  "coordinate_dimension": 253,
+  "representations": {
+    "whole_centered": {
+      "input_dimensions": 253,
+      "n_samples": 2592,
+      "pca_components_used": 40,
+      "pca_explained_variance_ratio_sum": 0.6661945248887078,
+      "seed": 20260809,
+      "standard_scaler": "false",
+      "tsne_kl_divergence": 2.137819290161133
+    },
+    "whole_raw": {
+      "input_dimensions": 253,
+      "n_samples": 2592,
+      "pca_components_used": 40,
+      "pca_explained_variance_ratio_sum": 0.9106489410638212,
+      "seed": 20260809,
+      "standard_scaler": "false",
+      "tsne_kl_divergence": 0.8904823660850525
+    },
+    "window5_centered": {
+      "input_dimensions": 253,
+      "n_samples": 12960,
+      "pca_components_used": 40,
+      "pca_explained_variance_ratio_sum": 0.7118514283272817,
+      "seed": 20260809,
+      "standard_scaler": "false",
+      "tsne_kl_divergence": 3.5831313133239746
+    },
+    "window5_raw": {
+      "input_dimensions": 253,
+      "n_samples": 12960,
+      "pca_components_used": 40,
+      "pca_explained_variance_ratio_sum": 0.859258727051151,
+      "seed": 20260809,
+      "standard_scaler": "false",
+      "tsne_kl_divergence": 2.360952138900757
+    }
+  },
+  "standard_scaler_applied": false,
+  "subject_centering_max_abs_mean": {
+    "whole": 2.9186529736256896e-14,
+    "window5": 1.0657894320173808e-13
+  }
+}

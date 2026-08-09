@@ -1,0 +1,13 @@
+subject,class_label,session,trial_id,trial_uid
+1,feet,0train,2,S01_0train_T002
+1,left_hand,0train,4,S01_0train_T004
+1,right_hand,0train,3,S01_0train_T003
+1,tongue,0train,1,S01_0train_T001
+2,feet,0train,8,S02_0train_T008
+2,left_hand,0train,1,S02_0train_T001
+2,right_hand,0train,2,S02_0train_T002
+2,tongue,0train,10,S02_0train_T010
+3,feet,0train,8,S03_0train_T008
+3,left_hand,0train,1,S03_0train_T001
+3,right_hand,0train,2,S03_0train_T002
+3,tongue,0train,10,S03_0train_T010
