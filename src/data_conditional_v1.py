@@ -288,6 +288,7 @@ def _read_metadata(path: Path) -> pd.DataFrame:
     try:
         return pd.read_csv(
             path,
+            float_precision="round_trip",
             dtype={
                 "session": "string",
                 "run": "string",

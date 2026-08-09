@@ -1136,7 +1136,7 @@ def load_phase_geometry_bundle(
         "degenerate_geometry_audit.csv",
     )
     for filename in gate_files:
-        frame = pd.read_csv(table_dir / filename)
+        frame = pd.read_csv(table_dir / filename, float_precision="round_trip")
         if frame.empty or "passed" not in frame or not frame["passed"].astype(bool).all():
             raise ConditionalPipelineError(f"scientific nulls blocked by {filename}")
         for key, value in context.prefix().items():
@@ -1230,7 +1230,7 @@ def validate_discovery_snapshot_contract(
     }
     frames: dict[str, pd.DataFrame] = {}
     for filename, schema in DISCOVERY_TABLE_SCHEMAS.items():
-        frame = pd.read_csv(table_dir / filename)
+        frame = pd.read_csv(table_dir / filename, float_precision="round_trip")
         if tuple(frame.columns) != schema or frame.empty:
             raise ConditionalPipelineError(f"discovery CSV schema/empty failure: {filename}")
         for key, expected in expected_prefix.items():
@@ -2144,7 +2144,7 @@ def validate_locked_discovery_f_templates(
         / "discovery"
         / "loso_templates.csv"
     )
-    frame = pd.read_csv(path)
+    frame = pd.read_csv(path, float_precision="round_trip")
     if tuple(frame.columns) != DISCOVERY_TABLE_SCHEMAS["loso_templates.csv"]:
         raise ConditionalPipelineError("locked discovery LOSO template schema mismatch")
     result: dict[tuple[int, int], np.ndarray] = {}
@@ -2286,7 +2286,10 @@ def _load_phase_subject_effects(
     subjects = np.asarray(config["dataset"]["subjects"], dtype=np.int64)
     result: dict[str, np.ndarray] = {}
     for stage, filename in specifications.items():
-        frame = pd.read_csv(output / "tables" / phase / filename)
+        frame = pd.read_csv(
+            output / "tables" / phase / filename,
+            float_precision="round_trip",
+        )
         if set(frame["phase"].astype(str)) != {phase}:
             raise ConditionalPipelineError(f"subject-effect phase mismatch: {filename}")
         values = np.empty((2, 2, len(subjects)), dtype=np.float64)
@@ -3398,9 +3401,18 @@ def _read_stage_group_tables(output: Path, phase: str) -> pd.DataFrame:
     directory = output / "tables" / phase
     result = pd.concat(
         [
-            pd.read_csv(directory / "label_destruction_group_summary.csv"),
-            pd.read_csv(directory / "semantic_permutation_null_summary.csv"),
-            pd.read_csv(directory / "oracle_permutation_group_summary.csv"),
+            pd.read_csv(
+                directory / "label_destruction_group_summary.csv",
+                float_precision="round_trip",
+            ),
+            pd.read_csv(
+                directory / "semantic_permutation_null_summary.csv",
+                float_precision="round_trip",
+            ),
+            pd.read_csv(
+                directory / "oracle_permutation_group_summary.csv",
+                float_precision="round_trip",
+            ),
         ],
         ignore_index=True,
     )
@@ -3561,8 +3573,14 @@ def finalize_confirmatory_decision_artifacts(
     )
 
     for filename, schema in DISCOVERY_TABLE_SCHEMAS.items():
-        discovery_frame = pd.read_csv(output / "tables" / "discovery" / filename)
-        confirmatory_frame = pd.read_csv(output / "tables" / "confirmatory" / filename)
+        discovery_frame = pd.read_csv(
+            output / "tables" / "discovery" / filename,
+            float_precision="round_trip",
+        )
+        confirmatory_frame = pd.read_csv(
+            output / "tables" / "confirmatory" / filename,
+            float_precision="round_trip",
+        )
         if tuple(discovery_frame.columns) != schema or tuple(confirmatory_frame.columns) != schema:
             raise ConditionalPipelineError(f"cannot combine mismatched table: {filename}")
         _atomic_write_csv(
@@ -3652,7 +3670,7 @@ def run_confirmatory_oracle_and_finalize(
     ):
         _atomic_write_csv(table_dir / filename, tables[filename])
     for filename in ("subject_bootstrap_summary.csv", "leave_one_subject_out_influence.csv"):
-        existing = pd.read_csv(table_dir / filename)
+        existing = pd.read_csv(table_dir / filename, float_precision="round_trip")
         # Script 26 is resumable/idempotent: replace its P rows while preserving
         # the R/S snapshot produced by script 25.
         existing = existing.loc[existing["stage"].astype(str) != "P"].copy()

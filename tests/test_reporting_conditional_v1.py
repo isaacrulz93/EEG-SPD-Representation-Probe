@@ -1092,7 +1092,7 @@ def test_confirmatory_templates_must_equal_locked_discovery_f_values(
     repo, config_path, output = _make_artifacts(tmp_path, monkeypatch)
     confirmatory_path = output / "tables" / "confirmatory" / "loso_templates.csv"
     root_path = output / "tables" / "loso_templates.csv"
-    confirmatory = pd.read_csv(confirmatory_path)
+    confirmatory = pd.read_csv(confirmatory_path, float_precision="round_trip")
     selected = (
         (confirmatory["geometry"] == "AIRM")
         & (confirmatory["object"] == "D")
@@ -1102,7 +1102,7 @@ def test_confirmatory_templates_must_equal_locked_discovery_f_values(
     )
     confirmatory.loc[selected, "value"] *= -1.0
     confirmatory.to_csv(confirmatory_path, index=False)
-    combined = pd.read_csv(root_path)
+    combined = pd.read_csv(root_path, float_precision="round_trip")
     root_selected = (
         (combined["phase"] == "confirmatory")
         & (combined["geometry"] == "AIRM")
@@ -1164,7 +1164,7 @@ def test_tampered_subject_effect_delta_is_rejected(
     repo, config_path, output = _make_artifacts(tmp_path, monkeypatch)
     snapshot_path = output / "tables" / "confirmatory" / "leave_one_subject_out_influence.csv"
     root_path = output / "tables" / "leave_one_subject_out_influence.csv"
-    snapshot = pd.read_csv(snapshot_path)
+    snapshot = pd.read_csv(snapshot_path, float_precision="round_trip")
     selected = (
         (snapshot["geometry"] == "AIRM")
         & (snapshot["object"] == "D")
@@ -1173,7 +1173,7 @@ def test_tampered_subject_effect_delta_is_rejected(
     )
     snapshot.loc[selected, "discovery_confirmatory_effect_delta"] += 0.1
     snapshot.to_csv(snapshot_path, index=False)
-    combined = pd.read_csv(root_path)
+    combined = pd.read_csv(root_path, float_precision="round_trip")
     selected = (
         (combined["phase"] == "confirmatory")
         & (combined["geometry"] == "AIRM")
@@ -1192,7 +1192,7 @@ def test_tampered_robustness_operand_is_rejected(
 ) -> None:
     repo, config_path, output = _make_artifacts(tmp_path, monkeypatch)
     path = output / "tables" / "airm_le_robustness.csv"
-    frame = pd.read_csv(path)
+    frame = pd.read_csv(path, float_precision="round_trip")
     frame.loc[0, "airm_confirmatory_effect"] += 0.1
     frame.to_csv(path, index=False)
     with pytest.raises(ReportingContractError, match="robustness"):

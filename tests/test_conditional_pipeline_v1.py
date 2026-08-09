@@ -241,6 +241,41 @@ def test_discovery_producer_exact_snapshot_contract_and_resume(tmp_path: Path) -
         code_commit="a" * 40,
     )
     assert validated["status"] == "PASS"
+
+
+def test_snapshot_validator_round_trips_oracle_rank_ties(tmp_path: Path) -> None:
+    """A persisted 21/23 threshold must not move upward by one parser ULP."""
+
+    config, output = _produce_complete_discovery_snapshot(tmp_path)
+    null_path = output / "nulls/discovery/oracle_rank_null.npz"
+    with np.load(null_path, allow_pickle=False) as archive:
+        payload = {name: np.asarray(archive[name]).copy() for name in archive.files}
+    observed = float(21.0 / 23.0)
+    payload["group_statistics"][0, 0] = np.asarray(
+        [observed, observed, 0.0, 0.0, 0.0], dtype=np.float64
+    )
+    np.savez_compressed(null_path, **payload)
+
+    summary_path = output / "tables/discovery/oracle_permutation_group_summary.csv"
+    summary = pd.read_csv(summary_path, float_precision="round_trip")
+    selected = (summary["geometry"] == "AIRM") & (summary["object"] == "D")
+    summary.loc[selected, "observed"] = observed
+    summary.loc[selected, "null_median"] = 0.0
+    summary.loc[selected, "effect"] = observed
+    summary.loc[selected, "exceedances"] = 2
+    summary.loc[selected, "p_value"] = 0.5
+    summary.to_csv(summary_path, index=False)
+
+    # pandas' default parser reads this decimal one ULP high on the frozen
+    # runtime; the production validator is required to use round-trip parsing.
+    assert float(pd.read_csv(summary_path).loc[selected, "observed"].iloc[0]) > observed
+    validated = validate_discovery_snapshot_contract(
+        config,
+        tmp_path,
+        config_sha256="c" * 64,
+        code_commit="a" * 40,
+    )
+    assert validated["status"] == "PASS"
     assert validated["table_file_count"] == 23
 
 

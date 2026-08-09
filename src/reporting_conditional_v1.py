@@ -256,7 +256,7 @@ def _read_json(path: Path, *, name: str) -> dict[str, Any]:
 
 def _read_csv(path: Path, *, name: str) -> pd.DataFrame:
     try:
-        frame = pd.read_csv(path)
+        frame = pd.read_csv(path, float_precision="round_trip")
     except (OSError, ValueError, pd.errors.ParserError) as error:
         raise ReportingContractError(f"cannot parse {name}: {path}") from error
     if frame.empty:
