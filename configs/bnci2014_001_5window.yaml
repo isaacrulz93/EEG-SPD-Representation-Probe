@@ -1,0 +1,85 @@
+project:
+  name: EEG-SPD-Representation-Probe
+  seed: 20260809
+  output_dir: outputs/bnci2014_001
+  cache_dir: cache/bnci2014_001
+  moabb_data_dir: cache/moabb_data
+
+dataset:
+  name: BNCI2014_001
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  primary_session_key: 0train
+  primary_session_number: 1
+  classes: [left_hand, right_hand, feet, tongue]
+  eeg_channels:
+    - Fz
+    - FC3
+    - FC1
+    - FCz
+    - FC2
+    - FC4
+    - C5
+    - C3
+    - C1
+    - Cz
+    - C2
+    - C4
+    - C6
+    - CP3
+    - CP1
+    - CPz
+    - CP2
+    - CP4
+    - P1
+    - Pz
+    - P2
+    - POz
+
+preprocessing:
+  epoch_tmin_seconds: 0.0
+  epoch_tmax_seconds: 3.996
+  source_event_interval_seconds: [2.0, 6.0]
+  bandpass_hz: [8.0, 30.0]
+  resample_hz: null
+  baseline: null
+  expected_sampling_frequency_hz: 250.0
+  expected_samples_per_trial: 1000
+
+representation:
+  covariance_estimator: oas
+  symmetrize_covariance: true
+  covariance_extra_regularization: none
+  n_windows: 5
+  overlap_samples: 0
+  remainder_policy: require_exact_division
+  expected_window_samples: 200
+  svec_off_diagonal_scale: sqrt2
+  standard_scaler: false
+
+embedding:
+  pca_components: 40
+  tsne_components: 2
+  perplexity: 30.0
+  init: pca
+  learning_rate: auto
+  max_iter: 1000
+  method: barnes_hut
+
+diagnostics:
+  silhouette_max_samples: 5000
+  linear_probe:
+    model: multinomial_logistic_regression
+    c: 1.0
+    solver: lbfgs
+    max_iter: 2000
+    folds: 5
+    standard_scaler: false
+  trajectory_subjects: [1, 2, 3]
+  trajectory_rule: smallest_trial_id_per_selected_subject_and_class
+  verdict_thresholds:
+    metric_silhouette_delta: 0.01
+    probe_accuracy_delta: 0.02
+    above_chance_margin: 0.05
+    window_silhouette_range: 0.02
+    transition_eta_squared: 0.01
+
