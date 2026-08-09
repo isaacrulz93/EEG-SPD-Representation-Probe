@@ -289,5 +289,14 @@ file between these commands.
 .venv/bin/python scripts/25_confirmatory_nulls.py --config configs/bnci2014_001_conditional_geometry_v1.yaml
 .venv/bin/python scripts/26_oracle_semantic_test.py --config configs/bnci2014_001_conditional_geometry_v1.yaml
 .venv/bin/python scripts/27_conditional_geometry_report.py --config configs/bnci2014_001_conditional_geometry_v1.yaml
+.venv/bin/python tools/render_conditional_figures_v1_presentation_fix.py --config configs/bnci2014_001_conditional_geometry_v1.yaml --repo-root .
 .venv/bin/python -m pytest -q
 ```
+
+The final command under `tools/` is a versioned, presentation-only erratum:
+it moves figure-level top legends away from their titles after the locked
+stage-27 validator has accepted all scientific artifacts. It refuses to
+finish unless the ten figure source CSVs and Markdown report remain
+byte-identical, and records input/output hashes in
+`presentation_rendering_provenance.json`. It does not alter D/G objects,
+nulls, statistics, chain decisions or the frozen analysis code snapshot.
