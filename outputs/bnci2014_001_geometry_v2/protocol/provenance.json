@@ -1,0 +1,78 @@
+{
+  "config_path": "/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/configs/bnci2014_001_geometry_v2.yaml",
+  "config_sha256": "ddb96fc11a77a8640996755b25031d8c2c4ed0b7d20c4e59b6549b29303c6914",
+  "data": {
+    "channel_names": [
+      "Fz",
+      "FC3",
+      "FC1",
+      "FCz",
+      "FC2",
+      "FC4",
+      "C5",
+      "C3",
+      "C1",
+      "Cz",
+      "C2",
+      "C4",
+      "C6",
+      "CP3",
+      "CP1",
+      "CPz",
+      "CP2",
+      "CP4",
+      "P1",
+      "Pz",
+      "P2",
+      "POz"
+    ],
+    "classes": [
+      "left_hand",
+      "right_hand",
+      "feet",
+      "tongue"
+    ],
+    "fallback_reason": null,
+    "numerical_checks": {
+      "covariances_file_sha256": "c6bd774ac5b3b53c497381433bcc7974af3b54b850a0ac0539aa2f797f6fa997",
+      "maximum_condition_number": 7539.416953914898,
+      "maximum_symmetry_relative_error": 0.0,
+      "minimum_eigenvalue": 4.0468769381754756e-14,
+      "whole_array_content_sha256": "3be57ea13767a407030a7b56541d07a7f4ce4ccbc1f0579720245413067f36a4"
+    },
+    "protocol_name": "BNCI2014_001 WHOLE-SPD Geometry Audit V2",
+    "protocol_sha256": "d0cd84cc5942a5e285ab11f018d2a6dfeb63a73a619d39901ca5d4396fcfd682",
+    "protocol_version": "2.0",
+    "read_only_v1": true,
+    "session": "0train",
+    "source": "exact_v1_read_only_reuse",
+    "subjects": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "v1_covariance_sanity_sha256": "d4a81b8c15fbbbd1f230a14e7a79482884efb43dabcbda0bc0c95345e6bbc070",
+    "v1_frozen_config_sha256": "41f1ad7b2d80a07ab19436de5ec547dfe63d86a320f06dfd05953620944cb232",
+    "v1_root": "/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe",
+    "v1_whole_metadata_sha256": "285eaf926fbfcec8f1228c3fd660b0b0e9ce209a7c5a13d0acd6b4eabdba0a6e",
+    "v2_config_hash": "6c1cb4636d56384b8f6713fb8e8aac0bbef921d3de9cc97127b7456e0f4b225b",
+    "v2_config_hash_kind": "canonical_json_sha256",
+    "whole_dtype": "float64",
+    "whole_shape": [
+      2592,
+      22,
+      22
+    ]
+  },
+  "protocol_name": "BNCI2014_001 WHOLE-SPD Geometry Audit V2",
+  "protocol_path": "/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/docs/PROTOCOL_GEOMETRY_V2.md",
+  "protocol_sha256": "d0cd84cc5942a5e285ab11f018d2a6dfeb63a73a619d39901ca5d4396fcfd682",
+  "protocol_version": "2.0",
+  "setup_error": null
+}

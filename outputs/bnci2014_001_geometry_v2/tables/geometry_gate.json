@@ -1,0 +1,16 @@
+{
+  "classification_authorized": true,
+  "classification_gate_pass": true,
+  "config_sha256": "ddb96fc11a77a8640996755b25031d8c2c4ed0b7d20c4e59b6549b29303c6914",
+  "failed_required_rows": 0,
+  "failed_subjects": [],
+  "failure_statuses": [],
+  "n_required_failed": 0,
+  "n_required_passed": 2331,
+  "n_required_rows": 2331,
+  "n_rows": 2358,
+  "passed_required_rows": 2331,
+  "protocol_sha256": "d0cd84cc5942a5e285ab11f018d2a6dfeb63a73a619d39901ca5d4396fcfd682",
+  "protocol_version": "2.0",
+  "required_rows": 2331
+}
