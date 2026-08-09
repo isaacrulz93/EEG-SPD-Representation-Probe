@@ -12,6 +12,7 @@ import pytest
 from src.data_v2 import load_config
 from src.reporting_v2 import (
     CLASS_ORDER,
+    DOMAIN_SPECS,
     FIGURE_STEMS,
     GEOMETRIES,
     MDM_SPECS,
@@ -229,7 +230,7 @@ def _leakage_table() -> pd.DataFrame:
 def _domain_table() -> pd.DataFrame:
     rows: list[dict[str, object]] = []
     for subject in range(1, 10):
-        for geometry, metric in MDM_SPECS:
+        for geometry, metric in DOMAIN_SPECS:
             for protocol, splits in (("T1", ("ALL",)), ("T2", ("A", "B"))):
                 for split in splits:
                     rows.append(

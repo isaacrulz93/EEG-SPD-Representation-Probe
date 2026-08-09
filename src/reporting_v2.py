@@ -67,6 +67,13 @@ MDM_SPECS = (
     ("AIRM", "riemann"),
     ("EA", "riemann"),
 )
+DOMAIN_SPECS = (
+    ("RAW", "riemann"),
+    ("RAW", "logeuclid"),
+    ("LE", "logeuclid"),
+    ("AIRM", "riemann"),
+    ("EA", "arithmetic_frobenius"),
+)
 CONFUSION_COLUMNS = tuple(
     f"confusion_{truth}__{prediction}"
     for truth in CLASS_ORDER
@@ -660,7 +667,7 @@ def validate_reporting_inputs(
         ("source_target_mean_distance", "absolute_dispersion_difference"),
         "domain_shift_diagnostics",
     )
-    domain_specs = MDM_SPECS
+    domain_specs = DOMAIN_SPECS
     expected_domain = {
         (subject, geometry, metric, protocol, split)
         for subject in subjects
@@ -780,13 +787,18 @@ def compute_frozen_verdicts(
     primary_failures = primary_failure_inventory(t1_primary, t2_primary)
     if not primary_failures.empty:
         technical_verdict = str(config["verdicts"]["technical_failure_verdict"])
-        failure_records = primary_failures.to_dict(orient="records")
+        failure_records = primary_failures[
+            ["source_table", "subject", "geometry", "protocol", "split"]
+        ].to_dict(orient="records")
         operands = {
             question: {
                 "calculation_status": "NOT_COMPUTED",
                 "reason": "one_or_more_primary_logistic_rows_failed",
                 "primary_failed_row_count": int(len(primary_failures)),
                 "failed_rows": failure_records,
+                "unique_warning_message_count": int(
+                    primary_failures["warning_messages"].nunique()
+                ),
                 "available_case_verdict_prohibited": True,
             }
             for question in ("Q1", "Q2", "Q3")
@@ -1415,8 +1427,8 @@ def _plot_figures(sources: Mapping[str, pd.DataFrame], figures_dir: Path) -> Non
     if unavailable_total:
         ax.text(
             0.01,
-            0.98,
-            f"Unavailable failed pairs: {unavailable_total} (x at zero; no verdict)",
+            0.96,
+            f"FAILED pairs: {unavailable_total}\n(no verdict; x at zero)",
             transform=ax.transAxes,
             va="top",
             color="#b2182b",
@@ -1491,6 +1503,16 @@ def _plot_figures(sources: Mapping[str, pd.DataFrame], figures_dir: Path) -> Non
     frame = sources[FIGURE_STEMS[4]]
     fig, axes = plt.subplots(1, 2, figsize=(9.4, 4.4), sharex=True, sharey=True)
     condition_order = ("v1_all_sample", "fold_safe")
+    score_values = frame[["balanced_accuracy", "accuracy"]].to_numpy(
+        dtype=float
+    )
+    finite_scores = score_values[np.isfinite(score_values)]
+    score_span = float(finite_scores.max() - finite_scores.min())
+    score_padding = max(0.02, 0.25 * score_span)
+    score_limits = (
+        max(0.0, float(finite_scores.min()) - score_padding),
+        min(1.0, float(finite_scores.max()) + score_padding),
+    )
     for ax, metric in zip(axes, ("balanced_accuracy", "accuracy"), strict=True):
         for position, condition in enumerate(condition_order):
             group = frame[frame["condition"] == condition]
@@ -1501,7 +1523,7 @@ def _plot_figures(sources: Mapping[str, pd.DataFrame], figures_dir: Path) -> Non
             ax.scatter(position, pooled[metric], marker="D", s=62, color="#d62728", label="pooled OOF" if position == 0 else None)
         ax.set_title(metric.replace("_", " ").title())
         ax.set_xticks((0, 1), ("all-sample", "fold-safe"))
-        ax.set_ylim(0.0, 1.0)
+        ax.set_ylim(*score_limits)
         ax.grid(axis="y", alpha=0.25)
     axes[0].set_ylabel("Score")
     axes[0].legend(frameon=False)
@@ -1626,20 +1648,19 @@ def render_report(
     if primary_failures.empty:
         primary_failure_detail = "Primary logistic failures: 0."
     else:
+        unique_primary_warnings = sorted(
+            primary_failures["warning_messages"].astype(str).unique()
+        )
         primary_failure_detail = (
             f"Primary logistic failures: {len(primary_failures)} row(s).\n\n"
             + _md_table(
-                ("Subject", "Geometry", "Protocol", "Split", "Warning"),
+                ("Subject", "Geometry", "Protocol", "Split"),
                 primary_failures[
-                    [
-                        "subject",
-                        "geometry",
-                        "protocol",
-                        "split",
-                        "warning_messages",
-                    ]
+                    ["subject", "geometry", "protocol", "split"]
                 ].itertuples(index=False, name=None),
             )
+            + "\n\nUnique captured warning(s):\n\n"
+            + "\n".join(f"- `{warning}`" for warning in unique_primary_warnings)
         )
     mdm_failures = secondary_mdm_failure_inventory(
         tables, config["dataset"]["subjects"]
