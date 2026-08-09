@@ -1,0 +1,26 @@
+{
+  "airm_feature_rows": 2592,
+  "bag_validation_permutations": 120,
+  "bag_validation_trials": 36,
+  "centering_isometry_trials": 2592,
+  "config_sha256": "b75890b1f4f8215561501c50ca4049b833efccee7bfce8559a548b59587c99db",
+  "feature_npz_path": "/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/cache/bnci2014_001_trajectory_v0/trajectory_features_v0.npz",
+  "feature_npz_sha256": "4036d4b16bb533ecfc4acaafc72eccac78b8e4d53b6ab2da08e8f6cd4618f3a7",
+  "feature_npz_written": true,
+  "gate_passed": true,
+  "generated_at_utc": "2026-08-09T11:07:41.849297Z",
+  "le_feature_rows": 2592,
+  "n_trials": 2592,
+  "n_windows": 12960,
+  "protocol_sha256": "16062edc068a8287bee1abc97d00ab9d6b15f9fcb29f76225e391594474ed75e",
+  "protocol_version": "0.0",
+  "required_failure_counts": {
+    "covariance_sanity": 0,
+    "dataset_contract": 0,
+    "trajectory_geometry_correctness": 0
+  },
+  "scientific_classification_allowed": true,
+  "seed": 20260809,
+  "session": "0train",
+  "status": "PASS"
+}
