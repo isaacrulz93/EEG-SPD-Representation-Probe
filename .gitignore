@@ -22,8 +22,36 @@ data/raw/
 *tsne*cache*
 *t-SNE*cache*
 
+# Conditional Geometry v1: only frozen compact object/null NPZ artifacts
+!outputs/bnci2014_001_conditional_geometry_v1/objects/airm_marginal_means.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/airm_class_means.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/le_marginal_means.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/le_class_means.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/D_matrices.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/G_matrices.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/airm_marginal_means.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/airm_class_means.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/le_marginal_means.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/le_class_means.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/D_matrices.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/G_matrices.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/confirmatory/airm_marginal_means.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/confirmatory/airm_class_means.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/confirmatory/le_marginal_means.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/confirmatory/le_class_means.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/confirmatory/D_matrices.npz
+!outputs/bnci2014_001_conditional_geometry_v1/objects/confirmatory/G_matrices.npz
+!outputs/bnci2014_001_conditional_geometry_v1/nulls/label_destruction_group_statistics.npz
+!outputs/bnci2014_001_conditional_geometry_v1/nulls/semantic_permutation_group_statistics.npz
+!outputs/bnci2014_001_conditional_geometry_v1/nulls/oracle_rank_null.npz
+!outputs/bnci2014_001_conditional_geometry_v1/nulls/discovery/label_destruction_group_statistics.npz
+!outputs/bnci2014_001_conditional_geometry_v1/nulls/discovery/semantic_permutation_group_statistics.npz
+!outputs/bnci2014_001_conditional_geometry_v1/nulls/discovery/oracle_rank_null.npz
+!outputs/bnci2014_001_conditional_geometry_v1/nulls/confirmatory/label_destruction_group_statistics.npz
+!outputs/bnci2014_001_conditional_geometry_v1/nulls/confirmatory/semantic_permutation_group_statistics.npz
+!outputs/bnci2014_001_conditional_geometry_v1/nulls/confirmatory/oracle_rank_null.npz
+
 # Local scratch files
 *.tmp
 *.temp
 *.log
-

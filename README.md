@@ -178,3 +178,116 @@ Stage 10 is a hard gate. A failed geometry check returns nonzero, and the
 one-command runner stops before fitting any classifier. V2 writes only below
 `outputs/bnci2014_001_geometry_v2/`; the V1 cache is validated by fixed hashes
 and reused read-only when it matches the frozen preprocessing contract.
+
+## Conditional-Geometry Anatomy v1 (branch-only experiment)
+
+The `pilot/conditional-geometry-anatomy-v1` branch adds a label-assisted
+anatomy measurement of the four class-prototype geometries in WHOLE covariance
+space. It asks whether exact inter-class AIRM distance shape (D) and
+marginal-center anchored tangent Gram shape (G) are reliable across independent
+runs, shared under the same semantic ordering across subjects and sessions, and
+informative about class names when the target's four true components are
+provided by an oracle. It is not a classifier, component-recovery procedure or
+domain-adaptation method, and it does not use WINDOW5 or trajectory artifacts.
+
+The scientific definitions, fixed seeds, tolerances, output contract and
+decision rules are frozen in
+[`PROTOCOL_CONDITIONAL_GEOMETRY_V1.md`](docs/PROTOCOL_CONDITIONAL_GEOMETRY_V1.md)
+and
+[`bnci2014_001_conditional_geometry_v1.yaml`](configs/bnci2014_001_conditional_geometry_v1.yaml).
+
+### Session lock
+
+The analysis order is strict: discovery `0train`, a committed discovery
+snapshot, confirmatory unlock, confirmatory `1test`, then the final report.
+Before a valid `confirmatory_unlock.json` exists, discovery code cannot resolve,
+hash, open or preprocess the `1test` A??E files and cannot compute any `1test`
+marginal/class mean, D, G, shape or semantic-permutation score. The unlock is
+created only from the configured branch at a clean committed HEAD after all
+required discovery object, table and null snapshots are present and tracked.
+
+The unlock records the protocol, config, code commit and every discovery output
+hash. Confirmatory entry points validate those values before resolving a
+`1test` path. Changing HEAD, source, scripts, requirements, protocol, config or
+any locked discovery artifact invalidates the unlock. Prior general session-1
+inventory/classifier access is recorded separately from direct conditional
+geometry access; the frozen history audit found no prior session-1 D/G anatomy,
+so this experiment is designated `STRICT_CONFIRMATORY`.
+
+### Artifact policy
+
+All outputs live under
+`outputs/bnci2014_001_conditional_geometry_v1/`; regenerable epochs,
+covariances and resumable checkpoints live under the ignored
+`cache/bnci2014_001_conditional_geometry_v1/`. Raw EEG, caches and the general
+`*.npz` class remain ignored. The only NPZ exceptions are the six required
+object basenames and three required compact null basenames at their exact
+final, discovery and confirmatory output locations. No other NPZ should be
+force-added. A tracked artifact must be smaller than the frozen 95,000,000-byte
+limit; stop rather than commit an oversized or uncontrolled artifact.
+Immutable discovery artifacts use `objects/discovery/`, `tables/discovery/`
+and `nulls/discovery/`; confirmatory artifacts use the matching
+`confirmatory/` paths. The final synthesis writes the required combined tables,
+figures, decision JSON and
+[`conditional_geometry_anatomy_v1.md`](outputs/bnci2014_001_conditional_geometry_v1/report/conditional_geometry_anatomy_v1.md)
+without overwriting the discovery snapshot.
+
+### Strict reproduction sequence
+
+Run this sequence from the committed protocol/implementation HEAD on
+`pilot/conditional-geometry-anatomy-v1`, before an unlock manifest exists. The
+initial clean-tree assertion prevents an uncommitted code or protocol change
+from entering the official discovery run.
+
+```bash
+test -z "$(git status --porcelain=v1 --untracked-files=all)"
+.venv/bin/python scripts/20_freeze_conditional_protocol.py --config configs/bnci2014_001_conditional_geometry_v1.yaml
+.venv/bin/python scripts/21_discovery_conditional_geometry.py --config configs/bnci2014_001_conditional_geometry_v1.yaml
+.venv/bin/python scripts/22_discovery_nulls.py --config configs/bnci2014_001_conditional_geometry_v1.yaml --dry-run-replicates 3
+.venv/bin/python scripts/22_discovery_nulls.py --config configs/bnci2014_001_conditional_geometry_v1.yaml
+```
+
+The dry run writes only `protocol/label_null_dry_run.json`; it does not write a
+scientific null or table. The following invocation without the dry-run option
+uses the frozen replicate counts. Before unlock, run the complete test suite,
+verify that the size command prints nothing, and commit the exact discovery
+snapshot. The explicit forced additions are limited to the nine required NPZ
+files; they do not override the cache/raw/general-NPZ policy.
+
+```bash
+.venv/bin/python -m pytest -q
+find outputs/bnci2014_001_conditional_geometry_v1/objects/discovery outputs/bnci2014_001_conditional_geometry_v1/nulls/discovery -type f -name '*.npz' -size +95000000c -print
+git add outputs/bnci2014_001_conditional_geometry_v1/manifest.json
+git add outputs/bnci2014_001_conditional_geometry_v1/git_provenance.json
+git add outputs/bnci2014_001_conditional_geometry_v1/environment.json
+git add outputs/bnci2014_001_conditional_geometry_v1/protocol
+git add outputs/bnci2014_001_conditional_geometry_v1/objects/discovery
+git add outputs/bnci2014_001_conditional_geometry_v1/tables/discovery
+git add outputs/bnci2014_001_conditional_geometry_v1/nulls/discovery
+git add -f outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/airm_marginal_means.npz
+git add -f outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/airm_class_means.npz
+git add -f outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/le_marginal_means.npz
+git add -f outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/le_class_means.npz
+git add -f outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/D_matrices.npz
+git add -f outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/G_matrices.npz
+git add -f outputs/bnci2014_001_conditional_geometry_v1/nulls/discovery/label_destruction_group_statistics.npz
+git add -f outputs/bnci2014_001_conditional_geometry_v1/nulls/discovery/semantic_permutation_group_statistics.npz
+git add -f outputs/bnci2014_001_conditional_geometry_v1/nulls/discovery/oracle_rank_null.npz
+git diff --cached --check
+git diff --cached --stat
+git commit -m "run discovery conditional geometry"
+test -z "$(git status --porcelain=v1 --untracked-files=all)"
+```
+
+Only after that commit and clean-tree check may the unlock and confirmatory
+commands run. Do not amend the discovery commit, switch HEAD or edit a locked
+file between these commands.
+
+```bash
+.venv/bin/python scripts/23_lock_confirmatory.py --config configs/bnci2014_001_conditional_geometry_v1.yaml
+.venv/bin/python scripts/24_confirmatory_conditional_geometry.py --config configs/bnci2014_001_conditional_geometry_v1.yaml
+.venv/bin/python scripts/25_confirmatory_nulls.py --config configs/bnci2014_001_conditional_geometry_v1.yaml
+.venv/bin/python scripts/26_oracle_semantic_test.py --config configs/bnci2014_001_conditional_geometry_v1.yaml
+.venv/bin/python scripts/27_conditional_geometry_report.py --config configs/bnci2014_001_conditional_geometry_v1.yaml
+.venv/bin/python -m pytest -q
+```
