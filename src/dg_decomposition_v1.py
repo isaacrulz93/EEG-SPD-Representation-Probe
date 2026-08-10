@@ -962,11 +962,17 @@ def make_figures(
     f6 = gates[gates.geometry == "LE"][["session", "subject", "split", *columns]].copy()
     f6.to_csv(figure_dir / "figure_6_le_algebraic_control.csv", index=False)
     fig, ax = plt.subplots(figsize=(10, 4))
-    values = [f6[column].to_numpy() for column in columns]
-    ax.boxplot(values, tick_labels=["D_exact² vs D_tan²", "G vs G0", "K_exact vs G0"], showfliers=True)
+    labels = ["D_exact² vs D_tan²", "G vs G0", "K_exact vs G0"]
+    floor = np.finfo(np.float64).eps * 0.1
+    for index, column in enumerate(columns):
+        values = np.maximum(np.abs(f6[column].to_numpy()), floor)
+        jitter = np.linspace(-0.14, 0.14, len(values))
+        ax.scatter(index + jitter, values, s=14, alpha=.55)
     ax.axhline(REL_TOL, color="red", linestyle="--", label="hard tolerance")
-    ax.set_yscale("symlog", linthresh=1e-16)
-    ax.set_ylabel("relative error")
+    ax.set_xticks(range(3), labels)
+    ax.set_yscale("log")
+    ax.set_ylim(1e-17, 3e-10)
+    ax.set_ylabel("absolute relative error")
     ax.legend()
     ax.set_title("LE algebraic controls at numerical zero")
     fig.tight_layout()
@@ -1005,7 +1011,7 @@ def make_figures(
     ax.set_yticks(range(4), [f"{s} · {g}" for s, g in matrix.index])
     for i in range(matrix.shape[0]):
         for j in range(matrix.shape[1]):
-            ax.text(j, i, f"{matrix.iloc[i, j]:.4f}", ha="center", va="center", fontsize=8)
+            ax.text(j, i, f"{matrix.iloc[i, j]:.2e}", ha="center", va="center", fontsize=8)
     fig.colorbar(image, ax=ax, label="effect contrast")
     ax.set_title(f"Mechanism decision: {replication.overall_label.iloc[0]}")
     fig.tight_layout()
@@ -1058,6 +1064,8 @@ def _write_report(
         f"- Session 0 label: **{labels['0train']}**",
         f"- Session 1 label: **{labels['1test']}**",
         f"- Overall: **{overall}**",
+        "",
+        "The matched encoding contrasts are large and direction-replicated in both AIRM and the exact-information LE control, whereas the anchor contrasts are nonpositive and numerically negligible. AIRM curvature contrasts are also positive in both sessions but are orders of magnitude smaller than the encoding contrasts; because the frozen rules forbid adding a post hoc materiality cutoff, the replicated encoding-plus-curvature sign pattern receives the mixed label.",
         "",
         "The label is provisional and uses algebraic matching plus replicated contrast direction, not a new post hoc absolute cutoff and not a single p-value. It is not a scientific GO before external confirmation.",
         "",
