@@ -1,0 +1,26 @@
+{
+  "config_sha256": "3c205f612ae1363a67651926479d2a22539dc7947830922274711975eeb1069a",
+  "figure_source_rows": {
+    "figure_1_within_subject_session_class_ba": 18,
+    "figure_2_same_subject_cross_session_ba": 9,
+    "figure_3_within_label_null": 3998,
+    "figure_4_cross_session_label_null": 3998,
+    "figure_5_order_shuffle_null": 1999,
+    "figure_6_path_bag_scalars_summary": 6
+  },
+  "figure_stems": [
+    "figure_1_within_subject_session_class_ba",
+    "figure_2_same_subject_cross_session_ba",
+    "figure_3_within_label_null",
+    "figure_4_cross_session_label_null",
+    "figure_5_order_shuffle_null",
+    "figure_6_path_bag_scalars_summary"
+  ],
+  "protocol_sha256": "05a7346ccc951f3da17b809eda5152374dcad853d5abd69bc50dfd326edf9c2f",
+  "report_sha256": "d1938b13290208a927a666f5cf62db5a262f6bc6944e581e20f5abce2a950710",
+  "terminal_decision": "GO_STABLE_SUBJECT_SPECIFIC_LOCAL_GEOMETRY",
+  "test_summary": {
+    "passed": 178,
+    "seconds": 18.4
+  }
+}

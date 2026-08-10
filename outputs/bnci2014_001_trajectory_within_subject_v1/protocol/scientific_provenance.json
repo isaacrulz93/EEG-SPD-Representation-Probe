@@ -1,0 +1,39 @@
+{
+  "analysis_name": "BNCI2014_001 trajectory within-subject audit v1",
+  "config_sha256": "3c205f612ae1363a67651926479d2a22539dc7947830922274711975eeb1069a",
+  "null_replicates": {
+    "label": 1999,
+    "order": 1999
+  },
+  "protocol_freeze_commit": "49685f3",
+  "protocol_sha256": "05a7346ccc951f3da17b809eda5152374dcad853d5abd69bc50dfd326edf9c2f",
+  "result_artifact_sha256": {
+    "decisions/decision_chain.csv": "9c91a9ba7efd7fc9ed1c5f45bef132e5c1e5e579d269aa9495047a07ec52e367",
+    "decisions/terminal_decision.json": "6945369c96333d5349fe9bf3f3a9558151a8dc191df649ed5da580cc50afffaa",
+    "nulls/label_null_statistics.npz": "49813d09ba698c110d9a54b1a65f8cf66cf3ef06128d5066f91cfc547413ccc0",
+    "nulls/order_null_statistics.npz": "2ab0612565990e5e7a0e27d2b84c126966a7b933a13d055e5de6f041f100d441",
+    "tables/cross_session_scores.csv": "f71f57c6c280cd00863dd700bbf582ba31227fcfc48753606d0aaf22d366be7c",
+    "tables/data_contract.csv": "4368f055ea7e6d8e452d28ccce28d6271f9b9edfb40177f21bd404e79d9d0536",
+    "tables/label_null_summary.csv": "ff8f1a9c54d65ea28fc1663f06ee4a0096bff362d659fc28394320e964bd91a8",
+    "tables/order_null_summary.csv": "77f8ed31ecae3697033e9a066461bae3b782fe56ce32f384189a95dac43b5db0",
+    "tables/representation_comparison.csv": "4ab3be2ea0ee0c231d87b94ae34fb60b723712795cd6a810e393f4245272686f",
+    "tables/reproduction_gate.csv": "b2e4978d66712f4935f7ac374c6bae72dd0f464acc9e39292feaafe85acc8729",
+    "tables/within_session_scores.csv": "b2974819fca9a944383fd4ad5b9c972bbf755e61ae26af44335d3172694ee6b4"
+  },
+  "scientific_scores_computed": true,
+  "source_sha256": {
+    "scripts/30_prepare_trajectory_within_subject_v1.py": "3cfea1bee89fcad552def809cbaeda0ac77407a1ab65801301effdb7077ab55d",
+    "scripts/31_run_trajectory_within_subject_v1.py": "9c98969a776ee9084781ad52a9814477a85f9192670b27bb717da7eec9074067",
+    "scripts/32_report_trajectory_within_subject_v1.py": "b9abf0431229edeec81861d6c5cd10e749dee96dc18f81dde41b9305d5f9aff3",
+    "src/reporting_trajectory_within_subject_v1.py": "e154a9c814778c92abba683217e83c926ea479285370d1167ffb6d5c991e790e",
+    "src/trajectory_within_subject_analysis_v1.py": "ba1ad590f8c282f4b70051a68690b31b24ebebef43adfe3b502ee403babb24f7",
+    "src/trajectory_within_subject_data_v1.py": "c6282c060bf1c6966547ef186a9006e6c28f9b669e069d5f1608d6290e7f612a",
+    "src/trajectory_within_subject_v1.py": "1c3b00da8f076535cc01b594f60f885ceddf2ef9ce0866118628ad084d0cc30f"
+  },
+  "terminal_decision": "GO_STABLE_SUBJECT_SPECIFIC_LOCAL_GEOMETRY",
+  "test_summary": {
+    "passed": 178,
+    "seconds": 18.4
+  },
+  "whole_subject_class_interaction_used": false
+}
