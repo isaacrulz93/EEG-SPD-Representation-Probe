@@ -1,0 +1,247 @@
+{
+  "artifact_count": 46,
+  "artifacts": [
+    {
+      "bytes": 755,
+      "path": "figures/figure_1_stage_s_effects.csv",
+      "sha256": "967129242aea1e445e60ed94b9bcfad9c97e6a9769b295beb6726596cbd7c54e"
+    },
+    {
+      "bytes": 17317,
+      "path": "figures/figure_1_stage_s_effects.pdf",
+      "sha256": "e8386d590735968b9d0472c2a4afcbf5b8750ce215f665d9091a59b32b9e551c"
+    },
+    {
+      "bytes": 100534,
+      "path": "figures/figure_1_stage_s_effects.png",
+      "sha256": "8a69603700a8e1386ed107c339a05295e164aefba3b688fe7eac69a473a61d32"
+    },
+    {
+      "bytes": 742,
+      "path": "figures/figure_2_matched_pairs.csv",
+      "sha256": "4790367bb247cd3373105d93cb9c5cd5213514edd69d7644716867885b141630"
+    },
+    {
+      "bytes": 17094,
+      "path": "figures/figure_2_matched_pairs.pdf",
+      "sha256": "03750bf93f5938c1a7c904450b5c44490541fc3abe21ca33d53abccab76a3339"
+    },
+    {
+      "bytes": 124768,
+      "path": "figures/figure_2_matched_pairs.png",
+      "sha256": "4afff04f5ff610105f572401a2352801b44df828010d2654331773b930db6cff"
+    },
+    {
+      "bytes": 32642,
+      "path": "figures/figure_3_airm_distance_scatter.csv",
+      "sha256": "4b83ef26a3561ed59df8cca21dbc82ac78c64efc01c908d66dfcbd31d3100a72"
+    },
+    {
+      "bytes": 23006,
+      "path": "figures/figure_3_airm_distance_scatter.pdf",
+      "sha256": "14965feb5093b0c034e98b723a927a138a55d9c4b77fb5ac85d7dcd68b10867b"
+    },
+    {
+      "bytes": 212106,
+      "path": "figures/figure_3_airm_distance_scatter.png",
+      "sha256": "b5416e38fa2fdf4d0b93cbe6e95645b6f971342c392272e6a32fb072146533ed"
+    },
+    {
+      "bytes": 10948,
+      "path": "figures/figure_4_airm_curvature_by_pair.csv",
+      "sha256": "c69ff9d02a642542ea2287c862b83774c79c90a50a33eee02885ba1077985609"
+    },
+    {
+      "bytes": 21827,
+      "path": "figures/figure_4_airm_curvature_by_pair.pdf",
+      "sha256": "6e0d2f0488fdfa7f7b92798182b610283cbd2a71c98474bb52824fd144c032d0"
+    },
+    {
+      "bytes": 59939,
+      "path": "figures/figure_4_airm_curvature_by_pair.png",
+      "sha256": "b118fa62e48c9d9e8106db1c36a30e4b0f0de8dc5a2350410a8fb7ad062773b4"
+    },
+    {
+      "bytes": 731,
+      "path": "figures/figure_5_anchor_effect.csv",
+      "sha256": "7b8497c2d66354671dce4f07ddef681a52cd0523ded5a8aa030af3e3ea3aedd3"
+    },
+    {
+      "bytes": 16344,
+      "path": "figures/figure_5_anchor_effect.pdf",
+      "sha256": "3e9ab790157f4f5024efd88652a69ab2a8e222689c3dcba4c5ffbc9a886413b6"
+    },
+    {
+      "bytes": 61679,
+      "path": "figures/figure_5_anchor_effect.png",
+      "sha256": "daf8431dcad3ad8d55510d1272ff30c16bf5cee0f611557c9cefb32ac34009b5"
+    },
+    {
+      "bytes": 4518,
+      "path": "figures/figure_6_le_algebraic_control.csv",
+      "sha256": "87e07ea28ebff5926bc2e072d91aea4751f3eeda3e68e1593beb67c4600c0fe6"
+    },
+    {
+      "bytes": 18649,
+      "path": "figures/figure_6_le_algebraic_control.pdf",
+      "sha256": "cfead4993d94a5c4aa5076f8f09dbed69d0a0ce2aaed81d780c31593dee39b2b"
+    },
+    {
+      "bytes": 70847,
+      "path": "figures/figure_6_le_algebraic_control.png",
+      "sha256": "95121deb10bd1005f7f3b1f8f2bec7698897afd7bffa9dad43ee9b16976e9da2"
+    },
+    {
+      "bytes": 6919,
+      "path": "figures/figure_7_subject_stage_s_effects.csv",
+      "sha256": "3caf12f0f20cc5febc7149a28b0d2efdf009c804e2ce3aec69a993823d6e74ce"
+    },
+    {
+      "bytes": 27657,
+      "path": "figures/figure_7_subject_stage_s_effects.pdf",
+      "sha256": "f91f11202de65d3b71d68ef37b46789671e5b9c03e11e9af2bd1bd6deab5009f"
+    },
+    {
+      "bytes": 240103,
+      "path": "figures/figure_7_subject_stage_s_effects.png",
+      "sha256": "0a5c109adcad3619c97957fed135f7ba217262dbe2330160c03b1bbdbb7f70a6"
+    },
+    {
+      "bytes": 918,
+      "path": "figures/figure_8_mechanism_decision.csv",
+      "sha256": "a41c59978b581bdcb11e956f69b8fa5f00baca4cb925acefac2991a4255254d9"
+    },
+    {
+      "bytes": 20892,
+      "path": "figures/figure_8_mechanism_decision.pdf",
+      "sha256": "5cca36d68c7f110dd063a7369d36f03ca0b5012f8d3125af6cf89961c9a1ee6a"
+    },
+    {
+      "bytes": 78498,
+      "path": "figures/figure_8_mechanism_decision.png",
+      "sha256": "739989f53e06726fc7d259355667d7c87e8b7576217416d41a7ae919af96b136"
+    },
+    {
+      "bytes": 73649620,
+      "path": "nulls/semantic_permutation_0train.npz",
+      "sha256": "bf3fab9f2141839aa2a07f4395e677e244cc44aa6b7e1e66bdbd31dc5bc84420"
+    },
+    {
+      "bytes": 73789293,
+      "path": "nulls/semantic_permutation_1test.npz",
+      "sha256": "39ce917a82fca0d68920a7aa369ac7988b919a8a924d07f46a825db9f7832dbd"
+    },
+    {
+      "bytes": 43639,
+      "path": "objects/derived_objects.npz",
+      "sha256": "7879ebe55529037d9ea9f8cedc81cc4262bbe002965aaf4375b460882c1837b3"
+    },
+    {
+      "bytes": 25100,
+      "path": "objects/oracle_permutation_scores.npz",
+      "sha256": "382fefce33f95a79f16aef2d0b5520966636d92e264a4d957496a1e27dd180e9"
+    },
+    {
+      "bytes": 12229,
+      "path": "protocol/PROTOCOL_DG_DISCREPANCY_DECOMPOSITION_V1.md",
+      "sha256": "a4357cd296ef7234a24e53f2d366b6018696bdf6c3d7b732ea6faa5b5de48fe9"
+    },
+    {
+      "bytes": 5888,
+      "path": "protocol/frozen_config.yaml",
+      "sha256": "edb255e9e71f9c14fcbe96df24f582bab81f96a38d5f330a9e8593a2ccbd3cae"
+    },
+    {
+      "bytes": 7508,
+      "path": "report/dg_discrepancy_decomposition_v1.md",
+      "sha256": "d647bb9c036a937b182cc65fbed6868e2f0fc25041ec2420800b337c199dfdc2"
+    },
+    {
+      "bytes": 28432,
+      "path": "tables/D_exact_shapes.csv",
+      "sha256": "bd00dacc5d1f47a3e8a698d699524ae0d5cbce2e07164881c6510185e8251476"
+    },
+    {
+      "bytes": 28420,
+      "path": "tables/D_tan_shapes.csv",
+      "sha256": "063df944b4ba58d763cce1c1ddbda13470ed8d8f541c03beb0cfa187d63c3b0d"
+    },
+    {
+      "bytes": 46785,
+      "path": "tables/G0_shapes.csv",
+      "sha256": "147c94224d4d5866b1cb0f9e3be51d949ce4c308bce9b645ab1c64c2826f6275"
+    },
+    {
+      "bytes": 46848,
+      "path": "tables/G_shapes.csv",
+      "sha256": "aa8ea339331e00d01a6b83db1f00248489bd506cce68b2d82f8bd25ec17c4a3c"
+    },
+    {
+      "bytes": 46846,
+      "path": "tables/K_exact_shapes.csv",
+      "sha256": "e0a9f554937bae44e8235ddada3b7f52acad5ece0cbd1e9b5f6e2455ca958f70"
+    },
+    {
+      "bytes": 11278,
+      "path": "tables/anchor_offset_summary.csv",
+      "sha256": "16c679116ada70f2ff59a2c133da1d36ec3e1ebff352cd91901b7955bea66649"
+    },
+    {
+      "bytes": 12555,
+      "path": "tables/curvature_distortion_summary.csv",
+      "sha256": "d244a2841a6ce6e1621b83d30473760746a1e784af884b09b30ba47623cea7f4"
+    },
+    {
+      "bytes": 19393,
+      "path": "tables/derived_object_identity_gates.csv",
+      "sha256": "de8eb842c85a44b74771aa2ee09ec6c09e4ed4407434208c53004c945f81f210"
+    },
+    {
+      "bytes": 475,
+      "path": "tables/mechanism_contrasts.csv",
+      "sha256": "33f3b3b0bdaa23e6dab3abb0650202e7bab5ae67f66ca36283dc1e507e4d6831"
+    },
+    {
+      "bytes": 255552,
+      "path": "tables/oracle_descriptive_summary.csv",
+      "sha256": "ce49e9063a43b90e9e8fe66101a2f06f14c91a4d3e96a04a0bbe84366d03fb0f"
+    },
+    {
+      "bytes": 1827,
+      "path": "tables/reliability_summary.csv",
+      "sha256": "37f5cd9a2e2afc9ce9ce559b83d9552ef268bfdaacd0115eed940bbda14d7e57"
+    },
+    {
+      "bytes": 349,
+      "path": "tables/session_replication_summary.csv",
+      "sha256": "b6f75f41a7b35372c025b737fccbc75ffc5486faf3b6f9befac056a5c7ee265b"
+    },
+    {
+      "bytes": 2212,
+      "path": "tables/shared_semantic_summary.csv",
+      "sha256": "03bea0c33256e6c7e54f8c81bd5c108fa7680b80cb1b5aa888d2ceb8f5d2bbfe"
+    },
+    {
+      "bytes": 2030,
+      "path": "tables/source_artifact_audit.csv",
+      "sha256": "6294f6d8716327465647f3731a97a884ed49b9ffa5a1f00c333ce8181ed2d046"
+    },
+    {
+      "bytes": 18353,
+      "path": "tables/subject_semantic_effects.csv",
+      "sha256": "1b26400790e676f561174174d310758257625e948e225f478bcf8644203bb207"
+    }
+  ],
+  "base_commit": "74bbae09fd9880c5809b61769d8f6e27b9b994bf",
+  "branch": "pilot/dg-discrepancy-decomposition-v1",
+  "config_sha256": "edb255e9e71f9c14fcbe96df24f582bab81f96a38d5f330a9e8593a2ccbd3cae",
+  "hard_gates": "PASS",
+  "implementation_commit": "76c81f25c0340a2ddd3eadf1503db6896452b832",
+  "overall_provisional_mechanism": "PROVISIONAL_MIXED",
+  "protocol_sha256": "a4357cd296ef7234a24e53f2d366b6018696bdf6c3d7b732ea6faa5b5de48fe9",
+  "schema_version": "dg-discrepancy-decomposition-v1",
+  "session0_label": "PROVISIONAL_MIXED",
+  "session1_label": "PROVISIONAL_MIXED",
+  "source_output_aggregate_sha256": "51332ac66d3235e80ed43df4e80cdf752d2d37f81b2ae71c19c7caa3b3e7e8ba",
+  "source_outputs_unchanged": true
+}

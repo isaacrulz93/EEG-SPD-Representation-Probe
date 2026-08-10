@@ -1,0 +1,5 @@
+session,geometry,Delta_curvature,Delta_anchor,Delta_encoding_exact,Delta_encoding_tangent,session0_supported,session1_supported,direction_replicated
+0train,AIRM,2.106785486943874e-05,-2.1519902149158554e-07,0.0875764657229432,0.08767227313814119,curvature:1;anchor:0;encoding:1,curvature:1;anchor:0;encoding:1,curvature:1;anchor:0;encoding:1
+0train,LE,-1.1102230246251565e-16,-1.1102230246251565e-16,0.1047369376920535,0.10473693769205372,curvature:1;anchor:0;encoding:1,curvature:1;anchor:0;encoding:1,curvature:1;anchor:0;encoding:1
+1test,AIRM,4.265839012695949e-06,-4.971397099540198e-07,0.09738998408756028,0.0974557231624511,curvature:1;anchor:0;encoding:1,curvature:1;anchor:0;encoding:1,curvature:1;anchor:0;encoding:1
+1test,LE,1.1102230246251565e-16,-1.1102230246251565e-16,0.12388472600369538,0.12388472600369571,curvature:1;anchor:0;encoding:1,curvature:1;anchor:0;encoding:1,curvature:1;anchor:0;encoding:1
