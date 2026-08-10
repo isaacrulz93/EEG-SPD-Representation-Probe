@@ -26,6 +26,10 @@ data/raw/
 !outputs/bnci2014_001_trajectory_v0/nulls/order_shuffle_group_stats.npz
 !outputs/bnci2014_001_trajectory_v0/nulls/label_null_group_stats.npz
 
+# Compact, preregistered Trajectory Within-Subject Audit v1 null statistics
+!outputs/bnci2014_001_trajectory_within_subject_v1/nulls/label_null_statistics.npz
+!outputs/bnci2014_001_trajectory_within_subject_v1/nulls/order_null_statistics.npz
+
 # Local scratch files
 *.tmp
 *.temp

@@ -1,0 +1,9 @@
+check,observed,expected,passed
+combined_trials,5184,5184,True
+session_count,2,2,True
+subjects,9,9,True
+classes,4,4,True
+session1_raw_files,9,9,True
+channel_order,"[""Fz"", ""FC3"", ""FC1"", ""FCz"", ""FC2"", ""FC4"", ""C5"", ""C3"", ""C1"", ""Cz"", ""C2"", ""C4"", ""C6"", ""CP3"", ""CP1"", ""CPz"", ""CP2"", ""CP4"", ""P1"", ""Pz"", ""P2"", ""POz""]","[""Fz"", ""FC3"", ""FC1"", ""FCz"", ""FC2"", ""FC4"", ""C5"", ""C3"", ""C1"", ""Cz"", ""C2"", ""C4"", ""C6"", ""CP3"", ""CP1"", ""CPz"", ""CP2"", ""CP4"", ""P1"", ""Pz"", ""P2"", ""POz""]",True
+window_count,5,5,True
+samples_per_window,200,200,True

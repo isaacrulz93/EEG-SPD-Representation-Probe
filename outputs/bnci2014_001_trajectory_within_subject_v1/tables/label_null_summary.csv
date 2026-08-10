@@ -1,0 +1,5 @@
+stage,representation,observed,null_median,effect,p_value,exceedance_count,replicates,passed,shared_label_realization,role,prerequisite_pass,inferential_pass
+W,PATH_D10,0.30729166666666663,0.25,0.05729166666666663,0.0005,0,1999,True,True,primary,True,True
+X,PATH_D10,0.2881944444444444,0.25,0.03819444444444442,0.0005,0,1999,True,True,primary,True,True
+W,BAG_CANON_D10,0.2708333333333333,0.25,0.020833333333333315,0.0095,18,1999,True,True,mandatory_unordered_comparator,True,True
+X,BAG_CANON_D10,0.2829861111111111,0.25,0.032986111111111105,0.0005,0,1999,True,True,mandatory_unordered_comparator,True,True

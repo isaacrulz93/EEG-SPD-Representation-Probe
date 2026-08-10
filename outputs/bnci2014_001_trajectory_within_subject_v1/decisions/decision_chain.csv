@@ -1,0 +1,7 @@
+step,status,vote
+reproduction_gate,PASS,True
+technical_grid,PASS,True
+PATH_STAGE_W,PASS,True
+PATH_STAGE_X,PASS,True
+PATH_STAGE_O,FAIL,False
+terminal,GO_STABLE_SUBJECT_SPECIFIC_LOCAL_GEOMETRY,

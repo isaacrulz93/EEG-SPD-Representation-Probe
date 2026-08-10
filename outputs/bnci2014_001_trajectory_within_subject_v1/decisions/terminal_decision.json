@@ -1,0 +1,170 @@
+{
+  "claim_restrictions_applied": true,
+  "config_sha256": "3c205f612ae1363a67651926479d2a22539dc7947830922274711975eeb1069a",
+  "decision": "GO_STABLE_SUBJECT_SPECIFIC_LOCAL_GEOMETRY",
+  "label_null_summary": [
+    {
+      "effect": 0.0572916666666666,
+      "exceedance_count": 0,
+      "inferential_pass": true,
+      "null_median": 0.25,
+      "observed": 0.3072916666666666,
+      "p_value": 0.0005,
+      "passed": true,
+      "prerequisite_pass": true,
+      "replicates": 1999,
+      "representation": "PATH_D10",
+      "role": "primary",
+      "shared_label_realization": true,
+      "stage": "W"
+    },
+    {
+      "effect": 0.0381944444444444,
+      "exceedance_count": 0,
+      "inferential_pass": true,
+      "null_median": 0.25,
+      "observed": 0.2881944444444444,
+      "p_value": 0.0005,
+      "passed": true,
+      "prerequisite_pass": true,
+      "replicates": 1999,
+      "representation": "PATH_D10",
+      "role": "primary",
+      "shared_label_realization": true,
+      "stage": "X"
+    },
+    {
+      "effect": 0.0208333333333333,
+      "exceedance_count": 18,
+      "inferential_pass": true,
+      "null_median": 0.25,
+      "observed": 0.2708333333333333,
+      "p_value": 0.0095,
+      "passed": true,
+      "prerequisite_pass": true,
+      "replicates": 1999,
+      "representation": "BAG_CANON_D10",
+      "role": "mandatory_unordered_comparator",
+      "shared_label_realization": true,
+      "stage": "W"
+    },
+    {
+      "effect": 0.0329861111111111,
+      "exceedance_count": 0,
+      "inferential_pass": true,
+      "null_median": 0.25,
+      "observed": 0.2829861111111111,
+      "p_value": 0.0005,
+      "passed": true,
+      "prerequisite_pass": true,
+      "replicates": 1999,
+      "representation": "BAG_CANON_D10",
+      "role": "mandatory_unordered_comparator",
+      "shared_label_realization": true,
+      "stage": "X"
+    }
+  ],
+  "order_null_summary": [
+    {
+      "effect": 0.0156249999999999,
+      "exceedance_count": 143,
+      "null_median": 0.2725694444444445,
+      "observed": 0.2881944444444444,
+      "p_value": 0.072,
+      "passed": false,
+      "prerequisite_w_pass": true,
+      "prerequisite_x_pass": true,
+      "replicates": 1999,
+      "representation": "PATH_D10",
+      "stage": "O",
+      "status": "PASS"
+    }
+  ],
+  "order_status": "PASS",
+  "protocol_sha256": "05a7346ccc951f3da17b809eda5152374dcad853d5abd69bc50dfd326edf9c2f",
+  "protocol_version": "1.0",
+  "stage_o_pass": false,
+  "stage_w_pass": true,
+  "stage_x_pass": true,
+  "subject_context": {
+    "BAG_CANON_D10": {
+      "stage_w_above_chance_count": 9,
+      "stage_w_subject_values": [
+        0.37152777777777773,
+        0.2552083333333333,
+        0.2604166666666667,
+        0.26041666666666663,
+        0.2708333333333333,
+        0.2552083333333333,
+        0.2743055555555555,
+        0.29861111111111105,
+        0.3368055555555555
+      ],
+      "stage_x_above_chance_count": 7,
+      "stage_x_subject_values": [
+        0.3350694444444444,
+        0.24826388888888884,
+        0.2899305555555556,
+        0.27083333333333337,
+        0.2829861111111111,
+        0.24479166666666666,
+        0.26562499999999994,
+        0.3194444444444444,
+        0.38368055555555547
+      ]
+    },
+    "PATH_D10": {
+      "stage_w_above_chance_count": 8,
+      "stage_w_subject_values": [
+        0.3472222222222222,
+        0.2899305555555555,
+        0.30729166666666663,
+        0.3298611111111111,
+        0.2916666666666667,
+        0.2777777777777778,
+        0.24999999999999997,
+        0.3125,
+        0.3472222222222222
+      ],
+      "stage_x_above_chance_count": 9,
+      "stage_x_subject_values": [
+        0.34201388888888884,
+        0.2881944444444444,
+        0.265625,
+        0.2881944444444444,
+        0.2534722222222222,
+        0.2690972222222222,
+        0.2934027777777778,
+        0.3246527777777778,
+        0.3038194444444444
+      ]
+    },
+    "SCALARS_11": {
+      "stage_w_above_chance_count": 5,
+      "stage_w_subject_values": [
+        0.3611111111111111,
+        0.2482638888888889,
+        0.28298611111111105,
+        0.2899305555555555,
+        0.24826388888888887,
+        0.24652777777777773,
+        0.24999999999999997,
+        0.3402777777777778,
+        0.37152777777777773
+      ],
+      "stage_x_above_chance_count": 7,
+      "stage_x_subject_values": [
+        0.3732638888888889,
+        0.2569444444444444,
+        0.28125,
+        0.2951388888888889,
+        0.23090277777777773,
+        0.23090277777777773,
+        0.2569444444444444,
+        0.34375,
+        0.40104166666666663
+      ]
+    }
+  },
+  "whole_subject_class_interaction_used": false
+}
