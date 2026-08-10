@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import itertools
+from pathlib import Path
 
 import autograd.numpy as anp
 import numpy as np
 import pymanopt
 import pytest
+import yaml
 from autograd import grad as autograd_grad
 from pymanopt import Problem
 from pymanopt.manifolds import SpecialOrthogonalGroup
@@ -27,10 +29,12 @@ from src.common_action_solver_v0 import (
     action_objective,
     analyze_common_stabilizer,
     assess_predictive_identifiability,
+    build_pymanopt_optimizer,
     classify_prediction_set,
     conjugate,
     deterministic_starts,
     diagnose_multistart,
+    equivalence_objective_tolerance,
     fit_source_model,
     heldout_template,
     nonidentity_permutations_three,
@@ -46,6 +50,7 @@ from src.common_subject_action_v0 import (
     loco_folds,
     raw_population_prediction,
     residual_class_correspondence_null,
+    required_identifiability_gate,
     seed_vector,
     subject_group_statistic,
     terminal_decision,
@@ -388,7 +393,8 @@ def test_equivalent_q_with_same_heldout_prediction_is_harmless_nonuniqueness() -
     result = classify_prediction_set(
         (identity, sign_flip),
         heldout,
-        split_half_relative_variability=0.0,
+        split_half_prediction_a=heldout,
+        split_half_prediction_b=heldout,
     )
     assert result.classification == "HARMLESS_Q_NONUNIQUENESS"
     assert result.maximum_relative_prediction_dispersion == 0.0
@@ -417,7 +423,8 @@ def test_equivalent_fit_q_with_different_heldout_prediction_is_nonidentifiable()
     result = classify_prediction_set(
         (identity, sign_flip),
         heldout,
-        split_half_relative_variability=1e-3,
+        split_half_prediction_a=heldout,
+        split_half_prediction_b=1.001 * heldout,
     )
     assert result.classification == "PREDICTIVE_NONIDENTIFIABILITY"
     assert result.maximum_relative_prediction_dispersion > result.materiality_threshold
@@ -436,9 +443,11 @@ def test_continuous_stabilizer_is_judged_by_prediction_not_q_uniqueness() -> Non
     harmless_heldout = np.diag([0.5, 0.5, 0.1, -0.7])
     stabilizer, harmless = assess_predictive_identifiability(
         fit,
+        target,
         fit_templates,
         harmless_heldout,
-        split_half_relative_variability=0.0,
+        split_half_prediction_a=harmless_heldout,
+        split_half_prediction_b=harmless_heldout,
     )
     assert stabilizer.numerical_nullity == 1
     assert harmless.classification == "HARMLESS_Q_NONUNIQUENESS"
@@ -446,9 +455,11 @@ def test_continuous_stabilizer_is_judged_by_prediction_not_q_uniqueness() -> Non
     dangerous_heldout[0, 1] = dangerous_heldout[1, 0] = 0.4
     _, dangerous = assess_predictive_identifiability(
         fit,
+        target,
         fit_templates,
         dangerous_heldout,
-        split_half_relative_variability=1e-3,
+        split_half_prediction_a=dangerous_heldout,
+        split_half_prediction_b=1.001 * dangerous_heldout,
     )
     assert dangerous.classification == "PREDICTIVE_NONIDENTIFIABILITY"
 
@@ -467,13 +478,18 @@ def test_materiality_rule_uses_one_for_one_split_half_noise_scale() -> None:
     strict = classify_prediction_set(
         (identity, alternative),
         heldout,
-        split_half_relative_variability=1e-4,
+        split_half_prediction_a=heldout,
+        split_half_prediction_b=1.0001 * heldout,
     )
     assert strict.classification == "PREDICTIVE_NONIDENTIFIABILITY"
     measurement_limited = classify_prediction_set(
         (identity, alternative),
         heldout,
-        split_half_relative_variability=2.0 * strict.maximum_relative_prediction_dispersion,
+        split_half_prediction_a=heldout,
+        split_half_prediction_b=(
+            1.0 + 2.0 * strict.maximum_relative_prediction_dispersion
+        )
+        * heldout,
     )
     assert measurement_limited.classification == "HARMLESS_Q_NONUNIQUENESS"
     assert measurement_limited.materiality_threshold == pytest.approx(
@@ -488,20 +504,23 @@ def test_noisy_identifiable_fixture_multistart_spread_is_below_split_half_variab
     rng = np.random.default_rng(197)
     predictions = []
     fits = []
+    fit_targets = []
     for half in range(2):
         noise = rng.normal(scale=2e-4, size=(3, dimension, dimension))
         noise = 0.5 * (noise + noise.transpose(0, 2, 1))
         target = conjugate(truth, templates[:3]) + noise
         fit = optimize_action(target, templates[:3], seed=198 + half)
         fits.append(fit)
+        fit_targets.append(target)
         predictions.append(conjugate(fit.matrix, templates[3]))
-    split_half = np.linalg.norm(predictions[0] - predictions[1]) / np.linalg.norm(templates[3])
-    for fit in fits:
+    for fit, target in zip(fits, fit_targets):
         _, result = assess_predictive_identifiability(
             fit,
+            target,
             templates[:3],
             templates[3],
-            split_half_relative_variability=float(split_half),
+            split_half_prediction_a=predictions[0],
+            split_half_prediction_b=predictions[1],
         )
         assert result.classification in {
             "PREDICTIVELY_IDENTIFIABLE",
@@ -534,7 +553,8 @@ def test_numerical_local_minima_are_not_mislabeled_as_equivalent_actions() -> No
     assessment = classify_prediction_set(
         tuple(fit.starts[index].matrix for index in fit.equivalent_start_indices),
         templates[3],
-        split_half_relative_variability=0.0,
+        split_half_prediction_a=heldout,
+        split_half_prediction_b=heldout,
     )
     predicted = conjugate(fit.matrix, templates[3])
     assert assessment.classification == "PREDICTIVELY_IDENTIFIABLE"
@@ -641,3 +661,102 @@ def test_candidate_settings_cover_both_components_and_are_explicit() -> None:
     assert CANDIDATE_SOLVER_SETTINGS.outer_iterations == 120
     assert CANDIDATE_SOLVER_SETTINGS.exact_prediction_relative_tolerance == 1e-8
     assert CANDIDATE_SOLVER_SETTINGS.prediction_dispersion_numerical_floor == 1e-5
+
+
+def test_runtime_pymanopt_optimizer_and_line_search_match_frozen_config() -> None:
+    config_path = Path(__file__).resolve().parents[1] / "configs/bnci2014_001_common_subject_action_v0.yaml"
+    config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    frozen = config["optimizer"]
+    line_frozen = frozen["line_search"]
+    optimizer = build_pymanopt_optimizer()
+    line_search = optimizer._line_searcher
+    assert type(optimizer).__name__ == "ConjugateGradient"
+    assert optimizer._beta_rule == frozen["beta_rule"]
+    assert optimizer._max_iterations == frozen["max_iterations"]
+    assert optimizer._min_gradient_norm == frozen["min_gradient_norm"]
+    assert optimizer._min_step_size == frozen["min_step_size"]
+    assert optimizer._max_cost_evaluations == frozen["max_cost_evaluations"]
+    assert optimizer._max_time == frozen["max_time_seconds"]
+    assert type(line_search).__name__ == "BackTrackingLineSearcher"
+    assert line_search.contraction_factor == line_frozen["contraction_factor"]
+    assert line_search.optimism == line_frozen["optimism"]
+    assert line_search.sufficient_decrease == line_frozen["sufficient_decrease"]
+    assert line_search.max_iterations == line_frozen["max_iterations"]
+    assert line_search.initial_step_size == line_frozen["initial_step_size"]
+    assert not hasattr(line_search, "min_step_size")
+
+
+def test_near_optimal_objective_rule_uses_abs_best_without_unit_floor() -> None:
+    settings = CANDIDATE_SOLVER_SETTINGS
+    best = 2.5e-4
+    expected = (
+        settings.equivalent_objective_absolute_tolerance
+        + settings.equivalent_objective_relative_tolerance * abs(best)
+    )
+    assert equivalence_objective_tolerance(best) == pytest.approx(expected)
+    assert expected < 2e-10
+
+
+def test_only_one_near_optimal_q_has_zero_D_eq() -> None:
+    heldout = np.diag([0.2, 0.7, 1.1])
+    result = classify_prediction_set(
+        (np.eye(3),),
+        heldout,
+        split_half_prediction_a=heldout,
+        split_half_prediction_b=heldout,
+    )
+    assert result.classification == "PREDICTIVELY_IDENTIFIABLE"
+    assert result.equivalent_solution_count == 1
+    assert result.maximum_relative_prediction_dispersion == 0.0
+
+
+def test_numerical_zero_split_prediction_fails_closed() -> None:
+    heldout = np.diag([0.2, 0.7, 1.1])
+    with pytest.raises(Exception, match="UNASSESSED_NUMERICAL_OR_DATA_FAILURE"):
+        classify_prediction_set(
+            (np.eye(3),),
+            heldout,
+            split_half_prediction_a=np.zeros_like(heldout),
+            split_half_prediction_b=heldout,
+        )
+
+
+def test_missing_converged_determinant_sector_is_technical_failure() -> None:
+    fit_templates = _bank(901, 3, 4)
+    target = fit_templates.copy()
+    fit = optimize_action(target, fit_templates, seed=902, starts=(np.eye(4),))
+    heldout = _bank(903, 1, 4)[0]
+    with pytest.raises(Exception, match="UNASSESSED_TECHNICAL_FAILURE"):
+        assess_predictive_identifiability(
+            fit,
+            target,
+            fit_templates,
+            heldout,
+            split_half_prediction_a=heldout,
+            split_half_prediction_b=heldout,
+        )
+
+
+def test_different_determinant_sectors_can_be_harmlessly_equivalent() -> None:
+    heldout = _bank(904, 1, 3)[0]
+    result = classify_prediction_set(
+        (np.eye(3), -np.eye(3)),
+        heldout,
+        split_half_prediction_a=heldout,
+        split_half_prediction_b=heldout,
+    )
+    assert np.linalg.det(np.eye(3)) > 0 and np.linalg.det(-np.eye(3)) < 0
+    assert result.classification == "HARMLESS_Q_NONUNIQUENESS"
+    assert result.maximum_relative_prediction_dispersion == 0.0
+
+
+def test_any_required_nonidentifiable_cell_fails_entire_chain() -> None:
+    passing = ["PREDICTIVELY_IDENTIFIABLE"] * 72
+    assert required_identifiability_gate(passing, stage="A") == "PASS"
+    passing[37] = "PREDICTIVE_NONIDENTIFIABILITY"
+    assert (
+        required_identifiability_gate(passing, stage="A")
+        == "UNASSESSED_ACTION_NOT_IDENTIFIABLE"
+    )
+    with pytest.raises(AuditContractError, match="available-case"):
+        required_identifiability_gate(passing[:-1], stage="A")

@@ -35,11 +35,12 @@ class SolverSettings:
     max_iterations: int = 1000
     gradient_tolerance: float = 1.0e-5
     objective_tolerance: float = 1.0e-13
-    armijo_initial_step: float = 1.0
-    armijo_contraction: float = 0.5
-    armijo_c1: float = 1.0e-4
-    armijo_min_step: float = 1.0e-12
-    armijo_max_iterations: int = 50
+    line_search_initial_step_size: float = 1.0
+    line_search_contraction_factor: float = 0.5
+    line_search_sufficient_decrease: float = 1.0e-4
+    line_search_max_iterations: int = 50
+    line_search_optimism: float = 2.0
+    optimizer_min_step_size: float = 1.0e-12
     optimizer_max_time_seconds: float = 3600.0
     outer_starts: int = 4
     outer_iterations: int = 120
@@ -95,6 +96,7 @@ class SourceModelFit:
     templates: np.ndarray
     best_start_index: int
     starts: tuple[SourceStartResult, ...]
+    equivalent_start_indices: tuple[int, ...]
     anchor_index: int
 
 
@@ -116,6 +118,8 @@ class PredictiveIdentifiability:
     maximum_relative_prediction_dispersion: float
     split_half_relative_variability: float
     materiality_threshold: float
+    prediction_normalization: float
+    normalization_epsilon: float
     prediction_hashes: tuple[str, ...]
 
 
@@ -289,16 +293,16 @@ def _optimize_one_custom(
             converged = True
             break
         direction = -gradient
-        step = settings.armijo_initial_step
+        step = settings.line_search_initial_step_size
         accepted = False
-        while step >= settings.armijo_min_step:
+        while step >= settings.optimizer_min_step_size:
             candidate = orthogonal_retraction(q, step * direction)
             candidate_objective = action_objective(targets, templates, candidate)
-            if candidate_objective <= objective - settings.armijo_c1 * step * gradient_norm**2:
+            if candidate_objective <= objective - settings.line_search_sufficient_decrease * step * gradient_norm**2:
                 previous, objective, q = objective, candidate_objective, candidate
                 accepted = True
                 break
-            step *= settings.armijo_contraction
+            step *= settings.line_search_contraction_factor
         if not accepted:
             line_failures += 1
             break
@@ -352,6 +356,36 @@ def _pymanopt_problem(
     )
 
 
+def build_pymanopt_optimizer(
+    settings: SolverSettings = CANDIDATE_SOLVER_SETTINGS,
+) -> ConjugateGradient:
+    """Instantiate the exact public Pymanopt optimizer contract.
+
+    ``optimizer_min_step_size`` belongs to Pymanopt's optimizer stopping
+    criteria. It is deliberately not described as a BackTrackingLineSearcher
+    parameter because Pymanopt 2.2.1 does not expose such a line-search option.
+    """
+
+    line_search = BackTrackingLineSearcher(
+        contraction_factor=settings.line_search_contraction_factor,
+        optimism=settings.line_search_optimism,
+        sufficient_decrease=settings.line_search_sufficient_decrease,
+        max_iterations=settings.line_search_max_iterations,
+        initial_step_size=settings.line_search_initial_step_size,
+    )
+    return ConjugateGradient(
+        beta_rule="HestenesStiefel",
+        line_searcher=line_search,
+        max_time=settings.optimizer_max_time_seconds,
+        max_iterations=settings.max_iterations,
+        min_gradient_norm=settings.gradient_tolerance,
+        min_step_size=settings.optimizer_min_step_size,
+        max_cost_evaluations=settings.max_iterations + 1,
+        verbosity=0,
+        log_verbosity=0,
+    )
+
+
 def _optimize_one_pymanopt(
     targets: np.ndarray,
     templates: np.ndarray,
@@ -361,24 +395,7 @@ def _optimize_one_pymanopt(
     settings: SolverSettings,
 ) -> StartResult:
     manifold, problem = _pymanopt_problem(targets, templates)
-    line_search = BackTrackingLineSearcher(
-        contraction_factor=settings.armijo_contraction,
-        optimism=2.0,
-        sufficient_decrease=settings.armijo_c1,
-        max_iterations=settings.armijo_max_iterations,
-        initial_step_size=settings.armijo_initial_step,
-    )
-    optimizer = ConjugateGradient(
-        beta_rule="HestenesStiefel",
-        line_searcher=line_search,
-        max_time=settings.optimizer_max_time_seconds,
-        max_iterations=settings.max_iterations,
-        min_gradient_norm=settings.gradient_tolerance,
-        min_step_size=settings.armijo_min_step,
-        max_cost_evaluations=settings.max_iterations + 1,
-        verbosity=0,
-        log_verbosity=0,
-    )
+    optimizer = build_pymanopt_optimizer(settings)
     initial = np.asarray(start, dtype=np.float64)
     if initial.shape != (manifold._n, manifold._p):
         raise ValueError("start has the wrong shape")
@@ -401,6 +418,21 @@ def _optimize_one_pymanopt(
         line_search_failures=int(result.step_size == 0.0),
         optimizer="pymanopt_2.2.1_stiefel_cg",
         stopping_criterion=str(result.stopping_criterion),
+    )
+
+
+def equivalence_objective_tolerance(
+    best_objective: float,
+    settings: SolverSettings = CANDIDATE_SOLVER_SETTINGS,
+) -> float:
+    """Frozen additive tolerance in L <= L_best + atol + rtol*|L_best|."""
+
+    value = float(best_objective)
+    if not np.isfinite(value):
+        raise ValueError("best objective must be finite")
+    return float(
+        settings.equivalent_objective_absolute_tolerance
+        + settings.equivalent_objective_relative_tolerance * abs(value)
     )
 
 
@@ -434,7 +466,7 @@ def optimize_action(
             f"all action starts failed convergence; best objective={best_any.objective:.17g}, gradient={best_any.gradient_norm:.17g}"
         )
     best = min((results[index] for index in converged_indices), key=lambda value: (value.objective, value.gradient_norm, value.start_index))
-    tolerance = settings.equivalent_objective_absolute_tolerance + settings.equivalent_objective_relative_tolerance * max(1.0, abs(best.objective))
+    tolerance = equivalence_objective_tolerance(best.objective, settings)
     equivalent = tuple(
         value.start_index
         for value in results
@@ -556,19 +588,23 @@ def fit_source_model(
                     continue
                 flattened_targets = values[index].reshape(-1, values.shape[-1], values.shape[-1])
                 flattened_templates = templates.reshape(-1, values.shape[-1], values.shape[-1])
-                spectral_pair = deterministic_starts(
+                sector_starts = deterministic_starts(
                     flattened_targets,
                     flattened_templates,
                     seed=seed + 7919 * global_start + 101 * index,
                     count=settings.starts,
-                )[:2]
+                )
                 fit = optimize_action(
                     flattened_targets,
                     flattened_templates,
                     seed=seed + 7919 * global_start + 101 * index,
                     settings=settings,
-                    starts=(actions[index], *spectral_pair),
+                    starts=(actions[index], *sector_starts),
                 )
+                if diagnose_multistart(fit).determinant_sectors_with_converged_solution != (-1, 1):
+                    raise ActionSolverError(
+                        "UNASSESSED_TECHNICAL_FAILURE: source update lacks a converged determinant sector"
+                    )
                 actions[index] = fit.matrix
                 inner_results.append(fit.starts[fit.best_start_index])
             actions[int(anchor_index)] = np.eye(values.shape[-1])
@@ -601,7 +637,20 @@ def fit_source_model(
             f"all generalized-Procrustes starts failed; objective={best_any.objective:.17g}, gradient={best_any.maximum_gradient_norm:.17g}"
         )
     best = min(converged, key=lambda value: (value.objective, value.maximum_gradient_norm, value.start_index))
-    return SourceModelFit(best.actions, best.templates, best.start_index, tuple(results), int(anchor_index))
+    tolerance = equivalence_objective_tolerance(best.objective, settings)
+    equivalent = tuple(
+        value.start_index
+        for value in results
+        if value.converged and value.objective <= best.objective + tolerance
+    )
+    return SourceModelFit(
+        best.actions,
+        best.templates,
+        best.start_index,
+        tuple(results),
+        equivalent,
+        int(anchor_index),
+    )
 
 
 def heldout_template(source_actions: np.ndarray, source_heldout: np.ndarray) -> np.ndarray:
@@ -702,85 +751,158 @@ def analyze_common_stabilizer(
 def stabilizer_augmented_actions(
     fit: ActionFit,
     diagnostic: StabilizerDiagnostic,
+    fit_targets: np.ndarray,
+    fit_templates: np.ndarray,
+    *,
+    settings: SolverSettings = CANDIDATE_SOLVER_SETTINGS,
 ) -> tuple[np.ndarray, ...]:
-    """Collect near-optimal multi-start actions and exact Lie symmetries."""
+    """Collect exactly criterion-qualified multi-start/Lie-equivalent actions."""
 
-    actions = [fit.starts[index].matrix for index in fit.equivalent_start_indices]
+    best = fit.starts[fit.best_start_index]
+    limit = best.objective + equivalence_objective_tolerance(
+        best.objective, settings
+    )
+    candidates = [best.matrix]
+    candidates.extend(
+        fit.starts[index].matrix
+        for index in fit.equivalent_start_indices
+        if index != fit.best_start_index
+    )
     best = fit.matrix
     for omega in diagnostic.nullspace_basis:
         for angle in (0.5 * np.pi, -0.5 * np.pi, np.pi):
-            actions.append(best @ expm(angle * omega))
+            candidates.append(best @ expm(angle * omega))
     unique: list[np.ndarray] = []
-    for action in actions:
+    for action in candidates:
+        objective = action_objective(fit_targets, fit_templates, action)
+        if objective > limit:
+            continue
         if not any(np.linalg.norm(action - existing) <= 1.0e-12 for existing in unique):
             unique.append(np.asarray(action, dtype=np.float64))
+    if not unique:
+        raise ActionSolverError("UNASSESSED_TECHNICAL_FAILURE: Q_eq is empty")
     return tuple(unique)
+
+
+def prediction_norm_epsilon(prediction: np.ndarray) -> float:
+    values = np.asarray(prediction, dtype=np.float64)
+    return float(np.finfo(np.float64).eps * np.sqrt(values.size))
+
+
+def classify_prediction_matrices(
+    predictions: Sequence[np.ndarray],
+    *,
+    best_prediction: np.ndarray,
+    split_half_prediction_a: np.ndarray,
+    split_half_prediction_b: np.ndarray,
+    settings: SolverSettings = CANDIDATE_SOLVER_SETTINGS,
+) -> PredictiveIdentifiability:
+    """Apply the exact cell-level predictive-identifiability contract.
+
+    Both D_eq and D_split use max(||P_best||_F, epsilon) as their denominator.
+    The split-half predictions are independently recomputed inputs. No
+    multiplicative factor is applied to D_split.
+    """
+
+    values = tuple(np.asarray(value, dtype=np.float64) for value in predictions)
+    if not values:
+        raise ValueError("at least one near-optimal prediction is required")
+    best = np.asarray(best_prediction, dtype=np.float64)
+    half_a = np.asarray(split_half_prediction_a, dtype=np.float64)
+    half_b = np.asarray(split_half_prediction_b, dtype=np.float64)
+    if any(value.shape != best.shape for value in (*values, half_a, half_b)):
+        raise ValueError("all held-out predictions must share shape")
+    if not all(np.isfinite(value).all() for value in (*values, best, half_a, half_b)):
+        raise ActionSolverError(
+            "UNASSESSED_NUMERICAL_OR_DATA_FAILURE: nonfinite prediction"
+        )
+    epsilon = prediction_norm_epsilon(best)
+    best_norm = float(np.linalg.norm(best))
+    half_a_norm = float(np.linalg.norm(half_a))
+    half_b_norm = float(np.linalg.norm(half_b))
+    if best_norm <= epsilon or half_a_norm <= epsilon or half_b_norm <= epsilon:
+        raise ActionSolverError(
+            "UNASSESSED_NUMERICAL_OR_DATA_FAILURE: held-out prediction norm is numerical zero"
+        )
+    denominator = max(best_norm, epsilon)
+    maximum = 0.0
+    for left in range(len(values)):
+        for right in range(left + 1, len(values)):
+            maximum = max(
+                maximum,
+                float(np.linalg.norm(values[left] - values[right]))
+                / denominator,
+            )
+    split_half = float(np.linalg.norm(half_a - half_b) / denominator)
+    threshold = max(settings.prediction_dispersion_numerical_floor, split_half)
+    if maximum > threshold:
+        classification = "PREDICTIVE_NONIDENTIFIABILITY"
+    elif len(values) > 1:
+        classification = "HARMLESS_Q_NONUNIQUENESS"
+    else:
+        classification = "PREDICTIVELY_IDENTIFIABLE"
+    return PredictiveIdentifiability(
+        classification=classification,
+        equivalent_solution_count=len(values),
+        maximum_relative_prediction_dispersion=float(maximum),
+        split_half_relative_variability=split_half,
+        materiality_threshold=float(threshold),
+        prediction_normalization=denominator,
+        normalization_epsilon=epsilon,
+        prediction_hashes=tuple(sha256_array(value) for value in values),
+    )
 
 
 def classify_prediction_set(
     actions: Sequence[np.ndarray],
     heldout_template_matrix: np.ndarray,
     *,
-    split_half_relative_variability: float,
+    split_half_prediction_a: np.ndarray,
+    split_half_prediction_b: np.ndarray,
     settings: SolverSettings = CANDIDATE_SOLVER_SETTINGS,
 ) -> PredictiveIdentifiability:
-    """Classify Q non-uniqueness by its induced held-out prediction.
-
-    Materiality is frozen conceptually as a one-for-one comparison: the
-    maximum normalized equivalent-solution spread must not exceed the larger
-    of the synthetic solver-dispersion floor and independently recomputed
-    split-half prediction variability. Exact recovery has a separate stricter
-    tolerance. No real-data-derived multiplier or threshold is used.
-    """
-
     matrices = tuple(np.asarray(value, dtype=np.float64) for value in actions)
     if not matrices:
         raise ValueError("at least one action is required")
     heldout = np.asarray(heldout_template_matrix, dtype=np.float64)
     predictions = tuple(conjugate(value, heldout) for value in matrices)
-    denominator = max(float(np.linalg.norm(heldout)), np.finfo(np.float64).tiny)
-    maximum = 0.0
-    for left in range(len(predictions)):
-        for right in range(left + 1, len(predictions)):
-            maximum = max(
-                maximum,
-                float(np.linalg.norm(predictions[left] - predictions[right]))
-                / denominator,
-            )
-    split_half = float(split_half_relative_variability)
-    if not np.isfinite(split_half) or split_half < 0.0:
-        raise ValueError("split-half variability must be finite and nonnegative")
-    threshold = max(settings.prediction_dispersion_numerical_floor, split_half)
-    if maximum > threshold:
-        classification = "PREDICTIVE_NONIDENTIFIABILITY"
-    elif len(predictions) > 1:
-        classification = "HARMLESS_Q_NONUNIQUENESS"
-    else:
-        classification = "PREDICTIVELY_IDENTIFIABLE"
-    return PredictiveIdentifiability(
-        classification=classification,
-        equivalent_solution_count=len(predictions),
-        maximum_relative_prediction_dispersion=float(maximum),
-        split_half_relative_variability=split_half,
-        materiality_threshold=float(threshold),
-        prediction_hashes=tuple(sha256_array(value) for value in predictions),
+    return classify_prediction_matrices(
+        predictions,
+        best_prediction=predictions[0],
+        split_half_prediction_a=split_half_prediction_a,
+        split_half_prediction_b=split_half_prediction_b,
+        settings=settings,
     )
 
 
 def assess_predictive_identifiability(
     fit: ActionFit,
+    fit_targets: np.ndarray,
     fit_templates: np.ndarray,
     heldout_template_matrix: np.ndarray,
     *,
-    split_half_relative_variability: float,
+    split_half_prediction_a: np.ndarray,
+    split_half_prediction_b: np.ndarray,
     settings: SolverSettings = CANDIDATE_SOLVER_SETTINGS,
 ) -> tuple[StabilizerDiagnostic, PredictiveIdentifiability]:
+    landscape = diagnose_multistart(fit)
+    if landscape.determinant_sectors_with_converged_solution != (-1, 1):
+        raise ActionSolverError(
+            "UNASSESSED_TECHNICAL_FAILURE: no converged solution in both determinant sectors"
+        )
     stabilizer = analyze_common_stabilizer(fit_templates, settings=settings)
-    actions = stabilizer_augmented_actions(fit, stabilizer)
+    actions = stabilizer_augmented_actions(
+        fit,
+        stabilizer,
+        fit_targets,
+        fit_templates,
+        settings=settings,
+    )
     assessment = classify_prediction_set(
         actions,
         heldout_template_matrix,
-        split_half_relative_variability=split_half_relative_variability,
+        split_half_prediction_a=split_half_prediction_a,
+        split_half_prediction_b=split_half_prediction_b,
         settings=settings,
     )
     return stabilizer, assessment
@@ -828,10 +950,13 @@ __all__ = [
     "action_objective",
     "analyze_common_stabilizer",
     "assess_predictive_identifiability",
+    "build_pymanopt_optimizer",
+    "classify_prediction_matrices",
     "classify_prediction_set",
     "conjugate",
     "deterministic_starts",
     "diagnose_multistart",
+    "equivalence_objective_tolerance",
     "fit_source_model",
     "heldout_template",
     "nonidentity_permutations_three",
@@ -840,6 +965,7 @@ __all__ = [
     "optimize_action_custom",
     "orthogonal_retraction",
     "prediction_ambiguity",
+    "prediction_norm_epsilon",
     "sha256_array",
     "skew_symmetric_basis",
     "stabilizer_augmented_actions",

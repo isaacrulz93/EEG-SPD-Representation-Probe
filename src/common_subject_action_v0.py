@@ -297,6 +297,32 @@ def validate_direction_grid(rows: Sequence[Mapping[str, object]], stage: str) ->
             raise AuditContractError(f"Stage {stage} contains a required failed cell")
 
 
+def required_identifiability_gate(
+    classifications: Sequence[str],
+    *,
+    stage: str,
+    expected_cells: int = 72,
+) -> str:
+    """Fail closed across every required Stage-A/Stage-B cell."""
+
+    values = tuple(str(value) for value in classifications)
+    if len(values) != int(expected_cells):
+        raise AuditContractError(
+            f"Stage {stage} identifiability grid has {len(values)} cells, "
+            f"expected {expected_cells}; available-case analysis is forbidden"
+        )
+    allowed = {
+        "PREDICTIVELY_IDENTIFIABLE",
+        "HARMLESS_Q_NONUNIQUENESS",
+        "PREDICTIVE_NONIDENTIFIABILITY",
+    }
+    if any(value not in allowed for value in values):
+        return "UNASSESSED_TECHNICAL_FAILURE"
+    if any(value == "PREDICTIVE_NONIDENTIFIABILITY" for value in values):
+        return "UNASSESSED_ACTION_NOT_IDENTIFIABLE"
+    return "PASS"
+
+
 __all__ = [
     "AuditContractError",
     "CLASSES",
@@ -314,6 +340,7 @@ __all__ = [
     "raw_population_prediction",
     "residual_class_correspondence_null",
     "residual_same_subject_test",
+    "required_identifiability_gate",
     "seed_vector",
     "stage_pass",
     "subject_group_statistic",
