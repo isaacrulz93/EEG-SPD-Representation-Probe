@@ -1,0 +1,14 @@
+{
+  "LE_robustness_all_stages_pass": true,
+  "R_control_all_stages_pass": true,
+  "bnci_directions_positive": {
+    "C": true,
+    "I": true,
+    "R": true
+  },
+  "openbmi_unlocked": false,
+  "primary_chain": "AIRM/session-specific/sensor/Z",
+  "result_selected_protocol_modifications": false,
+  "spectrum_control_all_stages_pass": true,
+  "terminal_decision": "OPENBMI_UNLOCK_ELIGIBLE_NOT_TERMINAL"
+}

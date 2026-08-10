@@ -1,0 +1,10 @@
+{
+  "base_commit": "6124adb907369bc8f76733e880ebb8c43db38e94",
+  "branch": "pilot/subject-class-interaction-v0",
+  "config_sha256": "06ea1c28399b081d14cb14c6185d39b3784f59c70b613da34976b820b7b7224d",
+  "frozen_definition_commit": "09fb211",
+  "master_seed": 20260810,
+  "phase": "PROTOCOL_FROZEN",
+  "protocol_sha256": "88134949377265c1280e4efa292e7265fade4f4bd688cf98ce8b228af48d4657",
+  "schema_version": "subject-class-interaction-v0"
+}

@@ -1,0 +1,49 @@
+{
+  "config_sha256": "06ea1c28399b081d14cb14c6185d39b3784f59c70b613da34976b820b7b7224d",
+  "core_objects_file": "outputs/subject_class_interaction_v0/objects/core_interaction_objects.npz",
+  "core_objects_sha256": "1bb487a8446308e1dd29965ac57901a810d6e92da25b020ae284569176f33f6d",
+  "dataset": "BNCI2014_001",
+  "hard_gates_pass": true,
+  "input_provenance": {
+    "0train_covariance_array_sha256": "3be57ea13767a407030a7b56541d07a7f4ce4ccbc1f0579720245413067f36a4",
+    "0train_covariance_file_sha256": "c6bd774ac5b3b53c497381433bcc7974af3b54b850a0ac0539aa2f797f6fa997",
+    "0train_metadata_sha256": "285eaf926fbfcec8f1228c3fd660b0b0e9ce209a7c5a13d0acd6b4eabdba0a6e",
+    "1test_covariance_array_sha256": "2bf695d860624797136425e0ad1a3e31cde3dc852c71e1f53a877ab6531b9d1c",
+    "1test_covariance_file_sha256": "ba391bf7bbc407421ff796a8d15fa171252575ba9d14cd4f692c4ccbe704ffd9",
+    "1test_metadata_sha256": "c4e59ce59842d6dcbae51872fe48ca8f5ba3597ac5b657b7e46f647b81cb756e",
+    "channel_names": [
+      "Fz",
+      "FC3",
+      "FC1",
+      "FCz",
+      "FC2",
+      "FC4",
+      "C5",
+      "C3",
+      "C1",
+      "Cz",
+      "C2",
+      "C4",
+      "C6",
+      "CP3",
+      "CP1",
+      "CPz",
+      "CP2",
+      "CP4",
+      "P1",
+      "Pz",
+      "P2",
+      "POz"
+    ],
+    "combined_covariance_hash": "f3dcf70f54e0de77d4a133fe9afa6a0590e4c315df725ce77cf6aa150080b6bd",
+    "rows": 5184,
+    "shape": [
+      5184,
+      22,
+      22
+    ]
+  },
+  "protocol_sha256": "88134949377265c1280e4efa292e7265fade4f4bd688cf98ce8b228af48d4657",
+  "role": "RETROSPECTIVE_DEVELOPMENT_ONLY",
+  "schema_version": "subject-class-interaction-observed-v0"
+}

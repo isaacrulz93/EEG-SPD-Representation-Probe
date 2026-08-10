@@ -1,0 +1,23 @@
+{
+  "branch": "pilot/subject-class-interaction-v0",
+  "head": "230f36108a1ad59ac33a61a1a6cdbe5840c8226c",
+  "status_porcelain": [
+    "?? outputs/subject_class_interaction_v0/cross_session/same_subject_scores.csv",
+    "?? outputs/subject_class_interaction_v0/cross_session/similarity_matrix.csv",
+    "?? outputs/subject_class_interaction_v0/objects/core_interaction_objects.npz",
+    "?? outputs/subject_class_interaction_v0/objects/observed_similarity_matrices.npy",
+    "?? outputs/subject_class_interaction_v0/provenance/PROTOCOL_SUBJECT_CLASS_INTERACTION_V0.md",
+    "?? outputs/subject_class_interaction_v0/provenance/environment.json",
+    "?? outputs/subject_class_interaction_v0/provenance/frozen_config.yaml",
+    "?? outputs/subject_class_interaction_v0/provenance/manifest.json",
+    "?? outputs/subject_class_interaction_v0/reliability/split_half_subject_scores.csv",
+    "?? outputs/subject_class_interaction_v0/tables/class_effects_summary.csv",
+    "?? outputs/subject_class_interaction_v0/tables/data_contract.csv",
+    "?? outputs/subject_class_interaction_v0/tables/descriptive_energy_fractions.csv",
+    "?? outputs/subject_class_interaction_v0/tables/geometry_gates.csv",
+    "?? outputs/subject_class_interaction_v0/tables/interaction_summary.csv",
+    "?? outputs/subject_class_interaction_v0/tables/observed_stage_statistics.csv",
+    "?? outputs/subject_class_interaction_v0/tables/subject_global_residual_summary.csv"
+  ],
+  "tracked_code_sha256": "567fda42734564b3396a9f458236afeeeda3f3018c12dd3427d2345fb08af974"
+}
