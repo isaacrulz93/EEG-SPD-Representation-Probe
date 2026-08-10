@@ -1043,15 +1043,15 @@ def _write_report(
         "",
         "Observed A/B reliability was computed for all five objects. Exact v1 D/G label-null summaries were reproduced. The immutable source does not store trial covariances/metadata or per-replicate fitted D/G objects, so the derived-object label nulls cannot be exactly computed from the authorized source. They are explicitly marked `NOT_COMPUTABLE_FROM_IMMUTABLE_SOURCE`; no proxy or approximation was substituted, and Stage R does not vote in the mechanism label.",
         "",
-        reliability.to_markdown(index=False, floatfmt=".6f"),
+        _markdown_table(reliability),
         "",
         "## Stage S null-referenced effects",
         "",
-        semantic.summary.to_markdown(index=False, floatfmt=".6f"),
+        _markdown_table(semantic.summary),
         "",
         "## Mechanism contrasts",
         "",
-        contrasts.to_markdown(index=False, floatfmt=".6f"),
+        _markdown_table(contrasts),
         "",
         "## Provisional decision",
         "",
@@ -1065,11 +1065,11 @@ def _write_report(
         "",
         "AIRM curvature (F split, median across subjects):",
         "",
-        curvature[(curvature.geometry == "AIRM") & (curvature.split == "F")].groupby("session")[["median_C", "max_C"]].median().to_markdown(floatfmt=".6g"),
+        _markdown_table(curvature[(curvature.geometry == "AIRM") & (curvature.split == "F")].groupby("session")[["median_C", "max_C"]].median().reset_index()),
         "",
         "Anchor fraction (F split, median across subjects):",
         "",
-        anchors[anchors.split == "F"].groupby(["session", "geometry"])["anchor_fraction"].median().to_frame().to_markdown(floatfmt=".6g"),
+        _markdown_table(anchors[anchors.split == "F"].groupby(["session", "geometry"])["anchor_fraction"].median().reset_index()),
         "",
         "## Limits",
         "",
@@ -1092,6 +1092,26 @@ def _manifest(output: Path, metadata: Mapping[str, Any]) -> None:
     (output / "manifest.json").write_text(
         json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
+
+
+def _markdown_table(frame: pd.DataFrame, *, digits: int = 6) -> str:
+    """Render a compact Markdown table without optional pandas dependencies."""
+
+    def render(value: Any) -> str:
+        if pd.isna(value):
+            return "NA"
+        if isinstance(value, (float, np.floating)):
+            return f"{float(value):.{digits}g}"
+        return str(value).replace("|", "\\|")
+
+    columns = [str(column) for column in frame.columns]
+    lines = [
+        "| " + " | ".join(columns) + " |",
+        "| " + " | ".join("---" for _ in columns) + " |",
+    ]
+    for row in frame.itertuples(index=False, name=None):
+        lines.append("| " + " | ".join(render(value) for value in row) + " |")
+    return "\n".join(lines)
 
 
 def run_diagnostic(repo: Path, config_path: Path, *, tests: str = "PASS") -> RunResult:
@@ -1237,4 +1257,3 @@ def final_numerical_summary(output: Path) -> str:
             lines.append(f"max_curvature_distortion={c.max_C.max():.12g}")
             lines.append(f"median_anchor_fraction={a.anchor_fraction.median():.12g}")
     return "\n".join(lines)
-
