@@ -324,19 +324,31 @@ def _class_means_for_label_batch(
     label_batch: np.ndarray,
     mask: np.ndarray,
     *, geometry: str, config: Mapping[str, Any], scalar_crosscheck: bool,
+    classes: Sequence[str] | None = None,
+    log_covariances: np.ndarray | None = None,
 ) -> tuple[np.ndarray, np.ndarray]:
     labels = np.asarray(label_batch).astype(str)
     b = labels.shape[0]
     subjects = tuple(sorted(int(value) for value in metadata["subject"].unique()))
     sessions = tuple(str(value) for value in metadata["session"].drop_duplicates())
-    classes = tuple(str(value) for value in config["datasets"]["bnci2014_001"]["classes"])
+    classes = (
+        tuple(str(value) for value in config["datasets"]["bnci2014_001"]["classes"])
+        if classes is None
+        else tuple(str(value) for value in classes)
+    )
     p = covariances.shape[-1]
     means = np.empty((b, len(subjects), len(sessions), len(classes), p, p), dtype=np.float64)
     counts = np.empty((b, len(subjects), len(sessions), len(classes)), dtype=np.int64)
     subject_values = metadata["subject"].to_numpy(dtype=np.int64)
     session_values = metadata["session"].astype(str).to_numpy()
     if geometry == "LE":
-        log_covariances = spd_log(covariances)
+        log_covariances = (
+            spd_log(covariances)
+            if log_covariances is None
+            else np.asarray(log_covariances, dtype=np.float64)
+        )
+        if log_covariances.shape != covariances.shape or not np.isfinite(log_covariances).all():
+            raise ValueError("log_covariances must be finite and match covariances")
     grouped: dict[int, list[tuple[tuple[int, int, int, int], np.ndarray]]] = {}
     for replicate in range(b):
         for s, subject in enumerate(subjects):
@@ -401,7 +413,8 @@ def _create_joint_checkpoint(stage: str, identity: Mapping[str, Any], replicates
 
 def _validate_joint(value: JointCheckpoint) -> None:
     replicates = int(value.metadata["replicates"])
-    if value.completed.shape != (replicates,) or value.seed_words.shape != (replicates, 4) or value.subject_statistics.shape != (replicates, len(value.chain_ids), 9):
+    n_subjects = int(value.metadata.get("n_subjects", 9))
+    if value.completed.shape != (replicates,) or value.seed_words.shape != (replicates, 4) or value.subject_statistics.shape != (replicates, len(value.chain_ids), n_subjects):
         raise ValueError("joint checkpoint shape mismatch")
     done = value.completed.astype(bool)
     if not np.isfinite(value.subject_statistics[done]).all() or not np.isnan(value.subject_statistics[~done]).all():
@@ -439,7 +452,8 @@ def _load_joint(path: Path, expected_identity: Mapping[str, Any]) -> JointCheckp
 
 def _record_joint(value: JointCheckpoint, indices: np.ndarray, statistics: np.ndarray) -> JointCheckpoint:
     _validate_joint(value)
-    if np.any(value.completed[indices]) or statistics.shape != (len(indices), len(value.chain_ids), 9) or not np.isfinite(statistics).all():
+    n_subjects = int(value.metadata.get("n_subjects", 9))
+    if np.any(value.completed[indices]) or statistics.shape != (len(indices), len(value.chain_ids), n_subjects) or not np.isfinite(statistics).all():
         raise ValueError("invalid joint checkpoint update")
     completed = value.completed.copy()
     subject_values = value.subject_statistics.copy()

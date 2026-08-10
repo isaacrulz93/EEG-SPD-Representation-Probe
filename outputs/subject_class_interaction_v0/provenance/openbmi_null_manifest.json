@@ -1,0 +1,18 @@
+{
+  "all_complete": true,
+  "checkpoint_hashes": {
+    "C": "903c66416a592a2b0127674849b9133c02d2e37d7866d647d401959022da05d0",
+    "I": "6bacb4f62a0ba8da9d5e6bdeb8aca28e21231fe9ad44cc0c895ced51d88fa70a",
+    "R": "eeadf9b2567489540c100d0770d50207510faed38838f4e6f6be0d753f8433c0"
+  },
+  "config_sha256": "06ea1c28399b081d14cb14c6185d39b3784f59c70b613da34976b820b7b7224d",
+  "manifest_commit_sha": "91877d3ea5b83a6b524fbbe091fb1db6c9973170",
+  "null_code_sha256": "f3ed89d0af20a62342a3f8d4f8ff43f0516d4d92bb5a098dff55b1a3cb12f699",
+  "objects_sha256": "f7e2fd7517fe1f55f84ef7729823b2d3f10452833ec2399a4b7014f769c98572",
+  "protocol_sha256": "88134949377265c1280e4efa292e7265fade4f4bd688cf98ce8b228af48d4657",
+  "replicates_C": 1999,
+  "replicates_I": 100000,
+  "replicates_R": 1999,
+  "schema_version": "openbmi-null-manifest-v0",
+  "source_manifest_sha256": "5133a0d8521f4cdd121362663c4980fed500e72875f26bb3dc4ce830d8c5e409"
+}

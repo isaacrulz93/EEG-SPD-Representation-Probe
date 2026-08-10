@@ -1,0 +1,10 @@
+{
+  "config_sha256": "06ea1c28399b081d14cb14c6185d39b3784f59c70b613da34976b820b7b7224d",
+  "decision_chain_sha256": "d2a251b6c1b479384822d59bc42e9256f40e105bd29fd31335a1d48d66021ac7",
+  "decision_sha256": "203674e03059e2f13c920b98176ee5ae69b8fdfe280f3032667f9ed256db38d6",
+  "figure_9_source_sha256": "b9764bd8be2d55a4025d7cccae8bd70cff6cf93bb63a9a2f7bfa29ebc71d4e16",
+  "openbmi_null_manifest_sha256": "20e13406d5002c9f04a3500137f7bb45c9bed1ffccb95ad0d13d0fc875046586",
+  "report_sha256": "22bee0edffdc2cf55c478faa05cebc1ab6898b4c6f8ffac9f05f103cd4af7570",
+  "schema_version": "openbmi-final-report-v0",
+  "terminal_decision": "GO_SENSOR_SPACE_ONLY"
+}

@@ -6,9 +6,16 @@
     "I": true,
     "R": true
   },
-  "openbmi_unlocked": false,
+  "hard_gates_pass": true,
+  "openbmi_primary_gates": {
+    "C": true,
+    "I": true,
+    "R": true
+  },
+  "openbmi_unlocked": true,
+  "pooled_template_all_stages_pass": true,
   "primary_chain": "AIRM/session-specific/sensor/Z",
   "result_selected_protocol_modifications": false,
-  "spectrum_control_all_stages_pass": true,
-  "terminal_decision": "OPENBMI_UNLOCK_ELIGIBLE_NOT_TERMINAL"
+  "spectrum_control_all_stages_pass": false,
+  "terminal_decision": "GO_SENSOR_SPACE_ONLY"
 }

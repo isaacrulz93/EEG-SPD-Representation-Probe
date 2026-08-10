@@ -370,6 +370,7 @@ def compute_interactions(
     geometry: str,
     template: str = "session_specific",
     labels: np.ndarray | None = None,
+    classes: Sequence[str] | None = None,
 ) -> InteractionObjects:
     values = np.asarray(covariances, dtype=np.float64)
     frame = metadata.reset_index(drop=True).copy()
@@ -378,7 +379,11 @@ def compute_interactions(
     label_values = frame["class_label"].astype(str).to_numpy() if labels is None else np.asarray(labels).astype(str)
     if label_values.shape != (len(frame),):
         raise ValueError("labels must align with metadata")
-    classes = tuple(str(value) for value in config["datasets"]["bnci2014_001"]["classes"])
+    classes = (
+        tuple(str(value) for value in config["datasets"]["bnci2014_001"]["classes"])
+        if classes is None
+        else tuple(str(value) for value in classes)
+    )
     subjects = tuple(sorted(int(value) for value in frame["subject"].unique()))
     sessions = tuple(str(value) for value in frame["session"].drop_duplicates())
     thresholds = geometry_thresholds(config)

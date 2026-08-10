@@ -1,0 +1,6 @@
+{
+  "core_objects_sha256": "f7e2fd7517fe1f55f84ef7729823b2d3f10452833ec2399a4b7014f769c98572",
+  "hard_gates_pass": true,
+  "subjects": 54,
+  "trials": 10800
+}
