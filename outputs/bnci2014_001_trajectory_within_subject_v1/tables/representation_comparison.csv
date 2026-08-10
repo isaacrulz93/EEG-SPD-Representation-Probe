@@ -1,0 +1,4 @@
+representation,role,stage_w_observed_median_subject_ba,stage_x_observed_median_subject_ba,stage_w_subjects_above_chance,stage_x_subjects_above_chance,terminal_vote
+PATH_D10,primary,0.30729166666666663,0.2881944444444444,8,9,True
+BAG_CANON_D10,mandatory_unordered_comparator,0.2708333333333333,0.2829861111111111,9,7,False
+SCALARS_11,descriptive_only,0.28298611111111105,0.28125,5,7,False

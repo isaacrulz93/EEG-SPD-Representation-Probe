@@ -1,0 +1,262 @@
+protocol:
+  name: BNCI2014_001 Trajectory Within-Subject Audit v1
+  version: "1.0"
+  freeze_date: "2026-08-10"
+  timezone: Asia/Seoul
+  path: docs/PROTOCOL_TRAJECTORY_WITHIN_SUBJECT_AUDIT_V1.md
+  sha256: 05a7346ccc951f3da17b809eda5152374dcad853d5abd69bc50dfd326edf9c2f
+  reference_branch: pilot/trajectory-anatomy-v0
+  reference_commit: fcb55ccdccdd4613290b8e8d93be91ea256edd45
+  audit_branch: pilot/trajectory-within-subject-audit-v1
+  result_adaptation: forbidden
+
+project:
+  name: EEG-SPD-Representation-Probe
+  experiment_name: Trajectory Within-Subject Audit v1
+  output_dir: outputs/bnci2014_001_trajectory_within_subject_v1
+  cache_dir: cache/bnci2014_001_trajectory_within_subject_v1
+  v0_output_dir: outputs/bnci2014_001_trajectory_v0
+  v0_cache_dir: cache/bnci2014_001_trajectory_v0
+
+dataset:
+  name: BNCI2014_001
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  sessions: [0train, 1test]
+  runs: [0, 1, 2, 3, 4, 5]
+  classes: [left_hand, right_hand, feet, tongue]
+  eeg_channels:
+    - Fz
+    - FC3
+    - FC1
+    - FCz
+    - FC2
+    - FC4
+    - C5
+    - C3
+    - C1
+    - Cz
+    - C2
+    - C4
+    - C6
+    - CP3
+    - CP1
+    - CPz
+    - CP2
+    - CP4
+    - P1
+    - Pz
+    - P2
+    - POz
+  expected_trials_total: 5184
+  expected_trials_per_session: 2592
+  expected_trials_per_subject_session: 288
+  expected_trials_per_subject_session_class: 72
+  expected_trials_per_subject_session_run: 48
+  expected_trials_per_subject_session_run_class: 12
+
+preprocessing:
+  bandpass_hz: [8.0, 32.0]
+  epoch_tmin_seconds: 0.0
+  epoch_tmax_seconds: 3.996
+  observed_source_epoch_seconds: [2.0, 5.996]
+  sampling_frequency_hz: 250.0
+  samples_per_trial: 1000
+  resample_hz: null
+  baseline: null
+  epoch_cache_dtype: float32
+  covariance_estimator: oas
+  covariance_dtype: float64
+  extra_diagonal_loading: none
+  eigenvalue_clipping: false
+  deterministic_symmetrization: true
+  trial_rejection: false
+
+window5:
+  n_windows: 5
+  samples_per_window: 200
+  overlap_samples: 0
+  chronological_order: [1, 2, 3, 4, 5]
+  remainder_policy: require_exact_division
+  expected_state_shape_per_session: [2592, 5, 22, 22]
+
+representations:
+  geometry: AIRM
+  primary: PATH_D10
+  mandatory_unordered_control: BAG_CANON_D10
+  descriptive_scalar_control: SCALARS_11
+  path_d10_columns: [d12, d13, d14, d15, d23, d24, d25, d34, d35, d45]
+  bag_canon_columns: [bag01, bag02, bag03, bag04, bag05, bag06, bag07, bag08, bag09, bag10]
+  scalar_columns:
+    - total_path_length
+    - endpoint_distance
+    - efficiency
+    - excess
+    - mean_turn
+    - max_turn
+    - mean_geodesic_deviation
+    - max_geodesic_deviation
+    - frechet_variance
+    - frechet_radius_mean
+    - diameter
+  new_representation_allowed: false
+
+reference_inputs:
+  v0_config:
+    path: configs/bnci2014_001_trajectory_v0.yaml
+    sha256: b75890b1f4f8215561501c50ca4049b833efccee7bfce8559a548b59587c99db
+  v0_feature_cache:
+    path: cache/bnci2014_001_trajectory_v0/trajectory_features_v0.npz
+    sha256: 4036d4b16bb533ecfc4acaafc72eccac78b8e4d53b6ab2da08e8f6cd4618f3a7
+  v0_geometry_gate:
+    path: outputs/bnci2014_001_trajectory_v0/tables/trajectory_geometry_gate.json
+    sha256: b45f761d4125525d9efbc29818db01a90d9358d81ce1e76648cb1c7d2fa69c28
+  v0_path_table:
+    path: outputs/bnci2014_001_trajectory_v0/tables/airm_path_d10.csv
+    sha256: a9748ee9368abf4dc40cdf1c1cdd88a82d0a67b545108033eabf62272f3b9f80
+  v0_bag_table:
+    path: outputs/bnci2014_001_trajectory_v0/tables/airm_bag_canon_d10.csv
+    sha256: 4123c09e690a2fe8ab3ced455025ff19c0e50002b31faefe8d4bb511f2cacc1b
+  v0_scalar_table:
+    path: outputs/bnci2014_001_trajectory_v0/tables/trial_airm_path_features.csv
+    sha256: 55b34b61e75471dd0f7fdbf06938a2db404ca5c7c0202e85b53d6831a0f6800b
+  v0_window_covariances:
+    path: cache/bnci2014_001/covariances.npz
+    file_sha256: c6bd774ac5b3b53c497381433bcc7974af3b54b850a0ac0539aa2f797f6fa997
+    window5_content_sha256: c3bd7e98d988ac408ea5cadd1f749a452ce9831a4ff7df89dde588cefbcd3643
+  v0_window_metadata:
+    path: cache/bnci2014_001/window5_metadata.csv
+    sha256: c0fb099a53a6b3678f4c4795fc6769b41f44dba8616bceb148c23264f2116009
+
+session1_inputs:
+  raw_moabb_dir: cache/moabb_data
+  raw_files:
+    - {subject: 1, path: "cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A01E.mat", bytes: 43772146, sha256: 53d415f39c3d7b0c88b894d7b08d99bcdfe855ede63831d3691af1a45607fb62}
+    - {subject: 2, path: "cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A02E.mat", bytes: 44218409, sha256: d63c454005d3a9b41d8440629482e855afc823339bdd0b5721842a7ee9cc7b12}
+    - {subject: 3, path: "cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A03E.mat", bytes: 42316292, sha256: d4229267ec7624fa8bd3af5cbebac17f415f7c722de6cb676748f8cb3b717d97}
+    - {subject: 4, path: "cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A04E.mat", bytes: 41730824, sha256: 81916dff2c12997974ba50ffc311da006ea66e525010d010765f0047e771c86a}
+    - {subject: 5, path: "cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A05E.mat", bytes: 44392496, sha256: 8b357470865610c28b2f1d351beac247a56a856f02b2859d650736eb2ef77808}
+    - {subject: 6, path: "cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A06E.mat", bytes: 43395510, sha256: bf67a40621b74b6af7a986c2f6edfff7fc2bbbca237aadd07b575893032998d1}
+    - {subject: 7, path: "cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A07E.mat", bytes: 42242294, sha256: b9aaec73dcee002fab84ee98e938039a67bf6a3cbf4fc86d5d8df198cfe4c323}
+    - {subject: 8, path: "cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A08E.mat", bytes: 46282127, sha256: 0eedbd89790c7d621c8eef68065ddecf80d437bbbcf60321d9253e2305f294f7}
+    - {subject: 9, path: "cache/moabb_data/MNE-bnci-data/~bci/database/001-2014/A09E.mat", bytes: 44780912, sha256: 5d79649a42df9d51215def8ffbdaf1c3f76c54b88b9bbaae721e8c6fd972cc36}
+  total_bytes: 393131010
+  prepared_epoch_cache: cache/bnci2014_001_trajectory_within_subject_v1/session1_prepared_epochs.npz
+  prepared_metadata_cache: cache/bnci2014_001_trajectory_within_subject_v1/session1_prepared_metadata.csv
+  trajectory_feature_cache: cache/bnci2014_001_trajectory_within_subject_v1/session1_trajectory_features.npz
+  data_provenance_cache: cache/bnci2014_001_trajectory_within_subject_v1/session1_data_provenance.json
+
+hard_gates:
+  reproduction_absolute_tolerance: 1.0e-12
+  reproduction_relative_tolerance: 0.0
+  symmetry_relative_error_max: 1.0e-12
+  condition_number_max: 1.0e12
+  distance_symmetry_absolute_error_max: 1.0e-10
+  distance_diagonal_absolute_error_max: 1.0e-12
+  distance_negative_tolerance: 1.0e-12
+  triangle_absolute_tolerance: 1.0e-10
+  triangle_relative_tolerance: 1.0e-10
+  bag_invariance_absolute_error_max: 1.0e-12
+  normalized_karcher_residual_max: 1.0e-7
+  airm_mean_tol: 1.0e-9
+  airm_mean_maxiter: 100
+
+classifier:
+  scaler: StandardScaler
+  scaler_fit_scope: train_only
+  with_mean: true
+  with_std: true
+  classifier: multinomial_logistic_regression
+  c: 1.0
+  solver: lbfgs
+  max_iter: 5000
+  tol: 1.0e-4
+  class_weight: null
+  random_state: 20260809
+  tuning: false
+  primary_metric: balanced_accuracy
+  secondary_metrics: [accuracy, macro_f1, per_class_recall]
+  chance: 0.25
+
+stage_w:
+  question: within_subject_within_session_class_decoding
+  half_a_runs: [0, 1, 2]
+  half_b_runs: [3, 4, 5]
+  directions: [A_TO_B, B_TO_A]
+  subject_statistic: mean_across_sessions_and_directions
+  group_statistic: median_subject
+
+stage_x:
+  question: same_subject_cross_session_class_transfer
+  directions: [0train_TO_1test, 1test_TO_0train]
+  subject_statistic: mean_across_directions
+  group_statistic: median_subject
+  inferential_prerequisite: PATH_STAGE_W_PASS
+
+nulls:
+  master_seed: 20260810
+  label_destruction:
+    replicates: 1999
+    stream_tag_hex: "0x4C4142454C5758"
+    seed_derivation: "SeedSequence([master_seed,stream_tag]).spawn(replicates); child uint64[0]"
+    grouping: subject_x_session_x_run
+    group_order: subject_then_session_config_order_then_numeric_run
+    trial_order: global_sample_index
+    shared_representations: [PATH_D10, BAG_CANON_D10]
+    shared_stages: [W, X]
+  order_shuffle:
+    replicates: 1999
+    stream_tag_hex: "0x4F52444552"
+    seed_derivation: "SeedSequence([master_seed,stream_tag]).spawn(replicates); child uint64[0]"
+    permutations: S5_lexicographic_nonidentity_uniform
+    trial_order: global_sample_index
+    stage: X
+    representation: PATH_D10
+    prerequisite: PATH_STAGE_W_AND_X_PASS
+  monte_carlo:
+    statistic: median_subject_balanced_accuracy
+    sidedness: greater_or_equal
+    plus_one: true
+    alpha: 0.05
+    pass_rule: effect_gt_zero_and_p_lte_alpha
+
+decisions:
+  reproduction_failure: UNASSESSED_TRAJECTORY_REPRODUCTION_FAILURE
+  technical_failure: UNASSESSED_TECHNICAL_FAILURE
+  stage_w_fail: STOP_WITHIN_SUBJECT_TRAJECTORY_CLASS_POOR
+  stage_x_fail: STOP_SESSION_SPECIFIC_TRAJECTORY_ONLY
+  stage_o_fail: GO_STABLE_SUBJECT_SPECIFIC_LOCAL_GEOMETRY
+  all_pass: GO_STABLE_SUBJECT_SPECIFIC_ORDERED_TRAJECTORY_COMPONENT
+  order_not_run: NOT_RUN_PREREQUISITE
+
+outputs:
+  tables:
+    - data_contract.csv
+    - reproduction_gate.csv
+    - within_session_scores.csv
+    - cross_session_scores.csv
+    - label_null_summary.csv
+    - order_null_summary.csv
+    - representation_comparison.csv
+  nulls:
+    - label_null_seeds.json
+    - label_null_statistics.npz
+    - order_null_seeds.json
+    - order_null_statistics.npz
+  decisions:
+    - terminal_decision.json
+    - decision_chain.csv
+  figures:
+    - figure_1_within_subject_session_class_ba
+    - figure_2_same_subject_cross_session_ba
+    - figure_3_within_label_null
+    - figure_4_cross_session_label_null
+    - figure_5_order_shuffle_null
+    - figure_6_path_bag_scalars_summary
+  report: report/trajectory_within_subject_audit_v1.md
+
+runtime:
+  python_executable: .venv/bin/python
+  workers: 4
+  batch_size: 8
+  blas_threads_per_fit: 1
+  result_adaptation: forbidden

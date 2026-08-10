@@ -10,6 +10,7 @@ import pandas as pd
 import pytest
 
 from src.trajectory_geometry_v0 import bag_canon_d10, path_d10, permute_distance_matrix
+from src.trajectory_within_subject_analysis_v1 import _fast_statistics, _split_indices
 from src.trajectory_within_subject_v1 import (
     ALL_PERMUTATIONS_5,
     CLASS_ORDER,
@@ -285,6 +286,26 @@ def test_no_available_case_silent_drop(observed_w) -> None:
         stage_subject_statistics(failed, "W")
     with pytest.raises(IncompleteRequiredGrid, match="incomplete"):
         stage_subject_statistics(observed_w.iloc[:-1], "W")
+
+
+def test_fast_null_statistic_matches_public_observed_definition(
+    config, synthetic, observed_w, observed_x
+) -> None:
+    metadata, arrays = synthetic
+    w_splits, x_splits = _split_indices(metadata)
+    labels = metadata.class_label.to_numpy(dtype=str)
+    fast_w_subject, fast_w_group = _fast_statistics(
+        arrays["PATH_D10"], labels, w_splits, 4, config
+    )
+    fast_x_subject, fast_x_group = _fast_statistics(
+        arrays["PATH_D10"], labels, x_splits, 2, config
+    )
+    public_w_subject, public_w_group = stage_subject_statistics(observed_w, "W")
+    public_x_subject, public_x_group = stage_subject_statistics(observed_x, "X")
+    np.testing.assert_array_equal(fast_w_subject, public_w_subject)
+    np.testing.assert_array_equal(fast_x_subject, public_x_subject)
+    assert fast_w_group == public_w_group
+    assert fast_x_group == public_x_group
 
 
 def test_plus_one_monte_carlo_uses_all_1999_replicates() -> None:
