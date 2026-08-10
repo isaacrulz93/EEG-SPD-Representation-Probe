@@ -1,0 +1,257 @@
+protocol:
+  name: Subject Class Interaction V0
+  version: "0.1.0"
+  freeze_date: "2026-08-10"
+  timezone: Asia/Seoul
+  master_seed: 20260810
+  base_commit: 6124adb907369bc8f76733e880ebb8c43db38e94
+  branch: pilot/subject-class-interaction-v0
+  protocol_path: docs/PROTOCOL_SUBJECT_CLASS_INTERACTION_V0.md
+  protocol_sha256: 88134949377265c1280e4efa292e7265fade4f4bd688cf98ce8b228af48d4657
+  scientific_scope: premise_falsification
+  operational_term: cross-session-reproducible subject-by-class interaction
+
+project:
+  output_dir: outputs/subject_class_interaction_v0
+  cache_dir: cache/subject_class_interaction_v0
+  openbmi_unlock_path: outputs/subject_class_interaction_v0/provenance/openbmi_unlock.json
+  openbmi_manifest_path: outputs/subject_class_interaction_v0/provenance/openbmi_protocol_manifest.json
+
+forbidden:
+  - test_time_adaptation
+  - neural_networks
+  - new_losses
+  - low_rank_factor_models
+  - mixed_effects_model_fitting
+  - classification_sota_experiments
+  - result_selected_features
+  - window5
+
+datasets:
+  bnci2014_001:
+    role: RETROSPECTIVE_DEVELOPMENT_ONLY
+    strict_confirmation_wording_forbidden: true
+    moabb_identifier: BNCI2014_001
+    subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    sessions: [0train, 1test]
+    classes: [left_hand, right_hand, feet, tongue]
+    runs: ["0", "1", "2", "3", "4", "5"]
+    eeg_channels: [Fz, FC3, FC1, FCz, FC2, FC4, C5, C3, C1, Cz, C2, C4, C6, CP3, CP1, CPz, CP2, CP4, P1, Pz, P2, POz]
+    preprocessing:
+      bandpass_hz: [8.0, 32.0]
+      epoch_tmin_seconds: 0.0
+      epoch_tmax_seconds: 3.996
+      sampling_frequency_hz: 250.0
+      samples_per_trial: 1000
+      baseline: null
+      resample_hz: null
+      covariance_estimator: oas
+      covariance_dtype: float64
+      symmetrize_covariance: true
+      representation: WHOLE
+    expected_counts:
+      trials_per_subject_session: 288
+      trials_per_subject_session_class: 72
+      runs_per_subject_session: 6
+      trials_per_subject_session_run: 48
+      trials_per_subject_session_run_class: 12
+    split_half:
+      method: run_partition
+      A: ["0", "1", "2"]
+      B: ["3", "4", "5"]
+    frozen_inputs:
+      covariance_path: cache/bnci2014_001/covariances.npz
+      metadata_path: cache/bnci2014_001/whole_metadata.csv
+      expected_covariance_file_sha256: c6bd774ac5b3b53c497381433bcc7974af3b54b850a0ac0539aa2f797f6fa997
+      expected_covariance_array_sha256: 3be57ea13767a407030a7b56541d07a7f4ce4ccbc1f0579720245413067f36a4
+      expected_metadata_sha256: 285eaf926fbfcec8f1228c3fd660b0b0e9ce209a7c5a13d0acd6b4eabdba0a6e
+
+  openbmi_lee2019_mi:
+    role: PROSPECTIVE_EXTERNAL_REPLICATION
+    scientific_access_locked_until_manifest_commit: true
+    dataset_identifier: UNRESOLVED_UNTIL_MANIFEST
+    moabb_api_name: UNRESOLVED_UNTIL_MANIFEST
+    subject_policy: all_54_with_two_valid_sessions
+    subject_ids: UNRESOLVED_UNTIL_MANIFEST
+    session_ids: UNRESOLVED_UNTIL_MANIFEST
+    classes: [left_hand, right_hand]
+    phase: offline_training_only
+    phase_identifier: UNRESOLVED_UNTIL_MANIFEST
+    channels_policy: canonical_20_motor_area_channels
+    eeg_channels: UNRESOLVED_UNTIL_MANIFEST
+    preprocessing:
+      bandpass_hz: [8.0, 30.0]
+      epoch_tmin_seconds: 1.0
+      epoch_tmax_seconds: 3.5
+      baseline: null
+      covariance_estimator: oas
+      covariance_dtype: float64
+      sample_rate_handling: UNRESOLVED_UNTIL_MANIFEST
+      symmetrize_covariance: true
+      representation: WHOLE
+    expected_counts:
+      trials_per_subject_session_class: 50
+      balanced_trials_required: true
+      mismatch_action: DATA_CONTRACT_FAILURE
+    split_half:
+      method: deterministic_within_class_acquisition_order_odd_even
+      expected_trials_per_half_class: 25
+    protocol_resolution_failure: OPENBMI_PROTOCOL_RESOLUTION_FAILURE
+
+geometry:
+  primary: AIRM
+  robustness_only: LE
+  primary_template: session_specific_loso
+  pooled_session_template: secondary_sensitivity_only
+  common_tangent: identity
+  class_order_source: frozen_dataset_order
+  eigenspectrum_order: ascending
+  svec:
+    triangle_order: upper_row_major
+    diagonal_scale: 1.0
+    off_diagonal_scale: sqrt2
+  mean_riemann:
+    implementation: pyriemann.geometry.mean.mean_riemann
+    tol: 1.0e-9
+    maxiter: 100
+  mean_logeuclid:
+    implementation: closed_form_log_euclidean
+  interaction_signature:
+    normalization: l2
+    degeneracy_threshold: machine_epsilon_times_sqrt_vector_dimension
+    degeneracy_action: DEGENERATE_INTERACTION_SIGNATURE
+  objects:
+    marginal: M_subject_session
+    class_mean: M_subject_session_class
+    recentered_class_mean: inverse_sqrt_M_times_Mclass_times_inverse_sqrt_M
+    marginally_recentered_class_effect: U_equals_log_recentered_class_mean
+    loso_population_template: entrywise_frobenius_mean_U_excluding_target_subject_within_session_class
+    population_class_residual: R_equals_U_minus_loso_template
+    class_independent_subject_residual: weighted_class_mean_R
+    primary_subject_class_interaction: Z_equals_R_minus_weighted_class_mean_R
+
+hard_gates:
+  exact_data_counts: true
+  finite_nonfinite_count_max: 0
+  covariance_symmetry_relative_error_max: 1.0e-12
+  covariance_min_eigenvalue_strictly_greater_than: 0.0
+  covariance_condition_number_max: 1.0e12
+  airm_karcher_residual_max: 1.0e-7
+  marginal_centering_identity_relative_error_max: 1.0e-7
+  tangent_symmetry_relative_error_max: 1.0e-12
+  class_proportion_sum_absolute_error_max: 1.0e-15
+  weighted_Z_sum_relative_error_max: 1.0e-12
+  deterministic_svec_required: true
+  deterministic_eigenspectrum_required: true
+  reconstruction_hashes_required: true
+  any_required_failure_outcome: UNASSESSED_NUMERICAL_OR_DATA_FAILURE
+
+stages:
+  reliability:
+    name: R
+    label_destruction_replicates: 1999
+    permutation_unit: subject_session
+    preserve_class_counts: true
+    full_label_dependent_pipeline_recompute: true
+    aggregation: median_subject_of_mean_session_cosine_half_A_half_B
+    effect: observed_minus_null_median
+    p_value: plus_one_one_sided_greater_equal
+    pass: effect_strictly_positive_and_p_le_0_05_and_hard_gates
+  identity:
+    name: I
+    observed: median_subject_diagonal_cross_session_cosine
+    bnci_null: enumerate_all_133496_derangements
+    openbmi_null: 100000_deterministic_random_derangements
+    effect: observed_minus_null_median
+    p_value_bnci: exact_tail_probability_and_plus_one_saved
+    p_value_openbmi: plus_one_one_sided_greater_equal
+    pass: reliability_pass_and_effect_strictly_positive_and_p_le_0_05
+    if_reliability_fails: DESCRIPTIVE_ONLY
+  class_dependence:
+    name: C
+    label_destruction_replicates: 1999
+    permutation_unit: subject_session
+    preserve_class_counts: true
+    independent_between_sessions: true
+    full_label_dependent_pipeline_recompute: true
+    observed: true_label_same_subject_statistic
+    effect: observed_minus_null_median
+    p_value: plus_one_one_sided_greater_equal
+    pass: identity_pass_and_effect_strictly_positive_and_p_le_0_05
+
+controls:
+  R_signature:
+    stages: [R, I, C]
+    vote: DESCRIPTIVE_ONLY
+    interpretation_if_R_stable_Z_fails: STOP_SUBJECT_MAIN_EFFECT_ONLY
+  spectrum_signature:
+    stages: [R, I, C]
+    vote: SECONDARY_CONTROL_ONLY
+    cannot_rescue_sensor_signature: true
+  pooled_session_template:
+    stages: [R, I, C]
+    vote: SECONDARY_SENSITIVITY_ONLY
+    cannot_rescue_session_specific_template: true
+  log_euclidean:
+    stages: [R, I, C]
+    vote: ROBUSTNESS_ONLY
+    cannot_rescue_airm: true
+
+rng:
+  master_seed: 20260810
+  bit_generator: PCG64DXSM
+  key_fields: [dataset, geometry, stage, signature, template, replicate_index]
+  key_encoding: canonical_json_sha256_first_128_bits_as_seed_entropy
+  replicate_index_base: 0
+
+checkpointing:
+  required_for: [label_destruction_1999, openbmi_derangements_100000]
+  completed_index_bitmap: true
+  seed_mapping: true
+  partial_statistics: true
+  config_sha256: true
+  code_sha: true
+  input_hashes: true
+  atomic_replace: true
+  final_summary_must_be_byte_identical_after_resume: true
+
+phase_boundary:
+  phase_A: [freeze_protocol_config, generic_implementation_tests, bnci_development_only]
+  bnci_direction_requirements: [E_half_strictly_positive, E_id_strictly_positive, E_class_strictly_positive]
+  bnci_failure_outcome: STOP_BNCI_DIRECTION_FAILURE
+  phase_B_requires_all_bnci_directions: true
+  metadata_only_openbmi_resolution_before_unlock: true
+  openbmi_manifest_commit_message: freeze OpenBMI external replication manifest
+  unlock_records_manifest_commit_sha: true
+  scientific_scores_before_unlock_forbidden: true
+
+terminal_logic:
+  primary_chain: AIRM_session_specific_sensor_Z
+  alpha: 0.05
+  no_absolute_cosine_thresholds: true
+  ordered_rules:
+    - [hard_gate_failure, UNASSESSED_NUMERICAL_OR_DATA_FAILURE]
+    - [openbmi_gate_R_failure, UNASSESSED_CURRENT_OBJECT]
+    - [Z_gate_R_pass_and_Z_gate_I_failure, STOP_NO_STABLE_INDIVIDUAL_COMPONENT]
+    - [Z_gate_I_pass_and_Z_gate_C_failure, STOP_GENERIC_SUBJECT_FINGERPRINT]
+    - [R_stable_and_Z_primary_chain_fails, STOP_SUBJECT_MAIN_EFFECT_ONLY]
+    - [openbmi_Z_pass_but_any_bnci_direction_nonpositive, STOP_NOT_CROSS_DATASET_ROBUST]
+    - [sensor_Z_all_pass_and_spectrum_not_supportive, GO_SENSOR_SPACE_ONLY]
+    - [sensor_Z_all_pass_and_spectrum_supportive, GO_STABLE_SUBJECT_CLASS_INTERACTION]
+
+descriptive_energy_anatomy:
+  fit_mixed_effects_model: false
+  quantities:
+    - squared_population_class_effect_norm
+    - squared_class_independent_subject_residual_norm
+    - squared_subject_class_interaction_norm
+    - split_half_estimation_discrepancy_energy
+    - cross_session_discrepancy_energy
+  normalized_fractions_only_when_algebraically_permitted: true
+  required_label: DESCRIPTIVE ENERGY FRACTIONS
+
+reporting:
+  required_phrase: cross-session-reproducible subject-by-class interaction in marginally recentered covariance representation
+  spectral_suffix: with an orthogonal-conjugation-invariant spectral control
+  forbidden_terms: [physiology, personality, neural_trait, brain_fingerprint, biomarker, source_anatomy, intrinsic_biological_class_effect]
+  go_next_question: Is the stable subject-by-class interaction low-dimensional and structured across the population?

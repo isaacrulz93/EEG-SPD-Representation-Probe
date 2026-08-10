@@ -1,0 +1,14 @@
+{
+  "base_commit": "f76785d4c06ddc3cf2f1f7a6310d4fb153a19ba9",
+  "branch": "pilot/conditional-geometry-anatomy-v1",
+  "config_sha256": "ca0178be9c5fd168509f48974d2b3e1bbc91b2ba4e8e9e320299fd98dcf765e8",
+  "confirmatory_designation": "STRICT_CONFIRMATORY",
+  "frozen_config": "outputs/bnci2014_001_conditional_geometry_v1/protocol/frozen_config.yaml",
+  "frozen_definition_commit": "01ef71c62de5ca93abb0b07421442e56d2efe1c0",
+  "frozen_protocol": "outputs/bnci2014_001_conditional_geometry_v1/protocol/PROTOCOL_CONDITIONAL_GEOMETRY_V1.md",
+  "phase": "PROTOCOL_FROZEN",
+  "protocol_name": "BNCI2014_001 Conditional Geometry Anatomy V1",
+  "protocol_sha256": "ff7143dca8408a73233321fc7219358e48f2336bad0cb63f4e76f8988e77ecce",
+  "protocol_version": "1.0",
+  "schema_version": "1.0"
+}

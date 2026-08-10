@@ -1,0 +1,17 @@
+session,geometry,object,effect,pair
+0train,AIRM,D_exact,0.015567151658271716,exact
+0train,AIRM,D_tan,0.015588219513141155,tangent
+0train,AIRM,K_exact,0.10314361738121491,exact
+0train,AIRM,G0,0.10326049265128234,tangent
+0train,LE,D_exact,0.020643076122168424,exact
+0train,LE,D_tan,0.020643076122168313,tangent
+0train,LE,K_exact,0.12538001381422192,exact
+0train,LE,G0,0.12538001381422204,tangent
+1test,AIRM,D_exact,0.003875658808481619,exact
+1test,AIRM,D_tan,0.003879924647494315,tangent
+1test,AIRM,K_exact,0.1012656428960419,exact
+1test,AIRM,G0,0.10133564780994542,tangent
+1test,LE,D_exact,0.005969117186188311,exact
+1test,LE,D_tan,0.005969117186188422,tangent
+1test,LE,K_exact,0.1298538431898837,exact
+1test,LE,G0,0.12985384318988413,tangent

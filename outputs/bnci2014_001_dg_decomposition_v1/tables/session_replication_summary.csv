@@ -1,0 +1,4 @@
+mechanism,session0_supported,session1_supported,direction_replicated,session0_label,session1_label,overall_label
+curvature,True,True,True,PROVISIONAL_MIXED,PROVISIONAL_MIXED,PROVISIONAL_MIXED
+anchor,False,False,False,PROVISIONAL_MIXED,PROVISIONAL_MIXED,PROVISIONAL_MIXED
+encoding,True,True,True,PROVISIONAL_MIXED,PROVISIONAL_MIXED,PROVISIONAL_MIXED

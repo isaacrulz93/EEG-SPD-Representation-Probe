@@ -1,0 +1,244 @@
+{
+  "branch": "pilot/conditional-geometry-anatomy-v1",
+  "config_sha256": "ca0178be9c5fd168509f48974d2b3e1bbc91b2ba4e8e9e320299fd98dcf765e8",
+  "frozen_code_snapshot": {
+    "aggregate_sha256": "43d20e593342e90976a9f0a1ab3dafb170f107eb886c4d591421aee1a6607473",
+    "algorithm": "sha256_canonical_json_sorted_file_records_v1",
+    "file_count": 45,
+    "files": [
+      {
+        "bytes": 13067,
+        "path": "configs/bnci2014_001_conditional_geometry_v1.yaml",
+        "sha256": "ca0178be9c5fd168509f48974d2b3e1bbc91b2ba4e8e9e320299fd98dcf765e8"
+      },
+      {
+        "bytes": 18954,
+        "path": "docs/PROTOCOL_CONDITIONAL_GEOMETRY_V1.md",
+        "sha256": "ff7143dca8408a73233321fc7219358e48f2336bad0cb63f4e76f8988e77ecce"
+      },
+      {
+        "bytes": 150,
+        "path": "requirements.txt",
+        "sha256": "e3cf250983d6304b78e22a82417073f7bbe165d9ca9d5b5c816649eaa2ca18ab"
+      },
+      {
+        "bytes": 1225,
+        "path": "scripts/01_prepare_bnci.py",
+        "sha256": "12dfd3ff21402642851dd28ee6b4f3d0465e91bfb9c14349ba2ee943d6c742cb"
+      },
+      {
+        "bytes": 867,
+        "path": "scripts/02_build_covariances.py",
+        "sha256": "e93b9056253660b42d937f91da73153004e33f216717250056c00d444b123e6e"
+      },
+      {
+        "bytes": 9874,
+        "path": "scripts/03_make_embeddings.py",
+        "sha256": "e779c5e61a7e6e0233e77028e5a08099cd736609e58c7d43caddd8bf417c7025"
+      },
+      {
+        "bytes": 17540,
+        "path": "scripts/04_compute_diagnostics.py",
+        "sha256": "b94d5afcb769f92f0385921ef69ba58466be63b1c6c53a8ed7553bd8cbfa3406"
+      },
+      {
+        "bytes": 64831,
+        "path": "scripts/05_make_report.py",
+        "sha256": "de3ceb61b5fc5d5c69e0c3cd1515417a016fd855205fc02c250da921b0686062"
+      },
+      {
+        "bytes": 6185,
+        "path": "scripts/10_geometry_correctness_v2.py",
+        "sha256": "9e248cbebb638fa1904949116f526954746d14e5c69e2309a532f38324427af4"
+      },
+      {
+        "bytes": 3811,
+        "path": "scripts/11_loso_alignment_v2.py",
+        "sha256": "2aed238ad8272a0faedc673d62737129e2e8e43eb71f4cffe1511ea55abc9df8"
+      },
+      {
+        "bytes": 5934,
+        "path": "scripts/12_v1_leakage_audit.py",
+        "sha256": "3832f7cc9633f3e51be93e78d4cc37ca335337968cbf96e451f84d68924883a9"
+      },
+      {
+        "bytes": 5729,
+        "path": "scripts/13_geometry_report_v2.py",
+        "sha256": "ca3091cf50ee7f2e6ff18cbbc576135632a02269aec96c1e504a853047649376"
+      },
+      {
+        "bytes": 974,
+        "path": "scripts/20_freeze_conditional_protocol.py",
+        "sha256": "b318dd3b62bd06ad0dc32f1b7ec0a12a9ab7d7e49f9f108838296756795ba325"
+      },
+      {
+        "bytes": 2635,
+        "path": "scripts/21_discovery_conditional_geometry.py",
+        "sha256": "942a4c2cd99741354cdd9be8485ecda847338111a5a20837f88d8de6c88b08e3"
+      },
+      {
+        "bytes": 3103,
+        "path": "scripts/22_discovery_nulls.py",
+        "sha256": "4a8679e12503f038154d798fd2b981466cefff2c02816098a288c69b59a56bb5"
+      },
+      {
+        "bytes": 1707,
+        "path": "scripts/23_lock_confirmatory.py",
+        "sha256": "8bfb434af4994bf58fb0afb77efb091cb51e64beb57c858b6a62ae6c74a5e8a2"
+      },
+      {
+        "bytes": 3018,
+        "path": "scripts/24_confirmatory_conditional_geometry.py",
+        "sha256": "96234b09700439ce20932aec2e5848d1191a4c94996103f453ceef1a54bc3c3f"
+      },
+      {
+        "bytes": 2713,
+        "path": "scripts/25_confirmatory_nulls.py",
+        "sha256": "a4c9d732330ca6cea57a3bf44c7c9653b91a682e401122f99a4f6f2a115baea5"
+      },
+      {
+        "bytes": 2290,
+        "path": "scripts/26_oracle_semantic_test.py",
+        "sha256": "825f47720642f825e45002e331f3c181579ae884636071b40f70c7b5c6426350"
+      },
+      {
+        "bytes": 1769,
+        "path": "scripts/27_conditional_geometry_report.py",
+        "sha256": "5b8ecfe13a36f1739af08266b46faef9d1aa69effca5c01744be17a618a93a9a"
+      },
+      {
+        "bytes": 883,
+        "path": "scripts/run_all.py",
+        "sha256": "7c8167250cbfaa9530a3456e1fe6829bd3393e08626c5e85ac84c363cb4b51cf"
+      },
+      {
+        "bytes": 1357,
+        "path": "scripts/run_geometry_v2.py",
+        "sha256": "c90a4e3a829f42e051e23079ea856061edfd6d5d6a133de05df4720eb6a23f24"
+      },
+      {
+        "bytes": 75,
+        "path": "src/__init__.py",
+        "sha256": "773938cef1411eedd1554ac11e455302f3d041af062741653bd41190a71d00a6"
+      },
+      {
+        "bytes": 28392,
+        "path": "src/alignment_v2.py",
+        "sha256": "affd95b179865aba21ad95ca62043127f091c32fdfa5d3e3c51320896860ac37"
+      },
+      {
+        "bytes": 1525,
+        "path": "src/centering.py",
+        "sha256": "dd939a23a6e650a8d91fef5f39a3a9ccde0fd261e7ec0b965733a244aa76ff8c"
+      },
+      {
+        "bytes": 47609,
+        "path": "src/conditional_geometry_v1.py",
+        "sha256": "10a4e413a89cd356b86c0b7d5573e4d1c7df3c8964a55cfc79ac85a5785283a1"
+      },
+      {
+        "bytes": 33322,
+        "path": "src/conditional_nulls_v1.py",
+        "sha256": "8be124d04e0ab2c41963d6ac9cb9e39057b8536ec34a58792b4fee7b58189149"
+      },
+      {
+        "bytes": 160659,
+        "path": "src/conditional_pipeline_v1.py",
+        "sha256": "957dcbfcdf64f544797bb4b97373534e0f2389fffac43fcfd099b7dd467df274"
+      },
+      {
+        "bytes": 33599,
+        "path": "src/conditional_provenance_v1.py",
+        "sha256": "d8e4083b28f00488464fe23d6e95fa9095739e1dce5fc2fb61592840d66f923b"
+      },
+      {
+        "bytes": 19577,
+        "path": "src/conditional_statistics_v1.py",
+        "sha256": "2893fdfdcad81bf33e5ff3e96903bb71c02ecb283a2d97f0df1245dd9b61ccc2"
+      },
+      {
+        "bytes": 12735,
+        "path": "src/covariance.py",
+        "sha256": "13ef26625a39d1b7e5c1a114ac9f6e5e15eb2ddca53c2fbb08662885fcb2e0ba"
+      },
+      {
+        "bytes": 19430,
+        "path": "src/data.py",
+        "sha256": "c61f3b0136d5aa756bf37256514f4b7a8916ef1e352072bed0233a2e63eeb4b0"
+      },
+      {
+        "bytes": 50036,
+        "path": "src/data_conditional_v1.py",
+        "sha256": "21aa80caa0a2709dd0ece71c66ec776470b2d22f2c89caa37f94d13104662a22"
+      },
+      {
+        "bytes": 33972,
+        "path": "src/data_v2.py",
+        "sha256": "e37e1a9dffaaa88bbcdb19606b848b6792c51a7d9c3f5d7aa8f2057e09c53f7a"
+      },
+      {
+        "bytes": 1712,
+        "path": "src/embedding.py",
+        "sha256": "aedf19d0e42c9e8e9d502bd6fa02b336f834b1d16a850eed9e937759017ae2d5"
+      },
+      {
+        "bytes": 9905,
+        "path": "src/evaluation_v2.py",
+        "sha256": "f2cb9d25edafde7eb0f0bec29e48a532625c451cc6f4a385e2f9ecaef649896e"
+      },
+      {
+        "bytes": 25539,
+        "path": "src/geometry_audit_v2.py",
+        "sha256": "e5654b17458e0e96130d13326bf7aa3c19b9269c5793d2653758db0ffa7afc21"
+      },
+      {
+        "bytes": 21012,
+        "path": "src/geometry_v2.py",
+        "sha256": "590a184ff01f53ef745bda2e7243763132c9b04aa7adb80116f367438c37b320"
+      },
+      {
+        "bytes": 24699,
+        "path": "src/leakage_audit_v2.py",
+        "sha256": "19b99f9364fa3ce5816e77346d098606e465190c1a57ceb66968d5d55699988c"
+      },
+      {
+        "bytes": 62742,
+        "path": "src/loso_v2.py",
+        "sha256": "73c04dbfc0135c2ee04fb55f25d2d67c1bd4ec25ac3c0be676d4acb6050a48fc"
+      },
+      {
+        "bytes": 30442,
+        "path": "src/metrics.py",
+        "sha256": "e2a49ce490aaf1d67d1e063472ecee0638bbe733ec99e1ba2cecd1ccbf0336eb"
+      },
+      {
+        "bytes": 5110,
+        "path": "src/plotting.py",
+        "sha256": "6809fd272f92ce8e15487c8eb9029697e82f320ba210aabaae66c9426ea69c66"
+      },
+      {
+        "bytes": 175133,
+        "path": "src/reporting_conditional_v1.py",
+        "sha256": "751b3ee7e8e4f96a5ed1b3c26ea3ae677e29f063619764976fa6c5b93395ff80"
+      },
+      {
+        "bytes": 82169,
+        "path": "src/reporting_v2.py",
+        "sha256": "894fd9ff4410bc5cac226a48c48049ddfc4bb8cd62afb25bb1ca23b663f55402"
+      },
+      {
+        "bytes": 2468,
+        "path": "src/spd_utils.py",
+        "sha256": "5ce1056f221cece849dac7d9757b1e6cb8213a3b521bf8c80082cfa2a89f8ef3"
+      }
+    ],
+    "total_bytes": 1050478
+  },
+  "frozen_definition_commit": "01ef71c62de5ca93abb0b07421442e56d2efe1c0",
+  "head": "0c9085a7366142fd489e5640b36c75720ff4acbc",
+  "protocol_name": "BNCI2014_001 Conditional Geometry Anatomy V1",
+  "protocol_sha256": "ff7143dca8408a73233321fc7219358e48f2336bad0cb63f4e76f8988e77ecce",
+  "protocol_version": "1.0",
+  "working_tree_clean_before_freeze": true,
+  "working_tree_status_before_freeze": ""
+}

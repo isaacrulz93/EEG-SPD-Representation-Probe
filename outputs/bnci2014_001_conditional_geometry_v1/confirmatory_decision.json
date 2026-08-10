@@ -1,0 +1,21 @@
+{
+  "chains": {
+    "AIRM": {
+      "D": false,
+      "G": true
+    },
+    "LE": {
+      "D": false,
+      "G": true
+    }
+  },
+  "code_commit": "0c9085a7366142fd489e5640b36c75720ff4acbc",
+  "config_sha256": "ca0178be9c5fd168509f48974d2b3e1bbc91b2ba4e8e9e320299fd98dcf765e8",
+  "le_robustness_label": "AIRM+LE CONSISTENT",
+  "phase": "combined",
+  "protocol_sha256": "ff7143dca8408a73233321fc7219358e48f2336bad0cb63f4e76f8988e77ecce",
+  "protocol_version": "1.0",
+  "session": "0train+1test",
+  "status": "PASS",
+  "terminal_decision": "STOP_TANGENT_ONLY"
+}

@@ -1,0 +1,3 @@
+dataset,geometry,template,session,label,population_class_effect_squared_norm,class_independent_Rbar_squared_norm,Z_interaction_squared_norm,split_half_discrepancy_energy,cross_session_discrepancy_energy,Rbar_fraction_of_Rbar_plus_Z,Z_fraction_of_Rbar_plus_Z,population_normalized_fraction
+BNCI2014_001,AIRM,session_specific,0train,DESCRIPTIVE ENERGY FRACTIONS,0.2784778116046614,4.4001384040762817e-06,0.36472941934672137,0.2409733058467674,0.23549359425591701,1.206397150197838e-05,0.999987936028498,
+BNCI2014_001,AIRM,session_specific,1test,DESCRIPTIVE ENERGY FRACTIONS,0.34162496873850101,7.1586680351865674e-06,0.57864174644434485,0.236659696584405,0.23549359425591701,1.2371349832237693e-05,0.99998762865016777,

@@ -1,0 +1,162 @@
+protocol:
+  name: BNCI2014_001 D/G Discrepancy Decomposition V1
+  version: "1.0"
+  freeze_date: "2026-08-10"
+  timezone: Asia/Seoul
+  base_commit: 74bbae09fd9880c5809b61769d8f6e27b9b994bf
+  branch: pilot/dg-discrepancy-decomposition-v1
+  protocol_path: docs/PROTOCOL_DG_DISCREPANCY_DECOMPOSITION_V1.md
+  retrospective_post_hoc: true
+  external_confirmation: false
+  frozen_original_terminal: STOP_TANGENT_ONLY
+  seed: 20260809
+
+project:
+  source_output_dir: outputs/bnci2014_001_conditional_geometry_v1
+  output_dir: outputs/bnci2014_001_dg_decomposition_v1
+  source_read_only: true
+  forbid_existing_output_overwrite: true
+
+source_contract:
+  protocol:
+    path: docs/PROTOCOL_CONDITIONAL_GEOMETRY_V1.md
+    sha256: ff7143dca8408a73233321fc7219358e48f2336bad0cb63f4e76f8988e77ecce
+  config:
+    path: configs/bnci2014_001_conditional_geometry_v1.yaml
+    sha256: ca0178be9c5fd168509f48974d2b3e1bbc91b2ba4e8e9e320299fd98dcf765e8
+  source_output_snapshot:
+    file_count: 139
+    total_bytes: 36630557
+    aggregate_sha256: 51332ac66d3235e80ed43df4e80cdf752d2d37f81b2ae71c19c7caa3b3e7e8ba
+    algorithm: sha256_canonical_compact_json_sorted_relative_file_records_v1
+  sessions:
+    - session: 0train
+      diagnostic_name: retrospective mechanism set A
+      phase_directory: discovery
+      D_path: outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/D_matrices.npz
+      D_sha256: 0053a7413d804cc88fd3ac586a94d237e9f260cf79e6ada123c648857881a3d8
+      G_path: outputs/bnci2014_001_conditional_geometry_v1/objects/discovery/G_matrices.npz
+      G_sha256: 54e08e56c969d5475106e4f6e027dbb518dd1dc9449b49322f1317de96c65ca9
+    - session: 1test
+      diagnostic_name: locked internal replication set B
+      phase_directory: confirmatory
+      D_path: outputs/bnci2014_001_conditional_geometry_v1/objects/confirmatory/D_matrices.npz
+      D_sha256: a3376f93fc862ce36af7ee9103044bfe57e2b8f7f456b96fc8584dc1f226e4c0
+      G_path: outputs/bnci2014_001_conditional_geometry_v1/objects/confirmatory/G_matrices.npz
+      G_sha256: b2aaa5b0516a86429684cbab81d2b3cbcc9869247f9530a14e9afbc63aa630fc
+  root_replication:
+    D_path: outputs/bnci2014_001_conditional_geometry_v1/objects/D_matrices.npz
+    D_sha256: a3376f93fc862ce36af7ee9103044bfe57e2b8f7f456b96fc8584dc1f226e4c0
+    G_path: outputs/bnci2014_001_conditional_geometry_v1/objects/G_matrices.npz
+    G_sha256: b2aaa5b0516a86429684cbab81d2b3cbcc9869247f9530a14e9afbc63aa630fc
+
+axes:
+  sessions: [0train, 1test]
+  geometries: [AIRM, LE]
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  splits: [A, B, F]
+  classes: [left_hand, right_hand, feet, tongue]
+  d_upper_triangle_indices: [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]]
+  gram_svec_order: [[0, 0], [0, 1], [0, 2], [0, 3], [1, 1], [1, 2], [1, 3], [2, 2], [2, 3], [3, 3]]
+  gram_svec_off_diagonal_scale: sqrt2
+
+derived_objects:
+  names: [D_exact, D_tan, K_exact, G0, G]
+  D_tan_squared: G_cc + G_cprime_cprime - 2*G_ccprime
+  H_pi: I - one*pi_transpose
+  G0: H_pi*G*H_pi_transpose
+  K_exact: -0.5*H_pi*(D_exact_elementwise_squared)*H_pi_transpose
+  anchor_energy: pi_transpose*G*pi
+  anchor_fraction: anchor_energy/trace_G
+  curvature: D_exact_elementwise_squared-D_tan_elementwise_squared
+  psd_projection: forbidden
+
+normalization:
+  type: per_object_l2_unit
+  degeneracy_epsilon_multiplier: 100.0
+  scaler: none
+  pca: false
+  whitening: false
+
+hard_gates:
+  relative_error_max: 1.0e-10
+  regression_absolute_tolerance: 1.0e-12
+  negative_q_relative_tolerance: 1.0e-10
+  curvature_negative_relative_tolerance: 1.0e-10
+  all_required_rows_must_pass: true
+
+rng:
+  bit_generator: PCG64DXSM
+  seed_sequence_fields: [master_seed, family_tag, phase_tag, replicate_index]
+  master_seed: 20260809
+  family_tags:
+    label_destruction: 1101
+    semantic_permutation: 1201
+    oracle_rank: 1301
+  phase_tags:
+    retrospective_set_a: 0
+    internal_replication_set_b: 1
+    paired_common: 2
+
+nulls:
+  label_destruction:
+    replicates: 1999
+    permutation_unit: subject_session_run
+    preserve_label_multiset: true
+    derived_after_each_D_G_refit: true
+    immutable_source_storage_contingency: NOT_COMPUTABLE_FROM_IMMUTABLE_SOURCE
+  semantic_permutation:
+    replicates: 100000
+    permutation_pool: all_24_S4_including_identity
+    independent_by_source_subject: true
+    common_plan_all_objects_geometries_sessions: true
+  p_value: plus_one_one_sided_greater_equal
+  effect: observed_minus_null_median
+
+statistics:
+  group: subject_median
+  stage_R: A_B_cosine
+  stage_S_set_A: average_source_A_target_B_and_source_B_target_A_LOSO
+  stage_S_set_B: fixed_set_A_F_LOSO_template_to_set_B_A_B_average
+  template: normalize_sum_of_unit_source_subject_shapes
+  oracle_tie_tolerance: 1.0e-12
+  primary_contrasts:
+    curvature: E_S_D_tan-minus-E_S_D_exact
+    anchor: E_S_G-minus-E_S_G0
+    encoding_exact: E_S_K_exact-minus-E_S_D_exact
+    encoding_tangent: E_S_G0-minus-E_S_D_tan
+
+decision:
+  labels:
+    - PROVISIONAL_CURVATURE_SUPPORTED
+    - PROVISIONAL_ANCHOR_SUPPORTED
+    - PROVISIONAL_ENCODING_SUPPORTED
+    - PROVISIONAL_MIXED
+    - PROVISIONAL_UNRESOLVED
+  new_absolute_cutoff: forbidden
+  p_value_alone_votes: false
+  require_session_direction_replication_for_overall: true
+  oracle_votes: false
+
+output_contract:
+  directories: [protocol, objects, tables, nulls, figures, report]
+  tables:
+    - source_artifact_audit.csv
+    - derived_object_identity_gates.csv
+    - D_exact_shapes.csv
+    - D_tan_shapes.csv
+    - G_shapes.csv
+    - G0_shapes.csv
+    - K_exact_shapes.csv
+    - anchor_offset_summary.csv
+    - curvature_distortion_summary.csv
+    - reliability_summary.csv
+    - shared_semantic_summary.csv
+    - subject_semantic_effects.csv
+    - mechanism_contrasts.csv
+    - oracle_descriptive_summary.csv
+    - session_replication_summary.csv
+  figures: 8
+  figure_formats: [png, pdf, csv]
+  report: report/dg_discrepancy_decomposition_v1.md
+  manifest: manifest.json

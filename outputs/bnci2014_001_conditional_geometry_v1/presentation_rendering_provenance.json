@@ -1,0 +1,60 @@
+{
+  "config_sha256": "ca0178be9c5fd168509f48974d2b3e1bbc91b2ba4e8e9e320299fd98dcf765e8",
+  "decision_sha256": "d7ceeecc5163ede37f912b07d24aca356527e2faf79e33e80d9aed2c9fe56f2e",
+  "frozen_analysis_code_commit": "0c9085a7366142fd489e5640b36c75720ff4acbc",
+  "layout_change": {
+    "bbox_to_anchor": [
+      0.5,
+      1.14
+    ],
+    "reason": "prevent suptitle/legend overlap",
+    "scope": "figure-level legends with loc=upper center"
+  },
+  "le_robustness_label": "AIRM+LE CONSISTENT",
+  "locked_discovery_head": "ea2858168aa345aaf8c1450a56cb68b2909b9e6c",
+  "protected_content_sha256": {
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_10_airm_le_stage_effects.csv": "8b12965923e278c3a7d171ab2bdb34f455a03804969c9363d0f94a48863e7941",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_1_within_subject_reliability.csv": "12e39b4a5a40baec2931fe8e1581313ef1041bb1c4f3ee74afe57367951ce1de",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_2_reliability_label_null.csv": "e5309e106dae5dcee962b8ab0edcdba3edaa6e1f49089ebc5fcf8eb86f8fa135",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_3_same_vs_unrelated.csv": "36a37e98fef6307a3c5ba7deb2ee538557cba248cde9a5d54ece7e6ca8a1f3c6",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_4_shared_template_similarity.csv": "7f49d9f8ba4a390b5354fbf210dcfa0b56ae6d1f629188d62cef8d612218f0ab",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_5_D_heatmaps.csv": "e5ea729338429acd46738b062b53a7b93a627cf7163269213187e57f9526dded",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_6_G_heatmaps.csv": "f6c275c285ca29f63aa60ef4ea597c4433975069b2cb1c804fc801a86524a86c",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_7_oracle_permutation_scores.csv": "813dbfc69d18139afcc22b1389f69ec0bbafe083d2e395898f0ab21a2a3ee795",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_8_oracle_rank_margin.csv": "fb57618691b7f97d7da271e583c76eebc4e1fba9026072c770aee2625d462f38",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_9_subject_forest_influence.csv": "4a95ebbce11ae4de629ea9a678ff5b454305338a5ca7b026e6b17be989ff2321",
+    "outputs/bnci2014_001_conditional_geometry_v1/report/conditional_geometry_anatomy_v1.md": "d3cc41e32262f45113e732e27624d1b07015c22bbb0267bd9bbbe32e0d4d0e31"
+  },
+  "protocol_sha256": "ff7143dca8408a73233321fc7219358e48f2336bad0cb63f4e76f8988e77ecce",
+  "purpose": "post_confirmatory_presentation_erratum",
+  "rendered_media_sha256": {
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_10_airm_le_stage_effects.pdf": "d05bfee8071a6500ad9d762b1240f7b0aef4ea266519f12fcea54657f2dddcf3",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_10_airm_le_stage_effects.png": "40d455fbdb812236b4d3d132a1c2838e3e2729167cfe9bdcbb8d56b9bc35628f",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_1_within_subject_reliability.pdf": "9d78a5382e929022fd01fac5eb70f7e35bd373259029b475ba768e6526653094",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_1_within_subject_reliability.png": "2a78d05d52db9dbbbf0488d262ab70e536756e6bb341a760f92fa3effbf26843",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_2_reliability_label_null.pdf": "1600ff5b528b6f133cd16a6a69cae67f435e4428a4e14e378ecb205f8314a414",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_2_reliability_label_null.png": "adcb552832c6d145ae4fb0fd7992703ec2703050b711c522432fe3b6c61e6f38",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_3_same_vs_unrelated.pdf": "55311c4a770220e46c4084e07714f22f9b408a2820c2d477bb676d7fff232c09",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_3_same_vs_unrelated.png": "d4229eeb4d539eaa4ee735b0b285f0563801bbf6781b065bd7d384cd7ddfb2b2",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_4_shared_template_similarity.pdf": "2722bbdb6ba205e12159696548b21ee981fd689f821fa647abe661326c9c582e",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_4_shared_template_similarity.png": "231a9e21c3d6a36eb96cc5d3dbd10add48c9cb6e9f16e61b3b91782844464117",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_5_D_heatmaps.pdf": "f1049d99fe32cb50287ee3d743ab3625687963997c0dd84ad5e85584dfc98910",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_5_D_heatmaps.png": "5a002deabbd2ca099f948a202839dd1cdf5c8f81a1638befa66df0335379ef9d",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_6_G_heatmaps.pdf": "37c402263d9e7d8d9c014d1a0594200581d99578ab9cf656ba63f12f01065b2b",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_6_G_heatmaps.png": "c0015b776093fd962819d3edd432a35f562db6290a7a08d054f0c0273c0617c1",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_7_oracle_permutation_scores.pdf": "7ee16c29b477f771dbfe222eb7a6c545a961632353e835d6e74e04dca0b92373",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_7_oracle_permutation_scores.png": "233e88c8b150f484952041ae119e0d1f7fc0184ed2de86c4bef40777a39155fc",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_8_oracle_rank_margin.pdf": "32bd2b94f003366c3b838987941832323973c98197f569cb0fb0a8033809a58e",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_8_oracle_rank_margin.png": "e8bbe81143c396552457c315de5cfd17dee3385f6e2354a90c1caa8b1f93e74f",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_9_subject_forest_influence.pdf": "282a0b25347fca663d5c29f208718d4e1c4a429b2ef8d2880ecfa35e8ce0a7d1",
+    "outputs/bnci2014_001_conditional_geometry_v1/figures/figure_9_subject_forest_influence.png": "986f1d5b41f10a1f111aeee6d225607f62b15d1dc8fcffa62bf6564424f1d8f4"
+  },
+  "renderer": {
+    "path": "tools/render_conditional_figures_v1_presentation_fix.py",
+    "sha256": "b1caaf8fd7d23b9832aaee59f20a897f6b0b40377166c94d1528cc8f6cca5175"
+  },
+  "schema_version": "1.0",
+  "scientific_analysis_changed": false,
+  "scientific_sources_and_report_byte_identical": true,
+  "terminal_decision": "STOP_TANGENT_ONLY"
+}
