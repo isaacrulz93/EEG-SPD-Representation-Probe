@@ -27,6 +27,7 @@ from src.openbmi_protocol_v0 import OpenBMILockError, validate_scientific_unlock
 from src.spd_utils import svec
 from src.subject_class_interaction_v0 import (
     build_interactions_from_means,
+    compute_interactions,
     geometry_thresholds,
     load_frozen_config,
     split_masks,
@@ -141,7 +142,7 @@ def _label_fixture() -> tuple[np.ndarray, pd.DataFrame]:
     labels = []
     for subject in (1, 2):
         for session in ("s0", "s1"):
-            for trial in range(12):
+            for trial in range(24):
                 rows.append({"subject": subject, "session": session, "run": str(trial // 4), "trial_uid": f"S{subject}_{session}_T{trial:02d}", "class_label": str(trial % 3)})
                 labels.append(str(trial % 3))
     return np.asarray(labels), pd.DataFrame(rows)
@@ -172,6 +173,33 @@ def test_split_halves_are_disjoint_exhaustive_and_have_no_trial_leakage() -> Non
     assert a_ids.isdisjoint(b_ids)
     assert a_ids | b_ids == set(metadata["trial_uid"])
     assert len(labels) == len(a_ids | b_ids)
+    assert a_ids and b_ids
+
+
+def test_label_override_recomputes_class_means_U_and_Z() -> None:
+    config, _ = load_frozen_config(ROOT)
+    rng = np.random.default_rng(9)
+    rows = []
+    covariances = []
+    classes = config["datasets"]["bnci2014_001"]["classes"]
+    for subject in range(1, 5):
+        for session in ("s0", "s1"):
+            for class_index, class_name in enumerate(classes):
+                for trial in range(3):
+                    base = np.diag([1.0 + 0.1 * class_index, 1.1 + 0.02 * subject, 1.2 + 0.01 * trial])
+                    noise = rng.normal(scale=0.01, size=(3, 3))
+                    covariances.append(base + noise @ noise.T)
+                    rows.append({"subject": subject, "session": session, "class_label": class_name, "run": str(trial), "trial_uid": f"S{subject}_{session}_{class_name}_{trial}"})
+    metadata = pd.DataFrame(rows)
+    covariances = np.asarray(covariances)
+    original = compute_interactions(covariances, metadata, config=config, geometry="LE")
+    key = make_key(dataset="synthetic", geometry="LE", stage="C", signature="sensor_Z", template="session_specific", replicate_index=3)
+    shuffled = shuffle_labels_subject_session(metadata["class_label"].to_numpy(), metadata, key=key)
+    refit = compute_interactions(covariances, metadata, config=config, geometry="LE", labels=shuffled)
+    np.testing.assert_array_equal(original.marginal_means, refit.marginal_means)
+    assert not np.array_equal(original.class_means, refit.class_means)
+    assert not np.array_equal(original.U, refit.U)
+    assert not np.array_equal(original.Z, refit.Z)
 
 
 def test_openbmi_lock_blocks_scientific_access_before_manifest_freeze(tmp_path: Path) -> None:

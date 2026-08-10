@@ -51,6 +51,10 @@ data/raw/
 !outputs/bnci2014_001_conditional_geometry_v1/nulls/confirmatory/semantic_permutation_group_statistics.npz
 !outputs/bnci2014_001_conditional_geometry_v1/nulls/confirmatory/oracle_rank_null.npz
 
+# Subject Class Interaction v0: frozen core objects are compact required evidence.
+!outputs/subject_class_interaction_v0/objects/core_interaction_objects.npz
+!outputs/subject_class_interaction_v0/objects/observed_similarity_matrices.npy
+
 # Local scratch files
 *.tmp
 *.temp
