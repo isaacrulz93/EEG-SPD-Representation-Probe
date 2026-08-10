@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import itertools
 import json
+import multiprocessing
 import os
 import tempfile
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -50,6 +52,7 @@ SPLITS = ("A", "B", "F")
 JOINT_GEOMETRY_KEY = "joint_AIRM_LE"
 JOINT_SIGNATURE_KEY = "joint_R_Z_sensor_spectrum"
 JOINT_TEMPLATE_KEY = "joint_session_specific_pooled"
+_NULL_WORKER_CONTEXT: tuple[Any, ...] | None = None
 
 
 def chain_order() -> tuple[tuple[str, str, str, str], ...]:
@@ -487,7 +490,24 @@ def _joint_label_batch_statistics(
     return output
 
 
-def run_bnci_nulls(repo_root: str | Path, *, batch_size: int = 4) -> dict[str, Any]:
+def _parallel_joint_task(arguments: tuple[str, np.ndarray]) -> tuple[np.ndarray, np.ndarray]:
+    """Evaluate one immutable index batch from a fork-inherited read-only context."""
+
+    if _NULL_WORKER_CONTEXT is None:
+        raise RuntimeError("parallel null worker context is not initialized")
+    stage, indices = arguments
+    covariances, metadata, config, arrays, masks = _NULL_WORKER_CONTEXT
+    statistics = _joint_label_batch_statistics(
+        stage=stage, replicate_indices=indices, covariances=covariances,
+        metadata=metadata, config=config, arrays=arrays, masks=masks,
+        scalar_crosscheck=False,
+    )
+    return indices, statistics
+
+
+def run_bnci_nulls(
+    repo_root: str | Path, *, batch_size: int = 4, workers: int = 1
+) -> dict[str, Any]:
     root = Path(repo_root).resolve()
     config, config_hash = load_frozen_config(root)
     output = root / str(config["project"]["output_dir"])
@@ -509,17 +529,38 @@ def run_bnci_nulls(repo_root: str | Path, *, batch_size: int = 4) -> dict[str, A
         path = root / str(config["project"]["cache_dir"]) / "checkpoints" / f"bnci_{stage}_joint.npz"
         checkpoint = _load_joint(path, identity) if path.exists() else _create_joint_checkpoint(stage, identity, total)
         pending = np.flatnonzero(checkpoint.completed == 0)
-        first_batch = True
-        for start in range(0, len(pending), int(batch_size)):
-            indices = pending[start : start + int(batch_size)]
+        batches = [pending[start : start + int(batch_size)] for start in range(0, len(pending), int(batch_size))]
+        if batches:
+            indices = batches.pop(0)
             statistics = _joint_label_batch_statistics(
                 stage=stage, replicate_indices=indices, covariances=covariances,
                 metadata=metadata, config=config, arrays=arrays, masks=masks,
-                scalar_crosscheck=first_batch,
+                scalar_crosscheck=True,
             )
-            first_batch = False
             checkpoint = _record_joint(checkpoint, indices, statistics)
             _save_joint(path, checkpoint)
+        if batches and int(workers) > 1:
+            global _NULL_WORKER_CONTEXT
+            _NULL_WORKER_CONTEXT = (covariances, metadata, config, arrays, masks)
+            context = multiprocessing.get_context("fork")
+            with ProcessPoolExecutor(max_workers=int(workers), mp_context=context) as executor:
+                for indices, statistics in executor.map(
+                    _parallel_joint_task,
+                    ((stage, indices) for indices in batches),
+                    chunksize=1,
+                ):
+                    checkpoint = _record_joint(checkpoint, indices, statistics)
+                    _save_joint(path, checkpoint)
+            _NULL_WORKER_CONTEXT = None
+        else:
+            for indices in batches:
+                statistics = _joint_label_batch_statistics(
+                    stage=stage, replicate_indices=indices, covariances=covariances,
+                    metadata=metadata, config=config, arrays=arrays, masks=masks,
+                    scalar_crosscheck=False,
+                )
+                checkpoint = _record_joint(checkpoint, indices, statistics)
+                _save_joint(path, checkpoint)
         if np.any(checkpoint.completed == 0):
             raise RuntimeError(f"{stage} label checkpoint remained incomplete")
         checkpoints[stage] = checkpoint

@@ -18,5 +18,6 @@ from src.interaction_pipeline_v0 import run_bnci_nulls
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--batch-size", type=int, default=4)
+    parser.add_argument("--workers", type=int, default=1)
     args = parser.parse_args()
-    print(json.dumps(run_bnci_nulls(ROOT, batch_size=args.batch_size), indent=2, sort_keys=True))
+    print(json.dumps(run_bnci_nulls(ROOT, batch_size=args.batch_size, workers=args.workers), indent=2, sort_keys=True))
