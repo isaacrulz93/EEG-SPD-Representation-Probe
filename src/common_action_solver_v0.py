@@ -15,7 +15,7 @@ import numpy as np
 import pymanopt
 from pymanopt import Problem
 from pymanopt.manifolds import Stiefel
-from pymanopt.optimizers import ConjugateGradient
+from pymanopt.optimizers import ConjugateGradient, TrustRegions
 from pymanopt.optimizers.line_search import BackTrackingLineSearcher
 from pyriemann.optimization.grassmann import _project as _pyriemann_project
 from pyriemann.optimization.grassmann import _retract as _pyriemann_retract
@@ -180,6 +180,29 @@ def action_gradient(targets: np.ndarray, templates: np.ndarray, action: np.ndarr
     prediction = np.einsum("ij,kjl,ml->kim", q, b, q, optimize=True)
     residual = prediction - a
     return 4.0 * np.einsum("kij,jl,klm->im", residual, q, b, optimize=True)
+
+
+def action_hessian_vector(
+    targets: np.ndarray,
+    templates: np.ndarray,
+    action: np.ndarray,
+    direction: np.ndarray,
+) -> np.ndarray:
+    """Analytic Euclidean Hessian-vector product of the frozen loss."""
+
+    a, b = _validate_banks(targets, templates)
+    q = np.asarray(action, dtype=np.float64)
+    h = np.asarray(direction, dtype=np.float64)
+    if q.shape != a.shape[-2:] or h.shape != q.shape:
+        raise ValueError("action/direction has the wrong shape")
+    result = np.zeros_like(q)
+    for target, template in zip(a, b, strict=True):
+        residual = q @ template @ q.T - target
+        residual_direction = h @ template @ q.T + q @ template @ h.T
+        result += 4.0 * (
+            residual_direction @ q @ template + residual @ h @ template
+        )
+    return result
 
 
 def tangent_projection(action: np.ndarray, euclidean_gradient: np.ndarray) -> np.ndarray:
@@ -358,6 +381,37 @@ def _pymanopt_problem(
     )
 
 
+def _pymanopt_trust_regions_problem(
+    targets: np.ndarray,
+    templates: np.ndarray,
+) -> tuple[Stiefel, Problem]:
+    """Construct the audited TrustRegions problem with analytic Hessian."""
+
+    a, b = _validate_banks(targets, templates)
+    manifold = Stiefel(a.shape[-1], a.shape[-1], retraction="polar")
+
+    @pymanopt.function.numpy(manifold)
+    def cost(action: np.ndarray) -> float:
+        return action_objective(a, b, action)
+
+    @pymanopt.function.numpy(manifold)
+    def euclidean_gradient(action: np.ndarray) -> np.ndarray:
+        return action_gradient(a, b, action)
+
+    @pymanopt.function.numpy(manifold)
+    def euclidean_hessian(
+        action: np.ndarray, direction: np.ndarray
+    ) -> np.ndarray:
+        return action_hessian_vector(a, b, action, direction)
+
+    return manifold, Problem(
+        manifold,
+        cost,
+        euclidean_gradient=euclidean_gradient,
+        euclidean_hessian=euclidean_hessian,
+    )
+
+
 def build_pymanopt_optimizer(
     settings: SolverSettings = CANDIDATE_SOLVER_SETTINGS,
 ) -> ConjugateGradient:
@@ -387,6 +441,28 @@ def build_pymanopt_optimizer(
         # The pairwise amendment sets this to one to preserve evaluated
         # iterates. Other callers retain the historical zero-log default.
         log_verbosity=settings.pymanopt_log_verbosity,
+    )
+
+
+def build_pymanopt_trust_regions_optimizer(
+    settings: SolverSettings = CANDIDATE_SOLVER_SETTINGS,
+) -> TrustRegions:
+    """Instantiate the exact TrustRegions configuration from the V2 audit."""
+
+    return TrustRegions(
+        miniter=3,
+        kappa=0.1,
+        theta=1.0,
+        rho_prime=0.1,
+        use_rand=False,
+        rho_regularization=1000.0,
+        max_time=settings.optimizer_max_time_seconds,
+        max_iterations=settings.max_iterations,
+        min_gradient_norm=settings.gradient_tolerance,
+        min_step_size=settings.optimizer_min_step_size,
+        max_cost_evaluations=settings.max_iterations + 1,
+        verbosity=0,
+        log_verbosity=0,
     )
 
 
@@ -465,6 +541,48 @@ def _optimize_one_pymanopt(
     )
 
 
+def _optimize_one_pymanopt_trust_regions(
+    targets: np.ndarray,
+    templates: np.ndarray,
+    start: np.ndarray,
+    *,
+    start_index: int,
+    settings: SolverSettings,
+) -> StartResult:
+    """Run the synthetically audited TrustRegions single-action solve."""
+
+    manifold, problem = _pymanopt_trust_regions_problem(targets, templates)
+    optimizer = build_pymanopt_trust_regions_optimizer(settings)
+    initial = np.asarray(start, dtype=np.float64)
+    if initial.shape != (manifold._n, manifold._p):
+        raise ValueError("start has the wrong shape")
+    orthogonality = float(
+        np.linalg.norm(initial.T @ initial - np.eye(len(initial)))
+    )
+    if orthogonality > 1.0e-10:
+        raise ValueError(f"start is not orthogonal: {orthogonality}")
+    # No run-time arguments are overridden. Pymanopt 2.2.1 therefore uses
+    # mininner=1, maxinner=manifold.dim, Delta_bar=manifold.typical_dist,
+    # and Delta0=Delta_bar/8, exactly as in the preregistered stress audit.
+    result = optimizer.run(problem, initial_point=initial)
+    q = np.asarray(result.point, dtype=np.float64)
+    projected = manifold.projection(q, action_gradient(targets, templates, q))
+    gradient_norm = float(manifold.norm(q, projected))
+    converged = bool(gradient_norm <= settings.gradient_tolerance)
+    return StartResult(
+        start_index=int(start_index),
+        matrix=q,
+        objective=float(action_objective(targets, templates, q)),
+        gradient_norm=gradient_norm,
+        converged=converged,
+        iterations=int(result.iterations),
+        determinant=float(np.linalg.det(q)),
+        line_search_failures=0,
+        optimizer="pymanopt_2.2.1_stiefel_trust_regions",
+        stopping_criterion=str(result.stopping_criterion),
+    )
+
+
 def equivalence_objective_tolerance(
     best_objective: float,
     settings: SolverSettings = CANDIDATE_SOLVER_SETTINGS,
@@ -500,10 +618,14 @@ def optimize_action(
         )
     if solver == "pymanopt":
         solve_one = _optimize_one_pymanopt
+    elif solver == "pymanopt_trust_regions":
+        solve_one = _optimize_one_pymanopt_trust_regions
     elif solver == "custom":
         solve_one = _optimize_one_custom
     else:
-        raise ValueError("solver must be 'pymanopt' or 'custom'")
+        raise ValueError(
+            "solver must be 'pymanopt', 'pymanopt_trust_regions', or 'custom'"
+        )
     results = tuple(
         solve_one(a, b, value, start_index=index, settings=settings)
         for index, value in enumerate(initial)

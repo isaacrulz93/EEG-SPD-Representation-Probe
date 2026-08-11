@@ -59,6 +59,10 @@ PROTOCOL_PATH = "docs/PROTOCOL_AMENDMENT_PAIRWISE_COMMON_ACTION_V1.md"
 # Filled after the protocol/config are final and before the amendment commit.
 EXPECTED_CONFIG_SHA256 = "0c5d7b01fccab0d103653c5a178243db1021a0f273686939b48e661f65431b26"
 EXPECTED_PROTOCOL_SHA256 = "48878fdbc75a9fe02d102317142fd6f58202e161271a0db09e3a371b4b9f4519"
+OUTPUT_PROTOCOL_FILENAME = "PROTOCOL_AMENDMENT_PAIRWISE_COMMON_ACTION_V1.md"
+REPORT_TITLE = "Pairwise Common Action V1"
+REPORT_FILENAME = "pairwise_common_action_v1.md"
+CHECKPOINT_IDENTITY: dict[str, str] | None = None
 CLASSES = ("left_hand", "right_hand", "feet", "tongue")
 SESSIONS = ("0train", "1test")
 
@@ -139,7 +143,7 @@ def prepare_output(root: Path, config: Mapping[str, Any]) -> Path:
     for relative in ("protocol", "objects", "tables", "nulls", "checkpoints", "decisions", "report"):
         (output / relative).mkdir(parents=True, exist_ok=True)
     shutil.copy2(root / CONFIG_PATH, output / "protocol/frozen_config.yaml")
-    shutil.copy2(root / PROTOCOL_PATH, output / "protocol/PROTOCOL_AMENDMENT_PAIRWISE_COMMON_ACTION_V1.md")
+    shutil.copy2(root / PROTOCOL_PATH, output / f"protocol/{OUTPUT_PROTOCOL_FILENAME}")
     environment = {
         "python": platform.python_version(),
         "platform": platform.platform(),
@@ -161,6 +165,7 @@ def prepare_output(root: Path, config: Mapping[str, Any]) -> Path:
             "original_freeze_commit": config["protocol"]["original_freeze_commit"],
             "new_bnci_scientific_statistic_before_freeze": False,
             "old_nested_generalized_procrustes_used": False,
+            "checkpoint_identity": CHECKPOINT_IDENTITY,
         },
     )
     return output
@@ -397,11 +402,24 @@ def _save_task(path: Path, result: Mapping[str, Any]) -> None:
         eq_actions=np.asarray(result.get("eq_actions", np.empty(0))),
         mismatch_gains=np.asarray(result.get("mismatch_gains", np.empty(0))),
         mismatch_actions=np.asarray(result.get("mismatch_actions", np.empty(0))),
+        checkpoint_identity_json=np.asarray(
+            json.dumps(CHECKPOINT_IDENTITY or {}, sort_keys=True)
+        ),
     )
 
 
 def _load_task(path: Path) -> dict[str, Any]:
     with np.load(path, allow_pickle=False) as archive:
+        stored_identity = (
+            json.loads(str(archive["checkpoint_identity_json"].item()))
+            if "checkpoint_identity_json" in archive.files
+            else {}
+        )
+        if CHECKPOINT_IDENTITY is not None and stored_identity != CHECKPOINT_IDENTITY:
+            raise PairwiseContractError(
+                "checkpoint provenance mismatch; V2 caches cannot be reused across "
+                "config/source/optimizer/amendment identities"
+            )
         return {
             "target": int(archive["target"]),
             "rows": json.loads(str(archive["rows_json"].item())),
@@ -765,7 +783,7 @@ def _write_report(
             f"{'PASS' if gate.passed else 'FAIL'}."
         )
 
-    text = f"""# Pairwise Common Action V1
+    text = f"""# {REPORT_TITLE}
 
 ## Plain-language question
 
@@ -787,7 +805,7 @@ Pairwise success is a necessary consequence of a latent common-action model. It 
 
 This result concerns only pairwise class-independent sensor-space orthogonal conjugation of marginally recentered identity-tangent class effects. It does not establish physiology, a complete model of individuality, a global latent action model, source-space structure, causal dynamics, unlabeled identifiability, or performance improvement. The planned next branch remains split-epoch covariance-set anatomy.
 """
-    path = output / "report/pairwise_common_action_v1.md"
+    path = output / f"report/{REPORT_FILENAME}"
     path.write_text(text, encoding="utf-8")
 
 

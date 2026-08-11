@@ -1,0 +1,301 @@
+{
+  "both_sectors_certified_fixtures": 12,
+  "dimension": 22,
+  "fixtures": 12,
+  "maximum_exact_heldout_relative_error": 1.1167965909625377e-15,
+  "maximum_noisy_heldout_relative_error": 0.002677486032947758,
+  "rows": [
+    {
+      "best_heldout_relative_error": 1.1167965909625377e-15,
+      "both_sectors_certified": true,
+      "converged_starts": 4,
+      "family": "generic_exact",
+      "fixture": "generic_exact__det_positive",
+      "initial_determinants": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "iterations": [
+        1,
+        8,
+        13,
+        21
+      ],
+      "maximum_gradient_norm": 2.8675042226485917e-06,
+      "optimizer_identities": [
+        "pymanopt_2.2.1_stiefel_trust_regions"
+      ],
+      "truth_determinant": 1
+    },
+    {
+      "best_heldout_relative_error": 1.0946639274660817e-15,
+      "both_sectors_certified": true,
+      "converged_starts": 4,
+      "family": "generic_exact",
+      "fixture": "generic_exact__det_negative",
+      "initial_determinants": [
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "iterations": [
+        1,
+        8,
+        30,
+        16
+      ],
+      "maximum_gradient_norm": 7.203329288042332e-06,
+      "optimizer_identities": [
+        "pymanopt_2.2.1_stiefel_trust_regions"
+      ],
+      "truth_determinant": -1
+    },
+    {
+      "best_heldout_relative_error": 0.002179245017026432,
+      "both_sectors_certified": true,
+      "converged_starts": 4,
+      "family": "generic_noisy",
+      "fixture": "generic_noisy__det_positive",
+      "initial_determinants": [
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "iterations": [
+        2,
+        9,
+        15,
+        19
+      ],
+      "maximum_gradient_norm": 2.7280373188819e-07,
+      "optimizer_identities": [
+        "pymanopt_2.2.1_stiefel_trust_regions"
+      ],
+      "truth_determinant": 1
+    },
+    {
+      "best_heldout_relative_error": 0.0022447075448862705,
+      "both_sectors_certified": true,
+      "converged_starts": 4,
+      "family": "generic_noisy",
+      "fixture": "generic_noisy__det_negative",
+      "initial_determinants": [
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "iterations": [
+        2,
+        9,
+        18,
+        29
+      ],
+      "maximum_gradient_norm": 2.907437128170284e-06,
+      "optimizer_identities": [
+        "pymanopt_2.2.1_stiefel_trust_regions"
+      ],
+      "truth_determinant": -1
+    },
+    {
+      "best_heldout_relative_error": 0.00010888522328438614,
+      "both_sectors_certified": true,
+      "converged_starts": 4,
+      "family": "nearly_commuting",
+      "fixture": "nearly_commuting__det_positive",
+      "initial_determinants": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "iterations": [
+        1,
+        1,
+        3,
+        3
+      ],
+      "maximum_gradient_norm": 6.342384216693682e-06,
+      "optimizer_identities": [
+        "pymanopt_2.2.1_stiefel_trust_regions"
+      ],
+      "truth_determinant": 1
+    },
+    {
+      "best_heldout_relative_error": 0.002677486032947758,
+      "both_sectors_certified": true,
+      "converged_starts": 4,
+      "family": "nearly_commuting",
+      "fixture": "nearly_commuting__det_negative",
+      "initial_determinants": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "iterations": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "maximum_gradient_norm": 1.6218761256891792e-06,
+      "optimizer_identities": [
+        "pymanopt_2.2.1_stiefel_trust_regions"
+      ],
+      "truth_determinant": -1
+    },
+    {
+      "best_heldout_relative_error": 0.00011590931053984924,
+      "both_sectors_certified": true,
+      "converged_starts": 4,
+      "family": "clustered_spectrum",
+      "fixture": "clustered_spectrum__det_positive",
+      "initial_determinants": [
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "iterations": [
+        1,
+        9,
+        22,
+        17
+      ],
+      "maximum_gradient_norm": 9.71056771764288e-06,
+      "optimizer_identities": [
+        "pymanopt_2.2.1_stiefel_trust_regions"
+      ],
+      "truth_determinant": 1
+    },
+    {
+      "best_heldout_relative_error": 0.00010415318703491123,
+      "both_sectors_certified": true,
+      "converged_starts": 4,
+      "family": "clustered_spectrum",
+      "fixture": "clustered_spectrum__det_negative",
+      "initial_determinants": [
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "iterations": [
+        1,
+        9,
+        19,
+        30
+      ],
+      "maximum_gradient_norm": 2.258316162174138e-06,
+      "optimizer_identities": [
+        "pymanopt_2.2.1_stiefel_trust_regions"
+      ],
+      "truth_determinant": -1
+    },
+    {
+      "best_heldout_relative_error": 9.280844598288112e-06,
+      "both_sectors_certified": true,
+      "converged_starts": 4,
+      "family": "approximate_stabilizer",
+      "fixture": "approximate_stabilizer__det_positive",
+      "initial_determinants": [
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "iterations": [
+        1,
+        12,
+        9,
+        12
+      ],
+      "maximum_gradient_norm": 1.2375443203897587e-06,
+      "optimizer_identities": [
+        "pymanopt_2.2.1_stiefel_trust_regions"
+      ],
+      "truth_determinant": 1
+    },
+    {
+      "best_heldout_relative_error": 1.0102618192819883e-05,
+      "both_sectors_certified": true,
+      "converged_starts": 4,
+      "family": "approximate_stabilizer",
+      "fixture": "approximate_stabilizer__det_negative",
+      "initial_determinants": [
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "iterations": [
+        1,
+        12,
+        1,
+        12
+      ],
+      "maximum_gradient_norm": 1.9817632352366475e-07,
+      "optimizer_identities": [
+        "pymanopt_2.2.1_stiefel_trust_regions"
+      ],
+      "truth_determinant": -1
+    },
+    {
+      "best_heldout_relative_error": 4.011205556907755e-05,
+      "both_sectors_certified": true,
+      "converged_starts": 4,
+      "family": "ill_conditioned",
+      "fixture": "ill_conditioned__det_positive",
+      "initial_determinants": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "iterations": [
+        1,
+        31,
+        22,
+        26
+      ],
+      "maximum_gradient_norm": 9.704358457233645e-06,
+      "optimizer_identities": [
+        "pymanopt_2.2.1_stiefel_trust_regions"
+      ],
+      "truth_determinant": 1
+    },
+    {
+      "best_heldout_relative_error": 4.785429207805921e-05,
+      "both_sectors_certified": true,
+      "converged_starts": 4,
+      "family": "ill_conditioned",
+      "fixture": "ill_conditioned__det_negative",
+      "initial_determinants": [
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "iterations": [
+        1,
+        33,
+        32,
+        23
+      ],
+      "maximum_gradient_norm": 9.488770622322688e-06,
+      "optimizer_identities": [
+        "pymanopt_2.2.1_stiefel_trust_regions"
+      ],
+      "truth_determinant": -1
+    }
+  ],
+  "runtime_seconds": 5.745432666968554,
+  "scientific_data_accessed": false,
+  "starts": 48,
+  "status": "PASS"
+}
