@@ -1,0 +1,159 @@
+protocol:
+  name: BNCI2014_001 Local AIRM Metric Interaction V0
+  version: "0.0"
+  freeze_date: "2026-08-11"
+  timezone: Asia/Seoul
+  path: docs/PROTOCOL_LOCAL_METRIC_INTERACTION_V0.md
+  sha256: fc00ef6a261f6c7e4114a1a0e24771aebc6bf6b21444065ebe5f10d756f3d16c
+  branch: pilot/local-metric-interaction-v0
+  scientific_base_sha: 355fe0b55b1ef692f7b4ddd16d19b7ccc30e72e1
+  result_adaptation: forbidden
+
+project:
+  output_dir: outputs/bnci2014_001_local_metric_interaction_v0
+  immutable_reference_output: outputs/bnci2014_001_trajectory_within_subject_v1
+  frozen_input_cache: cache/bnci2014_001_trajectory_within_subject_v1/combined_trajectory_features.npz
+  implementation_source_files:
+    - src/local_metric_geometry_v0.py
+    - src/local_metric_interaction_v0.py
+    - src/local_metric_data_v0.py
+    - src/local_metric_pipeline_v0.py
+    - src/reporting_local_metric_v0.py
+    - scripts/18_run_local_metric_interaction_v0.py
+
+dataset:
+  name: BNCI2014_001
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  sessions: [0train, 1test]
+  runs: [0, 1, 2, 3, 4, 5]
+  classes: [left_hand, right_hand, feet, tongue]
+  eeg_channels: [Fz, FC3, FC1, FCz, FC2, FC4, C5, C3, C1, Cz, C2, C4, C6, CP3, CP1, CPz, CP2, CP4, P1, Pz, P2, POz]
+  expected_trials_total: 5184
+  expected_trials_per_session: 2592
+  expected_trials_per_subject_session: 288
+  expected_trials_per_subject_session_class: 72
+  expected_trials_per_subject_session_run_class: 12
+
+frozen_representation:
+  reference_experiment: trajectory-within-subject-audit-v1
+  combined_cache_sha256: 5accf2f3e6becce187b18d30a1ea1741ae0d0faafc15a1f8ac16632a5a71628d
+  distance_matrices_content_sha256: 681d8a075eff1218e5e2b2d0e292631ead67badaccc00ec075ba428c9d5aed64
+  path_d10_content_sha256: 8179f7654d6a1c89065aca12e99029e6a7476d332fdf62767e83c0f0966008f9
+  bandpass_hz: [8.0, 32.0]
+  epoch_interval_seconds: [0.0, 3.996]
+  sampling_frequency_hz: 250.0
+  samples_per_trial: 1000
+  covariance_estimator: pyriemann_oas
+  covariance_dtype: float64
+  extra_regularization: none
+  eigenvalue_clipping: false
+  windows: 5
+  samples_per_window: 200
+  overlap_samples: 0
+  geometry: AIRM
+  edge_order: [d12, d13, d14, d15, d23, d24, d25, d34, d35, d45]
+  temporal_order_used: false
+  pose_used: false
+
+quotient_metrics:
+  group: S5_vertex_relabeling
+  enumeration_count: 120
+  arbitrary_S10_forbidden: true
+  matching: exact_enumeration
+  raw: min_vertex_permutation_root_mean_squared_edge_difference
+  size: absolute_edge_rms_metric_size_difference
+  normalized: min_vertex_permutation_root_mean_squared_size_normalized_edge_difference
+  degenerate_policy: stop_without_epsilon
+  brute_vectorized_atol: 1.0e-12
+  brute_vectorized_rtol: 1.0e-12
+  computation_chunk_size: 128
+
+cell_summary:
+  directional: median_all_trial_pair_distances_session0_to_session1
+  grid_shape: [36, 36]
+  session_role_symmetrization: "M=(M01+transpose(M01))/2"
+  trial_pairs_inferential: false
+
+interaction:
+  same_subject_same_class: a_sc
+  same_subject_different_class: b_sc_mean_other_3_classes
+  different_subject_same_class: c_sc_mean_other_8_subjects
+  different_subject_different_class: d_sc_mean_other_8_subjects_x_3_classes
+  primary_cell_contrast: "J_sc=b_sc+c_sc-a_sc-d_sc"
+  subject_contrast: mean_4_classes
+  group_statistic: mean_9_subjects
+  scientific_group_unit: target_subject
+  supporting_subject_specificity: "S_sc=c_sc-a_sc"
+  supporting_class_specificity: "C_sc=b_sc-a_sc"
+
+nulls:
+  master_seed: 20260810
+  replicates: 1999
+  pvalue: one_sided_greater_or_equal_plus_one
+  alpha: 0.05
+  classbreak:
+    stream_tag: 1101
+    operation: independent_complete_S4_permutation_within_each_session1_subject
+    preserves: subject_and_whole_trial_cells
+  subjectbreak:
+    stream_tag: 1102
+    operation: independent_complete_S9_permutation_within_each_session1_class
+    preserves: class_and_whole_trial_cells
+  conservative_primary_p: max_classbreak_subjectbreak
+  pass_rule: T_J_gt_0_and_both_pvalues_lt_0.05
+  same_mapping_arrays_reused_for: [raw, size, normalized]
+
+mechanism_controls:
+  size_primary_definition: absolute_edge_rms_metric_size_difference
+  log_size_primary: false
+  normalized_definition: edge_vector_divided_by_edge_rms_metric_size
+  exact_trial_pair_squared_identity: "delta_raw^2=(sA-sB)^2+sA*sB*delta_norm^2"
+  group_J_additive_decomposition_claim: forbidden
+  mechanism_tags:
+    - BOTH_SIZE_AND_RELATIVE_PATTERN_SUPPORTED
+    - RELATIVE_PATTERN_SUPPORTED
+    - METRIC_SIZE_SUPPORTED_RELATIVE_PATTERN_NOT_ESTABLISHED
+    - MECHANISM_UNRESOLVED
+  changes_raw_terminal: false
+
+reliability_diagnostic:
+  gating: false
+  per_subject_session_class:
+    - n_trials
+    - median_within_cell_delta_raw
+    - q25_q75_iqr
+    - median_distance_medoid_objective
+  posthoc_threshold_forbidden: true
+
+secondary_decoder:
+  metric: delta_raw
+  model: nearest_class_medoid
+  medoid_objective: median_distance_to_other_same_class_trials
+  tie_rule: lowest_global_sample_index_then_frozen_class_order
+  directions: [0train_TO_1test, 1test_TO_0train]
+  subject_statistic: mean_two_direction_balanced_accuracy
+  report_group_statistics: [mean_subject, median_subject]
+  null_group_statistic: median_subject
+  chance: 0.25
+  null_replicates: 1999
+  null_master_seed: 20260810
+  null_stream_tag_hex: "0x4C4D494445434F44"
+  null_operation: permute_training_labels_within_subject_session_run
+  null_preserves_each_run_class_counts: true
+  pvalue: one_sided_greater_or_equal_plus_one
+  affects_primary_terminal: false
+
+terminal:
+  go: GO_STABLE_SUBJECT_CLASS_LOCAL_METRIC_INTERACTION
+  stop: STOP_NO_STABLE_LOCAL_METRIC_INTERACTION_V0
+  unassessed: UNASSESSED_TECHNICAL_FAILURE
+  reproduction_failure: UNASSESSED_TECHNICAL_FAILURE_REPRODUCTION
+
+claim_restrictions:
+  - no_full_SPD_configuration_identification
+  - no_complete_intrinsic_shape_claim
+  - no_pose_or_temporal_trajectory_identification
+  - no_physiology_or_source_space_claim
+  - no_global_subject_transform_recovery_claim
+  - no_pairwise_distance_completeness_claim
+  - no_method_or_adaptation_claim

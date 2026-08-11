@@ -1,0 +1,15 @@
+{
+  "config_sha256": "7634580719b47d34707a5480101e62440554f8327a8fcc8a646a6ec25b2271b8",
+  "implementation_source_sha256": "8759ac924f777ddb4bc54442aafb2cec8d8511a7c5d98190ef8edb1b994fc6c1",
+  "mechanism_tag": "MECHANISM_UNRESOLVED",
+  "protocol_freeze_sha": "12a4d3ebd29a3a95e7fbc1bbc3a6d70b770532dc",
+  "protocol_sha256": "fc00ef6a261f6c7e4114a1a0e24771aebc6bf6b21444065ebe5f10d756f3d16c",
+  "raw_T_J": 0.007015523974729123,
+  "raw_p_J_classbreak": 0.0035,
+  "raw_p_J_conservative": 0.1995,
+  "raw_p_J_subjectbreak": 0.1995,
+  "scientific_definitions_changed_after_P1": false,
+  "scientific_source_sha": "355fe0b55b1ef692f7b4ddd16d19b7ccc30e72e1",
+  "terminal_decision": "STOP_NO_STABLE_LOCAL_METRIC_INTERACTION_V0",
+  "total_runtime_seconds": 18.34151383396238
+}

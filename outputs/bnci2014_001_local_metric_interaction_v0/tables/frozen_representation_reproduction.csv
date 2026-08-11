@@ -1,0 +1,10 @@
+check,observed,expected,maximum_absolute_difference,tolerance,passed
+frozen_combined_cache_file_sha256,5accf2f3e6becce187b18d30a1ea1741ae0d0faafc15a1f8ac16632a5a71628d,5accf2f3e6becce187b18d30a1ea1741ae0d0faafc15a1f8ac16632a5a71628d,,,True
+airm_distance_matrices_content_sha256,681d8a075eff1218e5e2b2d0e292631ead67badaccc00ec075ba428c9d5aed64,681d8a075eff1218e5e2b2d0e292631ead67badaccc00ec075ba428c9d5aed64,,,True
+airm_path_d10_content_sha256,8179f7654d6a1c89065aca12e99029e6a7476d332fdf62767e83c0f0966008f9,8179f7654d6a1c89065aca12e99029e6a7476d332fdf62767e83c0f0966008f9,,,True
+distance_matrix_upper_triangle_equals_path_d10,max_abs_diff=0,max_abs_diff=0,0.0,0.0,True
+metadata_all_trials,groups=1;min=5184;max=5184,groups=1;count=5184,,,True
+metadata_session,groups=2;min=2592;max=2592,groups=2;count=2592,,,True
+metadata_subject_session,groups=18;min=288;max=288,groups=18;count=288,,,True
+metadata_subject_session_class,groups=72;min=72;max=72,groups=72;count=72,,,True
+metadata_subject_session_run_class,groups=432;min=12;max=12,groups=432;count=12,,,True
