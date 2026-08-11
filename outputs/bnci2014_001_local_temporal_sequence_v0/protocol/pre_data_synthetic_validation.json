@@ -1,0 +1,20 @@
+{
+  "S5_count": 120,
+  "class_mapping_shape": [
+    25,
+    36
+  ],
+  "commuting_airm_mean_max_abs_error": 2.220446049250313e-16,
+  "commuting_airm_mean_normalized_residual": 2.56839769374209e-16,
+  "derangement_count": 44,
+  "known_K_D_id": 1.0,
+  "known_K_G": 2.0,
+  "known_K_identity_rank": 1,
+  "known_K_median_derangement": 3.0,
+  "new_bnci_temporal_statistic_computed": false,
+  "status": "PASS",
+  "subject_mapping_shape": [
+    25,
+    36
+  ]
+}

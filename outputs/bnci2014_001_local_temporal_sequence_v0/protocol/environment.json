@@ -1,0 +1,14 @@
+{
+  "packages": {
+    "matplotlib": "3.11.1",
+    "mne": "1.12.1",
+    "moabb": "1.5.0",
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "pyriemann": "0.12",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.18.0"
+  },
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.8 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 10:37:40) [Clang 14.0.6 ]"
+}
