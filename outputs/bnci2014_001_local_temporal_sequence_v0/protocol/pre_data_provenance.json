@@ -1,0 +1,19 @@
+{
+  "branch": "pilot/local-temporal-sequence-correspondence-v0",
+  "config_sha256": "ff6e4f0130e8f5d7629695d163db4ba4a2acb3a0c59737e7f82ebe2f52e48e7a",
+  "elapsed_seconds": 3.197073250077665,
+  "gpa_outer_audit_final_sha": "347d61f17793d636653b614ec2104baa61ac7a4b",
+  "head_before_protocol_freeze": "347d61f17793d636653b614ec2104baa61ac7a4b",
+  "implementation_file_sha256": {
+    "scripts/25_run_local_temporal_sequence_v0.py": "be0efb337a46ad9cfde8250360ad81a617e9abdcd335921f9de9bd264b989c87",
+    "src/local_temporal_sequence_v0.py": "e30db6df78f5073750323defbc2c58b636ce901466ad991a365d306e05a2b161",
+    "src/reporting_local_temporal_sequence_v0.py": "bd1ee98a40ba71c52dcf02bf59b431fc6fd80b0e0ecf27b43485d1ff203e4bf8"
+  },
+  "implementation_source_sha256": "61cf0d498442916f91c767e09875aa06547376fc9568ebd872ad507f1609a74b",
+  "local_gpa_v1_final_sha": "122eacff868aa8f656ad6360716c1816f453979f",
+  "local_metric_final_sha": "796f04e7970972175a660a521caff47c83e0295f",
+  "new_bnci_temporal_statistic_computed": false,
+  "protocol_sha256": "f663379d77883542412d60804de6dc0c77beb1866344a59e0828131f39005040",
+  "scientific_representation_diff": "none",
+  "trial_local_centering_applied": false
+}

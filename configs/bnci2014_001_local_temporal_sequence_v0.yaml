@@ -1,0 +1,156 @@
+protocol:
+  name: BNCI2014_001 Local Temporal Sequence Correspondence V0
+  version: "0.0"
+  freeze_date: "2026-08-11"
+  timezone: Asia/Seoul
+  path: docs/PROTOCOL_LOCAL_TEMPORAL_SEQUENCE_V0.md
+  sha256: f663379d77883542412d60804de6dc0c77beb1866344a59e0828131f39005040
+  branch: pilot/local-temporal-sequence-correspondence-v0
+  result_adaptation: forbidden
+
+lineage:
+  local_metric_final_sha: 796f04e7970972175a660a521caff47c83e0295f
+  local_gpa_v1_final_sha: 122eacff868aa8f656ad6360716c1816f453979f
+  gpa_outer_audit_final_sha: 347d61f17793d636653b614ec2104baa61ac7a4b
+  branch_parent_sha: 347d61f17793d636653b614ec2104baa61ac7a4b
+
+project:
+  output_dir: outputs/bnci2014_001_local_temporal_sequence_v0
+  implementation_source_files:
+    - src/local_temporal_sequence_v0.py
+    - src/reporting_local_temporal_sequence_v0.py
+    - scripts/25_run_local_temporal_sequence_v0.py
+
+dataset:
+  name: BNCI2014_001
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  sessions: [0train, 1test]
+  classes: [left_hand, right_hand, feet, tongue]
+  runs: [0, 1, 2, 3, 4, 5]
+  eeg_channels: 22
+  sampling_frequency_hz: 250.0
+  bandpass_hz: [8.0, 32.0]
+  epoch_seconds: [0.0, 3.996]
+  samples_per_trial: 1000
+  trials_total: 5184
+  trials_per_subject_session_class: 72
+  trials_per_subject_session_run_class: 12
+  windows: 5
+  samples_per_window: 200
+  overlap_samples: 0
+  covariance_estimator: pyriemann_oas
+  covariance_dtype: float64
+  extra_regularization: none
+  geometry: AIRM
+
+input_reproduction:
+  session0_cache: cache/bnci2014_001/covariances.npz
+  session1_cache: cache/bnci2014_001_trajectory_within_subject_v1/session1_window_covariances.npz
+  combined_feature_cache: cache/bnci2014_001_trajectory_within_subject_v1/combined_trajectory_features.npz
+  session0_states_sha256: c75044f48552f12ad088306b505b074e930f396fdcb544307fff394717e2ca86
+  session1_states_sha256: 1afc8cd52d82310a05857d1ffa67859427c4c9aa1302897a140ebda64d0442f8
+  frozen_airm_distance_sha256: 681d8a075eff1218e5e2b2d0e292631ead67badaccc00ec075ba428c9d5aed64
+  maximum_absolute_tolerance: 1.0e-12
+  failure: UNASSESSED_TECHNICAL_FAILURE_REPRODUCTION
+
+mean_sequences:
+  local_centering: false
+  mean: AIRM_Frechet
+  implementation: pyriemann_mean_riemann
+  init: null
+  tolerance: 1.0e-9
+  max_iterations: 100
+  warning_allowed: false
+  normalized_karcher_residual_max: 1.0e-7
+  ordered_sequence_count: 72
+  temporal_positions: [1, 2, 3, 4, 5]
+  point_permutation_during_averaging: false
+
+split_half:
+  half_A_runs: [0, 2, 4]
+  half_B_runs: [1, 3, 5]
+  trials_per_half_cell: 36
+  save_same_position_distances: true
+  save_cross_position_5x5: true
+  gating: false
+  posthoc_threshold: forbidden
+
+matching:
+  cross_time_matrix_shape: [36, 36, 5, 5]
+  all_permutations: 120
+  permutation_order: python_itertools_lexicographic
+  permutation_convention: row_i_to_column_pi_i
+  derangements: 44
+  derangement_condition: pi_i_not_equal_i_for_every_i
+  D_id: root_mean_five_diagonal_squared_distances
+  gain: median_44_derangement_costs_minus_D_id
+  relative_gain: descriptive_only
+  identity_rank: one_plus_number_of_strictly_lower_all_120_costs
+  identity_rank_primary: false
+
+nulls:
+  master_seed: 20260810
+  replicates: 1999
+  pvalue: one_sided_greater_or_equal_plus_one
+  alpha: 0.05
+  temporal:
+    stream_tag: 1201
+    operation: independent_uniform_S5_temporal_relabel_per_session1_cell
+  subjectbreak:
+    stream_tag: 1102
+    operation: permute_session1_subject_sequences_within_class
+    exact_prior_stream_reused: true
+  classbreak:
+    stream_tag: 1101
+    operation: permute_session1_class_sequences_within_subject
+    exact_prior_stream_reused: true
+
+statistics:
+  A_sc: same_subject_same_class_G
+  T_temporal: mean_subject_of_mean_class_A_sc
+  S_sc: same_cell_G_minus_different_subject_same_class_mean_G
+  T_subject: mean_subject_of_mean_class_S_sc
+  C_sc: same_cell_G_minus_same_subject_different_class_mean_G
+  T_class: mean_subject_of_mean_class_C_sc
+  J_sc: a_sc_minus_b_sc_minus_c_sc_plus_d_sc
+  T_J: mean_subject_of_mean_class_J_sc
+  group_unit: subject
+  secondary_interaction_requires_both_nulls: true
+
+visualization:
+  global_reference: AIRM_mean_all_360_cell_window_means
+  tangent_coordinate: whitened_AIRM_log
+  vectorization: Frobenius_isometric_svec
+  pca_basis: one_global_sklearn_full_SVD_basis
+  components: 2
+  fixed_cells:
+    - [1, left_hand]
+    - [1, feet]
+    - [2, left_hand]
+    - [2, feet]
+  subject_small_multiples: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  group_K_categories:
+    - same_subject_same_class
+    - different_subject_same_class
+    - same_subject_different_class
+    - different_subject_different_class
+  scientific_space: AIRM_not_PCA
+
+terminal:
+  full_specificity: GO_REPRODUCIBLE_SUBJECT_CLASS_TEMPORAL_SEQUENCE
+  partial_specificity: GO_SHARED_TEMPORAL_SEQUENCE_WITH_PARTIAL_SPECIFICITY
+  shared_only: GO_SHARED_TEMPORAL_SEQUENCE_ONLY
+  no_temporal: STOP_NO_REPRODUCIBLE_TEMPORAL_SEQUENCE_V0
+  numerical_failure: UNASSESSED_NUMERICAL_FAILURE
+  technical_failure: UNASSESSED_TECHNICAL_FAILURE
+  reproduction_failure: UNASSESSED_TECHNICAL_FAILURE_REPRODUCTION
+
+claim_restrictions:
+  - no_continuous_physiological_trajectory
+  - no_causal_temporal_dynamics
+  - no_subject_specific_pose
+  - no_mean_shape_or_GPA_consensus
+  - no_neural_state_sequence
+  - no_source_space_trajectory
+  - no_interaction_claim_unless_secondary_J_passes_both_nulls
+  - not_old_order_shuffle_classifier

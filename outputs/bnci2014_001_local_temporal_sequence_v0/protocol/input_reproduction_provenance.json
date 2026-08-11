@@ -1,0 +1,28 @@
+{
+  "combined_feature_cache": "cache/bnci2014_001_trajectory_within_subject_v1/combined_trajectory_features.npz",
+  "config_sha256": "ff6e4f0130e8f5d7629695d163db4ba4a2acb3a0c59737e7f82ebe2f52e48e7a",
+  "distance_max_abs_diff": 0.0,
+  "gpa_outer_audit_final_sha": "347d61f17793d636653b614ec2104baa61ac7a4b",
+  "implementation_file_sha256": {
+    "scripts/25_run_local_temporal_sequence_v0.py": "be0efb337a46ad9cfde8250360ad81a617e9abdcd335921f9de9bd264b989c87",
+    "src/local_temporal_sequence_v0.py": "e30db6df78f5073750323defbc2c58b636ce901466ad991a365d306e05a2b161",
+    "src/reporting_local_temporal_sequence_v0.py": "bd1ee98a40ba71c52dcf02bf59b431fc6fd80b0e0ecf27b43485d1ff203e4bf8"
+  },
+  "implementation_source_sha256": "61cf0d498442916f91c767e09875aa06547376fc9568ebd872ad507f1609a74b",
+  "infrastructure_source_shas": [
+    "796f04e7970972175a660a521caff47c83e0295f"
+  ],
+  "local_gpa_v1_final_sha": "122eacff868aa8f656ad6360716c1816f453979f",
+  "local_metric_final_sha": "796f04e7970972175a660a521caff47c83e0295f",
+  "new_bnci_temporal_statistic_computed": false,
+  "new_stage2a_scientific_statistic_computed": false,
+  "protocol_sha256": "f663379d77883542412d60804de6dc0c77beb1866344a59e0828131f39005040",
+  "recomputed_distance_sha256": "681d8a075eff1218e5e2b2d0e292631ead67badaccc00ec075ba428c9d5aed64",
+  "scientific_base_sha": "796f04e7970972175a660a521caff47c83e0295f",
+  "scientific_representation_diff": "none",
+  "session0_cache": "cache/bnci2014_001/covariances.npz",
+  "session0_states_sha256": "c75044f48552f12ad088306b505b074e930f396fdcb544307fff394717e2ca86",
+  "session1_cache": "cache/bnci2014_001_trajectory_within_subject_v1/session1_window_covariances.npz",
+  "session1_states_sha256": "1afc8cd52d82310a05857d1ffa67859427c4c9aa1302897a140ebda64d0442f8",
+  "trial_count": 5184
+}
