@@ -1,0 +1,5 @@
+target,source,session,heldout_class,split,start_index,initial_determinant,final_determinant,converged,objective,gradient_norm,iterations,stopping_criterion
+7,1,0train,feet,F,0,-1,-1,False,1.0113924173547508,0.001106774462156307,1000,max_iterations
+7,1,0train,feet,F,1,1,1,False,1.0122124822161918,0.0011862512748811898,1000,max_iterations
+7,1,0train,feet,F,2,-1,-1,True,1.0076277912040363,9.233935028016979e-06,604,min_gradient_norm_returned_logged_tolerance_iterate
+7,1,0train,feet,F,3,1,1,False,1.0062940720007654,0.00014809489254446199,1000,max_iterations

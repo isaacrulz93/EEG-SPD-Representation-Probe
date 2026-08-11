@@ -1,0 +1,58 @@
+{
+  "dimension": 22,
+  "fixtures": 12,
+  "optimizers": {
+    "conjugate_gradient": {
+      "both_sectors_certified_fixtures": 10,
+      "current_contract_converged": 42,
+      "current_plateau_clause_used": 0,
+      "maximum_iterations": 1000,
+      "median_best_heldout_relative_error": 0.00010856778861233448,
+      "median_iterations": 66.0,
+      "median_runtime_seconds_per_start": 0.021233479026705027,
+      "runs": 48,
+      "stable_action_but_above_gradient_tolerance": 0,
+      "strict_gradient_converged": 42,
+      "total_runtime_seconds": 2.782616675365716,
+      "trajectory_classifications": {
+        "gradient_converged": 42,
+        "still_descending": 6
+      }
+    },
+    "steepest_descent": {
+      "both_sectors_certified_fixtures": 10,
+      "current_contract_converged": 37,
+      "current_plateau_clause_used": 0,
+      "maximum_iterations": 1000,
+      "median_best_heldout_relative_error": 0.00011164926379240788,
+      "median_iterations": 212.5,
+      "median_runtime_seconds_per_start": 0.05300627090036869,
+      "runs": 48,
+      "stable_action_but_above_gradient_tolerance": 0,
+      "strict_gradient_converged": 37,
+      "total_runtime_seconds": 4.858260836452246,
+      "trajectory_classifications": {
+        "gradient_converged": 37,
+        "still_descending": 11
+      }
+    },
+    "trust_regions": {
+      "both_sectors_certified_fixtures": 12,
+      "current_contract_converged": 48,
+      "current_plateau_clause_used": 0,
+      "maximum_iterations": 33,
+      "median_best_heldout_relative_error": 7.600373955648522e-05,
+      "median_iterations": 9.0,
+      "median_runtime_seconds_per_start": 0.02241006202530116,
+      "runs": 48,
+      "stable_action_but_above_gradient_tolerance": 0,
+      "strict_gradient_converged": 48,
+      "total_runtime_seconds": 5.283623038558289,
+      "trajectory_classifications": {
+        "gradient_converged": 48
+      }
+    }
+  },
+  "scientific_objective": "sum_i ||A_i - Q B_i Q^T||_F^2 on O(22)",
+  "starts_per_fixture": 4
+}

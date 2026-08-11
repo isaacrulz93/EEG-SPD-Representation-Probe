@@ -1,0 +1,7 @@
+gate,observed,expected,passed
+source_object_file_sha256,1bb487a8446308e1dd29965ac57901a810d6e92da25b020ae284569176f33f6d,1bb487a8446308e1dd29965ac57901a810d6e92da25b020ae284569176f33f6d,True
+full_U_max_absolute_difference,0.0,1e-12,True
+full_U_relative_frobenius_difference,0.0,1e-12,True
+F_U_symmetry_relative_error,0.0,1e-12,True
+A_U_symmetry_relative_error,0.0,1e-12,True
+B_U_symmetry_relative_error,0.0,1e-12,True

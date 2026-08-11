@@ -1,0 +1,10 @@
+{
+  "master_seed": 20260810,
+  "replicates": 1999,
+  "streams": [
+    "stage_A_unrelated_target",
+    "stage_A_semantic",
+    "stage_B_unrelated_target",
+    "stage_B_semantic"
+  ]
+}

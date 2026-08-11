@@ -1,0 +1,19 @@
+{
+  "completed_stage_A_target_tasks": 0,
+  "decision": "UNASSESSED_TECHNICAL_FAILURE",
+  "failed_cell": {
+    "heldout_class": "feet",
+    "heldout_class_index": 2,
+    "session": "0train",
+    "session_index": 0,
+    "source_subject": 1,
+    "split": "F",
+    "target_subject": 7
+  },
+  "failure": "required determinant +1 sector had no converged action start",
+  "new_scientific_setting_changed_after_real_data_access": false,
+  "rerun_attempted": false,
+  "scientific_stage_A_statistic_generated": false,
+  "scientific_stage_A_p_value_generated": false,
+  "stage": "Stage_A_primary"
+}

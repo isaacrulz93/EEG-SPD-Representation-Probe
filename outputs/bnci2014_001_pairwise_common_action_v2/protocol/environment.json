@@ -1,0 +1,11 @@
+{
+  "config_sha256": "5980cdb336358602b7c45d21dfa18c01e4c6bbf26cfaafb6e812f35d09d92ad6",
+  "freeze_commit": "f695d3c8f25978297fa9ee2a655c636c067d5448",
+  "numpy": "2.5.1",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "protocol_sha256": "c6856ed0dd16c3b76ef5232735e0d894f561ac9cd84a758c4d3e8d62c365677d",
+  "pymanopt": "2.2.1",
+  "pyriemann": "0.12",
+  "python": "3.12.8",
+  "scipy": "1.18.0"
+}

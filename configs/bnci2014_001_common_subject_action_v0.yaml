@@ -1,0 +1,225 @@
+protocol:
+  name: Common Subject Action Falsification V0
+  version: "0.1.0"
+  freeze_date: "2026-08-10"
+  timezone: Asia/Seoul
+  master_seed: 20260810
+  base_commit: 272d775678644aad062df424a70586d4b42de652
+  implementation_commit: f5ffc3bd554e2327040839aa4ebf55889092dbf5
+  branch: pilot/common-subject-action-falsification-v0
+  protocol_path: docs/PROTOCOL_COMMON_SUBJECT_ACTION_V0.md
+
+project:
+  output_dir: outputs/bnci2014_001_common_subject_action_v0
+  cache_dir: cache/bnci2014_001_common_subject_action_v0
+  frozen_reference_dir: outputs/subject_class_interaction_v0
+
+dataset:
+  identifier: BNCI2014_001
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  sessions: [0train, 1test]
+  classes: [left_hand, right_hand, feet, tongue]
+  runs: ["0", "1", "2", "3", "4", "5"]
+  channels: [Fz, FC3, FC1, FCz, FC2, FC4, C5, C3, C1, Cz, C2, C4, C6, CP3, CP1, CPz, CP2, CP4, P1, Pz, P2, POz]
+  dimension: 22
+  expected_trials: 5184
+  expected_trials_per_subject_session: 288
+  expected_trials_per_subject_session_class: 72
+  expected_trials_per_subject_session_run_class: 12
+  split_half:
+    A: ["0", "1", "2"]
+    B: ["3", "4", "5"]
+    recompute_marginal_and_class_means_independently: true
+  preprocessing:
+    bandpass_hz: [8.0, 32.0]
+    epoch_seconds: [0.0, 3.996]
+    sampling_frequency_hz: 250.0
+    samples_per_trial: 1000
+    baseline: null
+    resample_hz: null
+    covariance_estimator: oas
+    covariance_dtype: float64
+  frozen_inputs:
+    covariance_path: cache/bnci2014_001/covariances.npz
+    metadata_path: cache/bnci2014_001/whole_metadata.csv
+    full_interaction_objects_path: outputs/subject_class_interaction_v0/objects/core_interaction_objects.npz
+    full_interaction_objects_sha256: 1bb487a8446308e1dd29965ac57901a810d6e92da25b020ae284569176f33f6d
+    full_U_key: AIRM__session_specific__F__U
+    split_A_U_key: AIRM__session_specific__A__U
+    split_B_U_key: AIRM__session_specific__B__U
+    expected_combined_covariance_hash: f3dcf70f54e0de77d4a133fe9afa6a0590e4c315df725ce77cf6aa150080b6bd
+
+scientific_model:
+  object: marginally_recentered_identity_tangent_class_effect_U
+  action: Q_U_Q_transpose
+  manifold: O_d
+  dimension: 22
+  loss: sum_squared_frobenius
+  weights: equal_classes
+  forbidden:
+    - svec_vector_space_rotation
+    - unconstrained_linear_action
+    - SO_only_search
+    - AIRM_RPA_claim
+
+reproduction_gate:
+  source_object_file_sha256_required: true
+  exact_subject_session_class_order_required: true
+  maximum_absolute_difference: 1.0e-12
+  relative_frobenius_difference: 1.0e-12
+  symmetry_relative_error_max: 1.0e-12
+  finite_required: true
+  failure: UNASSESSED_NUMERICAL_OR_DATA_FAILURE
+
+optimizer:
+  library: pymanopt
+  version: 2.2.1
+  manifold_class: pymanopt.manifolds.Stiefel
+  manifold_arguments:
+    n: 22
+    p: 22
+    retraction: polar
+  optimizer_class: pymanopt.optimizers.ConjugateGradient
+  beta_rule: HestenesStiefel
+  deterministic_starts: 8
+  determinant_sector_policy: four_starts_each_in_det_positive_and_negative
+  max_iterations: 1000
+  min_gradient_norm: 1.0e-5
+  min_step_size: 1.0e-12
+  max_cost_evaluations: 1001
+  max_time_seconds: 3600.0
+  line_search:
+    class: pymanopt.optimizers.line_search.BackTrackingLineSearcher
+    contraction_factor: 0.5
+    optimism: 2.0
+    sufficient_decrease: 1.0e-4
+    max_iterations: 50
+    initial_step_size: 1.0
+  source_alternation:
+    starts: 4
+    max_iterations: 120
+    relative_objective_tolerance: 1.0e-6
+    anchor: lowest_subject_id_Q_identity
+
+identifiability:
+  objective_atol: 1.0e-10
+  objective_rtol: 1.0e-8
+  q_equivalence_rule: L_j_le_L_best_plus_atol_plus_rtol_times_abs_L_best
+  commutant_relative_tolerance: 1.0e-8
+  exact_prediction_relative_tolerance: 1.0e-8
+  prediction_dispersion_floor: 1.0e-5
+  prediction_norm_epsilon: machine_epsilon_times_sqrt_matrix_entry_count
+  normalization: max_frobenius_norm_full_best_prediction_and_epsilon
+  D_eq: max_pairwise_equivalent_prediction_frobenius_distance_over_normalization
+  D_split: half_A_half_B_prediction_frobenius_distance_over_same_full_best_normalization
+  decision: D_eq_le_max_prediction_dispersion_floor_and_D_split
+  split_multiplier: 1.0
+  only_one_Q_eq: D_eq_zero
+  zero_prediction_norm: UNASSESSED_NUMERICAL_OR_DATA_FAILURE
+  split_half_fit_failure: UNASSESSED_TECHNICAL_FAILURE
+  missing_converged_determinant_sector: UNASSESSED_TECHNICAL_FAILURE
+  near_optimal_both_sectors: include_all_in_Q_eq
+  stabilizer_predictions_agree: HARMLESS_Q_NONUNIQUENESS
+  any_required_cell_nonidentifiable: UNASSESSED_ACTION_NOT_IDENTIFIABLE
+  available_case_allowed: false
+
+loco:
+  target_subject_excluded_from_source: true
+  heldout_classes: [left_hand, right_hand, feet, tongue]
+  fit_class_count: 3
+  source_heldout_class_used_only_after_source_actions_fit: true
+  target_heldout_class_used_in_action_fit: false
+
+stages:
+  A:
+    name: within_session_heldout_class
+    cells_per_subject: 8
+    contexts: two_sessions_times_four_heldout_classes
+    group_statistic: median_subject_of_median_cell_gain
+  B:
+    name: cross_session_stable_action
+    prerequisite: Stage_A_PASS
+    cells_per_subject: 8
+    contexts: two_directions_times_four_heldout_classes
+    group_statistic: median_subject_of_median_cell_gain
+  C:
+    name: post_action_residual
+    prerequisite: Stage_B_PASS
+    action_fit: opposite_session_leave_one_class_out
+    class_order: [left_hand, right_hand, feet, tongue]
+    same_subject_null: all_derangements_9_subjects
+    class_correspondence_null: independent_nonidentity_S4_per_subject
+
+prediction:
+  raw_baseline: LOSO_source_mean_in_current_sensor_coordinates
+  error: squared_frobenius_residual_over_squared_target_frobenius_norm
+  gain: raw_error_minus_action_error
+  target_zero_norm: UNASSESSED_NUMERICAL_OR_DATA_FAILURE
+
+nulls:
+  replicates: 1999
+  master_seed: 20260810
+  unrelated_action:
+    stage_A_stream_tag: stage_A_unrelated
+    stage_B_stream_tag: stage_B_unrelated
+    comparator: every_non_target_source_action_in_same_fold_gauge
+  semantic_mismatch:
+    stage_A_stream_tag: stage_A_semantic
+    stage_B_stream_tag: stage_B_semantic
+    permutations: all_five_nonidentity_S3
+  residual_class_correspondence:
+    stream_tag: residual_class_correspondence
+    permutations: nonidentity_S4_independently_per_subject
+  p_value: one_sided_greater_equal_plus_one
+
+pass_rules:
+  A: T_A_gt_zero_and_unrelated_effect_gt_zero_p_le_0_05_and_semantic_effect_gt_zero_p_le_0_05
+  B: Stage_A_PASS_and_T_B_gt_zero_and_unrelated_effect_gt_zero_p_le_0_05_and_semantic_effect_gt_zero_p_le_0_05
+  C: same_subject_derangement_PASS_and_class_correspondence_PASS
+
+terminal_logic:
+  data_failure: UNASSESSED_NUMERICAL_OR_DATA_FAILURE
+  technical_failure: UNASSESSED_TECHNICAL_FAILURE
+  predictive_nonidentifiability: UNASSESSED_ACTION_NOT_IDENTIFIABLE
+  stage_A_fail: COMMON_ACTION_NOT_SUPPORTED_WITHIN_SESSION
+  stage_A_pass_stage_B_fail: SESSION_SPECIFIC_COMMON_ACTION_ONLY
+  stage_A_B_C_pass: COMMON_ACTION_SUPPORTED_RESIDUAL_INDIVIDUALITY_REMAINS
+  stage_A_B_pass_stage_C_fail: COMMON_ACTION_SUPPORTED_NO_STABLE_RESIDUAL_EVIDENCE
+
+claim_restrictions:
+  - not_all_subject_transforms_rejected
+  - not_all_individuality_is_rotation
+  - not_brain_physiology
+  - not_source_space
+  - not_causal
+  - not_unlabeled_identifiability
+  - not_performance_improvement
+
+outputs:
+  required_tables:
+    - data_contract.csv
+    - U_reproduction_gate.csv
+    - solver_diagnostics.csv
+    - split_half_noise.csv
+    - stage_A_prediction_cells.csv
+    - stage_A_subject_summary.csv
+    - stage_A_null_summary.csv
+    - stage_B_prediction_cells.csv
+    - stage_B_subject_summary.csv
+    - stage_B_null_summary.csv
+    - residual_subject_scores.csv
+    - residual_null_summary.csv
+    - decision_chain.csv
+  required_objects:
+    - full_U_reference.npz
+    - split_half_U.npz
+    - source_model_fits.npz
+    - target_action_fits.npz
+    - cross_fitted_residuals.npz
+  required_figures:
+    - figure_1_within_session_heldout_gain
+    - figure_2_cross_session_heldout_gain
+    - figure_3_action_vs_unrelated_null
+    - figure_4_semantic_mismatch_null
+    - figure_5_split_half_identifiability
+    - figure_6_post_action_residual

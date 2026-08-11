@@ -1,0 +1,6 @@
+order,gate,status
+1,Stage_A_primary,PASS
+2,Stage_A_semantic,PASS
+3,Stage_B_primary,PASS
+4,Stage_B_semantic,PASS
+5,terminal,PAIRWISE_COMMON_ACTION_NECESSARY_CONSEQUENCE_SUPPORTED

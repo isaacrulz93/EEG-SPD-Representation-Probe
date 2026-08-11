@@ -1,0 +1,59 @@
+{
+  "cycle_median_descriptive": 0.7161311994113497,
+  "decision": "PAIRWISE_COMMON_ACTION_NECESSARY_CONSEQUENCE_SUPPORTED",
+  "optimizer_amendment_sha": "f695d3c8f25978297fa9ee2a655c636c067d5448",
+  "optimizer_convergence": {
+    "det_negative_converged": 9216,
+    "det_negative_total": 9216,
+    "det_positive_converged": 9216,
+    "det_positive_total": 9216,
+    "maximum_iterations": 60,
+    "total_converged": 18432,
+    "total_starts": 18432
+  },
+  "predictive_identifiability": {
+    "stage_A_identifiable": 576,
+    "stage_A_required": 576,
+    "stage_B_identifiable": 576,
+    "stage_B_required": 576
+  },
+  "profiled_global_model": "NOT_RUN_REQUIRES_SEPARATE_PRODUCT_START_FREEZE",
+  "runtime_seconds": 582.9357013702393,
+  "scientific_setting_changed_after_v2_data_access": false,
+  "stage_A_primary": {
+    "effect": 0.36675066524669286,
+    "exceedances": 0,
+    "null_median": -0.13915509187139852,
+    "observed": 0.22759557337529435,
+    "p_value": 0.0005,
+    "passed": true,
+    "replicates": 1999
+  },
+  "stage_A_semantic": {
+    "effect": 0.1297896825983275,
+    "exceedances": 0,
+    "null_median": 0.09780589077696686,
+    "observed": 0.22759557337529435,
+    "p_value": 0.0005,
+    "passed": true,
+    "replicates": 1999
+  },
+  "stage_B_primary": {
+    "effect": 0.17285615213340194,
+    "exceedances": 0,
+    "null_median": -0.17223676333492471,
+    "observed": 0.0006193887984772273,
+    "p_value": 0.0005,
+    "passed": true,
+    "replicates": 1999
+  },
+  "stage_B_semantic": {
+    "effect": 0.07133803397939922,
+    "exceedances": 0,
+    "null_median": -0.070718645180922,
+    "observed": 0.0006193887984772273,
+    "p_value": 0.0005,
+    "passed": true,
+    "replicates": 1999
+  }
+}
