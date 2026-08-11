@@ -449,6 +449,11 @@ def optimize_action(
     initial = deterministic_starts(a, b, seed=seed, count=settings.starts) if starts is None else tuple(starts)
     if not initial:
         raise ValueError("at least one start is required")
+    if len(initial) != int(settings.starts):
+        raise ActionSolverError(
+            "configured start-count contract violated: "
+            f"expected exactly {settings.starts} total starts, received {len(initial)}"
+        )
     if solver == "pymanopt":
         solve_one = _optimize_one_pymanopt
     elif solver == "custom":
@@ -599,7 +604,9 @@ def fit_source_model(
                     flattened_templates,
                     seed=seed + 7919 * global_start + 101 * index,
                     settings=settings,
-                    starts=(actions[index], *sector_starts),
+                    # The configured count is TOTAL starts. The warm action
+                    # occupies one slot; there is no hidden ninth solve.
+                    starts=(actions[index], *sector_starts[: settings.starts - 1]),
                 )
                 if diagnose_multistart(fit).determinant_sectors_with_converged_solution != (-1, 1):
                     raise ActionSolverError(

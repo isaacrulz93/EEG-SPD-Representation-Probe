@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import itertools
+from dataclasses import replace
 from pathlib import Path
 
 import autograd.numpy as anp
@@ -724,7 +725,14 @@ def test_numerical_zero_split_prediction_fails_closed() -> None:
 def test_missing_converged_determinant_sector_is_technical_failure() -> None:
     fit_templates = _bank(901, 3, 4)
     target = fit_templates.copy()
-    fit = optimize_action(target, fit_templates, seed=902, starts=(np.eye(4),))
+    one_start = replace(CANDIDATE_SOLVER_SETTINGS, starts=1)
+    fit = optimize_action(
+        target,
+        fit_templates,
+        seed=902,
+        settings=one_start,
+        starts=(np.eye(4),),
+    )
     heldout = _bank(903, 1, 4)[0]
     with pytest.raises(Exception, match="UNASSESSED_TECHNICAL_FAILURE"):
         assess_predictive_identifiability(

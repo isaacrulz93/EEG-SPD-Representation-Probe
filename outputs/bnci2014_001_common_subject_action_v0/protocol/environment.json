@@ -1,0 +1,9 @@
+{
+  "numpy": "2.5.1",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "protocol_freeze_sha": "9a4dd836fd24c47ffc2d0f80459c478827e93d3d",
+  "pymanopt": "2.2.1",
+  "pyriemann": "0.12",
+  "python": "3.12.8",
+  "scipy": "1.18.0"
+}
