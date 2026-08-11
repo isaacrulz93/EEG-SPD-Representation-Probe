@@ -1,0 +1,24 @@
+{
+  "contract_gate": {
+    "interpretation_allowed": false,
+    "mne_exact_match": false,
+    "observed_mne": "1.10.1",
+    "required_mne": "1.12.1",
+    "status": "FAIL"
+  },
+  "packages": {
+    "matplotlib": "3.11.1",
+    "mne": "1.10.1",
+    "moabb": "1.2.0",
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "pymanopt": "2.2.1",
+    "pyriemann": "0.12",
+    "pytest": "8.4.2",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.18.0"
+  },
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.8",
+  "terminal_override": "UNASSESSED_OPENBMI_DATA_CONTRACT_FAILURE"
+}

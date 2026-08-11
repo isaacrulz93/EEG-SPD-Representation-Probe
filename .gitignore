@@ -37,6 +37,10 @@ data/raw/
 !outputs/bnci2014_001_local_gpa_consensus_v1/nulls/correspondence_null_statistics.npz
 !outputs/bnci2014_001_local_gpa_outer_convergence_audit_v2/traces/outer_loop_traces.npz
 
+# Frozen OpenBMI ordered-movement replication outputs and resume certificates
+!outputs/openbmi_ordered_movement_replication_v0/arrays/*.npz
+!outputs/openbmi_ordered_movement_replication_v0/checkpoints/*.npz
+
 # Local scratch files
 *.tmp
 *.temp

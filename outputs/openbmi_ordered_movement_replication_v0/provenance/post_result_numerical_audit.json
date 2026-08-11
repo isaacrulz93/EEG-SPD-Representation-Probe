@@ -1,0 +1,67 @@
+{
+  "anti_development": {
+    "all_2592_step_gates_passed": true,
+    "maximum_norm_absolute_error": 2.0650148258027912e-14,
+    "maximum_symmetry_relative_error": 0.0,
+    "maximum_transport_relative_error": 7.249443291948359e-15
+  },
+  "component_gates": {
+    "full": {
+      "maximum_reconstruction_absolute_error": 4.440892098500626e-16,
+      "minimum_c_ang": 0.2887800692321909,
+      "minimum_c_len": 0.00011457017942679217,
+      "minimum_c_ori": 0.5161757998018706
+    },
+    "split_half_A": {
+      "maximum_reconstruction_absolute_error": 8.881784197001252e-16,
+      "minimum_c_ang": 0.5968964681324639,
+      "minimum_c_len": 0.0005044860295251379,
+      "minimum_c_ori": 1.1068355663623781
+    },
+    "split_half_B": {
+      "maximum_reconstruction_absolute_error": 8.881784197001252e-16,
+      "minimum_c_ang": 0.5985902334654536,
+      "minimum_c_len": 0.0003135249488694748,
+      "minimum_c_ori": 1.1146547631891965
+    }
+  },
+  "mean_gates": {
+    "mean_count": 3240,
+    "maximum_normalized_karcher_residual": 9.428639499639764e-11,
+    "warning_total": 0
+  },
+  "null_gates": {
+    "angular_class_p_recomputed": 0.663,
+    "angular_subject_p_recomputed": 0.661,
+    "class_mapping_exactly_regenerated": true,
+    "draws_per_null": 1999,
+    "subject_mapping_exactly_regenerated": true
+  },
+  "optimizer_gates": {
+    "full": {
+      "all_11664_complete": true,
+      "all_both_determinant_sectors": true,
+      "all_objectives_finite": true,
+      "maximum_selected_gradient_norm": 9.99803119023365e-07
+    },
+    "split_half_A": {
+      "all_11664_complete": true,
+      "all_both_determinant_sectors": true,
+      "all_objectives_finite": true,
+      "maximum_selected_gradient_norm": 9.99958756137372e-07
+    },
+    "split_half_B": {
+      "all_11664_complete": true,
+      "all_both_determinant_sectors": true,
+      "all_objectives_finite": true,
+      "maximum_selected_gradient_norm": 9.9989165162504e-07
+    }
+  },
+  "statistical_reconstruction": {
+    "maximum_subject_J_full_minus_len_ang_error": 6.661338147750939e-16,
+    "maximum_subject_J_sensor_minus_len_ang_ori_error": 9.992007221626409e-16,
+    "T_J_full_minus_len_ang_error": 5.551115123125783e-17,
+    "T_J_sensor_minus_len_ang_ori_error": 4.423544863740858e-17
+  },
+  "status": "PASS"
+}
