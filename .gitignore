@@ -33,6 +33,8 @@ data/raw/
 # Compact Stage-2A quotient-consensus prototypes and frozen null statistics
 !outputs/bnci2014_001_local_gpa_consensus_v0/objects/consensus_prototypes.npz
 !outputs/bnci2014_001_local_gpa_consensus_v0/nulls/correspondence_null_statistics.npz
+!outputs/bnci2014_001_local_gpa_consensus_v1/objects/consensus_prototypes.npz
+!outputs/bnci2014_001_local_gpa_consensus_v1/nulls/correspondence_null_statistics.npz
 
 # Local scratch files
 *.tmp

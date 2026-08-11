@@ -1,0 +1,10 @@
+{
+  "cache_key": "47af98d57576932512c7c85e4cb113a33728fafb1d7865c10bddbfe80486be17",
+  "centered_states_sha256": "5d99bec906fb3d8827b94088fd2a80984cc89cc68956bdce23ff3504a2c7a146",
+  "elapsed_seconds": 12.729569666087627,
+  "input_sha256": "ca235dc4ac2176a74edf2adc1c04e856804ec1b287d0c0015bcb683d8ae0cfee",
+  "maximum_normalized_karcher_residual": 8.539076980603567e-11,
+  "median_normalized_karcher_residual": 5.832384513594664e-11,
+  "trial_count": 5184,
+  "workers": 8
+}

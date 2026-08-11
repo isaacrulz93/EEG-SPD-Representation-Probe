@@ -1,0 +1,393 @@
+{
+  "allowed_difference_categories": [
+    "optimizer identity and audited HVP fields",
+    "protocol/version provenance",
+    "output and cache namespace",
+    "implementation source list",
+    "versioned numerical-failure label"
+  ],
+  "allowed_optimizer_and_version_differences": {
+    "v0_failure_terminal": "UNASSESSED_GPA_NUMERICAL_FAILURE",
+    "v0_optimizer": "pymanopt_ConjugateGradient_HestenesStiefel",
+    "v1_failure_terminal": "UNASSESSED_GPA_NUMERICAL_FAILURE_V1",
+    "v1_hessian_radius": 1e-05,
+    "v1_optimizer": "pymanopt_TrustRegions"
+  },
+  "equal_scientific_fields": [
+    {
+      "equal": true,
+      "path": "dataset",
+      "v0": {
+        "bandpass_hz": [
+          8.0,
+          32.0
+        ],
+        "channels": 22,
+        "classes": [
+          "left_hand",
+          "right_hand",
+          "feet",
+          "tongue"
+        ],
+        "covariance_dtype": "float64",
+        "covariance_estimator": "pyriemann_oas",
+        "epoch_seconds": [
+          0.0,
+          3.996
+        ],
+        "expected_trials": 5184,
+        "expected_trials_per_cell": 72,
+        "extra_regularization": "none",
+        "geometry": "AIRM",
+        "name": "BNCI2014_001",
+        "runs": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "samples_per_trial": 1000,
+        "samples_per_window": 200,
+        "sampling_frequency_hz": 250.0,
+        "sessions": [
+          "0train",
+          "1test"
+        ],
+        "subjects": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "windows": 5
+      },
+      "v1": {
+        "bandpass_hz": [
+          8.0,
+          32.0
+        ],
+        "channels": 22,
+        "classes": [
+          "left_hand",
+          "right_hand",
+          "feet",
+          "tongue"
+        ],
+        "covariance_dtype": "float64",
+        "covariance_estimator": "pyriemann_oas",
+        "epoch_seconds": [
+          0.0,
+          3.996
+        ],
+        "expected_trials": 5184,
+        "expected_trials_per_cell": 72,
+        "extra_regularization": "none",
+        "geometry": "AIRM",
+        "name": "BNCI2014_001",
+        "runs": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "samples_per_trial": 1000,
+        "samples_per_window": 200,
+        "sampling_frequency_hz": 250.0,
+        "sessions": [
+          "0train",
+          "1test"
+        ],
+        "subjects": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "windows": 5
+      }
+    },
+    {
+      "equal": true,
+      "path": "input_reproduction",
+      "v0": {
+        "failure": "UNASSESSED_TECHNICAL_FAILURE_REPRODUCTION",
+        "frozen_distance_matrices_sha256": "681d8a075eff1218e5e2b2d0e292631ead67badaccc00ec075ba428c9d5aed64",
+        "maximum_absolute_tolerance": 1e-12,
+        "session0_states_sha256": "c75044f48552f12ad088306b505b074e930f396fdcb544307fff394717e2ca86",
+        "session1_states_sha256": "1afc8cd52d82310a05857d1ffa67859427c4c9aa1302897a140ebda64d0442f8"
+      },
+      "v1": {
+        "failure": "UNASSESSED_TECHNICAL_FAILURE_REPRODUCTION",
+        "frozen_distance_matrices_sha256": "681d8a075eff1218e5e2b2d0e292631ead67badaccc00ec075ba428c9d5aed64",
+        "maximum_absolute_tolerance": 1e-12,
+        "session0_states_sha256": "c75044f48552f12ad088306b505b074e930f396fdcb544307fff394717e2ca86",
+        "session1_states_sha256": "1afc8cd52d82310a05857d1ffa67859427c4c9aa1302897a140ebda64d0442f8"
+      }
+    },
+    {
+      "equal": true,
+      "path": "local_centering",
+      "v0": {
+        "constraint": "centered_AIRM_mean_identity",
+        "mean": "AIRM_Frechet",
+        "prior_subject_or_session_centering": false,
+        "rule": "G_inverse_sqrt_C_G_inverse_sqrt",
+        "scope": "trial_only",
+        "temporal_order_used": false
+      },
+      "v1": {
+        "constraint": "centered_AIRM_mean_identity",
+        "mean": "AIRM_Frechet",
+        "prior_subject_or_session_centering": false,
+        "rule": "G_inverse_sqrt_C_G_inverse_sqrt",
+        "scope": "trial_only",
+        "temporal_order_used": false
+      }
+    },
+    {
+      "equal": true,
+      "path": "quotient",
+      "v0": {
+        "arbitrary_edge_permutations": "forbidden",
+        "orthogonal_components": "both",
+        "point_permutations": 120,
+        "q_values_scientific_outputs": false,
+        "scientific_distance": "root_mean_five_AIRM_squared_distances",
+        "space": "SPD(22)^5/(O(22)xS5)"
+      },
+      "v1": {
+        "arbitrary_edge_permutations": "forbidden",
+        "orthogonal_components": "both",
+        "point_permutations": 120,
+        "q_values_scientific_outputs": false,
+        "scientific_distance": "root_mean_five_AIRM_squared_distances",
+        "space": "SPD(22)^5/(O(22)xS5)"
+      }
+    },
+    {
+      "equal": true,
+      "path": "gpa.settings",
+      "v0": {
+        "action_gradient_tolerance": 1e-06,
+        "action_max_iterations": 250,
+        "action_max_time_seconds": 120.0,
+        "action_min_step_size": 1e-12,
+        "centering_residual_max": 1e-07,
+        "equivalent_objective_atol": 1e-10,
+        "equivalent_objective_rtol": 1e-08,
+        "gpa_equivalent_orbit_tolerance": 0.0001,
+        "gpa_gradient_tolerance": 2e-05,
+        "gpa_objective_tolerance": 1e-07,
+        "gpa_outer_iterations": 24,
+        "gpa_prototype_inner_iterations": 16,
+        "gpa_total_starts": 2,
+        "line_search_contraction_factor": 0.5,
+        "line_search_initial_step_size": 1.0,
+        "line_search_max_iterations": 50,
+        "line_search_optimism": 2.0,
+        "line_search_sufficient_decrease": 0.0001,
+        "local_mean_max_iterations": 100,
+        "local_mean_tolerance": 1e-09,
+        "prototype_contraction_factor": 0.5,
+        "prototype_initial_step_size": 1.0,
+        "prototype_line_search_iterations": 30,
+        "prototype_min_step_size": 1e-12,
+        "prototype_sufficient_decrease": 0.0001,
+        "quotient_symmetry_tolerance": 1e-10,
+        "registration_alternations": 8,
+        "registration_objective_tolerance": 1e-09,
+        "registration_total_starts": 4
+      },
+      "v1": {
+        "action_gradient_tolerance": 1e-06,
+        "action_max_iterations": 250,
+        "action_max_time_seconds": 120.0,
+        "action_min_step_size": 1e-12,
+        "centering_residual_max": 1e-07,
+        "equivalent_objective_atol": 1e-10,
+        "equivalent_objective_rtol": 1e-08,
+        "gpa_equivalent_orbit_tolerance": 0.0001,
+        "gpa_gradient_tolerance": 2e-05,
+        "gpa_objective_tolerance": 1e-07,
+        "gpa_outer_iterations": 24,
+        "gpa_prototype_inner_iterations": 16,
+        "gpa_total_starts": 2,
+        "line_search_contraction_factor": 0.5,
+        "line_search_initial_step_size": 1.0,
+        "line_search_max_iterations": 50,
+        "line_search_optimism": 2.0,
+        "line_search_sufficient_decrease": 0.0001,
+        "local_mean_max_iterations": 100,
+        "local_mean_tolerance": 1e-09,
+        "prototype_contraction_factor": 0.5,
+        "prototype_initial_step_size": 1.0,
+        "prototype_line_search_iterations": 30,
+        "prototype_min_step_size": 1e-12,
+        "prototype_sufficient_decrease": 0.0001,
+        "quotient_symmetry_tolerance": 1e-10,
+        "registration_alternations": 8,
+        "registration_objective_tolerance": 1e-09,
+        "registration_total_starts": 4
+      }
+    },
+    {
+      "equal": true,
+      "path": "gpa.action_manifold",
+      "v0": "pymanopt_Stiefel_d_d_polar_retraction",
+      "v1": "pymanopt_Stiefel_d_d_polar_retraction"
+    },
+    {
+      "equal": true,
+      "path": "gpa.first_and_final_registration",
+      "v0": "four_total_starts_two_per_determinant_component",
+      "v1": "four_total_starts_two_per_determinant_component"
+    },
+    {
+      "equal": true,
+      "path": "gpa.intermediate_registration",
+      "v0": "one_best_basin_warm_continuation",
+      "v1": "one_best_basin_warm_continuation"
+    },
+    {
+      "equal": true,
+      "path": "gpa.prototype_parameterization",
+      "v0": "P_i_exp_Z_i_with_sum_Z_i_zero",
+      "v1": "P_i_exp_Z_i_with_sum_Z_i_zero"
+    },
+    {
+      "equal": true,
+      "path": "gpa.global_optimum_claim",
+      "v0": false,
+      "v1": false
+    },
+    {
+      "equal": true,
+      "path": "split_half",
+      "v0": {
+        "diagnostic_gating": false,
+        "expected_trials_per_half_cell": 36,
+        "half_A_runs": [
+          0,
+          2,
+          4
+        ],
+        "half_B_runs": [
+          1,
+          3,
+          5
+        ]
+      },
+      "v1": {
+        "diagnostic_gating": false,
+        "expected_trials_per_half_cell": 36,
+        "half_A_runs": [
+          0,
+          2,
+          4
+        ],
+        "half_B_runs": [
+          1,
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "equal": true,
+      "path": "interaction",
+      "v0": {
+        "M": "0.5*(M01+transpose(M01))",
+        "M01": "quotient_distance_session0_consensus_to_session1_consensus",
+        "group_statistic": "mean_nine_subjects",
+        "group_unit": "subject",
+        "primary_cell_contrast": "J_sc=b_sc+c_sc-a_sc-d_sc",
+        "subject_contrast": "mean_four_classes",
+        "supporting_class_specificity": "C_sc=b_sc-a_sc",
+        "supporting_subject_specificity": "S_sc=c_sc-a_sc"
+      },
+      "v1": {
+        "M": "0.5*(M01+transpose(M01))",
+        "M01": "quotient_distance_session0_consensus_to_session1_consensus",
+        "group_statistic": "mean_nine_subjects",
+        "group_unit": "subject",
+        "primary_cell_contrast": "J_sc=b_sc+c_sc-a_sc-d_sc",
+        "subject_contrast": "mean_four_classes",
+        "supporting_class_specificity": "C_sc=b_sc-a_sc",
+        "supporting_subject_specificity": "S_sc=c_sc-a_sc"
+      }
+    },
+    {
+      "equal": true,
+      "path": "nulls",
+      "v0": {
+        "alpha": 0.05,
+        "classbreak": "permute_session1_class_cells_within_subject",
+        "master_seed": 20260810,
+        "pass_rule": "T_J_positive_and_both_pvalues_strictly_below_0.05",
+        "pvalue": "one_sided_greater_or_equal_plus_one",
+        "replicates": 1999,
+        "rerun_gpa": false,
+        "subjectbreak": "permute_session1_subject_cells_within_class"
+      },
+      "v1": {
+        "alpha": 0.05,
+        "classbreak": "permute_session1_class_cells_within_subject",
+        "master_seed": 20260810,
+        "pass_rule": "T_J_positive_and_both_pvalues_strictly_below_0.05",
+        "pvalue": "one_sided_greater_or_equal_plus_one",
+        "replicates": 1999,
+        "rerun_gpa": false,
+        "subjectbreak": "permute_session1_subject_cells_within_class"
+      }
+    },
+    {
+      "equal": true,
+      "path": "runtime",
+      "v0": {
+        "blas_threads_per_worker": 1,
+        "resumable_cell_checkpoints": true,
+        "workers": 8
+      },
+      "v1": {
+        "blas_threads_per_worker": 1,
+        "resumable_cell_checkpoints": true,
+        "workers": 8
+      }
+    },
+    {
+      "equal": true,
+      "path": "terminal.go",
+      "v0": "GO_STABLE_SUBJECT_CLASS_QUOTIENT_MEAN_CONFIGURATION",
+      "v1": "GO_STABLE_SUBJECT_CLASS_QUOTIENT_MEAN_CONFIGURATION"
+    },
+    {
+      "equal": true,
+      "path": "terminal.stop",
+      "v0": "STOP_NO_STABLE_QUOTIENT_MEAN_CONFIGURATION_INTERACTION",
+      "v1": "STOP_NO_STABLE_QUOTIENT_MEAN_CONFIGURATION_INTERACTION"
+    },
+    {
+      "equal": true,
+      "path": "terminal.technical_failure",
+      "v0": "UNASSESSED_TECHNICAL_FAILURE",
+      "v1": "UNASSESSED_TECHNICAL_FAILURE"
+    }
+  ],
+  "status": "PASS",
+  "v0_protocol_sha256": "f4928e6e03b5094ab021457aa911d92c854e311dccf676c3d5292c9083406fd3",
+  "v1_amendment_sha256": "962834dfe2a252ab145232a7c127f45d4eddb0203137519646ebca5b4996fb30"
+}

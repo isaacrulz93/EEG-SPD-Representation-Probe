@@ -300,14 +300,17 @@ def write_report(
     provenance: Mapping[str, str],
     runtime_seconds: float,
     tests_summary: str,
+    report_filename: str = "local_gpa_consensus_v0.md",
+    report_title: str = "Local GPA Consensus V0",
+    amendment_lines: tuple[str, ...] = (),
 ) -> Path:
     root = Path(output_root)
-    report_path = root / "report" / "local_gpa_consensus_v0.md"
+    report_path = root / "report" / report_filename
     observed = result.observed
     full = bank.diagnostics.loc[bank.diagnostics["split"].eq("Full")]
     registration = bank.registration_diagnostics
     lines = [
-        "# Local GPA Consensus V0",
+        f"# {report_title}",
         "",
         "Stage 1은 다섯 점의 내부 AIRM 거리만 사용했고 subject×class interaction을 지지하지 않았다. Stage 2A는 각 trial을 국소 중심화한 뒤, `O(22)×S5` nuisance를 제거한 full five-point SPD configuration의 **cell consensus orbit**가 같은 subject와 같은 class에서 session을 넘어 반복되는지 묻는다. 등록 행렬 Q는 오직 nuisance이며 평균·비교·과학적 해석을 하지 않았다.",
         "",
@@ -319,6 +322,7 @@ def write_report(
         f"- Scientific result SHA: `{provenance.get('scientific_result_sha', 'pending at artifact creation')}`",
         f"- Final SHA: `{provenance.get('final_sha', 'report finalization commit')}`",
         "- Frozen WINDOW5 covariance hashes and all 5,184 frozen AIRM distance matrices reproduced exactly (maximum absolute difference 0).",
+        *amendment_lines,
         "",
         "## Numerical status",
         "",

@@ -15,8 +15,7 @@ import numpy as np
 import pymanopt
 from pymanopt import Problem
 from pymanopt.manifolds import Stiefel
-from pymanopt.optimizers import ConjugateGradient
-from pymanopt.optimizers.line_search import BackTrackingLineSearcher
+from pymanopt.optimizers import TrustRegions
 from scipy.linalg import expm_frechet
 
 from src.geometry_v2 import (
@@ -32,6 +31,8 @@ from src.trajectory_geometry_v0 import ALL_PERMUTATIONS_5
 
 N_POINTS = 5
 MASTER_SEED = 20260811
+TRUST_HESSIAN_RADIUS = 1.0e-5
+TRUST_MAX_INNER_ITERATIONS = 30
 PERMUTATIONS = np.asarray(ALL_PERMUTATIONS_5, dtype=np.int64)
 PERMUTATIONS.setflags(write=False)
 
@@ -299,6 +300,43 @@ def fixed_registration_gradient(
     return gradient
 
 
+def _unchecked_conjugation(
+    configuration: np.ndarray, action: np.ndarray
+) -> np.ndarray:
+    """Ambient congruence used by the audited finite-difference HVP."""
+
+    return symmetrize(
+        np.einsum(
+            "ij,kjl,ml->kim", action, configuration, action, optimize=True
+        )
+    )
+
+
+def ambient_registration_gradient(
+    target: np.ndarray,
+    source: np.ndarray,
+    action: np.ndarray,
+    permutation: Sequence[int] | np.ndarray,
+) -> np.ndarray:
+    """Euclidean gradient of the exact AIRM cost on an ambient GL(d) extension."""
+
+    selected = np.asarray(source, dtype=np.float64)[
+        np.asarray(permutation, dtype=np.int64)
+    ]
+    predicted = _unchecked_conjugation(
+        selected, np.asarray(action, dtype=np.float64)
+    )
+    gradient = np.zeros_like(action, dtype=np.float64)
+    for target_point, source_point, estimate in zip(
+        np.asarray(target, dtype=np.float64), selected, predicted, strict=True
+    ):
+        derivative = _distance_euclidean_gradient_wrt_second(
+            target_point, estimate
+        )
+        gradient += 2.0 * derivative @ action @ source_point / N_POINTS
+    return gradient
+
+
 def _action_problem(
     target: np.ndarray,
     source: np.ndarray,
@@ -317,25 +355,54 @@ def _action_problem(
     def euclidean_gradient(action: np.ndarray) -> np.ndarray:
         return fixed_registration_gradient(a, b, action, perm)
 
-    return manifold, Problem(manifold, cost, euclidean_gradient=euclidean_gradient)
+    @pymanopt.function.numpy(manifold)
+    def riemannian_hessian(
+        action: np.ndarray, tangent: np.ndarray
+    ) -> np.ndarray:
+        """Audited central difference of the exact Riemannian gradient."""
 
+        tangent_norm = float(manifold.norm(action, tangent))
+        if tangent_norm == 0.0:
+            return manifold.zero_vector(action)
+        unit = tangent / tangent_norm
+        plus = manifold.retraction(action, TRUST_HESSIAN_RADIUS * unit)
+        minus = manifold.retraction(action, -TRUST_HESSIAN_RADIUS * unit)
+        plus_gradient = manifold.euclidean_to_riemannian_gradient(
+            plus,
+            ambient_registration_gradient(a, b, plus, perm),
+        )
+        minus_gradient = manifold.euclidean_to_riemannian_gradient(
+            minus,
+            ambient_registration_gradient(a, b, minus, perm),
+        )
+        transported_plus = manifold.transport(plus, action, plus_gradient)
+        transported_minus = manifold.transport(minus, action, minus_gradient)
+        estimate = tangent_norm * (transported_plus - transported_minus) / (
+            2.0 * TRUST_HESSIAN_RADIUS
+        )
+        return manifold.projection(action, estimate)
 
-def _action_optimizer(settings: GPASettings) -> ConjugateGradient:
-    line_search = BackTrackingLineSearcher(
-        contraction_factor=settings.line_search_contraction_factor,
-        optimism=settings.line_search_optimism,
-        sufficient_decrease=settings.line_search_sufficient_decrease,
-        max_iterations=settings.line_search_max_iterations,
-        initial_step_size=settings.line_search_initial_step_size,
+    return manifold, Problem(
+        manifold,
+        cost,
+        euclidean_gradient=euclidean_gradient,
+        riemannian_hessian=riemannian_hessian,
     )
-    return ConjugateGradient(
-        beta_rule="HestenesStiefel",
-        line_searcher=line_search,
+
+
+def _action_optimizer(settings: GPASettings) -> TrustRegions:
+    return TrustRegions(
+        miniter=3,
+        kappa=0.1,
+        theta=1.0,
+        rho_prime=0.1,
+        use_rand=False,
+        rho_regularization=1000.0,
         max_time=settings.action_max_time_seconds,
         max_iterations=settings.action_max_iterations,
         min_gradient_norm=settings.action_gradient_tolerance,
         min_step_size=settings.action_min_step_size,
-        max_cost_evaluations=settings.action_max_iterations + 1,
+        max_cost_evaluations=5000,
         verbosity=0,
         log_verbosity=0,
     )
@@ -355,7 +422,12 @@ def optimize_action_fixed_permutation(
         raise ValueError("action start has wrong shape")
     if np.linalg.norm(initial.T @ initial - np.eye(len(initial)), ord="fro") > 1.0e-10:
         raise ValueError("action start is not orthogonal")
-    result = _action_optimizer(settings).run(problem, initial_point=initial)
+    result = _action_optimizer(settings).run(
+        problem,
+        initial_point=initial,
+        mininner=1,
+        maxinner=TRUST_MAX_INNER_ITERATIONS,
+    )
     action = np.asarray(result.point, dtype=np.float64)
     projected = manifold.projection(
         action, fixed_registration_gradient(target, source, action, permutation)
@@ -910,7 +982,10 @@ __all__ = [
     "PrototypeStep",
     "RegistrationFit",
     "RegistrationStart",
+    "TRUST_HESSIAN_RADIUS",
+    "TRUST_MAX_INNER_ITERATIONS",
     "aligned_configuration",
+    "ambient_registration_gradient",
     "assignment_costs",
     "configuration_from_zero_sum_logs",
     "conjugate_configuration",
