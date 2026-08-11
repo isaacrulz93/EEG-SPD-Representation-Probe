@@ -1,0 +1,131 @@
+protocol:
+  name: BNCI2014_001 Local Ordered Movement Component Decomposition V0
+  version: "0.0"
+  freeze_date: "2026-08-12"
+  timezone: Asia/Seoul
+  path: docs/PROTOCOL_LOCAL_MOVEMENT_COMPONENT_DECOMPOSITION_V0.md
+  sha256: e4c71bc2c498b149603e130b0c250080d2c31fdcb0c69f0d10c449563b309769
+  branch: pilot/local-movement-component-decomposition-v0
+  result_adaptation: forbidden
+
+lineage:
+  parent_branch: pilot/local-mean-movement-antidevelopment-v0
+  parent_sha: 12c19f38266bc76875cffae056e7f9403df299c1
+  movement_protocol_freeze_sha: e24312147ef3020854ef6f6cd174071d1c6ead02
+  movement_scientific_result_sha: c3f1d5ff9cf23db2007bbf839cf4b266e2cb8960
+  movement_terminal: GO_REPRODUCIBLE_SUBJECT_CLASS_ORDERED_MOVEMENT
+
+project:
+  output_dir: outputs/bnci2014_001_local_movement_component_decomposition_v0
+  implementation_source_files:
+    - src/local_movement_component_decomposition_v0.py
+    - src/reporting_local_movement_component_decomposition_v0.py
+    - scripts/27_run_local_movement_component_decomposition_v0.py
+
+artifacts:
+  outputs/bnci2014_001_local_mean_movement_v0/arrays/full_ordered_antidevelopment.npz: f3771773a194088e84d765b543ba50db95fc9571ab85838aa43a581eca32a2d3
+  outputs/bnci2014_001_local_mean_movement_v0/arrays/split_half_ordered_antidevelopment.npz: ab64bfdb279805cf5d0e0b9bc12c65eccd1c602ee14e3084f7429e9588e98520
+  outputs/bnci2014_001_local_mean_movement_v0/arrays/cross_session_movement_matrices.npz: f3470799a2a532d98f9406902cc7bb75f9385f899991ade350d63e3ca78ef5dc
+  outputs/bnci2014_001_local_mean_movement_v0/nulls/movement_null_distributions.npz: 954fbaaf761157332a67dfebcc8085ae1a4a8c38b2921340e1226a37e30b2fa1
+  outputs/bnci2014_001_local_mean_movement_v0/tables/d_mov_matrix.csv: be1abec7e3081df6ffc8ac919ce12ceb6b94f527d2371984e23a8c92315ca64e
+  outputs/bnci2014_001_local_mean_movement_v0/tables/d_len_matrix.csv: b57ad89bf6225df5728135424ab48848cb142bbae9aba0bb58cdab84a46f1e2f
+  outputs/bnci2014_001_local_mean_movement_v0/tables/d_direct_matrix.csv: 1d4ea0b4692565018f33f2889623e8bf372244788d9ff8c45987c442cbf4501c
+
+object:
+  dimension: 22
+  steps: 4
+  temporal_identity: fixed
+  delta_t_seconds: 0.8
+  input_representation: frozen_ordered_discrete_AIRM_antidevelopment
+  refit_airm_means: false
+  refit_antidevelopment: false
+
+costs:
+  scale: squared
+  c_sensor: mean_four_unquotiented_Frobenius_squared
+  c_full: saved_d_mov_squared
+  c_len: saved_d_len_squared
+  c_ang: c_full_minus_c_len
+  c_ori: c_sensor_minus_c_full
+  full_identity: c_full_equals_c_len_plus_c_ang
+  sensor_identity: c_sensor_equals_c_len_plus_c_ang_plus_c_ori
+  full_data_q_refit: forbidden_except_four_fixed_internal_reproduction_checks
+  fitted_q_interpretation: nuisance_only
+
+numerical:
+  atol: 1.0e-8
+  rtol: 1.0e-8
+  scientific_clipping: false
+  failure: UNASSESSED_COMPONENT_DECOMPOSITION_NUMERICAL_FAILURE
+
+statistics:
+  a_sc: same_subject_same_class_squared_cost
+  b_sc: same_subject_different_class_mean_squared_cost
+  c_sc: different_subject_same_class_mean_squared_cost
+  d_sc: different_subject_different_class_mean_squared_cost
+  S_sc: c_sc_minus_a_sc
+  C_sc: b_sc_minus_a_sc
+  J_sc: b_sc_plus_c_sc_minus_a_sc_minus_d_sc
+  aggregation: class_mean_within_subject_then_subject_mean
+
+nulls:
+  master_seed: 20260810
+  replicates: 1999
+  alpha: 0.05
+  pvalue: one_sided_greater_or_equal_plus_one
+  exact_same_indexed_mapping_all_components: true
+  subjectbreak:
+    stream_tag: 1102
+    operation: permute_session1_subject_whole_tuples_within_class
+  classbreak:
+    stream_tag: 1101
+    operation: permute_session1_class_whole_tuples_within_subject
+
+optimizer:
+  scope: split_half_cross_session_and_four_fixed_full_reproduction_checks_only
+  inherited_definition: exact_Local_Mean_Movement_V0
+  total_starts: 6
+  determinant_coverage: three_per_sector
+  max_iterations: 250
+  gradient_tolerance: 1.0e-6
+  min_step_size: 1.0e-12
+  max_time_seconds: 120.0
+  max_cost_evaluations: 5000
+  parallel_workers: 4
+
+split_half:
+  replicate_A: session0_half_A_to_session1_half_A
+  replicate_B: session0_half_B_to_session1_half_B
+  sign_stability: both_T_J_ang_strictly_positive
+  pvalue_per_half: none
+  gating_only_if_full_angular_support: true
+
+descriptive:
+  safe_fraction_denominator: 1.0e-12
+  fixed_pairs:
+    - S1_Left0_to_S1_Left1
+    - S1_Left0_to_S2_Left1
+    - S1_Left0_to_S1_Feet1
+    - S1_Left0_to_S2_Feet1
+  step_localization: descriptive_only
+  posthoc_best_transition_test: forbidden
+
+terminal:
+  both: BOTH_INTRINSIC_RELATIVE_AND_SENSOR_FRAME_COMPONENTS
+  angular_only: GO_DIRECTIONAL_JOINT_MOVEMENT_INTERACTION
+  orientation_only: SENSOR_FRAME_ORIENTATION_ONLY_SUPPORT
+  speed_only: SPEED_PROFILE_SUFFICIENT_AT_CURRENT_RESOLUTION
+  no_component: NO_COMPONENT_INTERACTION_AT_SQUARED_COST_RESOLUTION
+  unreliable: UNASSESSED_COMPONENT_DECOMPOSITION_UNRELIABLE
+  numerical_failure: UNASSESSED_COMPONENT_DECOMPOSITION_NUMERICAL_FAILURE
+  technical_failure: UNASSESSED_COMPONENT_DECOMPOSITION_TECHNICAL_FAILURE
+
+claim_restrictions:
+  - no_unique_neural_direction
+  - no_physiological_movement_direction
+  - no_motor_strategy_direction
+  - no_source_space_direction
+  - no_subject_neural_or_anatomical_pose
+  - no_continuous_time_dynamics
+  - always_window_wise_mean_covariance_movement
+  - always_fixed_5_by_0.8_second_discretization
