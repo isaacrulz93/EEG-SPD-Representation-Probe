@@ -16,7 +16,7 @@ The earlier trajectory audit asked whether distance-only local geometry contains
 
 ## 4. Final scientific-result SHA
 
-`PENDING_FINAL_SCIENTIFIC_RESULT_COMMIT`
+`12258c641bc1a185da32d131ffe1a679c5627192`
 
 ## 5. Frozen representation reproduction
 
@@ -155,15 +155,15 @@ The terminal is based only on raw T_J and the two preregistered correspondence-b
 
 ## 23. Relevant tests
 
-Pre-freeze local-metric mathematical, synthetic, null, and reproduction tests passed.
+25/25 local-metric mathematical, synthetic, null-calibration, reporting, protocol, and frozen-input reproduction tests passed both before and after the scientific run.
 
 ## 24. Full repository tests
 
-Full pre-freeze repository suite passed; final verification pending result artifact commit.
+203/203 repository tests passed after the scientific run (22.22 seconds). The same 203/203 suite also passed immediately before protocol freeze.
 
 ## 25. Git status
 
-`scientific outputs pending commit`
+`clean` after the scientific-result commit; only this final report/provenance update remained for the finalization commit.
 
 ## 26. Post-result immutability
 
