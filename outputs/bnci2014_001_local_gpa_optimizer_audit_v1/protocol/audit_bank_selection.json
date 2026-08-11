@@ -1,0 +1,57 @@
+{
+  "purpose": "optimizer-only audit; no Stage-2A cell statistic",
+  "selection_time_relative_to_outcomes": "written before either solver was run on the additional real registrations",
+  "selection_rule": {
+    "eligible_tasks": "the 72 Full cell tasks in frozen subject/session/class order",
+    "rng": "numpy default_rng SeedSequence([20260811, 0x47504131])",
+    "cell_draw": "four task indices without replacement",
+    "source_trial_draw": "one within-cell trial position uniformly from integers 1..71",
+    "target": "feasible constrained prototype formed from within-cell trial position 0",
+    "gpa_start": 0,
+    "gpa_outer_iteration": 1,
+    "registration_phase": "initial full four-start certification"
+  },
+  "registrations": [
+    {
+      "audit_index": 0,
+      "full_task_index": 20,
+      "subject": 3,
+      "session": "1test",
+      "class_label": "left_hand",
+      "source_trial_position": 32,
+      "target_global_sample_index": 3168,
+      "source_global_sample_index": 3292
+    },
+    {
+      "audit_index": 1,
+      "full_task_index": 43,
+      "subject": 6,
+      "session": "0train",
+      "class_label": "tongue",
+      "source_trial_position": 68,
+      "target_global_sample_index": 1440,
+      "source_global_sample_index": 1715
+    },
+    {
+      "audit_index": 2,
+      "full_task_index": 32,
+      "subject": 5,
+      "session": "0train",
+      "class_label": "left_hand",
+      "source_trial_position": 26,
+      "target_global_sample_index": 1152,
+      "source_global_sample_index": 1252
+    },
+    {
+      "audit_index": 3,
+      "full_task_index": 8,
+      "subject": 2,
+      "session": "0train",
+      "class_label": "left_hand",
+      "source_trial_position": 60,
+      "target_global_sample_index": 288,
+      "source_global_sample_index": 529
+    }
+  ],
+  "scientific_outcomes_inspected_for_selection": false
+}
