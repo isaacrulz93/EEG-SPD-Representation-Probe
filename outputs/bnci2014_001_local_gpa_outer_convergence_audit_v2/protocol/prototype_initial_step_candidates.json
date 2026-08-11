@@ -1,0 +1,14 @@
+{
+  "status": "FROZEN_BEFORE_COMPARATIVE_GPA_TRAJECTORY_INSPECTION",
+  "candidate_initial_line_search_steps": [1.0, 2.0, 4.0],
+  "additional_candidates_forbidden": true,
+  "terminology": "Armijo prototype initial line-search step; not a fixed learning rate",
+  "unchanged_contraction_factor": 0.5,
+  "unchanged_sufficient_decrease": 0.0001,
+  "unchanged_prototype_inner_iterations": 16,
+  "unchanged_gpa_gradient_tolerance": 0.00002,
+  "unchanged_gpa_relative_objective_tolerance": 0.0000001,
+  "selection_rule": "A larger initial step is a candidate only if it preserves monotone Armijo-valid updates, reaches the unchanged convergence gates faster/more reliably, does not increase assignment/prototype oscillation, behaves similarly in the frozen outcome-blind bank, and relaxes no tolerance.",
+  "same_backtracking_outcome": "If 2.0 or 4.0 backtracks to the same accepted steps as 1.0, conclude INITIAL_STEP_NOT_THE_BOTTLENECK.",
+  "scientific_statistics_computed": false
+}

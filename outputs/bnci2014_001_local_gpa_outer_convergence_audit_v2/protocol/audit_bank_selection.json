@@ -1,0 +1,17 @@
+{
+  "status": "FROZEN_BEFORE_GPA_TRAJECTORY_INSPECTION",
+  "master_seed_components": [20260811, 1196441906],
+  "stream_tag_hex": "0x47504132",
+  "candidate_task_indices_zero_based": "1..215 (the exact failed task at index 0 excluded)",
+  "sampling_rule": "numpy Generator(SeedSequence([20260811, 0x47504132])).choice(arange(1,216), size=4, replace=False), then sort",
+  "selected_task_indices_zero_based": [21, 29, 157, 182],
+  "selected_tasks": [
+    {"task_index": 21, "subject": 1, "session": "1test", "class_label": "tongue", "split": "Full"},
+    {"task_index": 29, "subject": 2, "session": "0train", "class_label": "right_hand", "split": "B"},
+    {"task_index": 157, "subject": 7, "session": "1test", "class_label": "left_hand", "split": "A"},
+    {"task_index": 182, "subject": 8, "session": "1test", "class_label": "left_hand", "split": "B"}
+  ],
+  "selection_inputs": "task position only; no covariance, objective, convergence, class relationship, or scientific outcome",
+  "bank_unlock_rule": "run only if the exact failed cell shows convergence after outer 24 under unchanged settings",
+  "scientific_statistics_computed": false
+}

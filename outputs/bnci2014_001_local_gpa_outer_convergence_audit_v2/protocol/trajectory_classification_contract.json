@@ -1,0 +1,21 @@
+{
+  "status": "FROZEN_BEFORE_GPA_TRAJECTORY_INSPECTION",
+  "frozen_outer_limit": 24,
+  "audit_outer_limit": 96,
+  "milestone_limits": [24, 48, 64, 96],
+  "convergence": "projected gradient <= 2e-5 AND relative objective change <= 1e-7",
+  "late_window": "last min(5,n) completed outer blocks",
+  "meaningful_normalized_objective_increase": 1e-7,
+  "strong_late_normalized_decrease": 1e-5,
+  "classification_precedence": [
+    "CONVERGING_BUT_BUDGET_LIMITED if convergence first occurs in 25..96 and no meaningful normalized objective increase occurs",
+    "REGISTRATION_PROTOTYPE_OSCILLATION if a meaningful normalized objective increase occurs in the last 8 blocks together with nonzero assignment changes in at least 3 of those blocks",
+    "STILL_DESCENDING_STRONGLY if no convergence by 96 and normalized decrease across the late window exceeds 1e-5",
+    "OBJECTIVE_PLATEAU_GRADIENT_NOT_CONVERGED if no convergence, every late relative change is <=1e-7, and the late median gradient exceeds 2e-5",
+    "OTHER_NUMERICAL_INSTABILITY otherwise"
+  ],
+  "bank_stability_gate": "every default-step start converges by 96; no meaningful normalized objective increase; all values finite",
+  "common_budget_rule": "smallest member of {48,64,96} greater than or equal to the maximum first-convergence iteration across both starts of the exact cell and all frozen bank tasks",
+  "initial_step_candidate_rule": "A larger candidate must converge all exact+bank starts, reduce the common milestone budget relative to 1.0, have no meaningful objective increase, and have total changed assignments no greater than 1.0. Ties choose the smaller initial candidate.",
+  "scientific_statistics_computed": false
+}
