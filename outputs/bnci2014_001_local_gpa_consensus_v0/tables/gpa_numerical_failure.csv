@@ -1,0 +1,4 @@
+stage,completed,required,status,detail,protocol_freeze_sha,scientific_result_sha
+full_cell_consensus,0,72,UNASSESSED_GPA_NUMERICAL_FAILURE,"required registration lacked converged candidates in both O(22) determinant sectors",ad3dd429a69e7cea77e3d4421987989ab45171b9,9aba8a8cee1c84d9b69b7fdf3d53d570927a7cc6
+split_half_consensus,0,144,NOT_REACHED,"full-cell numerical gate failed first",ad3dd429a69e7cea77e3d4421987989ab45171b9,9aba8a8cee1c84d9b69b7fdf3d53d570927a7cc6
+interaction_statistic,0,1,NOT_ASSESSED,"no complete 72-cell consensus bank",ad3dd429a69e7cea77e3d4421987989ab45171b9,9aba8a8cee1c84d9b69b7fdf3d53d570927a7cc6
