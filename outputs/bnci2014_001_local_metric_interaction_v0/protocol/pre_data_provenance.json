@@ -1,0 +1,22 @@
+{
+  "branch": "pilot/local-metric-interaction-v0",
+  "config_sha256": "7634580719b47d34707a5480101e62440554f8327a8fcc8a646a6ec25b2271b8",
+  "elapsed_seconds": 0.0689978338778019,
+  "head_before_protocol_freeze": "355fe0b55b1ef692f7b4ddd16d19b7ccc30e72e1",
+  "implementation_file_sha256": {
+    "scripts/18_run_local_metric_interaction_v0.py": "18aed54cb6a5ae1094815b80fabe22647a096213c6d9e6cd57b3d9d63d6c6c20",
+    "src/local_metric_data_v0.py": "f378308a4cc8bb70f28dfa1af010f3404d19b1bc5ce469e3ba4067b5400329b2",
+    "src/local_metric_geometry_v0.py": "2746af1b09797d401660c76990c136936789351605c7bc656ff93326c6dc2609",
+    "src/local_metric_interaction_v0.py": "56a0e92a0b6c654c6946c092c2a56d8310f0c921afd02c22dc512c431128fe4e",
+    "src/local_metric_pipeline_v0.py": "5d832fe01ae4e1a1d3ccf602fd4b531e8c7b902377e535a360025f72bd388ff5",
+    "src/reporting_local_metric_v0.py": "c8bb218a0de7bf4cb83b4e47c47a76fc321e30777840d786aa31a083cfb971a1"
+  },
+  "implementation_source_sha256": "8759ac924f777ddb4bc54442aafb2cec8d8511a7c5d98190ef8edb1b994fc6c1",
+  "infrastructure_source_shas": [
+    "355fe0b55b1ef692f7b4ddd16d19b7ccc30e72e1"
+  ],
+  "new_bnci_scientific_statistics_computed": false,
+  "protocol_sha256": "fc00ef6a261f6c7e4114a1a0e24771aebc6bf6b21444065ebe5f10d756f3d16c",
+  "scientific_representation_diff": "none",
+  "scientific_source_sha": "355fe0b55b1ef692f7b4ddd16d19b7ccc30e72e1"
+}

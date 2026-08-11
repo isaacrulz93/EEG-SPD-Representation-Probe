@@ -1,0 +1,19 @@
+{
+  "config_sha256": "7634580719b47d34707a5480101e62440554f8327a8fcc8a646a6ec25b2271b8",
+  "degenerate_trial_count": 0,
+  "distance_content_sha256": "681d8a075eff1218e5e2b2d0e292631ead67badaccc00ec075ba428c9d5aed64",
+  "frozen_cache_sha256": "5accf2f3e6becce187b18d30a1ea1741ae0d0faafc15a1f8ac16632a5a71628d",
+  "frozen_combined_cache": "cache/bnci2014_001_trajectory_within_subject_v1/combined_trajectory_features.npz",
+  "frozen_trajectory_config": "configs/bnci2014_001_trajectory_within_subject_v1.yaml",
+  "implementation_sha256": "8759ac924f777ddb4bc54442aafb2cec8d8511a7c5d98190ef8edb1b994fc6c1",
+  "infrastructure_diff_to_scientific_representation": "none",
+  "infrastructure_source_shas": [
+    "355fe0b55b1ef692f7b4ddd16d19b7ccc30e72e1"
+  ],
+  "path_d10_content_sha256": "8179f7654d6a1c89065aca12e99029e6a7476d332fdf62767e83c0f0966008f9",
+  "protocol_sha256": "fc00ef6a261f6c7e4114a1a0e24771aebc6bf6b21444065ebe5f10d756f3d16c",
+  "scientific_base_sha": "355fe0b55b1ef692f7b4ddd16d19b7ccc30e72e1",
+  "scientific_statistics_computed": false,
+  "trial_count": 5184,
+  "upper_triangle_path_max_abs_diff": 0.0
+}
