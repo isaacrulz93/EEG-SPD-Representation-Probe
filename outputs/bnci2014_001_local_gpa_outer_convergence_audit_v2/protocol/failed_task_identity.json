@@ -1,0 +1,13 @@
+{
+  "cell_configuration_sha256": "1f775f813c0e634327519322a5e1e8db7f34f91a034b737a6ef327283ea4914b",
+  "class_label": "left_hand",
+  "global_sample_indices_sha256": "1760dd1675a8e27091e3cf9a09eeaf77375bd1c133e48526703da263aeb9f45d",
+  "gpa_start_0_initial_trial_position": 0,
+  "gpa_start_1_initial_trial_position": 36,
+  "scientific_statistics_computed": false,
+  "session": "0train",
+  "split": "Full",
+  "subject": 1,
+  "task_index_zero_based": 0,
+  "trial_count": 72
+}

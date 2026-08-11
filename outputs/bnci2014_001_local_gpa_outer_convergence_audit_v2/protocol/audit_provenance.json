@@ -1,0 +1,24 @@
+{
+  "bank_manifest_sha256": "d9fca9228215b1015718de98c8cde2212c91c00d5a0a96a0f6a542c0ad45ca72",
+  "base_sha": "122eacff868aa8f656ad6360716c1816f453979f",
+  "branch": "audit/local-gpa-outer-convergence-v2",
+  "centered_states_sha256": "5d99bec906fb3d8827b94088fd2a80984cc89cc68956bdce23ff3504a2c7a146",
+  "classification_manifest_sha256": "2a0e97ca7ec9300a50d9dde9a6cd85eff1c8dca54a8f6b5479b400117624ced0",
+  "environment": {
+    "packages": {
+      "joblib": "1.5.3",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "pymanopt": "2.2.1",
+      "pyriemann": "0.12",
+      "scipy": "1.18.0"
+    },
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "python": "3.12.8 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 10:37:40) [Clang 14.0.6 ]"
+  },
+  "scientific_settings_changed": false,
+  "scientific_statistics_computed": false,
+  "step_manifest_sha256": "54107a2af7db37092da047c5ec5c6beda5f137a7945b0610de0bb27472c4abab",
+  "v1_failure_sha": "acfe94d805293119092413401e9261853273a1e8",
+  "v1_protocol_freeze_sha": "e6e8887036d1e04a2da7db36d84db58d8c80d9ef"
+}

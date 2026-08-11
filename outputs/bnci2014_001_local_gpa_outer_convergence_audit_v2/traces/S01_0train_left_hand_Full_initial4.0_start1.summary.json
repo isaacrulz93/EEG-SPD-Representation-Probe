@@ -1,0 +1,19 @@
+{
+  "cell_configuration_sha256": "1f775f813c0e634327519322a5e1e8db7f34f91a034b737a6ef327283ea4914b",
+  "converged": false,
+  "first_convergence_outer_iteration": null,
+  "frozen_24_reproduced_failure": true,
+  "identity": [
+    1,
+    "0train",
+    "left_hand",
+    "Full"
+  ],
+  "initial_prototype_sha256": "89750d4e8ad81acad0f8dcbe32d36fdb996b8d243637607c4208864584e8f8c9",
+  "initial_trial_position": 36,
+  "prototype_initial_step_size": 4.0,
+  "runtime_seconds": 1128.458530541975,
+  "start_index": 1,
+  "trace_csv": "outputs/bnci2014_001_local_gpa_outer_convergence_audit_v2/traces/S01_0train_left_hand_Full_initial4.0_start1.csv",
+  "trial_count": 72
+}

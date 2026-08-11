@@ -1,0 +1,15 @@
+{
+  "bank_unlocked": false,
+  "decision": "GPA_ALTERNATING_FORMULATION_NUMERICALLY_UNSTABLE",
+  "default_bank_stable": false,
+  "exact_default_start0_first_convergence": null,
+  "exact_default_start1_first_convergence": null,
+  "failed_default_start0_classification": "STILL_DESCENDING_STRONGLY",
+  "failed_default_start1_status": "STILL_DESCENDING_STRONGLY",
+  "initial_step_amendment_candidate": null,
+  "initial_step_outcome": "NO_INITIAL_STEP_AMENDMENT_SUPPORTED",
+  "recommended_outer_budget": null,
+  "scientific_statistics_computed": false,
+  "stage2a_rerun_performed": false,
+  "total_runtime_seconds": 6593.876579666976
+}
