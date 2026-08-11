@@ -7,7 +7,7 @@
 - Movement V0 protocol freeze: `e24312147ef3020854ef6f6cd174071d1c6ead02`
 - Movement V0 scientific result: `c3f1d5ff9cf23db2007bbf839cf4b266e2cb8960`
 - Component protocol freeze: `95c330de9596fa4c4eb4ee377d5af8d99896f4c3`
-- Scientific result SHA: `FINAL_RESULT_SHA_PENDING`
+- Scientific result SHA: `0dfa4ab4f94dd35c4d5ec8e74a5b51940083d3ca`
 - Parent terminal: `GO_REPRODUCIBLE_SUBJECT_CLASS_ORDERED_MOVEMENT`
 
 The finalized Movement V0 anti-developments, root-distance matrices, and null mappings were reused exactly. No AIRM means, raw covariances, anti-developments, M1 references, or full-data quotient matrices were refit.
