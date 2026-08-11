@@ -1,0 +1,4 @@
+fit_bank,total_starts,converged_starts,failed_starts,det_negative_total,det_negative_converged,det_positive_total,det_positive_converged,median_iterations,maximum_iterations,maximum_converged_gradient_norm
+stage_A_primary_full_and_halves,6912,6912,0,3456,3456,3456,3456,21.0,60,9.99623307556704e-06
+stage_A_semantic,11520,11520,0,5760,5760,5760,5760,21.0,59,9.99552853383028e-06
+all_required_action_fits,18432,18432,0,9216,9216,9216,9216,21.0,60,9.99623307556704e-06

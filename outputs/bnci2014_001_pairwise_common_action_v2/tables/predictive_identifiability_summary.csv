@@ -1,0 +1,3 @@
+stage,required_cells,predictively_identifiable,predictive_nonidentifiability,maximum_D_eq,maximum_D_split,minimum_threshold_minus_D_eq,numerical_stabilizer_nullity_nonzero,approximate_stabilizer_nullity_nonzero
+Stage_A,576,576,0,0.0,1.7833167705623605,0.4882065710033579,0,0
+Stage_B,576,576,0,0.0,1.918338763094328,0.5437648461907367,0,0

@@ -1,0 +1,17 @@
+{
+  "audit_commit": "53aab81598c4d92e2f860385980cf9637a7fc380",
+  "branch": "pilot/common-subject-action-falsification-v0",
+  "checkpoint_identity": {
+    "config_sha256": "5980cdb336358602b7c45d21dfa18c01e4c6bbf26cfaafb6e812f35d09d92ad6",
+    "optimizer_identity": "pymanopt_2.2.1_stiefel_trust_regions",
+    "protocol_amendment_sha": "f695d3c8f25978297fa9ee2a655c636c067d5448",
+    "source_sha256": "bcef781b041885e08d4fc5c1435b39e6755d63d47adcb6aee3bafa3b64c030e6"
+  },
+  "head_at_run_start": "f695d3c8f25978297fa9ee2a655c636c067d5448",
+  "new_bnci_scientific_statistic_before_freeze": false,
+  "old_nested_generalized_procrustes_used": false,
+  "original_freeze_commit": "27eaf074ac25acba1afc0f8f37671283267b16c9",
+  "runtime_seconds": 582.9357013702393,
+  "scientific_setting_changed_after_v2_data_access": false,
+  "v1_cache_reused": false
+}
