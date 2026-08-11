@@ -1,0 +1,11 @@
+{
+  "bins": 5,
+  "exact_integer_partition": true,
+  "frozen_epoch_samples": 250,
+  "samples_per_bin": 50,
+  "sampling_frequency_hz": 100.0,
+  "seconds_per_bin": 0.5,
+  "status": "PASS",
+  "window_covariance_array_sha256": "af111eae37076d2f7ed80f9d3ab5c5033c5b8843c3b7b138f8b8ab8fa0f768af",
+  "window_covariance_bank_sha256": "abdf9682ae7d593544aca68e196711300e25c01104165f1415f07629dfdd21cf"
+}

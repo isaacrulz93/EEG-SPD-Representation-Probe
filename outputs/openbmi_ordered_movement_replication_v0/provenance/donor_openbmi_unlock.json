@@ -1,0 +1,15 @@
+{
+  "schema_version": "openbmi-scientific-unlock-v0",
+  "unlocked": true,
+  "manifest_commit_sha": "91877d3ea5b83a6b524fbbe091fb1db6c9973170",
+  "manifest_sha256": "4b956d7e3b2b1a271ec07bddecc1ce0a93460ab1515ab8902b3d1ca35ebdb0ea",
+  "config_sha256": "06ea1c28399b081d14cb14c6185d39b3784f59c70b613da34976b820b7b7224d",
+  "protocol_sha256": "88134949377265c1280e4efa292e7265fade4f4bd688cf98ce8b228af48d4657",
+  "bnci_primary_direction_gate": {
+    "E_half": 0.7486994931476678,
+    "E_id": 0.9561868293114101,
+    "E_class": 0.7737642622347528,
+    "all_strictly_positive": true
+  },
+  "scientific_access_condition": "source MAT hashes and exact data contract must pass before any OpenBMI score"
+}
