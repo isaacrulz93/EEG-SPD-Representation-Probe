@@ -1,0 +1,14 @@
+{
+  "all_exact": true,
+  "full_artifact_path": "outputs/bnci2014_001_local_temporal_sequence_v0/arrays/ordered_mean_sequences.npz",
+  "full_artifact_sha256": "e03b94daef3eb37f9209ee7a7482ea575b1eb353804505a3e91013339da1913f",
+  "full_matrix_count": 360,
+  "matrix_count": 1080,
+  "maximum_absolute_difference": 0.0,
+  "new_bnci_movement_statistic_computed": false,
+  "split_artifact_path": "outputs/bnci2014_001_local_temporal_sequence_v0/arrays/split_half_mean_sequences.npz",
+  "split_artifact_sha256": "355f098de7ff3dcf274e5a62cf6d92022bc1b1f6ed4301a2dc53f9a19f3cd868",
+  "split_matrix_count": 720,
+  "status": "PASS",
+  "temporal_scientific_result_sha": "43e926073fab0ba76fd5baa881804538f0d7beee"
+}

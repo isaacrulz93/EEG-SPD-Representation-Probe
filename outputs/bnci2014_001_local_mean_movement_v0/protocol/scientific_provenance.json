@@ -1,0 +1,19 @@
+{
+  "branch": "pilot/local-mean-movement-antidevelopment-v0",
+  "config_sha256": "bcdf7649f364e160f3dbe01e2753415d66abc31cc8598f1326360bf2a9cf470a",
+  "first_result_checkpoint": "after complete d_mov matrix",
+  "git_status_at_start": "clean",
+  "head_at_start": "e24312147ef3020854ef6f6cd174071d1c6ead02",
+  "implementation_file_sha256": {
+    "scripts/26_run_local_mean_movement_v0.py": "be20a1faf32076ba68fc092e04ffd7a36421e45faf5d23b183185b94585c4448",
+    "src/local_mean_movement_v0.py": "97bf3964662214b3653ff6fc4502a518a231d6ee8e3ee6b4577bca668d0ca9de",
+    "src/reporting_local_mean_movement_v0.py": "39b66b18a9e417e59f7bad7045e7328a8c1d69456fc49c6c456da5504725d8c7"
+  },
+  "implementation_source_sha256": "020fab64898dfef1d08ce5ef32b54ec4ecb52b66fb796f10a75f4829d4a4c9d2",
+  "protocol_freeze_sha": "e24312147ef3020854ef6f6cd174071d1c6ead02",
+  "protocol_sha256": "59cadd31197c46042d9d58d2c834bc3cc1ab3ee90481c8fd06c5ed6ea08d829f",
+  "scientific_setting_changed_after_result_access": false,
+  "temporal_parent_final_sha": "6d5ad6a0bdd4f2d19bfee8ce6fcbb97a5c499a5d",
+  "temporal_protocol_freeze_sha": "70981aa89ddbadceca42f354c3c51d05bf6dbf0c",
+  "temporal_scientific_result_sha": "43e926073fab0ba76fd5baa881804538f0d7beee"
+}
