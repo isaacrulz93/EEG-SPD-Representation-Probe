@@ -1,0 +1,12 @@
+{
+  "T_J": 0.000361254525073187,
+  "config_sha256": "7634580719b47d34707a5480101e62440554f8327a8fcc8a646a6ec25b2271b8",
+  "implementation_source_sha256": "8759ac924f777ddb4bc54442aafb2cec8d8511a7c5d98190ef8edb1b994fc6c1",
+  "p_J": 0.0575,
+  "p_J_classbreak": 0.041,
+  "p_J_subjectbreak": 0.0575,
+  "protocol_freeze_sha": "12a4d3ebd29a3a95e7fbc1bbc3a6d70b770532dc",
+  "protocol_sha256": "fc00ef6a261f6c7e4114a1a0e24771aebc6bf6b21444065ebe5f10d756f3d16c",
+  "scientific_source_sha": "355fe0b55b1ef692f7b4ddd16d19b7ccc30e72e1",
+  "stage": "normalized_relative_pattern_control"
+}
