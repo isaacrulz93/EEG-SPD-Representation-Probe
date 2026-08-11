@@ -1,0 +1,8 @@
+{
+  "audit_commit": "6ea711e3b4eca048fe5c092e0828d74d3c406367",
+  "branch": "pilot/common-subject-action-falsification-v0",
+  "head_at_run_start": "27eaf074ac25acba1afc0f8f37671283267b16c9",
+  "new_bnci_scientific_statistic_before_freeze": false,
+  "old_nested_generalized_procrustes_used": false,
+  "original_freeze_commit": "9a4dd836fd24c47ffc2d0f80459c478827e93d3d"
+}

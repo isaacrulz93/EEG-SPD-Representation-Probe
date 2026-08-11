@@ -1,0 +1,7 @@
+order,gate,status
+1,U_reproduction,PASS
+2,Stage_A_technical,UNASSESSED_TECHNICAL_FAILURE
+3,Stage_A_scientific,NOT_REACHED
+4,Stage_A_semantic,NOT_REACHED
+5,Stage_B,NOT_REACHED
+6,terminal,UNASSESSED_TECHNICAL_FAILURE

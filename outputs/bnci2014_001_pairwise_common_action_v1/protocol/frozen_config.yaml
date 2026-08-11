@@ -1,0 +1,212 @@
+protocol:
+  name: Pairwise Common Action Amendment V1
+  version: "1.0.0"
+  freeze_date: "2026-08-11"
+  timezone: Asia/Seoul
+  master_seed: 20260810
+  base_commit: 272d775678644aad062df424a70586d4b42de652
+  original_freeze_commit: 9a4dd836fd24c47ffc2d0f80459c478827e93d3d
+  audit_commit: 6ea711e3b4eca048fe5c092e0828d74d3c406367
+  branch: pilot/common-subject-action-falsification-v0
+  protocol_path: docs/PROTOCOL_AMENDMENT_PAIRWISE_COMMON_ACTION_V1.md
+
+project:
+  output_dir: outputs/bnci2014_001_pairwise_common_action_v1
+  failed_v0_output_dir: outputs/bnci2014_001_common_subject_action_v0
+  frozen_reference_dir: outputs/subject_class_interaction_v0
+
+dataset:
+  identifier: BNCI2014_001
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  sessions: [0train, 1test]
+  classes: [left_hand, right_hand, feet, tongue]
+  runs: ["0", "1", "2", "3", "4", "5"]
+  channels: [Fz, FC3, FC1, FCz, FC2, FC4, C5, C3, C1, Cz, C2, C4, C6, CP3, CP1, CPz, CP2, CP4, P1, Pz, P2, POz]
+  dimension: 22
+  expected_trials: 5184
+  expected_trials_per_subject_session: 288
+  expected_trials_per_subject_session_class: 72
+  expected_trials_per_subject_session_run_class: 12
+  split_half:
+    A: ["0", "1", "2"]
+    B: ["3", "4", "5"]
+    recompute_marginal_and_class_means_independently: true
+  frozen_inputs:
+    full_interaction_objects_path: outputs/subject_class_interaction_v0/objects/core_interaction_objects.npz
+    full_interaction_objects_sha256: 1bb487a8446308e1dd29965ac57901a810d6e92da25b020ae284569176f33f6d
+    full_U_key: AIRM__session_specific__F__U
+    split_A_U_key: AIRM__session_specific__A__U
+    split_B_U_key: AIRM__session_specific__B__U
+
+reproduction_gate:
+  maximum_absolute_difference: 1.0e-12
+  relative_frobenius_difference: 1.0e-12
+  symmetry_relative_error_max: 1.0e-12
+  finite_required: true
+  failure: UNASSESSED_NUMERICAL_OR_DATA_FAILURE
+
+scientific_model:
+  role: necessary_consequence_test_not_global_latent_proof
+  object: marginally_recentered_identity_tangent_class_effect_U
+  action: R_U_R_transpose
+  manifold: O_22
+  loss: sum_squared_frobenius_over_three_fit_classes
+  heldout_prediction: R_U_source_heldout_R_transpose
+
+optimizer:
+  library: pymanopt
+  version: 2.2.1
+  manifold_class: pymanopt.manifolds.Stiefel
+  manifold_arguments: {n: 22, p: 22, retraction: polar}
+  optimizer_class: pymanopt.optimizers.ConjugateGradient
+  beta_rule: HestenesStiefel
+  total_starts: 4
+  actual_total_starts_must_equal_config: true
+  start_order:
+    - spectral_sign_resolved
+    - spectral_sign_resolved_right_fixed_reflection
+    - spectral_sign_unresolved
+    - spectral_sign_unresolved_right_fixed_reflection
+  fixed_reflection_diagonal: [-1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  initial_determinants_required: {positive: 2, negative: 2}
+  converged_determinant_sectors_required: [-1, 1]
+  max_iterations: 1000
+  min_gradient_norm: 1.0e-5
+  log_verbosity: 1
+  returned_iterate: last_logged_iterate_meeting_min_gradient_norm_else_runtime_returned_point
+  secondary_convergence:
+    requires_pymanopt_min_step_termination: true
+    relative_objective_change_max: 1.0e-13
+    gradient_norm_multiplier_max: 10.0
+    resulting_gradient_norm_max: 1.0e-4
+  min_step_size: 1.0e-12
+  max_cost_evaluations: 1001
+  max_time_seconds: 3600.0
+  line_search:
+    class: pymanopt.optimizers.line_search.BackTrackingLineSearcher
+    contraction_factor: 0.5
+    optimism: 2.0
+    sufficient_decrease: 1.0e-4
+    max_iterations: 50
+    initial_step_size: 1.0
+
+identifiability:
+  objective_atol: 1.0e-10
+  objective_rtol: 1.0e-8
+  q_equivalence_rule: L_j_le_L_best_plus_atol_plus_rtol_times_abs_L_best
+  commutant_relative_tolerance: 1.0e-8
+  continuous_stabilizer_probe_angles: [1.5707963267948966, -1.5707963267948966, 3.141592653589793]
+  prediction_dispersion_floor: 1.0e-5
+  prediction_norm_epsilon: machine_epsilon_times_sqrt_22_squared
+  normalization: max_frobenius_norm_full_best_prediction_and_epsilon
+  D_eq: max_pairwise_near_optimal_prediction_dispersion_over_normalization
+  D_split: independent_half_prediction_difference_over_same_normalization
+  decision: D_eq_le_max_prediction_dispersion_floor_and_D_split
+  raw_R_matrix_disagreement_forbidden: true
+  any_required_pair_nonidentifiable: UNASSESSED_ACTION_NOT_IDENTIFIABLE
+  any_required_pair_technical_failure: UNASSESSED_TECHNICAL_FAILURE
+  available_case_allowed: false
+
+prediction:
+  raw_baseline: same_source_heldout_U_without_action
+  normalization: squared_target_heldout_frobenius_norm
+  raw_error: squared_frobenius_target_minus_source_over_target_norm_squared
+  action_error: squared_frobenius_target_minus_action_prediction_over_target_norm_squared
+  gain: raw_error_minus_action_error
+
+aggregation:
+  source_to_target_cell: median_over_8_source_subjects
+  target_cell_to_subject: median_over_2_sessions_times_4_heldout_classes
+  subject_to_group: median_over_9_target_subjects
+  inferential_unit: target_subject
+  pairwise_pseudoreplication_forbidden: true
+
+stage_A:
+  pair_grid: 9_targets_times_8_sources_times_2_sessions_times_4_heldout_classes
+  required_pairs: 576
+  primary_pass: T_gt_0_and_unrelated_target_effect_gt_0_and_p_le_0_05
+  semantic_unlock: primary_PASS_only
+  semantic_not_unlocked_status: NOT_UNLOCKED_BY_PRIMARY_GATE
+  final_pass: primary_PASS_and_semantic_PASS
+
+stage_B:
+  unlock: stage_A_final_PASS_only
+  directions: [0train_to_1test, 1test_to_0train]
+  action_fit_session: direction_train_session_three_fit_classes
+  prediction_session: opposite_session_heldout_class
+  reuse_stage_A_actions: true
+  primary_pass: T_gt_0_and_unrelated_target_effect_gt_0_and_p_le_0_05
+  semantic_unlock: stage_B_primary_PASS_only
+  final_pass: primary_PASS_and_semantic_PASS
+
+nulls:
+  replicates: 1999
+  master_seed: 20260810
+  p_value: one_sided_greater_equal_plus_one
+  unrelated_target_action:
+    stage_A_stream: stage_A_unrelated_target
+    stage_B_stream: stage_B_unrelated_target
+    permutation: independent_derangement_of_8_targets_within_each_source_session_heldout_context
+    refits: 0
+  semantic_mismatch:
+    stage_A_stream: stage_A_semantic
+    stage_B_stream: stage_B_semantic
+    permutations: all_five_nonidentity_S3
+    target_fit_bank_is_permuted_source_fit_bank_fixed: true
+    one_choice_shared_across_8_sources_per_target_session_heldout_cell: true
+
+global_consistency:
+  unlock: stage_A_final_PASS_only
+  cycle_action: equivalence_aware_induced_prediction_comparison
+  raw_matrix_cycle_forbidden: true
+  terminal_vote: false
+  profiled_product_model:
+    exact_objective_required: true
+    automatic_execution: false
+    requires_separate_determinant_start_freeze: true
+  old_nested_alternating_implementation_forbidden: true
+
+terminal_logic:
+  data_failure: UNASSESSED_NUMERICAL_OR_DATA_FAILURE
+  technical_failure: UNASSESSED_TECHNICAL_FAILURE
+  predictive_nonidentifiability: UNASSESSED_ACTION_NOT_IDENTIFIABLE
+  stage_A_primary_fail: PAIRWISE_COMMON_ACTION_NOT_SUPPORTED_WITHIN_SESSION
+  stage_A_semantic_fail: PAIRWISE_COMMON_ACTION_NOT_SEMANTICALLY_SUPPORTED
+  stage_B_primary_fail: PAIRWISE_COMMON_ACTION_WITHIN_SESSION_ONLY
+  stage_B_semantic_fail: PAIRWISE_COMMON_ACTION_NOT_CROSS_SESSION_SEMANTICALLY_SUPPORTED
+  stage_A_B_pass: PAIRWISE_COMMON_ACTION_NECESSARY_CONSEQUENCE_SUPPORTED
+
+runtime:
+  workers: 8
+  blas_threads_per_worker: 1
+  primary_fit_objects: 1728
+  primary_pymanopt_runs: 6912
+  semantic_fit_objects_if_unlocked: 2880
+  semantic_pymanopt_runs_if_unlocked: 11520
+  maximum_stage_A_pymanopt_runs: 18432
+  projected_primary_minutes: [2, 6]
+  projected_semantic_unlocked_total_minutes: [4, 12]
+  synthetic_full_grid:
+    dimension: 4
+    primary_pair_cells: 576
+    primary_pymanopt_runs: 6912
+    maximum_heldout_action_error: 1.3268613983587723e-29
+    semantic_fit_objects: 2880
+    semantic_pymanopt_runs: 11520
+  synthetic_d22_noisy_benchmark:
+    symmetric_noise_scale: 2.0e-4
+    det_positive_seconds_per_four_start_fit: 0.161
+    det_negative_seconds_per_four_start_fit: 0.225
+    det_positive_heldout_relative_error: 1.21105148169934e-4
+    det_negative_heldout_relative_error: 1.4431490027273135e-4
+
+claim_restrictions:
+  - pairwise_success_not_global_latent_proof
+  - not_individuality_stops_at_Q
+  - not_all_individuality_is_rotation
+  - not_brain_physiology
+  - not_source_space
+  - not_causal
+  - not_unlabeled_identifiability
+  - not_performance_improvement
+  - next_branch_remains_split_epoch_covariance_set_anatomy
