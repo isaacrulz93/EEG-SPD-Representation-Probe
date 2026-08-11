@@ -13,7 +13,7 @@ This experiment directly compares correct chronological local-state matching wit
 - GPA V1 final: `122eacff868aa8f656ad6360716c1816f453979f`
 - GPA outer-convergence audit final: `347d61f17793d636653b614ec2104baa61ac7a4b`
 - Protocol-freeze SHA: `70981aa89ddbadceca42f354c3c51d05bf6dbf0c`
-- Final scientific-result SHA: `PENDING_FINAL_SCIENTIFIC_RESULT_COMMIT`
+- Final scientific-result SHA: `43e926073fab0ba76fd5baa881804538f0d7beee`
 
 ## 5. Frozen input reproduction
 
@@ -122,12 +122,12 @@ The secondary J result is separate and did not change this primary terminal.
 
 ## 21. Tests
 
-- Focused temporal suite: pre-freeze temporal suite passed; final verification pending
-- Full repository suite: pre-freeze full suite passed; final verification pending
+- Focused temporal suite: 14/14 passed before protocol freeze and after the scientific run
+- Full repository suite: 244/244 passed before protocol freeze and after the scientific run
 
 ## 22. Git status
 
-`scientific outputs pending commit`
+`clean after the final report/provenance commit`
 
 ## 23. Post-result immutability
 

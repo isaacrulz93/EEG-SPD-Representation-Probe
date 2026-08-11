@@ -1,0 +1,14 @@
+{
+  "branch": "pilot/local-temporal-sequence-correspondence-v0",
+  "final_scientific_result_sha": "43e926073fab0ba76fd5baa881804538f0d7beee",
+  "first_result_tables_figures_decision_sha": "e4dd1086c2e05a2eb25fe07532af8a9394aa701b",
+  "focused_post_result_tests": "14 passed in 5.12 seconds",
+  "full_post_result_tests": "244 passed in 36.01 seconds",
+  "gpa_outer_audit_final_sha": "347d61f17793d636653b614ec2104baa61ac7a4b",
+  "local_gpa_v1_final_sha": "122eacff868aa8f656ad6360716c1816f453979f",
+  "local_metric_final_sha": "796f04e7970972175a660a521caff47c83e0295f",
+  "protocol_freeze_sha": "70981aa89ddbadceca42f354c3c51d05bf6dbf0c",
+  "scientific_definitions_changed_after_result_access": false,
+  "scientific_rerun_performed": false,
+  "terminal": "GO_REPRODUCIBLE_SUBJECT_CLASS_TEMPORAL_SEQUENCE"
+}
