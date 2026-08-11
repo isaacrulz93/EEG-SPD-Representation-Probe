@@ -35,6 +35,8 @@ class SolverSettings:
     max_iterations: int = 1000
     gradient_tolerance: float = 1.0e-5
     objective_tolerance: float = 1.0e-13
+    objective_stall_gradient_multiplier: float = 10.0
+    pymanopt_log_verbosity: int = 0
     line_search_initial_step_size: float = 1.0
     line_search_contraction_factor: float = 0.5
     line_search_sufficient_decrease: float = 1.0e-4
@@ -382,7 +384,9 @@ def build_pymanopt_optimizer(
         min_step_size=settings.optimizer_min_step_size,
         max_cost_evaluations=settings.max_iterations + 1,
         verbosity=0,
-        log_verbosity=0,
+        # The pairwise amendment sets this to one to preserve evaluated
+        # iterates. Other callers retain the historical zero-log default.
+        log_verbosity=settings.pymanopt_log_verbosity,
     )
 
 
@@ -404,9 +408,49 @@ def _optimize_one_pymanopt(
         raise ValueError(f"start is not orthogonal: {orthogonality}")
     result = optimizer.run(problem, initial_point=initial)
     q = np.asarray(result.point, dtype=np.float64)
+    stopping = str(result.stopping_criterion)
+    if result.log is not None and result.log.get("iterations") is not None:
+        log = result.log["iterations"]
+        qualifying = [
+            index
+            for index, value in enumerate(log["gradient_norm"])
+            if float(value) <= settings.gradient_tolerance
+        ]
+        if qualifying:
+            q = np.asarray(log["point"][qualifying[-1]], dtype=np.float64)
+            stopping = f"{stopping}; returned_logged_tolerance_iterate"
     projected = manifold.projection(q, action_gradient(targets, templates, q))
     gradient_norm = float(manifold.norm(q, projected))
     converged = bool(gradient_norm <= settings.gradient_tolerance)
+    # Match the already-audited independent solver's second numerical stop:
+    # an objective plateau at machine precision with a projected gradient no
+    # larger than 10 times the primary tolerance. This is accepted only after
+    # Pymanopt itself reports its frozen minimum-step termination. It prevents
+    # an evaluated determinant sector from being mislabeled as unexplored when
+    # the polar/line-search arithmetic can no longer change the objective.
+    if (
+        not converged
+        and "min step_size reached" in str(result.stopping_criterion)
+        and result.log is not None
+        and result.log.get("iterations") is not None
+    ):
+        log = result.log["iterations"]
+        if len(log["cost"]) >= 2:
+            previous_cost = float(log["cost"][-2])
+            final_cost = float(log["cost"][-1])
+            relative_change = abs(final_cost - previous_cost) / max(
+                1.0, abs(final_cost), abs(previous_cost)
+            )
+            if (
+                relative_change <= settings.objective_tolerance
+                and gradient_norm
+                <= settings.objective_stall_gradient_multiplier
+                * settings.gradient_tolerance
+            ):
+                converged = True
+                stopping = (
+                    f"{stopping}; objective_stall_with_bounded_gradient"
+                )
     return StartResult(
         start_index=int(start_index),
         matrix=q,
@@ -417,7 +461,7 @@ def _optimize_one_pymanopt(
         determinant=float(np.linalg.det(q)),
         line_search_failures=int(result.step_size == 0.0),
         optimizer="pymanopt_2.2.1_stiefel_cg",
-        stopping_criterion=str(result.stopping_criterion),
+        stopping_criterion=stopping,
     )
 
 
