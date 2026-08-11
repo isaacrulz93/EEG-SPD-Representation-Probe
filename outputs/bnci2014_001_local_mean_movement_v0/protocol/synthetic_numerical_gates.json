@@ -1,0 +1,22 @@
+{
+  "common_o_maximum_transition_relative_error": 2.141332869628359e-14,
+  "common_o_minimum_transition_relative_error": 8.67229307540559e-15,
+  "common_o_orthogonality_frobenius_error": 1.5961467235657166e-14,
+  "delta_t_seconds": 0.8,
+  "dimension": 22,
+  "forward_distance": 1.2042929937894515,
+  "forward_reverse_exact": true,
+  "gradient_absolute_error": 1.6775821704007043e-10,
+  "gradient_analytic_directional_derivative": -0.05154325527378582,
+  "gradient_finite_difference": -0.051543255441544034,
+  "gradient_relative_error": 1.6775821704007043e-10,
+  "known_q_action_recovery_relative_error": 8.258170080205037e-16,
+  "known_q_converged_determinant_sector_count": 2,
+  "known_q_distance": 2.3177767149812513e-15,
+  "known_q_multistart_spectral_objective_spread": 1.436421077001851e-16,
+  "maximum_edge_transport_relative_error": 3.6675884940343266e-15,
+  "maximum_norm_absolute_error": 1.5987211554602254e-14,
+  "new_bnci_movement_statistic_computed": false,
+  "reverse_distance": 1.2042929937894515,
+  "status": "PASS"
+}

@@ -1,0 +1,14 @@
+{
+  "packages": {
+    "joblib": "1.5.3",
+    "matplotlib": "3.11.1",
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "pymanopt": "2.2.1",
+    "pyriemann": "0.12",
+    "scipy": "1.18.0",
+    "sklearn": "1.9.0"
+  },
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.8 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 10:37:40) [Clang 14.0.6 ]"
+}
