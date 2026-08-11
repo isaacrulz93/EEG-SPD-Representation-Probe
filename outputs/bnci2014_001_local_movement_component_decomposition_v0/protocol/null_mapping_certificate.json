@@ -1,0 +1,12 @@
+{
+  "class_seed_sequence": [
+    20260810,
+    1101
+  ],
+  "replicates": 1999,
+  "same_indexed_mappings_all_components": true,
+  "subject_seed_sequence": [
+    20260810,
+    1102
+  ]
+}

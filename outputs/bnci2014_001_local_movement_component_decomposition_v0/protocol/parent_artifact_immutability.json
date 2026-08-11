@@ -1,0 +1,22 @@
+{
+  "hashes_after": {
+    "outputs/bnci2014_001_local_mean_movement_v0/arrays/cross_session_movement_matrices.npz": "f3470799a2a532d98f9406902cc7bb75f9385f899991ade350d63e3ca78ef5dc",
+    "outputs/bnci2014_001_local_mean_movement_v0/arrays/full_ordered_antidevelopment.npz": "f3771773a194088e84d765b543ba50db95fc9571ab85838aa43a581eca32a2d3",
+    "outputs/bnci2014_001_local_mean_movement_v0/arrays/split_half_ordered_antidevelopment.npz": "ab64bfdb279805cf5d0e0b9bc12c65eccd1c602ee14e3084f7429e9588e98520",
+    "outputs/bnci2014_001_local_mean_movement_v0/nulls/movement_null_distributions.npz": "954fbaaf761157332a67dfebcc8085ae1a4a8c38b2921340e1226a37e30b2fa1",
+    "outputs/bnci2014_001_local_mean_movement_v0/tables/d_direct_matrix.csv": "1d4ea0b4692565018f33f2889623e8bf372244788d9ff8c45987c442cbf4501c",
+    "outputs/bnci2014_001_local_mean_movement_v0/tables/d_len_matrix.csv": "b57ad89bf6225df5728135424ab48848cb142bbae9aba0bb58cdab84a46f1e2f",
+    "outputs/bnci2014_001_local_mean_movement_v0/tables/d_mov_matrix.csv": "be1abec7e3081df6ffc8ac919ce12ceb6b94f527d2371984e23a8c92315ca64e"
+  },
+  "hashes_before": {
+    "outputs/bnci2014_001_local_mean_movement_v0/arrays/cross_session_movement_matrices.npz": "f3470799a2a532d98f9406902cc7bb75f9385f899991ade350d63e3ca78ef5dc",
+    "outputs/bnci2014_001_local_mean_movement_v0/arrays/full_ordered_antidevelopment.npz": "f3771773a194088e84d765b543ba50db95fc9571ab85838aa43a581eca32a2d3",
+    "outputs/bnci2014_001_local_mean_movement_v0/arrays/split_half_ordered_antidevelopment.npz": "ab64bfdb279805cf5d0e0b9bc12c65eccd1c602ee14e3084f7429e9588e98520",
+    "outputs/bnci2014_001_local_mean_movement_v0/nulls/movement_null_distributions.npz": "954fbaaf761157332a67dfebcc8085ae1a4a8c38b2921340e1226a37e30b2fa1",
+    "outputs/bnci2014_001_local_mean_movement_v0/tables/d_direct_matrix.csv": "1d4ea0b4692565018f33f2889623e8bf372244788d9ff8c45987c442cbf4501c",
+    "outputs/bnci2014_001_local_mean_movement_v0/tables/d_len_matrix.csv": "b57ad89bf6225df5728135424ab48848cb142bbae9aba0bb58cdab84a46f1e2f",
+    "outputs/bnci2014_001_local_mean_movement_v0/tables/d_mov_matrix.csv": "be1abec7e3081df6ffc8ac919ce12ceb6b94f527d2371984e23a8c92315ca64e"
+  },
+  "status": "PASS",
+  "unchanged": true
+}
