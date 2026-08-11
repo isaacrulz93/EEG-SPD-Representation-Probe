@@ -1,0 +1,10 @@
+{
+  "T_J": 0.15404379347512942,
+  "T_class": 0.23919846463061978,
+  "T_subject": 0.25826964750595305,
+  "p_J_classbreak": 0.0005,
+  "p_J_subjectbreak": 0.0005,
+  "p_class": 0.0005,
+  "p_subject": 0.0005,
+  "terminal": "GO_REPRODUCIBLE_SUBJECT_CLASS_ORDERED_MOVEMENT"
+}

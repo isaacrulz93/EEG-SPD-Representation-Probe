@@ -1,0 +1,10 @@
+{
+  "maximum_selected_gradient_norm": 9.991906893530165e-07,
+  "nonconverged_start_count": 0,
+  "primary_both_sector_fit_count": 1296,
+  "primary_fit_count": 1296,
+  "split_both_sector_fit_count": 72,
+  "split_fit_count": 72,
+  "starts_per_fit": 6,
+  "status": "PASS"
+}

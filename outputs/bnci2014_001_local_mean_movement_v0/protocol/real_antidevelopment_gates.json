@@ -1,0 +1,9 @@
+{
+  "all_passed": true,
+  "maximum_edge_transport_relative_error": 1.6464655631772447e-14,
+  "maximum_norm_absolute_error": 2.1316282072803006e-14,
+  "maximum_z_symmetry_relative_error": 0.0,
+  "sequence_count": 216,
+  "status": "PASS",
+  "transition_count": 864
+}
