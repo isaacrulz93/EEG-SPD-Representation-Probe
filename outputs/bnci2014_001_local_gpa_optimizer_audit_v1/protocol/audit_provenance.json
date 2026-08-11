@@ -1,0 +1,17 @@
+{
+  "branch": "audit/local-gpa-registration-failure-v1",
+  "base_sha": "abc4b8127da174709060c82507329bc8c5137069",
+  "scientific_base_sha": "796f04e7970972175a660a521caff47c83e0295f",
+  "v0_protocol_freeze_sha": "ad3dd429a69e7cea77e3d4421987989ab45171b9",
+  "v0_failure_result_sha": "9aba8a8cee1c84d9b69b7fdf3d53d570927a7cc6",
+  "v0_final_sha": "abc4b8127da174709060c82507329bc8c5137069",
+  "audit_definition_commit_sha": "a87563bd3788754172c0b73699a81a4bb10fb232",
+  "implementation_sha256": "8403a3b45c3a423be91b32821b4532dcc2b477003dade0e46eb9f0376cd48abb",
+  "runner_sha256": "a51e2e4ca67e5dfaacb93cb835e141376ca99557381fbade6e627a9f943f98ff",
+  "four_start_forensic_sha256": "0d473cfe5d871a29a697c8daab04cdb9310878d932e2b5cd9295e660c7a163f6",
+  "cg_iteration_trace_sha256": "82926e7695ab392e57e6a3a98ab8ed715d48b85fe141e66280029248bad48e86",
+  "scientific_contract_changed": false,
+  "stage2a_scientific_rerun_performed": false,
+  "stage2a_scientific_statistics_computed": false,
+  "full_repository_tests": "223 passed in 39.50s"
+}

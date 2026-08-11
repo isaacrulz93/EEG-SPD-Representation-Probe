@@ -1,0 +1,39 @@
+{
+  "decision": "RECOMMEND_GPA_OPTIMIZER_ONLY_V1_AMENDMENT",
+  "deterministic_real_audit_bank": {
+    "total_registrations": 4,
+    "trust_regions_certified_registrations": 4
+  },
+  "elapsed_seconds": 25.205433833179995,
+  "failed_registration": {
+    "cg_both_sectors_certified": false,
+    "cg_converged_starts": 1,
+    "trust_regions_both_sectors_certified": true,
+    "trust_regions_converged_starts": 4
+  },
+  "hessian_validation": {
+    "directional_relative_error": 3.1363684261574253e-07,
+    "directional_second_difference": 0.012288455438399147,
+    "directional_second_difference_step": 0.0003,
+    "finite_difference_radius": 1e-05,
+    "hessian_quadratic_form": 0.012288459292511511,
+    "self_adjoint_absolute_error": 1.638758226341075e-11,
+    "self_adjoint_lhs": -0.016022188623498267,
+    "self_adjoint_relative_error": 1.0228054750657027e-09,
+    "self_adjoint_rhs": -0.01602218863988585
+  },
+  "known_q_synthetic": {
+    "total_registrations": 3,
+    "trust_regions_certified_registrations": 3
+  },
+  "scientific_stage2a_statistics_computed": false,
+  "trust_regions_candidate_settings": {
+    "finite_difference_hessian_radius": 1e-05,
+    "gradient_tolerance": 1e-06,
+    "manifold": "Stiefel(d,d,retraction=polar)",
+    "max_inner_iterations": 30,
+    "max_iterations": 250,
+    "max_time_seconds": 120.0,
+    "scientific_objective_changed": false
+  }
+}

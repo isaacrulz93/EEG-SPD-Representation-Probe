@@ -1,0 +1,11 @@
+{
+  "directional_relative_error": 3.1363684261574253e-07,
+  "directional_second_difference": 0.012288455438399147,
+  "directional_second_difference_step": 0.0003,
+  "finite_difference_radius": 1e-05,
+  "hessian_quadratic_form": 0.012288459292511511,
+  "self_adjoint_absolute_error": 1.638758226341075e-11,
+  "self_adjoint_lhs": -0.016022188623498267,
+  "self_adjoint_relative_error": 1.0228054750657027e-09,
+  "self_adjoint_rhs": -0.01602218863988585
+}
