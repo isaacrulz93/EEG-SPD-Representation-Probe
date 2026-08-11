@@ -7,7 +7,7 @@
 - Temporal protocol freeze: `70981aa89ddbadceca42f354c3c51d05bf6dbf0c`
 - Temporal scientific result: `43e926073fab0ba76fd5baa881804538f0d7beee`
 - Protocol freeze SHA: `e24312147ef3020854ef6f6cd174071d1c6ead02`
-- Final result SHA: `FINAL_RESULT_SHA_PENDING`
+- Final result SHA: `c3f1d5ff9cf23db2007bbf839cf4b266e2cb8960`
 - Scientific object: window-wise mean covariance movement, not trial-level or continuous velocity.
 
 The full and split-half mean artifacts were loaded unchanged from the finalized temporal result. Full SHA-256 `e03b94daef3eb37f9209ee7a7482ea575b1eb353804505a3e91013339da1913f`; split SHA-256 `355f098de7ff3dcf274e5a62cf6d92022bc1b1f6ed4301a2dc53f9a19f3cd868`. All 1080 saved mean matrices matched the frozen result exactly; maximum absolute difference `0.000e+00`.
