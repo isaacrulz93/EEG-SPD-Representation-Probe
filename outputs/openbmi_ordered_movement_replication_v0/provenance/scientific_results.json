@@ -85,6 +85,7 @@
     "p_subjectbreak": 0.661
   },
   "protocol_freeze_sha": "19d103666624d9f961839f3099c70e6c2c8b6b0c",
+  "scientific_result_sha": "67a78bb1e461c48e33180c65d8da85cc9285d2cf",
   "raw_temporal": {
     "fraction_identity_better_than_median_derangement": 0.7129629629629629,
     "mean_identity_advantage": 0.01906937863216876,

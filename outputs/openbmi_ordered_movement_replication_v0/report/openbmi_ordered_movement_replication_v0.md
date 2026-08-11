@@ -11,7 +11,7 @@
 - BNCI terminal: `BOTH_INTRINSIC_RELATIVE_AND_SENSOR_FRAME_COMPONENTS`
 - OpenBMI donor branch/head: `pilot/subject-class-interaction-v0` / `272d775678644aad062df424a70586d4b42de652`
 - Protocol freeze SHA: `19d103666624d9f961839f3099c70e6c2c8b6b0c`
-- Scientific result SHA: `PENDING_SCIENTIFIC_RESULT_COMMIT`
+- Scientific result SHA: `67a78bb1e461c48e33180c65d8da85cc9285d2cf`
 
 ## Contract and numerical status
 

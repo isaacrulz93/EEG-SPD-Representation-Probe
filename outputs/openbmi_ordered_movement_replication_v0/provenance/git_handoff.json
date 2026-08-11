@@ -1,0 +1,16 @@
+{
+  "branch": "replication/openbmi-ordered-movement-v0",
+  "original_preserved_worktree": {
+    "branch": "pilot/local-ordered-airm-movement-v0",
+    "head": "6d5ad6a",
+    "status": [
+      "?? src/ordered_airm_movement_v0.py"
+    ],
+    "write_targeted_by_this_replication": false
+  },
+  "parent_sha": "edc1d344cb0657f2f2d87b2992049bceec4705d2",
+  "protocol_freeze_sha": "19d103666624d9f961839f3099c70e6c2c8b6b0c",
+  "scientific_result_sha": "67a78bb1e461c48e33180c65d8da85cc9285d2cf",
+  "terminal": "UNASSESSED_OPENBMI_DATA_CONTRACT_FAILURE",
+  "worktree_expected_clean_after_finalization_commit": true
+}
