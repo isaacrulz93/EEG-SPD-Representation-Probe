@@ -1,0 +1,15 @@
+{
+  "T_J_ang": 0.19240885452534362,
+  "T_J_len": 0.1234538087041349,
+  "T_J_ori": 0.1513437529112489,
+  "p_J_ang_classbreak": 0.0105,
+  "p_J_ang_subjectbreak": 0.001,
+  "p_J_len_classbreak": 0.0005,
+  "p_J_len_subjectbreak": 0.0035,
+  "p_J_ori_classbreak": 0.0005,
+  "p_J_ori_subjectbreak": 0.0005,
+  "split_half_T_J_ang_A": 0.2403025884332437,
+  "split_half_T_J_ang_B": 0.1691101139677596,
+  "split_half_ang_sign_stable": true,
+  "terminal": "BOTH_INTRINSIC_RELATIVE_AND_SENSOR_FRAME_COMPONENTS"
+}
