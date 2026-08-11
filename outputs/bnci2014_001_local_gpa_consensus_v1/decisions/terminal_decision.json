@@ -1,0 +1,22 @@
+{
+  "terminal": "UNASSESSED_GPA_NUMERICAL_FAILURE_V1",
+  "scientific_assessment_completed": false,
+  "reason": "A required GPA start did not converge within the frozen 24 outer iterations.",
+  "failure_level": "constrained quotient GPA outer loop",
+  "fixed_action_optimizer": "Pymanopt 2.2.1 TrustRegions",
+  "fixed_action_optimizer_failure": false,
+  "completed_full_cell_consensuses": 0,
+  "completed_split_half_consensuses": 0,
+  "T_J": null,
+  "p_classbreak": null,
+  "p_subjectbreak": null,
+  "J_s": null,
+  "J_sc": null,
+  "protocol_freeze_sha": "e6e8887036d1e04a2da7db36d84db58d8c80d9ef",
+  "v0_protocol_freeze_sha": "ad3dd429a69e7cea77e3d4421987989ab45171b9",
+  "v0_failure_sha": "9aba8a8cee1c84d9b69b7fdf3d53d570927a7cc6",
+  "optimizer_audit_final_sha": "d846650ea9d4ead205b580d004205327ac1fd3fd",
+  "elapsed_seconds": 321.09961308399215,
+  "automatic_rerun_performed": false,
+  "scientific_settings_changed_after_v1_access": false
+}

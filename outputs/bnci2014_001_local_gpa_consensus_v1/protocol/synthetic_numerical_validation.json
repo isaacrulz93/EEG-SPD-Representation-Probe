@@ -1,0 +1,75 @@
+{
+  "d22_registration": {
+    "converged_components": [
+      -1,
+      1
+    ],
+    "elapsed_seconds": 0.6742200828157365,
+    "objective": 1.920950259923025e-28,
+    "total_starts": 4
+  },
+  "elapsed_seconds": 2.800245832884684,
+  "known_Q_Od_and_S5": [
+    {
+      "converged_components": [
+        -1,
+        1
+      ],
+      "objective": 9.44907453035042e-30,
+      "quotient_distance": 3.0739346984525257e-15,
+      "total_starts": 4,
+      "truth_determinant": -1
+    },
+    {
+      "converged_components": [
+        -1,
+        1
+      ],
+      "objective": 1.384450888662878e-29,
+      "quotient_distance": 3.720820996316375e-15,
+      "total_starts": 4,
+      "truth_determinant": 1
+    }
+  ],
+  "known_answer_GPA": {
+    "constraint_residual": 5.571905644854436e-15,
+    "distance_between_start_orbits": 3.67314397616104e-15,
+    "distance_to_truth_orbit": 3.11298300390066e-15,
+    "objective": 1.0555534122933863e-29
+  },
+  "quotient_symmetry_absolute_difference": 0.0,
+  "settings": {
+    "action_gradient_tolerance": 1e-06,
+    "action_max_iterations": 250,
+    "action_max_time_seconds": 120.0,
+    "action_min_step_size": 1e-12,
+    "centering_residual_max": 1e-07,
+    "equivalent_objective_atol": 1e-10,
+    "equivalent_objective_rtol": 1e-08,
+    "gpa_equivalent_orbit_tolerance": 0.0001,
+    "gpa_gradient_tolerance": 2e-05,
+    "gpa_objective_tolerance": 1e-07,
+    "gpa_outer_iterations": 24,
+    "gpa_prototype_inner_iterations": 16,
+    "gpa_total_starts": 2,
+    "line_search_contraction_factor": 0.5,
+    "line_search_initial_step_size": 1.0,
+    "line_search_max_iterations": 50,
+    "line_search_optimism": 2.0,
+    "line_search_sufficient_decrease": 0.0001,
+    "local_mean_max_iterations": 100,
+    "local_mean_tolerance": 1e-09,
+    "prototype_contraction_factor": 0.5,
+    "prototype_initial_step_size": 1.0,
+    "prototype_line_search_iterations": 30,
+    "prototype_min_step_size": 1e-12,
+    "prototype_sufficient_decrease": 0.0001,
+    "quotient_symmetry_tolerance": 1e-10,
+    "registration_alternations": 8,
+    "registration_objective_tolerance": 1e-09,
+    "registration_total_starts": 4
+  },
+  "stage2a_scientific_statistic_computed": false,
+  "status": "PASS",
+  "trust_hessian_radius": 1e-05
+}

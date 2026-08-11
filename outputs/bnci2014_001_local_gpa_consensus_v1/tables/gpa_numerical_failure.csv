@@ -1,0 +1,2 @@
+terminal,failure_level,error,completed_full_cell_consensuses,completed_split_half_consensuses,T_J,p_classbreak,p_subjectbreak,elapsed_seconds,protocol_freeze_sha,optimizer
+UNASSESSED_GPA_NUMERICAL_FAILURE_V1,constrained quotient GPA outer loop,GPA start 0 did not converge in frozen outer iterations,0,0,,,,321.09961308399215,e6e8887036d1e04a2da7db36d84db58d8c80d9ef,Pymanopt 2.2.1 TrustRegions

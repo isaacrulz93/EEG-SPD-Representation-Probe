@@ -1,0 +1,37 @@
+{
+  "branch": "pilot/local-gpa-consensus-v1",
+  "combined_feature_cache": "cache/bnci2014_001_trajectory_within_subject_v1/combined_trajectory_features.npz",
+  "config_sha256": "67203e74a721ec929d31d3e9650aef5ef3629d4803780a7a7d6599fc260ad7e8",
+  "distance_max_abs_diff": 0.0,
+  "elapsed_seconds": 19.989204165991396,
+  "head_before_v1_freeze": "abc4b8127da174709060c82507329bc8c5137069",
+  "implementation_file_sha256": {
+    "scripts/23_run_local_gpa_consensus_v1.py": "2b200ce959099be88cd90cca5211b4c0ca1674e3c1d0dea27aaf0318e10e40fb",
+    "src/local_gpa_data_v0.py": "e55696de30798ff984a857cfa5368dbef98e59cd3b3d16f4f5ebcc79e0b8d69b",
+    "src/local_gpa_geometry_v0.py": "f23e2f0833c4c5769675a59ac8c30fc84fa8991ce4b7d97352dbeb93f28b6d94",
+    "src/local_gpa_pipeline_v0.py": "9483dd984a483298d1bf50c81caf6e846791f56f88762a4e1beec704a825e241",
+    "src/local_gpa_statistics_v0.py": "618206da5fbf34b5409ff999a7de4c6bfc8c69aa9758494fc272dbf2de722bb8",
+    "src/reporting_local_gpa_v0.py": "4c232f136886a25afee2658b8d2024039fa9fbb8e76a490864cda1f890af20e9"
+  },
+  "implementation_source_sha256": "237bf6fe0d15bbd8ae18dbf2840af095d01253d69f6e600d7a4e344c7e3c21e9",
+  "infrastructure_source_shas": [
+    "796f04e7970972175a660a521caff47c83e0295f"
+  ],
+  "new_stage2a_scientific_statistic_computed": false,
+  "new_stage2a_scientific_statistics_computed": false,
+  "optimizer": "Pymanopt 2.2.1 TrustRegions",
+  "optimizer_audit_definition_sha": "a87563bd3788754172c0b73699a81a4bb10fb232",
+  "optimizer_audit_final_sha": "d846650ea9d4ead205b580d004205327ac1fd3fd",
+  "protocol_sha256": "962834dfe2a252ab145232a7c127f45d4eddb0203137519646ebca5b4996fb30",
+  "recomputed_distance_sha256": "681d8a075eff1218e5e2b2d0e292631ead67badaccc00ec075ba428c9d5aed64",
+  "scientific_base_sha": "796f04e7970972175a660a521caff47c83e0295f",
+  "scientific_representation_diff": "none",
+  "session0_cache": "cache/bnci2014_001/covariances.npz",
+  "session0_states_sha256": "c75044f48552f12ad088306b505b074e930f396fdcb544307fff394717e2ca86",
+  "session1_cache": "cache/bnci2014_001_trajectory_within_subject_v1/session1_window_covariances.npz",
+  "session1_states_sha256": "1afc8cd52d82310a05857d1ffa67859427c4c9aa1302897a140ebda64d0442f8",
+  "trial_count": 5184,
+  "v0_failure_sha": "9aba8a8cee1c84d9b69b7fdf3d53d570927a7cc6",
+  "v0_final_sha": "abc4b8127da174709060c82507329bc8c5137069",
+  "v0_protocol_freeze_sha": "ad3dd429a69e7cea77e3d4421987989ab45171b9"
+}

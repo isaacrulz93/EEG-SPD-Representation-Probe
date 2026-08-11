@@ -1,0 +1,21 @@
+{
+  "elapsed_seconds": 321.09961308399215,
+  "error": "GPA start 0 did not converge in frozen outer iterations",
+  "error_type": "GPANumericalError",
+  "provenance": {
+    "branch": "pilot/local-gpa-consensus-v1",
+    "config_sha256": "67203e74a721ec929d31d3e9650aef5ef3629d4803780a7a7d6599fc260ad7e8",
+    "implementation_source_sha256": "237bf6fe0d15bbd8ae18dbf2840af095d01253d69f6e600d7a4e344c7e3c21e9",
+    "optimizer": "Pymanopt 2.2.1 TrustRegions",
+    "optimizer_audit_final_sha": "d846650ea9d4ead205b580d004205327ac1fd3fd",
+    "protocol_freeze_sha": "e6e8887036d1e04a2da7db36d84db58d8c80d9ef",
+    "protocol_sha256": "962834dfe2a252ab145232a7c127f45d4eddb0203137519646ebca5b4996fb30",
+    "scientific_source_sha": "796f04e7970972175a660a521caff47c83e0295f",
+    "v0_failure_sha": "9aba8a8cee1c84d9b69b7fdf3d53d570927a7cc6",
+    "v0_final_sha": "abc4b8127da174709060c82507329bc8c5137069",
+    "v0_protocol_freeze_sha": "ad3dd429a69e7cea77e3d4421987989ab45171b9"
+  },
+  "scientific_settings_changed_after_access": false,
+  "terminal": "UNASSESSED_GPA_NUMERICAL_FAILURE_V1",
+  "traceback": "joblib.externals.loky.process_executor._RemoteTraceback: \n\"\"\"\nTraceback (most recent call last):\n  File \"/opt/miniconda3/lib/python3.12/site-packages/joblib/externals/loky/process_executor.py\", line 490, in _process_worker\n    r = call_item()\n        ^^^^^^^^^^^\n  File \"/opt/miniconda3/lib/python3.12/site-packages/joblib/externals/loky/process_executor.py\", line 291, in __call__\n    return self.fn(*self.args, **self.kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/miniconda3/lib/python3.12/site-packages/joblib/parallel.py\", line 607, in __call__\n    return [func(*args, **kwargs) for func, args, kwargs in self.items]\n            ^^^^^^^^^^^^^^^^^^^^^\n  File \"/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/src/local_gpa_pipeline_v0.py\", line 202, in _fit_cell\n    fit: GPAFit = fit_quotient_gpa(\n                  ^^^^^^^^^^^^^^^^^\n  File \"/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/src/local_gpa_geometry_v0.py\", line 925, in fit_quotient_gpa\n    raise GPANumericalError(\nsrc.local_gpa_geometry_v0.GPANumericalError: GPA start 0 did not converge in frozen outer iterations\n\"\"\"\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/scripts/23_run_local_gpa_consensus_v1.py\", line 450, in run\n    bank = fit_all_cell_consensuses(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/src/local_gpa_pipeline_v0.py\", line 278, in fit_all_cell_consensuses\n    paths = Parallel(n_jobs=workers, backend=\"loky\", verbose=10)(\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/miniconda3/lib/python3.12/site-packages/joblib/parallel.py\", line 2072, in __call__\n    return output if self.return_generator else list(output)\n                                                ^^^^^^^^^^^^\n  File \"/opt/miniconda3/lib/python3.12/site-packages/joblib/parallel.py\", line 1682, in _get_outputs\n    yield from self._retrieve()\n  File \"/opt/miniconda3/lib/python3.12/site-packages/joblib/parallel.py\", line 1784, in _retrieve\n    self._raise_error_fast()\n  File \"/opt/miniconda3/lib/python3.12/site-packages/joblib/parallel.py\", line 1859, in _raise_error_fast\n    error_job.get_result(self.timeout)\n  File \"/opt/miniconda3/lib/python3.12/site-packages/joblib/parallel.py\", line 758, in get_result\n    return self._return_or_raise()\n           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/miniconda3/lib/python3.12/site-packages/joblib/parallel.py\", line 773, in _return_or_raise\n    raise self._result\nsrc.local_gpa_geometry_v0.GPANumericalError: GPA start 0 did not converge in frozen outer iterations\n"
+}
