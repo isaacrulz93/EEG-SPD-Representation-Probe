@@ -1,0 +1,71 @@
+{
+  "d22_registration": {
+    "elapsed_seconds": 0.8090471250470728,
+    "initial_components": [
+      -1,
+      1,
+      1,
+      -1
+    ],
+    "objective": 5.1217913467883236e-26,
+    "total_starts": 4
+  },
+  "elapsed_seconds": 3.8617924167774618,
+  "exact_Od_S5_cases": [
+    {
+      "both_components_converged": true,
+      "determinant": -1,
+      "objective": 6.428723339485488e-29,
+      "quotient_distance": 8.017931989912042e-15
+    },
+    {
+      "both_components_converged": true,
+      "determinant": 1,
+      "objective": 9.180615303542405e-29,
+      "quotient_distance": 9.58155274657631e-15
+    }
+  ],
+  "gpa_known_answer": {
+    "constraint_residual": 5.9026377116874204e-15,
+    "distance_between_gpa_start_orbits": 1.1405400618608055e-14,
+    "distance_to_truth_orbit": 8.27052816050149e-15,
+    "objective": 5.987741876165849e-29,
+    "outer_iterations": [
+      2,
+      2
+    ]
+  },
+  "new_bnci_stage2a_scientific_statistics_computed": false,
+  "settings": {
+    "action_gradient_tolerance": 1e-06,
+    "action_max_iterations": 250,
+    "action_max_time_seconds": 120.0,
+    "action_min_step_size": 1e-12,
+    "centering_residual_max": 1e-07,
+    "equivalent_objective_atol": 1e-10,
+    "equivalent_objective_rtol": 1e-08,
+    "gpa_equivalent_orbit_tolerance": 0.0001,
+    "gpa_gradient_tolerance": 2e-05,
+    "gpa_objective_tolerance": 1e-07,
+    "gpa_outer_iterations": 24,
+    "gpa_prototype_inner_iterations": 16,
+    "gpa_total_starts": 2,
+    "line_search_contraction_factor": 0.5,
+    "line_search_initial_step_size": 1.0,
+    "line_search_max_iterations": 50,
+    "line_search_optimism": 2.0,
+    "line_search_sufficient_decrease": 0.0001,
+    "local_mean_max_iterations": 100,
+    "local_mean_tolerance": 1e-09,
+    "prototype_contraction_factor": 0.5,
+    "prototype_initial_step_size": 1.0,
+    "prototype_line_search_iterations": 30,
+    "prototype_min_step_size": 1e-12,
+    "prototype_sufficient_decrease": 0.0001,
+    "quotient_symmetry_tolerance": 1e-10,
+    "registration_alternations": 8,
+    "registration_objective_tolerance": 1e-09,
+    "registration_total_starts": 4
+  },
+  "status": "PASS"
+}

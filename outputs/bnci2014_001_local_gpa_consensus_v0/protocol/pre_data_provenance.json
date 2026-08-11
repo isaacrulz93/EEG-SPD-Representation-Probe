@@ -1,0 +1,30 @@
+{
+  "branch": "pilot/local-gpa-consensus-v0",
+  "combined_feature_cache": "cache/bnci2014_001_trajectory_within_subject_v1/combined_trajectory_features.npz",
+  "config_sha256": "5f533867db0234ab39cf7c948b5276cf281db46169173e4f8b723db24c491d57",
+  "distance_max_abs_diff": 0.0,
+  "elapsed_seconds": 7.129126999992877,
+  "head_before_freeze": "796f04e7970972175a660a521caff47c83e0295f",
+  "implementation_file_sha256": {
+    "scripts/21_run_local_gpa_consensus_v0.py": "6032c8e6a9cf3c3af10cc0fdee9686240845d74e2b1c322e331c53970fe841fa",
+    "src/local_gpa_data_v0.py": "e55696de30798ff984a857cfa5368dbef98e59cd3b3d16f4f5ebcc79e0b8d69b",
+    "src/local_gpa_geometry_v0.py": "a4b25ce62a4e78b226bde5f198befac7c139928a9c8ac8a402c442399420b93f",
+    "src/local_gpa_pipeline_v0.py": "9483dd984a483298d1bf50c81caf6e846791f56f88762a4e1beec704a825e241",
+    "src/local_gpa_statistics_v0.py": "618206da5fbf34b5409ff999a7de4c6bfc8c69aa9758494fc272dbf2de722bb8",
+    "src/reporting_local_gpa_v0.py": "c253028fda92067c19e59704683596718d0a666fc4f277b07942620a19b323b9"
+  },
+  "implementation_source_sha256": "8a1630d13e439f562c6d8a13debc3ab6b3621e98d58201bf6dd78c2da70546c5",
+  "infrastructure_source_shas": [
+    "796f04e7970972175a660a521caff47c83e0295f"
+  ],
+  "new_stage2a_scientific_statistic_computed": false,
+  "protocol_sha256": "f4928e6e03b5094ab021457aa911d92c854e311dccf676c3d5292c9083406fd3",
+  "recomputed_distance_sha256": "681d8a075eff1218e5e2b2d0e292631ead67badaccc00ec075ba428c9d5aed64",
+  "scientific_base_sha": "796f04e7970972175a660a521caff47c83e0295f",
+  "scientific_representation_diff": "none",
+  "session0_cache": "cache/bnci2014_001/covariances.npz",
+  "session0_states_sha256": "c75044f48552f12ad088306b505b074e930f396fdcb544307fff394717e2ca86",
+  "session1_cache": "cache/bnci2014_001_trajectory_within_subject_v1/session1_window_covariances.npz",
+  "session1_states_sha256": "1afc8cd52d82310a05857d1ffa67859427c4c9aa1302897a140ebda64d0442f8",
+  "trial_count": 5184
+}

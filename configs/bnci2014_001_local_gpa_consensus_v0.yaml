@@ -1,0 +1,141 @@
+protocol:
+  name: BNCI2014_001 Local GPA Consensus V0
+  version: "0.0"
+  freeze_date: "2026-08-11"
+  timezone: Asia/Seoul
+  path: docs/PROTOCOL_LOCAL_GPA_CONSENSUS_V0.md
+  sha256: f4928e6e03b5094ab021457aa911d92c854e311dccf676c3d5292c9083406fd3
+  branch: pilot/local-gpa-consensus-v0
+  scientific_base_sha: 796f04e7970972175a660a521caff47c83e0295f
+  stage1_terminal_immutable: STOP_NO_STABLE_LOCAL_METRIC_INTERACTION_V0
+  result_adaptation: forbidden
+
+project:
+  output_dir: outputs/bnci2014_001_local_gpa_consensus_v0
+  cache_dir: cache/bnci2014_001_local_gpa_consensus_v0
+  immutable_stage1_output: outputs/bnci2014_001_local_metric_interaction_v0
+  implementation_source_files:
+    - src/local_gpa_geometry_v0.py
+    - src/local_gpa_data_v0.py
+    - src/local_gpa_pipeline_v0.py
+    - src/local_gpa_statistics_v0.py
+    - src/reporting_local_gpa_v0.py
+    - scripts/21_run_local_gpa_consensus_v0.py
+
+dataset:
+  name: BNCI2014_001
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  sessions: [0train, 1test]
+  classes: [left_hand, right_hand, feet, tongue]
+  runs: [0, 1, 2, 3, 4, 5]
+  expected_trials: 5184
+  expected_trials_per_cell: 72
+  channels: 22
+  sampling_frequency_hz: 250.0
+  bandpass_hz: [8.0, 32.0]
+  epoch_seconds: [0.0, 3.996]
+  samples_per_trial: 1000
+  windows: 5
+  samples_per_window: 200
+  covariance_estimator: pyriemann_oas
+  covariance_dtype: float64
+  extra_regularization: none
+  geometry: AIRM
+
+input_reproduction:
+  session0_states_sha256: c75044f48552f12ad088306b505b074e930f396fdcb544307fff394717e2ca86
+  session1_states_sha256: 1afc8cd52d82310a05857d1ffa67859427c4c9aa1302897a140ebda64d0442f8
+  frozen_distance_matrices_sha256: 681d8a075eff1218e5e2b2d0e292631ead67badaccc00ec075ba428c9d5aed64
+  maximum_absolute_tolerance: 1.0e-12
+  failure: UNASSESSED_TECHNICAL_FAILURE_REPRODUCTION
+
+local_centering:
+  scope: trial_only
+  prior_subject_or_session_centering: false
+  temporal_order_used: false
+  mean: AIRM_Frechet
+  rule: G_inverse_sqrt_C_G_inverse_sqrt
+  constraint: centered_AIRM_mean_identity
+
+quotient:
+  space: SPD(22)^5/(O(22)xS5)
+  point_permutations: 120
+  arbitrary_edge_permutations: forbidden
+  orthogonal_components: both
+  scientific_distance: root_mean_five_AIRM_squared_distances
+  q_values_scientific_outputs: false
+
+gpa:
+  settings:
+    local_mean_tolerance: 1.0e-9
+    local_mean_max_iterations: 100
+    centering_residual_max: 1.0e-7
+    registration_total_starts: 4
+    registration_alternations: 8
+    registration_objective_tolerance: 1.0e-9
+    action_max_iterations: 250
+    action_gradient_tolerance: 1.0e-6
+    action_min_step_size: 1.0e-12
+    action_max_time_seconds: 120.0
+    line_search_initial_step_size: 1.0
+    line_search_contraction_factor: 0.5
+    line_search_sufficient_decrease: 1.0e-4
+    line_search_max_iterations: 50
+    line_search_optimism: 2.0
+    gpa_total_starts: 2
+    gpa_outer_iterations: 24
+    gpa_prototype_inner_iterations: 16
+    gpa_objective_tolerance: 1.0e-7
+    gpa_gradient_tolerance: 2.0e-5
+    prototype_initial_step_size: 1.0
+    prototype_contraction_factor: 0.5
+    prototype_sufficient_decrease: 1.0e-4
+    prototype_line_search_iterations: 30
+    prototype_min_step_size: 1.0e-12
+    equivalent_objective_atol: 1.0e-10
+    equivalent_objective_rtol: 1.0e-8
+    gpa_equivalent_orbit_tolerance: 1.0e-4
+    quotient_symmetry_tolerance: 1.0e-10
+  action_manifold: pymanopt_Stiefel_d_d_polar_retraction
+  action_optimizer: pymanopt_ConjugateGradient_HestenesStiefel
+  first_and_final_registration: four_total_starts_two_per_determinant_component
+  intermediate_registration: one_best_basin_warm_continuation
+  prototype_parameterization: P_i_exp_Z_i_with_sum_Z_i_zero
+  global_optimum_claim: false
+
+split_half:
+  half_A_runs: [0, 2, 4]
+  half_B_runs: [1, 3, 5]
+  expected_trials_per_half_cell: 36
+  diagnostic_gating: false
+
+interaction:
+  M01: quotient_distance_session0_consensus_to_session1_consensus
+  M: "0.5*(M01+transpose(M01))"
+  primary_cell_contrast: "J_sc=b_sc+c_sc-a_sc-d_sc"
+  subject_contrast: mean_four_classes
+  group_statistic: mean_nine_subjects
+  group_unit: subject
+  supporting_subject_specificity: "S_sc=c_sc-a_sc"
+  supporting_class_specificity: "C_sc=b_sc-a_sc"
+
+nulls:
+  master_seed: 20260810
+  replicates: 1999
+  classbreak: permute_session1_class_cells_within_subject
+  subjectbreak: permute_session1_subject_cells_within_class
+  rerun_gpa: false
+  pvalue: one_sided_greater_or_equal_plus_one
+  alpha: 0.05
+  pass_rule: T_J_positive_and_both_pvalues_strictly_below_0.05
+
+terminal:
+  go: GO_STABLE_SUBJECT_CLASS_QUOTIENT_MEAN_CONFIGURATION
+  stop: STOP_NO_STABLE_QUOTIENT_MEAN_CONFIGURATION_INTERACTION
+  gpa_failure: UNASSESSED_GPA_NUMERICAL_FAILURE
+  technical_failure: UNASSESSED_TECHNICAL_FAILURE
+
+runtime:
+  workers: 8
+  blas_threads_per_worker: 1
+  resumable_cell_checkpoints: true

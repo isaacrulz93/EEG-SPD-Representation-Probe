@@ -1,0 +1,18 @@
+{
+  "terminal": "UNASSESSED_GPA_NUMERICAL_FAILURE",
+  "reason": "A required full-cell trial registration lacked a converged candidate in both determinant components of O(22).",
+  "completed_full_cell_consensuses": 0,
+  "required_full_cell_consensuses": 72,
+  "completed_split_half_consensuses": 0,
+  "required_split_half_consensuses": 144,
+  "T_J": null,
+  "p_classbreak": null,
+  "p_subjectbreak": null,
+  "subject_level_J_s": null,
+  "subject_class_J_sc": null,
+  "protocol_freeze_sha": "ad3dd429a69e7cea77e3d4421987989ab45171b9",
+  "scientific_result_sha": "9aba8a8cee1c84d9b69b7fdf3d53d570927a7cc6",
+  "scientific_source_sha": "796f04e7970972175a660a521caff47c83e0295f",
+  "scientific_definitions_changed_after_real_access": false,
+  "automatic_rerun_performed": false
+}
