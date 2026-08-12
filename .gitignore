@@ -37,6 +37,9 @@ data/raw/
 !outputs/bnci2014_001_local_gpa_consensus_v1/nulls/correspondence_null_statistics.npz
 !outputs/bnci2014_001_local_gpa_outer_convergence_audit_v2/traces/outer_loop_traces.npz
 
+# Compact frozen-matrix dual-relation anatomy arrays (no upstream refitting)
+!outputs/bnci2014_001_angular_dual_relation_anatomy_v0/arrays/dual_relation_anatomy.npz
+
 # Local scratch files
 *.tmp
 *.temp

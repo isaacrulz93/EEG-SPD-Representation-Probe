@@ -1,0 +1,76 @@
+analysis:
+  name: BNCI2014_001 angular dual relation anatomy v0
+  status: retrospective
+  branch: audit/bnci-angular-dual-relation-anatomy-v0
+  output: outputs/bnci2014_001_angular_dual_relation_anatomy_v0
+lineage:
+  parent_branch: pilot/local-movement-component-decomposition-v0
+  parent_head: edc1d344cb0657f2f2d87b2992049bceec4705d2
+  parent_protocol_freeze: 95c330de9596fa4c4eb4ee377d5af8d99896f4c3
+  parent_scientific_result: 0dfa4ab4f94dd35c4d5ec8e74a5b51940083d3ca
+  parent_T_subject_ang: 0.3091561771980925
+  parent_T_class_ang: 0.39309843397343514
+  parent_T_J_ang: 0.19240885452534362
+  parent_p_J_subjectbreak: 0.001
+  parent_p_J_classbreak: 0.0105
+supporting_lr_audit:
+  pr: 12
+  head: 7e692749e8b14ab1792d7175443ab476676fcb14
+  T_subject: 0.36482154482234475
+  p_subject: 0.0005
+  T_class: 0.15656493093976115
+  p_class: 0.158
+  T_J: 0.11912929182411669
+  p_J_subjectbreak: 0.09
+  p_J_classbreak: 0.3065
+  terminal: BNCI_LR_ANGULAR_INTERACTION_NOT_SUPPORTED
+frozen_input:
+  path: outputs/bnci2014_001_local_movement_component_decomposition_v0/arrays/component_cost_matrices.npz
+  sha256: 51af2be73930a8ad77e617dd1b473b0249423c74d030ea2966d489603a250091
+  key: c_ang_matrix
+  shape: [36, 36]
+  dtype: float64
+  direction: session0_rows_to_session1_columns
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  classes: [left_hand, right_hand, feet, tongue]
+formal_decomposition:
+  pairs: [LR, LF, LT, RF, RT, FT]
+  definitions:
+    S: c_minus_a
+    C: b_minus_a
+    J: b_plus_c_minus_a_minus_d
+  aggregation: class_mean_within_subject_then_subject_mean
+  pairwise_null_pvalues: not_computed
+  fraction_of_total_J: (T_J_pair_divided_by_6)_divided_by_T_J_4class
+  tolerance:
+    atol: 1.0e-12
+    rtol: 1.0e-12
+descriptive_dual_anatomy:
+  symmetric_A: (D_plus_D_transpose)_divided_by_2
+  inferential_use_of_A: forbidden
+  G: subject_fixed_class_relation_matrix
+  delta_G: G_minus_average_corresponding_diagonal
+  H: class_fixed_subject_relation_matrix
+  delta_H: H_minus_average_corresponding_diagonal
+  pairwise_profile_statistics:
+    - pearson_correlation
+    - centered_cosine_similarity
+    - euclidean_distance
+  commonality:
+    G: leave_one_subject_out_mean_profile
+    H: leave_one_class_out_mean_profile
+  centered_cosine_note: algebraically_equals_Pearson_for_nondegenerate_centered_profiles
+coarse_contrast:
+  K_J: mean_LF_LT_RF_RT_minus_mean_LR_FT
+  status: descriptive_no_pvalue
+inference_hierarchy:
+  immutable_formal_prior: frozen_four_class_angular_SCJ
+  formal_retrospective: exact_six_pair_decomposition
+  supporting_retrospective: PR12_left_right_audit
+  descriptive: [G, delta_G, H, delta_H, commonality, K_J, subject_influence]
+upstream_refitting:
+  EEG: forbidden
+  covariance_means: forbidden
+  anti_developments: forbidden
+  movement_tuples: forbidden
+  quotient_optimizer: forbidden

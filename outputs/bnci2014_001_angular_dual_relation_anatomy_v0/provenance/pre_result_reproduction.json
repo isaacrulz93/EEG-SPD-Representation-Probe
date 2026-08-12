@@ -1,0 +1,36 @@
+{
+  "canonical_classes": true,
+  "canonical_subjects": true,
+  "csv_maximum_absolute_roundtrip_error": 8.881784197001252e-16,
+  "dtype": "float64",
+  "exact_c_full_minus_c_len": true,
+  "hashes": {
+    "outputs/bnci2014_001_local_movement_component_decomposition_v0/arrays/component_cost_matrices.npz": "51af2be73930a8ad77e617dd1b473b0249423c74d030ea2966d489603a250091",
+    "outputs/bnci2014_001_local_movement_component_decomposition_v0/protocol/artifact_manifest.csv": "c3aea494fedee8af1ee42a5c26ff94fc5bfae5e5289549bc878c3941da43df79",
+    "outputs/bnci2014_001_local_movement_component_decomposition_v0/tables/c_ang_matrix.csv": "f6c06c3f44807207d7baf0d84226859380e008b1d27a47572f9b94d0dc6735bd"
+  },
+  "parent_statistics": {
+    "expected": {
+      "T_J": 0.19240885452534362,
+      "T_class": 0.39309843397343514,
+      "T_subject": 0.3091561771980925
+    },
+    "maximum_absolute_error": 0.0,
+    "observed": {
+      "T_J": 0.19240885452534362,
+      "T_class": 0.39309843397343514,
+      "T_subject": 0.3091561771980925
+    },
+    "signed_errors": {
+      "T_J": 0.0,
+      "T_class": 0.0,
+      "T_subject": 0.0
+    }
+  },
+  "protocol_source_hash": "b1391a9b54e473b0f1a6e5d5af5ff3e9bdde9b4116ffec19610c0c98b5ea7039",
+  "shape": [
+    36,
+    36
+  ],
+  "status": "PASS"
+}
