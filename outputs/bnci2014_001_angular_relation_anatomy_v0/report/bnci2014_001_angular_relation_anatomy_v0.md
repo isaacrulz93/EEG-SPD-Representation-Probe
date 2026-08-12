@@ -9,7 +9,7 @@
 - Parent protocol freeze: `95c330de9596fa4c4eb4ee377d5af8d99896f4c3`
 - Parent scientific result: `0dfa4ab4f94dd35c4d5ec8e74a5b51940083d3ca`
 - Protocol freeze SHA: `93ba2834eda20d1baa03dac2d26b6285062a8b1d`
-- Scientific result SHA: `PENDING_SCIENTIFIC_RESULT_COMMIT`
+- Scientific result SHA: `7b5bc7c35b9a825bcfa5b407d6d1e8c1f289188b`
 - Frozen matrix SHA-256: `51af2be73930a8ad77e617dd1b473b0249423c74d030ea2966d489603a250091`
 
 Only the frozen 36 x 36 cross-session squared `c_ang` matrix was read. No EEG,

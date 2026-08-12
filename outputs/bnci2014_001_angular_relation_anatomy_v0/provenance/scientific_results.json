@@ -125,7 +125,7 @@
   "protocol_freeze_sha": "93ba2834eda20d1baa03dac2d26b6285062a8b1d",
   "protocol_source_hash": "1f96f3071e647f0484116533ef640e0fa2cab11936a12857e8ac8a0629717b1d",
   "runtime_seconds": 0.8580274579580873,
-  "scientific_result_sha": "PENDING_SCIENTIFIC_RESULT_COMMIT",
+  "scientific_result_sha": "7b5bc7c35b9a825bcfa5b407d6d1e8c1f289188b",
   "scientific_settings_changed_after_protocol_freeze": false,
   "subject_J_summary": {
     "largest_subject": 9,
