@@ -8,7 +8,7 @@
 - Parent scientific result: `0dfa4ab4f94dd35c4d5ec8e74a5b51940083d3ca`
 - Parent terminal: `BOTH_INTRINSIC_RELATIVE_AND_SENSOR_FRAME_COMPONENTS`
 - Protocol freeze SHA: `659a9018adea03db5aa8879c7aff218622428dfb`
-- Scientific result SHA: `PENDING_SCIENTIFIC_RESULT_COMMIT`
+- Scientific result SHA: `19bc935620aae0659077cd620f31e4309a130a40`
 
 The diagnostic used only the frozen parent squared angular-cost arrays. No raw EEG, covariance mean, anti-development, movement tuple, or quotient optimizer was fitted or recomputed. Parent artifacts reproduced exactly and remained unchanged.
 

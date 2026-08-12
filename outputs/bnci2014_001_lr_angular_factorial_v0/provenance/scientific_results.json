@@ -19,7 +19,7 @@
   },
   "protocol_freeze_sha": "659a9018adea03db5aa8879c7aff218622428dfb",
   "runtime_seconds": 0.5965824169106781,
-  "scientific_result_sha": "PENDING_SCIENTIFIC_RESULT_COMMIT",
+  "scientific_result_sha": "19bc935620aae0659077cd620f31e4309a130a40",
   "scientific_setting_changed_after_protocol_freeze": false,
   "split_half": {
     "half_A_T_J": 0.15635726917541753,
