@@ -1,0 +1,457 @@
+{
+  "G_H_diagonal_maximum_absolute_error": 0.0,
+  "G_smallest_pair_counts": {
+    "adjusted": {
+      "FT": 1,
+      "LF": 1,
+      "LR": 4,
+      "LT": 1,
+      "RF": 1,
+      "RT": 1
+    },
+    "raw": {
+      "FT": 2,
+      "LF": 0,
+      "LR": 5,
+      "LT": 1,
+      "RF": 1,
+      "RT": 0
+    }
+  },
+  "K_J": 0.03853480269493012,
+  "K_J_direction": "positive",
+  "LR_subject_summary": {
+    "mean": 0.11912929182411669,
+    "median": -0.020045344094486106,
+    "positive_count": 4
+  },
+  "commonality": {
+    "G": {
+      "adjusted": {
+        "leave_out_by_label": {
+          "S1": 0.4571267460250236,
+          "S2": -0.5888977842289626,
+          "S3": 0.6480406588424042,
+          "S4": 0.6634377512217947,
+          "S5": 0.7533572749882368,
+          "S6": -0.5857500804887755,
+          "S7": 0.8733023755813037,
+          "S8": 0.8863019487180949,
+          "S9": 0.5277584307956847
+        },
+        "leave_out_pearson_mean": 0.40385303571720055,
+        "maximum_pearson_centered_cosine_error": 3.3306690738754696e-16,
+        "pairwise_pearson_maximum": 0.9895906571635679,
+        "pairwise_pearson_mean": 0.21418989089289084,
+        "pairwise_pearson_median": 0.47397585278166054,
+        "pairwise_pearson_minimum": -0.8077368041958684
+      },
+      "maximum_pearson_centered_cosine_error": 3.3306690738754696e-16,
+      "raw": {
+        "leave_out_by_label": {
+          "S1": 0.4576218257934632,
+          "S2": -0.6444267880029796,
+          "S3": 0.6116927869839992,
+          "S4": 0.7360509325692026,
+          "S5": 0.7546891121089582,
+          "S6": -0.35605416033104054,
+          "S7": 0.753856599778194,
+          "S8": 0.9193319965893797,
+          "S9": 0.5236074985810534
+        },
+        "leave_out_pearson_mean": 0.41737442267447,
+        "maximum_pearson_centered_cosine_error": 2.220446049250313e-16,
+        "pairwise_pearson_maximum": 0.9115560978078042,
+        "pairwise_pearson_mean": 0.25714169598464975,
+        "pairwise_pearson_median": 0.5162184206917957,
+        "pairwise_pearson_minimum": -0.7611850306693975
+      }
+    },
+    "H": {
+      "adjusted": {
+        "leave_out_by_label": {
+          "F": 0.8163491765273879,
+          "L": 0.7485434910875298,
+          "R": 0.1806432399323721,
+          "T": -0.10948998862638515
+        },
+        "leave_out_pearson_mean": 0.40901147973022617,
+        "maximum_pearson_centered_cosine_error": 2.220446049250313e-16,
+        "pairwise_pearson_maximum": 0.8631079838781527,
+        "pairwise_pearson_mean": 0.15047722216144901,
+        "pairwise_pearson_median": 0.07046396658567593,
+        "pairwise_pearson_minimum": -0.26863923114627136
+      },
+      "maximum_pearson_centered_cosine_error": 3.3306690738754696e-16,
+      "raw": {
+        "leave_out_by_label": {
+          "F": 0.8402448145082503,
+          "L": 0.8094886482193243,
+          "R": 0.3661260782283246,
+          "T": -0.039701823619902196
+        },
+        "leave_out_pearson_mean": 0.4940394293339992,
+        "maximum_pearson_centered_cosine_error": 3.3306690738754696e-16,
+        "pairwise_pearson_maximum": 0.8740641813402257,
+        "pairwise_pearson_mean": 0.2385514522477139,
+        "pairwise_pearson_median": 0.18159168218699867,
+        "pairwise_pearson_minimum": -0.21272753786113802
+      }
+    }
+  },
+  "cross_effector_mean_T_J": 0.20525378875698694,
+  "group_reconstruction": {
+    "T_C": 0.0,
+    "T_J": 2.7755575615628914e-17,
+    "T_S": 5.551115123125783e-17
+  },
+  "input_reproduction": {
+    "canonical_classes": true,
+    "canonical_subjects": true,
+    "csv_maximum_absolute_roundtrip_error": 8.881784197001252e-16,
+    "dtype": "float64",
+    "exact_c_full_minus_c_len": true,
+    "hashes": {
+      "outputs/bnci2014_001_local_movement_component_decomposition_v0/arrays/component_cost_matrices.npz": "51af2be73930a8ad77e617dd1b473b0249423c74d030ea2966d489603a250091",
+      "outputs/bnci2014_001_local_movement_component_decomposition_v0/protocol/artifact_manifest.csv": "c3aea494fedee8af1ee42a5c26ff94fc5bfae5e5289549bc878c3941da43df79",
+      "outputs/bnci2014_001_local_movement_component_decomposition_v0/tables/c_ang_matrix.csv": "f6c06c3f44807207d7baf0d84226859380e008b1d27a47572f9b94d0dc6735bd"
+    },
+    "shape": [
+      36,
+      36
+    ],
+    "status": "PASS"
+  },
+  "maximum_pearson_centered_cosine_error": 3.3306690738754696e-16,
+  "maximum_reconstruction_error": 2.220446049250313e-16,
+  "mean_G_adjusted_order": [
+    [
+      "LR",
+      0.15656493093976115
+    ],
+    [
+      "RF",
+      0.1575289065716441
+    ],
+    [
+      "LF",
+      0.2599722446623185
+    ],
+    [
+      "FT",
+      0.2815213159239606
+    ],
+    [
+      "RT",
+      0.4041010382811039
+    ],
+    [
+      "LT",
+      1.0989021674618225
+    ]
+  ],
+  "mean_G_raw_order": [
+    [
+      "LR",
+      0.5086492323745038
+    ],
+    [
+      "RF",
+      0.5166058397056871
+    ],
+    [
+      "LF",
+      0.6191039119121409
+    ],
+    [
+      "FT",
+      0.6257990225295669
+    ],
+    [
+      "RT",
+      0.7413313790716303
+    ],
+    [
+      "LT",
+      1.4361872423681281
+    ]
+  ],
+  "pairwise_pvalues_computed": false,
+  "parent": {
+    "T_J": 0.19240885452534362,
+    "T_class": 0.39309843397343514,
+    "T_subject": 0.3091561771980925,
+    "p_J_classbreak": 0.0105,
+    "p_J_subjectbreak": 0.001,
+    "signed_reproduction_errors": {
+      "T_J": 0.0,
+      "T_class": 0.0,
+      "T_subject": 0.0
+    }
+  },
+  "parent_artifacts_unchanged": true,
+  "parent_hashes_after": {
+    "outputs/bnci2014_001_local_movement_component_decomposition_v0/arrays/component_cost_matrices.npz": "51af2be73930a8ad77e617dd1b473b0249423c74d030ea2966d489603a250091",
+    "outputs/bnci2014_001_local_movement_component_decomposition_v0/protocol/artifact_manifest.csv": "c3aea494fedee8af1ee42a5c26ff94fc5bfae5e5289549bc878c3941da43df79",
+    "outputs/bnci2014_001_local_movement_component_decomposition_v0/tables/c_ang_matrix.csv": "f6c06c3f44807207d7baf0d84226859380e008b1d27a47572f9b94d0dc6735bd"
+  },
+  "parent_hashes_before": {
+    "outputs/bnci2014_001_local_movement_component_decomposition_v0/arrays/component_cost_matrices.npz": "51af2be73930a8ad77e617dd1b473b0249423c74d030ea2966d489603a250091",
+    "outputs/bnci2014_001_local_movement_component_decomposition_v0/protocol/artifact_manifest.csv": "c3aea494fedee8af1ee42a5c26ff94fc5bfae5e5289549bc878c3941da43df79",
+    "outputs/bnci2014_001_local_movement_component_decomposition_v0/tables/c_ang_matrix.csv": "f6c06c3f44807207d7baf0d84226859380e008b1d27a47572f9b94d0dc6735bd"
+  },
+  "protocol_freeze_sha": "54154436aeabd818cacaa8c6973400b93de7a9ea",
+  "protocol_source_hash": "b1391a9b54e473b0f1a6e5d5af5ff3e9bdde9b4116ffec19610c0c98b5ea7039",
+  "runtime_seconds": 1.3977909579407424,
+  "scientific_result_sha": "PENDING_SCIENTIFIC_RESULT_COMMIT",
+  "scientific_setting_changed_after_protocol_freeze": false,
+  "six_pair_group": [
+    {
+      "T_C": 0.15656493093976115,
+      "T_J": 0.11912929182411669,
+      "T_S": 0.36482154482234475,
+      "first_class": "left_hand",
+      "fraction_of_total_J_if_defined": 0.10319110323517298,
+      "pair": "LR",
+      "second_class": "right_hand"
+    },
+    {
+      "T_C": 0.2599722446623185,
+      "T_J": 0.016512582380636385,
+      "T_S": 0.40793880713640107,
+      "first_class": "left_hand",
+      "fraction_of_total_J_if_defined": 0.014303380529074861,
+      "pair": "LF",
+      "second_class": "feet"
+    },
+    {
+      "T_C": 1.0989021674618225,
+      "T_J": 0.514204524971885,
+      "T_S": 0.3419988383605588,
+      "first_class": "left_hand",
+      "fraction_of_total_J_if_defined": 0.44540961679438995,
+      "pair": "LT",
+      "second_class": "tongue"
+    },
+    {
+      "T_C": 0.1575289065716441,
+      "T_J": 0.1277244434440154,
+      "T_S": 0.27631351603562615,
+      "first_class": "right_hand",
+      "fraction_of_total_J_if_defined": 0.110636318131946,
+      "pair": "RF",
+      "second_class": "feet"
+    },
+    {
+      "T_C": 0.40410103828110394,
+      "T_J": 0.1625736042314111,
+      "T_S": 0.21037354725978386,
+      "first_class": "right_hand",
+      "fraction_of_total_J_if_defined": 0.14082304461547646,
+      "pair": "RT",
+      "second_class": "tongue"
+    },
+    {
+      "T_C": 0.2815213159239607,
+      "T_J": 0.21430868029999697,
+      "T_S": 0.25349080957384024,
+      "first_class": "feet",
+      "fraction_of_total_J_if_defined": 0.18563653669393956,
+      "pair": "FT",
+      "second_class": "tongue"
+    }
+  ],
+  "subject_concentration": {
+    "largest_subject": 9,
+    "largest_value": 1.4318612558257557,
+    "remaining_mean": 0.037477304362792084
+  },
+  "subject_pair_patterns": [
+    {
+      "largest_J": 0.5968464098635651,
+      "largest_J_pair": "RT",
+      "subject": 1
+    },
+    {
+      "largest_J": 0.0784379420270806,
+      "largest_J_pair": "RF",
+      "subject": 2
+    },
+    {
+      "largest_J": 0.5368750406406191,
+      "largest_J_pair": "RT",
+      "subject": 3
+    },
+    {
+      "largest_J": 0.16121156307499557,
+      "largest_J_pair": "RT",
+      "subject": 4
+    },
+    {
+      "largest_J": 0.011251458835327133,
+      "largest_J_pair": "FT",
+      "subject": 5
+    },
+    {
+      "largest_J": 0.24077725731754474,
+      "largest_J_pair": "FT",
+      "subject": 6
+    },
+    {
+      "largest_J": 0.06989083905881258,
+      "largest_J_pair": "FT",
+      "subject": 7
+    },
+    {
+      "largest_J": 0.19099659098581917,
+      "largest_J_pair": "RT",
+      "subject": 8
+    },
+    {
+      "largest_J": 4.949301756281019,
+      "largest_J_pair": "LT",
+      "subject": 9
+    }
+  ],
+  "subset_indices": {
+    "FT": [
+      2,
+      3,
+      6,
+      7,
+      10,
+      11,
+      14,
+      15,
+      18,
+      19,
+      22,
+      23,
+      26,
+      27,
+      30,
+      31,
+      34,
+      35
+    ],
+    "LF": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      30,
+      32,
+      34
+    ],
+    "LR": [
+      0,
+      1,
+      4,
+      5,
+      8,
+      9,
+      12,
+      13,
+      16,
+      17,
+      20,
+      21,
+      24,
+      25,
+      28,
+      29,
+      32,
+      33
+    ],
+    "LT": [
+      0,
+      3,
+      4,
+      7,
+      8,
+      11,
+      12,
+      15,
+      16,
+      19,
+      20,
+      23,
+      24,
+      27,
+      28,
+      31,
+      32,
+      35
+    ],
+    "RF": [
+      1,
+      2,
+      5,
+      6,
+      9,
+      10,
+      13,
+      14,
+      17,
+      18,
+      21,
+      22,
+      25,
+      26,
+      29,
+      30,
+      33,
+      34
+    ],
+    "RT": [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13,
+      15,
+      17,
+      19,
+      21,
+      23,
+      25,
+      27,
+      29,
+      31,
+      33,
+      35
+    ]
+  },
+  "supporting_lr_audit": {
+    "T_J": 0.11912929182411669,
+    "T_class": 0.15656493093976115,
+    "T_subject": 0.36482154482234475,
+    "head": "7e692749e8b14ab1792d7175443ab476676fcb14",
+    "p_J_classbreak": 0.3065,
+    "p_J_subjectbreak": 0.09,
+    "p_class": 0.158,
+    "p_subject": 0.0005,
+    "pr": 12,
+    "terminal": "BNCI_LR_ANGULAR_INTERACTION_NOT_SUPPORTED"
+  },
+  "tests": {
+    "focused_after": "16 passed in 0.17s",
+    "focused_before": "13 passed in 0.08s",
+    "full_after": "286 passed, 4 skipped, 1 unrelated failure: missing ignored cache/bnci2014_001_trajectory_within_subject_v1/combined_trajectory_features.npz"
+  },
+  "verdict": "COMPLETED_BNCI_ANGULAR_DUAL_RELATION_ANATOMY_V0",
+  "within_group_mean_T_J": 0.16671898606205682
+}

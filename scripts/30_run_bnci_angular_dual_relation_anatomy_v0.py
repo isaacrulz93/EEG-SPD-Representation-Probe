@@ -439,6 +439,16 @@ def render_report(results: dict[str, Any], scientific_sha: str) -> str:
     adjusted_order = ", ".join(
         f"{name}={fmt(value)}" for name, value in results["mean_G_adjusted_order"]
     )
+    raw_smallest = ", ".join(
+        f"{name}={count}/9"
+        for name, count in results["G_smallest_pair_counts"]["raw"].items()
+        if count > 0
+    )
+    adjusted_smallest = ", ".join(
+        f"{name}={count}/9"
+        for name, count in results["G_smallest_pair_counts"]["adjusted"].items()
+        if count > 0
+    )
     h_loo = ", ".join(
         f"{name}={fmt(value)}" for name, value in h["raw"]["leave_out_by_label"].items()
     )
@@ -498,9 +508,10 @@ LR into a new primary endpoint.
 
 Across-subject mean raw G relations, ordered small to large, are {raw_order}.
 The adjusted ordering is {adjusted_order}. The most frequent raw smallest pair
-and per-subject orderings are saved in the profile tables. These patterns show
-both shared tendencies and subject-specific deviations; G is a relation matrix,
-not an intrinsic metric geometry.
+counts are {raw_smallest}; adjusted counts are {adjusted_smallest}. Full
+per-subject orderings are saved in the profile tables. These patterns show both
+shared tendencies and subject-specific deviations; G is a relation matrix, not
+an intrinsic metric geometry.
 
 ## Q2 — Common class-relation backbone
 
@@ -564,6 +575,44 @@ interaction.
 
 Multiple patterns coexist; none is forced into a replacement primary result.
 The descriptive G/H deviations are not themselves formal interaction tests.
+
+## Formal versus descriptive hierarchy
+
+1. **Immutable formal prior evidence:** the frozen four-class angular J and its
+   two parent null tests remain the inferential result.
+2. **Formal retrospective decomposition:** the six binary-pair statistics are
+   an exact algebraic partition of the frozen mean-aggregated S/C/J values.
+3. **Supporting retrospective result:** PR #12 supplies the separately frozen
+   Left/Right-only audit; it is not promoted by this analysis.
+4. **Descriptive anatomy:** G, delta-G, H, delta-H, profile correlations,
+   subject-by-pair contributions, influence summaries, and K_J explain the
+   relation structure without replacing the formal S/C/J test.
+
+## Result-to-claim guide
+
+| Descriptive outcome | Permitted interpretation | Not established |
+| --- | --- | --- |
+| Strong G similarity across subjects | A common class-relation backbone is descriptively present. | A universal intrinsic class shape or generative class factor. |
+| Weak G but strong H similarity | Subject-pair ordering is more reusable across classes than class-pair ordering is across subjects. | One reusable subject transformation. |
+| Both G and H strong | Common class and subject relational backbones may coexist. | An additive or causal subject/class decomposition. |
+| Both G and H weak | The relation profiles are heterogeneous at this resolution. | Absence of formal S/C/J effects or equivalence to zero. |
+| LR weak but hand/nonhand pairs strong | The four-class result may be concentrated across coarse effector boundaries. | Feet and tongue as a biologically homogeneous class. |
+| J concentrated in LF/LT/RF/RT rather than LR | Cross-effector class-pair contributions explain more of the additive four-class J than LR. | A newly selected pairwise primary endpoint. |
+| J concentrated in a few subjects | The group mean has high descriptive subject influence and should be reported with its distribution. | Permission to drop subjects or treat entries as independent observations. |
+| Static versus movement patterns differ | Only already-frozen results may be compared, with their distinct objects kept explicit. | Interchangeability of static placement and ordered movement anatomy. |
+
+## Overclaim risks
+
+- G and H are relation matrices/profiles, not strongly intrinsic manifold
+  shapes.
+- Baseline-adjusted matrices remain descriptive and are not inferential
+  primaries.
+- Pairwise values or p-values cannot redefine the frozen main conclusion.
+- Common relation geometry does not identify a reusable transformation.
+- S/C/J alone does not identify a generative subject/class decomposition.
+- LR is one pair and cannot stand in for the entire four-class structure.
+- No upstream artifact may be refitted or silently modified.
+- Subjects, not trial pairs or matrix entries, are the population units.
 
 ## Validation
 
@@ -853,6 +902,16 @@ def execute(*, focused_before: str) -> None:
     largest_subject_index = int(np.argmax(full.j_s))
     raw_means = np.mean(dual.g_profiles, axis=0)
     adjusted_means = np.mean(dual.delta_g_profiles, axis=0)
+    raw_smallest_counts = {
+        name: int(np.count_nonzero(np.argmin(dual.g_profiles, axis=1) == index))
+        for index, name in enumerate(PAIR_NAMES)
+    }
+    adjusted_smallest_counts = {
+        name: int(
+            np.count_nonzero(np.argmin(dual.delta_g_profiles, axis=1) == index)
+        )
+        for index, name in enumerate(PAIR_NAMES)
+    }
     max_commonality_error = max(
         g_details["raw"]["maximum_pearson_centered_cosine_error"],
         g_details["adjusted"]["maximum_pearson_centered_cosine_error"],
@@ -898,6 +957,10 @@ def execute(*, focused_before: str) -> None:
             [PAIR_NAMES[index], float(adjusted_means[index])]
             for index in np.argsort(adjusted_means)
         ],
+        "G_smallest_pair_counts": {
+            "raw": raw_smallest_counts,
+            "adjusted": adjusted_smallest_counts,
+        },
         "subject_pair_patterns": subject_patterns,
         "subject_concentration": {
             "largest_subject": largest_subject_index + 1,
