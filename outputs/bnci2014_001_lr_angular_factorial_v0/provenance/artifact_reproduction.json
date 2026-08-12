@@ -1,0 +1,90 @@
+{
+  "artifacts": {
+    "arrays/component_cost_matrices.npz": {
+      "manifest_match": true,
+      "sha256": "51af2be73930a8ad77e617dd1b473b0249423c74d030ea2966d489603a250091"
+    },
+    "arrays/split_half_component_matrices.npz": {
+      "manifest_match": true,
+      "sha256": "cdf618662c1ac5eb3b8fa9b65ad9fde921b45d011c967e87f6ec9a2ab1775307"
+    },
+    "protocol/artifact_manifest.csv": {
+      "manifest_match": true,
+      "sha256": "c3aea494fedee8af1ee42a5c26ff94fc5bfae5e5289549bc878c3941da43df79"
+    },
+    "tables/c_ang_matrix.csv": {
+      "manifest_match": true,
+      "sha256": "f6c06c3f44807207d7baf0d84226859380e008b1d27a47572f9b94d0dc6735bd"
+    }
+  },
+  "c_ang_exactly_equals_c_full_minus_c_len": true,
+  "canonical_ordering": "subjects_1_to_9_x_left_hand_right_hand_feet_tongue",
+  "new_lr_statistic_accessed": false,
+  "parent_protocol_sha": "95c330de9596fa4c4eb4ee377d5af8d99896f4c3",
+  "parent_result_sha": "0dfa4ab4f94dd35c4d5ec8e74a5b51940083d3ca",
+  "parent_sha": "edc1d344cb0657f2f2d87b2992049bceec4705d2",
+  "readable_csv_npz_atol": 1e-15,
+  "readable_csv_npz_maximum_absolute_error": 8.881784197001252e-16,
+  "scientific_result_manifest_sha256": "28a12fc32c6477fe6cccd071af587304a31eb0e738b079a192c254ff5e82a6c6",
+  "selected_classes": [
+    "left_hand",
+    "right_hand",
+    "left_hand",
+    "right_hand",
+    "left_hand",
+    "right_hand",
+    "left_hand",
+    "right_hand",
+    "left_hand",
+    "right_hand",
+    "left_hand",
+    "right_hand",
+    "left_hand",
+    "right_hand",
+    "left_hand",
+    "right_hand",
+    "left_hand",
+    "right_hand"
+  ],
+  "selected_parent_indices": [
+    0,
+    1,
+    4,
+    5,
+    8,
+    9,
+    12,
+    13,
+    16,
+    17,
+    20,
+    21,
+    24,
+    25,
+    28,
+    29,
+    32,
+    33
+  ],
+  "selected_subjects": [
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5,
+    6,
+    6,
+    7,
+    7,
+    8,
+    8,
+    9,
+    9
+  ],
+  "status": "PASS"
+}

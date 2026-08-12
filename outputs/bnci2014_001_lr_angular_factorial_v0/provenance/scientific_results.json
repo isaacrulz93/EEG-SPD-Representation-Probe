@@ -1,0 +1,70 @@
+{
+  "no_raw_eeg_or_movement_refit": true,
+  "parent_four_class": {
+    "T_J_ang": 0.19240885452534362,
+    "T_class_ang": 0.39309843397343514,
+    "T_subject_ang": 0.3091561771980925,
+    "p_J_classbreak": 0.0105,
+    "p_J_subjectbreak": 0.001
+  },
+  "primary": {
+    "T_J": 0.11912929182411669,
+    "T_class": 0.15656493093976115,
+    "T_subject": 0.36482154482234475,
+    "p_J_classbreak": 0.3065,
+    "p_J_subjectbreak": 0.09,
+    "p_class": 0.158,
+    "p_subject": 0.0005,
+    "supported": false
+  },
+  "protocol_freeze_sha": "659a9018adea03db5aa8879c7aff218622428dfb",
+  "runtime_seconds": 0.5965824169106781,
+  "scientific_result_sha": "19bc935620aae0659077cd620f31e4309a130a40",
+  "scientific_setting_changed_after_protocol_freeze": false,
+  "split_half": {
+    "half_A_T_J": 0.15635726917541753,
+    "half_B_T_J": 0.059668831272278275,
+    "sign_stable": true
+  },
+  "subject": {
+    "C_s": [
+      0.04307447881477437,
+      0.02182694389501623,
+      0.03587185157578128,
+      0.02437961157462712,
+      0.006364050387924147,
+      -0.028566770982670547,
+      -0.05167536182632859,
+      -0.01210790847119525,
+      1.3699174834899217
+    ],
+    "J_s": [
+      0.03207943464871085,
+      -0.020045344094486106,
+      0.0430746187109462,
+      0.030496506499999965,
+      -0.0400968022845688,
+      -0.10817622894134371,
+      -0.04526238240584138,
+      -0.06503441463067006,
+      1.2451282389143032
+    ],
+    "S_s": [
+      0.20692318365034917,
+      1.2577248836012782,
+      0.2798165141537577,
+      0.45013900038911764,
+      0.10885654631973825,
+      0.09435475902175416,
+      0.17860470341368265,
+      0.2595293430576321,
+      0.44744496979379256
+    ]
+  },
+  "terminal": "BNCI_LR_ANGULAR_INTERACTION_NOT_SUPPORTED",
+  "tests": {
+    "focused_after": "14 passed in 0.14s",
+    "focused_before": "14 passed in 0.18s",
+    "full_after": "1 failed, 284 passed, 4 skipped (unrelated missing ignored legacy cache: combined_trajectory_features.npz)"
+  }
+}
