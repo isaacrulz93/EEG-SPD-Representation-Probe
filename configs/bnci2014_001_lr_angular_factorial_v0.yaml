@@ -1,0 +1,99 @@
+protocol:
+  name: BNCI2014_001 Left/Right-only Angular Factorial Diagnostic V0
+  version: "0.0"
+  freeze_date: "2026-08-12"
+  path: docs/PROTOCOL_BNCI_LEFT_RIGHT_ANGULAR_FACTORIAL_V0.md
+  sha256: e15238320d65f607f550b2c3210bdebbc0b09784b7d78a63f22c71eb3e36a944
+  branch: audit/bnci-left-right-angular-factorial-v0
+  post_result_adaptation: forbidden
+
+lineage:
+  parent_branch: pilot/local-movement-component-decomposition-v0
+  parent_head: edc1d344cb0657f2f2d87b2992049bceec4705d2
+  parent_protocol_freeze: 95c330de9596fa4c4eb4ee377d5af8d99896f4c3
+  parent_scientific_result: 0dfa4ab4f94dd35c4d5ec8e74a5b51940083d3ca
+  parent_terminal: BOTH_INTRINSIC_RELATIVE_AND_SENSOR_FRAME_COMPONENTS
+  parent_four_class_angular:
+    T_subject: 0.3091561771980925
+    T_class: 0.39309843397343514
+    T_J: 0.19240885452534362
+    p_J_subjectbreak: 0.001
+    p_J_classbreak: 0.0105
+
+source_artifacts:
+  root: outputs/bnci2014_001_local_movement_component_decomposition_v0
+  artifacts:
+    arrays/component_cost_matrices.npz: 51af2be73930a8ad77e617dd1b473b0249423c74d030ea2966d489603a250091
+    arrays/split_half_component_matrices.npz: cdf618662c1ac5eb3b8fa9b65ad9fde921b45d011c967e87f6ec9a2ab1775307
+    tables/c_ang_matrix.csv: f6c06c3f44807207d7baf0d84226859380e008b1d27a47572f9b94d0dc6735bd
+    protocol/artifact_manifest.csv: c3aea494fedee8af1ee42a5c26ff94fc5bfae5e5289549bc878c3941da43df79
+  scientific_result_manifest_sha256: 28a12fc32c6477fe6cccd071af587304a31eb0e738b079a192c254ff5e82a6c6
+  readable_csv_npz_atol: 1.0e-15
+  refit_raw_eeg: false
+  refit_covariance_means: false
+  refit_antidevelopment: false
+  refit_quotient: false
+
+subset:
+  parent_class_order: [left_hand, right_hand, feet, tongue]
+  selected_classes: [left_hand, right_hand]
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  parent_indices: [0, 1, 4, 5, 8, 9, 12, 13, 16, 17, 20, 21, 24, 25, 28, 29, 32, 33]
+  selected_cell_count: 18
+  feet_tongue_analysis: forbidden
+  class_pair_search: forbidden
+
+statistics:
+  cost: frozen_c_ang_squared_cost
+  a: same_subject_same_class
+  b: same_subject_opposite_hand
+  c: mean_different_subject_same_class
+  d: mean_different_subject_opposite_hand
+  S: c_minus_a
+  C: b_minus_a
+  J: b_plus_c_minus_a_minus_d
+  alternative_balanced_S_C: forbidden
+  aggregation: mean_classes_within_subject_then_mean_nine_subjects
+  primary: T_J_ang_BNCI_LR
+  supporting: [T_subject_ang_BNCI_LR, T_class_ang_BNCI_LR]
+  K4_regression_atol: 1.0e-14
+  K4_regression_rtol: 1.0e-14
+
+nulls:
+  replicates: 1999
+  master_seed: 20260810
+  pvalue: one_sided_greater_equal_plus_one
+  alpha: 0.05
+  subjectbreak:
+    seed_sequence: [20260810, 1102]
+    operation: independent_ordinary_permutation_of_nine_session1_subject_tuples_within_each_hand
+    derangement_required: false
+  classbreak:
+    seed_sequence: [20260810, 1101]
+    operation: independent_ordinary_permutation_of_two_session1_hand_tuples_within_each_subject
+
+split_half:
+  source: frozen_split_half_component_matrices
+  halves: [A, B]
+  statistic: binary_T_J_ang
+  half_pvalues: forbidden
+  sign_stable: both_half_T_J_strictly_positive
+  role: stability_diagnostic_only
+
+terminal:
+  supported_stable: BNCI_LR_ANGULAR_INTERACTION_SUPPORTED_AND_STABLE
+  supported_unstable: BNCI_LR_ANGULAR_INTERACTION_SUPPORTED_BUT_SPLIT_UNSTABLE
+  not_supported: BNCI_LR_ANGULAR_INTERACTION_NOT_SUPPORTED
+  failure: UNASSESSED_BNCI_LR_ANGULAR_DIAGNOSTIC_FAILURE
+
+project:
+  output_dir: outputs/bnci2014_001_lr_angular_factorial_v0
+  implementation:
+    - src/bnci_lr_angular_factorial_v0.py
+    - scripts/29_run_bnci_lr_angular_factorial_v0.py
+
+claims:
+  - no_equivalence_or_absence_claim
+  - no_parent_terminal_change
+  - no_OpenBMI_formal_replication_discussion
+  - no_physiology_motor_strategy_neural_direction_or_anatomy
