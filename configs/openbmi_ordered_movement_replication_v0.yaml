@@ -1,0 +1,165 @@
+protocol:
+  name: OpenBMI External Replication of Ordered Movement Anatomy V0
+  version: "0.0"
+  freeze_date: "2026-08-12"
+  timezone: Asia/Seoul
+  path: docs/PROTOCOL_OPENBMI_ORDERED_MOVEMENT_REPLICATION_V0.md
+  sha256: ee568f271266a4af794be262f5ea6b0343b6524d427281efbfa43008750e0970
+  branch: replication/openbmi-ordered-movement-v0
+  result_adaptation: forbidden
+
+lineage:
+  bnci_parent_branch: pilot/local-movement-component-decomposition-v0
+  bnci_parent_head: edc1d344cb0657f2f2d87b2992049bceec4705d2
+  bnci_protocol_freeze: 95c330de9596fa4c4eb4ee377d5af8d99896f4c3
+  bnci_scientific_result: 0dfa4ab4f94dd35c4d5ec8e74a5b51940083d3ca
+  bnci_terminal: BOTH_INTRINSIC_RELATIVE_AND_SENSOR_FRAME_COMPONENTS
+  openbmi_donor_branch: pilot/subject-class-interaction-v0
+  openbmi_donor_head: 272d775678644aad062df424a70586d4b42de652
+
+donor_artifacts:
+  protocol_manifest:
+    path: outputs/subject_class_interaction_v0/provenance/openbmi_protocol_manifest.json
+    sha256: 4b956d7e3b2b1a271ec07bddecc1ce0a93460ab1515ab8902b3d1ca35ebdb0ea
+  source_manifest:
+    path: outputs/subject_class_interaction_v0/provenance/openbmi_source_manifest.json
+    sha256: 5133a0d8521f4cdd121362663c4980fed500e72875f26bb3dc4ce830d8c5e409
+  unlock:
+    path: outputs/subject_class_interaction_v0/provenance/openbmi_unlock.json
+    sha256: aaf2bf598802e0e5bf84924b26d0c9ed7f64640605a594273894b888b6c043f0
+  ordered_source_manifest_sha256: d2c4b077c646868e0ad68d26491ec7fcf08208fbbd2bb9e06268c753bf8ca328
+  source_file_count: 108
+
+data:
+  dataset: Lee2019-MI
+  subjects: 54
+  sessions: [0, 1]
+  source_sessions: [1, 2]
+  phase: 1train
+  classes: [left_hand, right_hand]
+  trials_per_cell: 50
+  split_trials_per_cell: 25
+  channels: [FC5, FC3, FC1, FC2, FC4, FC6, C5, C3, C1, Cz, C2, C4, C6, CP5, CP3, CP1, CPz, CP2, CP4, CP6]
+  acquisition_sampling_hz: 1000.0
+  analysis_sampling_hz: 100.0
+  bandpass_hz: [8.0, 30.0]
+  filter: {family: Butterworth, order: 5, phase: zero, method: iir, output: sos}
+  processing_order: bandpass_continuous_then_resample_then_epoch
+  epoch_seconds: [1.0, 3.5]
+  epoch_interval: half_open
+  baseline: null
+  covariance: {estimator: oas, dtype: float64, symmetrize: true, clipping: false}
+  prepared_input_hashes:
+    five_bin_covariance_archive: abdf9682ae7d593544aca68e196711300e25c01104165f1415f07629dfdd21cf
+    canonical_covariance_array: af111eae37076d2f7ed80f9d3ab5c5033c5b8843c3b7b138f8b8ab8fa0f768af
+    metadata_csv: 6977a31be900f7b626744192113d2d9d71ea107d56a3b1538b43948152f72dd6
+
+temporal:
+  bins: 5
+  samples_per_bin: 50
+  seconds_per_bin: 0.5
+  nonoverlapping: true
+  exact_partition_of_250_samples: true
+  alternative_grid_search: forbidden
+
+means:
+  geometry: AIRM
+  solver: pyriemann.mean_riemann
+  tolerance: 1.0e-9
+  max_iterations: 100
+  normalized_karcher_residual_gate: 1.0e-7
+  warning_gate: none_allowed
+
+movement:
+  delta_t_seconds: 0.5
+  steps: 4
+  reverse_prefix_piecewise_AIRM_parallel_transport: true
+  identity_frame_reference: M1
+  temporal_permutation: forbidden
+  dtw: forbidden
+  quotient: one_common_O20_across_four_steps
+
+costs:
+  scale: squared
+  c_sensor: mean_four_unquotiented_Frobenius_squared
+  c_full: minimum_common_O20_mean_four_Frobenius_squared
+  c_len: mean_four_squared_step_norm_differences
+  c_ang: c_full_minus_c_len
+  c_ori: c_sensor_minus_c_full
+  atol: 1.0e-8
+  rtol: 1.0e-8
+  scientific_clipping: false
+
+optimizer:
+  inherited_definition: exact_finalized_BNCI_movement_TrustRegions
+  total_starts: 6
+  starts_per_determinant_sector: 3
+  max_iterations: 250
+  gradient_tolerance: 1.0e-6
+  min_step_size: 1.0e-12
+  max_time_seconds: 120.0
+  max_cost_evaluations: 5000
+  parallel_workers: 4
+  checkpoint_every_pairs: 12
+  checkpoint_phases: [full, split_half_A, split_half_B]
+  atomic_checkpoint_writes: true
+
+statistics:
+  relation_cells: [same_subject_same_class, same_subject_different_class, different_subject_same_class, different_subject_different_class]
+  S: c_minus_a
+  C: b_minus_a
+  J: b_plus_c_minus_a_minus_d
+  aggregation: class_mean_within_subject_then_subject_mean
+  primary: T_J_ang
+
+nulls:
+  replicates: 1999
+  alpha: 0.05
+  pvalue: one_sided_greater_or_equal_plus_one
+  subjectbreak:
+    seed_sequence: [20260810, 1102]
+    operation: independently_per_class_permute_all_54_session1_subject_tuples
+  classbreak:
+    seed_sequence: [20260810, 1101]
+    operation: independently_per_subject_permute_two_session1_class_tuples
+
+split_half:
+  rule: within_subject_session_class_acquisition_order_interleaving
+  half_A: zero_based_even_positions
+  half_B: zero_based_odd_positions
+  replicate_A: session0_half_A_to_session1_half_A
+  replicate_B: session0_half_B_to_session1_half_B
+  role: secondary_stability_diagnostic
+
+raw_temporal_control:
+  role: secondary_descriptive
+  distance: AIRM
+  correct: fixed_identity_matching_1_to_1_through_5_to_5
+  wrong: all_44_complete_derangements
+  summary: median_derangement_RMS_cost_minus_identity_RMS_cost
+  inference: none
+
+terminal:
+  pass: REPLICATED_OPENBMI_ANGULAR_JOINT_INTERACTION
+  valid_fail: NOT_REPLICATED_OPENBMI_ANGULAR_JOINT_INTERACTION
+  numerical_failure: UNASSESSED_OPENBMI_MOVEMENT_NUMERICAL_FAILURE
+  data_failure: UNASSESSED_OPENBMI_DATA_CONTRACT_FAILURE
+  temporal_ambiguity: STOP_AND_REPORT_TEMPORAL_CONTRACT_AMBIGUITY
+
+project:
+  output_dir: outputs/openbmi_ordered_movement_replication_v0
+  cache_dir: cache/openbmi_ordered_movement_v0
+  implementation:
+    - src/openbmi_ordered_movement_v0.py
+    - scripts/28_run_openbmi_ordered_movement_v0.py
+
+claim_restrictions:
+  - two_class_external_structural_replication
+  - no_same_effect_size_as_BNCI
+  - no_same_physical_temporal_scale_as_BNCI
+  - no_physiology_or_neural_trajectory
+  - no_continuous_dynamics
+  - no_motor_strategy_or_source_space_direction
+  - no_stable_subject_pose
+  - always_ordered_window_wise_mean_covariance_movement
+  - always_fixed_OpenBMI_5_by_0.5_second_discretization

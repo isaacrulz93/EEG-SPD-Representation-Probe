@@ -1,0 +1,18 @@
+{
+  "full_repository_suite": {
+    "passed": 286,
+    "skipped": 4,
+    "status": "PASS"
+  },
+  "focused_openbmi_suite": {
+    "passed": 15,
+    "status": "PASS"
+  },
+  "legacy_cache_reproduction": {
+    "artifact": "cache/bnci2014_001_trajectory_within_subject_v1/combined_trajectory_features.npz",
+    "copied_read_only_from_original_worktree": true,
+    "sha256": "5accf2f3e6becce187b18d30a1ea1741ae0d0faafc15a1f8ac16632a5a71628d"
+  },
+  "movement_statistic_accessed": false,
+  "stage": "pre_protocol_freeze"
+}

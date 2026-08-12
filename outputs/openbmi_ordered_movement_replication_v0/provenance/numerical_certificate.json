@@ -1,0 +1,10 @@
+{
+  "all_full_optimizer_pairs_both_sectors": true,
+  "atol": 1e-08,
+  "maximum_full_selected_gradient_norm": 9.99803119023365e-07,
+  "maximum_reconstruction_absolute_error": 4.440892098500626e-16,
+  "minimum_c_ang": 0.2887800692321909,
+  "minimum_c_ori": 0.5161757998018706,
+  "rtol": 1e-08,
+  "status": "PASS"
+}
