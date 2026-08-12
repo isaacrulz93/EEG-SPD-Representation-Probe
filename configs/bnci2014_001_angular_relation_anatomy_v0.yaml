@@ -1,0 +1,58 @@
+analysis:
+  name: BNCI2014_001 angular relation anatomy v0
+  kind: retrospective frozen-matrix anatomy
+  output: outputs/bnci2014_001_angular_relation_anatomy_v0
+lineage:
+  parent_branch: pilot/local-movement-component-decomposition-v0
+  parent_head: edc1d344cb0657f2f2d87b2992049bceec4705d2
+  parent_protocol_freeze: 95c330de9596fa4c4eb4ee377d5af8d99896f4c3
+  parent_scientific_result: 0dfa4ab4f94dd35c4d5ec8e74a5b51940083d3ca
+  parent_terminal: BOTH_INTRINSIC_RELATIVE_AND_SENSOR_FRAME_COMPONENTS
+frozen_input:
+  path: outputs/bnci2014_001_local_movement_component_decomposition_v0/arrays/component_cost_matrices.npz
+  sha256: 51af2be73930a8ad77e617dd1b473b0249423c74d030ea2966d489603a250091
+  key: c_ang_matrix
+  shape: [36, 36]
+  ordering:
+    subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    classes: [left_hand, right_hand, feet, tongue]
+  session_direction: session0_rows_to_session1_columns
+parent_angular_statistics:
+  T_subject: 0.3091561771980925
+  T_class: 0.39309843397343514
+  T_J: 0.19240885452534362
+formal_decomposition:
+  class_pairs: [LR, LF, LT, RF, RT, FT]
+  relation_definitions:
+    S: c_minus_a
+    C: b_minus_a
+    J: b_plus_c_minus_a_minus_d
+  aggregation: mean_classes_within_subject_then_mean_subjects
+  pairwise_pvalues: not_computed
+  reconstruction:
+    subject_level: full_four_class_equals_mean_of_six_binary_pairs
+    group_level: full_four_class_equals_mean_of_six_binary_pairs
+    atol: 1.0e-12
+    rtol: 1.0e-12
+descriptive_anatomy:
+  G: symmetrized_subject_fixed_class_relation_matrix
+  delta_G: G_minus_mean_pair_diagonal
+  H: symmetrized_class_fixed_subject_relation_matrix
+  delta_H: H_minus_mean_pair_diagonal
+  profile_distance: euclidean_distance_on_upper_off_diagonal_vector
+  pattern_similarity: centered_pearson_correlation
+  commonality: leave_one_out_correlation_to_mean_of_others
+  optional_permutation_nulls: not_run
+interpretation:
+  inferential_primary: immutable_parent_four_class_SCJ
+  formal_retrospective_primary: exact_six_pair_decomposition
+  descriptive_only: [G, delta_G, H, delta_H, profile_similarity, commonality]
+  no_strong_intrinsic_shape_claim: true
+  no_best_pair_primary_redefinition: true
+  no_independent_pair_or_matrix_entry_inference: true
+upstream_refitting:
+  eeg: forbidden
+  covariance_means: forbidden
+  anti_developments: forbidden
+  movement_objects: forbidden
+  quotient_optimizers: forbidden
