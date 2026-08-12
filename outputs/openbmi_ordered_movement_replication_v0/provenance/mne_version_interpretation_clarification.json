@@ -1,0 +1,21 @@
+{
+  "bit_identity_claimed_between_versions": false,
+  "clarification_role": "interpretation_and_audit_note_only",
+  "completed_operational_pipeline": [
+    "continuous_8_to_30_Hz_bandpass",
+    "resample_1000_Hz_to_100_Hz",
+    "half_open_epoch_1.0_to_3.5_seconds",
+    "exactly_250_samples",
+    "five_nonoverlapping_50_sample_windows",
+    "OAS_covariance"
+  ],
+  "formal_terminal_changed": false,
+  "mismatch_alone_establishes_scientific_error": false,
+  "no_rerun": true,
+  "observed_mne": "1.10.1",
+  "required_or_donor_provenance_mne": "1.12.1",
+  "results_or_scientific_settings_changed": false,
+  "sampling_note": "At 100 Hz the Nyquist frequency is 50 Hz, above the retained 8-30 Hz signal band.",
+  "status_instruction": "Preserve the existing formal terminal/status until further instruction.",
+  "version_difference_preserved_in_provenance": true
+}

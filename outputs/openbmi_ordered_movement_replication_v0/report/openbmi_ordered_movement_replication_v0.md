@@ -1,6 +1,6 @@
 # OpenBMI Ordered Movement External Replication V0
 
-**PRIMARY STATUS: UNASSESSED.** The active runtime used MNE 1.10.1, whereas the frozen donor preprocessing contract requires MNE 1.12.1 for exact sampling handling. The provisional endpoint below is retained only for audit and is not interpreted as a negative replication. No rerun was performed after endpoint access.
+**FORMAL STATUS UNCHANGED PENDING FURTHER INSTRUCTION.** The active runtime used MNE 1.10.1 while the donor provenance named MNE 1.12.1. This minor-version difference remains recorded, but it is not by itself evidence that the scientific computation was performed incorrectly. The completed run followed the intended operational pipeline: continuous 8–30 Hz filtering, resampling from 1000 Hz to 100 Hz, half-open [1.0,3.5) s epoching to 250 samples, five non-overlapping 50-sample windows, and OAS covariance estimation. Bit identity between MNE 1.10.1 and 1.12.1 has not been established or claimed. No rerun was performed, and the existing formal terminal below is retained without reinterpretation until further instruction.
 
 ## Immutable lineage
 
@@ -17,7 +17,7 @@
 
 The donor Lee2019-MI source/count contract was reproduced for 54 subjects, both sessions, left/right hand, 50 trials per cell, and the frozen ordered 20-channel montage. The intended computation applied continuous 8–30 Hz filtering, 100 Hz resampling, the half-open 1.0–3.5 s epoch, no baseline, and OAS covariance estimation. The 250-sample epoch has an exact, prespecified partition into five non-overlapping 50-sample (0.5 s) bins. All 108 raw source hashes match the donor manifest.
 
-The raw-source, count, channel, epoch-length, and five-bin gates passed, but the exact runtime-version gate failed: installed MNE was 1.10.1 instead of the donor's required 1.12.1. Because resampling is part of the frozen preprocessing contract, this overrides the otherwise valid downstream numerical calculations and prohibits scientific interpretation.
+The raw-source, count, channel, epoch-length, five-bin, target-rate, filtering, covariance, geometry, statistic, and null-definition gates passed. Installed MNE was 1.10.1 rather than the 1.12.1 version named in donor provenance. The version difference remains an explicit reproducibility qualification: the two versions are not asserted to produce bit-identical signals. It also must not be treated, on its own, as proof that the operational 100 Hz scientific analysis was wrong. At 100 Hz the Nyquist frequency is 50 Hz, above the retained 8–30 Hz band. This clarification changes no scientific object, array, statistic, p-value, or formal terminal.
 
 - AIRM mean and anti-development gates: PASS
 - Full/split quotient determinant-sector certification: PASS
@@ -220,7 +220,7 @@ Split-half angular stability (odd/even acquisition positions; no half-level p-va
 
 `UNASSESSED_OPENBMI_DATA_CONTRACT_FAILURE`
 
-No replication or non-replication claim is made. Had the runtime contract passed, this would have been a two-class external structural replication, not a reproduction of BNCI's four-class combinatorial structure or physical bin duration. The quarantined object is the discrete anti-development of the ordered window-wise mean covariance movement at a fixed 5 × 0.5 s OpenBMI discretization. No physiological, continuous-dynamic, source-space, motor-strategy, or stable-pose claim is made.
+No replication or non-replication claim is changed by this clarification; formal status awaits further instruction. The experiment is a two-class external structural replication, not a reproduction of BNCI's four-class combinatorial structure or physical bin duration. The analyzed object is the discrete anti-development of the ordered window-wise mean covariance movement at a fixed 5 × 0.5 s OpenBMI discretization. No physiological, continuous-dynamic, source-space, motor-strategy, or stable-pose claim is made.
 
 ## Runtime, tests, and immutability
 
