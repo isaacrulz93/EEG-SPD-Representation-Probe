@@ -311,7 +311,13 @@ def heatmap_grid(
     count = len(titles)
     columns = 3 if count == 9 else 2
     rows = int(np.ceil(count / columns))
-    figure, axes = plt.subplots(rows, columns, figsize=(3.8 * columns, 3.4 * rows), squeeze=False)
+    figure, axes = plt.subplots(
+        rows,
+        columns,
+        figsize=(3.8 * columns, 3.4 * rows),
+        squeeze=False,
+        layout="constrained",
+    )
     minimum = float(np.min(matrices))
     maximum = float(np.max(matrices))
     if centered:
@@ -329,9 +335,15 @@ def heatmap_grid(
         axis.set_xticks(range(len(labels)), labels, rotation=45, ha="right")
         axis.set_yticks(range(len(labels)), labels)
     if image is not None:
-        figure.colorbar(image, ax=axes.ravel().tolist(), shrink=0.78, label=colorbar_label)
+        visible_axes = [axis for index, axis in enumerate(axes.ravel()) if index < count]
+        figure.colorbar(
+            image,
+            ax=visible_axes,
+            shrink=0.78,
+            pad=0.02,
+            label=colorbar_label,
+        )
     figure.suptitle(output_stem.name.replace("_", " "))
-    figure.subplots_adjust(left=0.07, right=0.9, bottom=0.08, top=0.92, wspace=0.32, hspace=0.36)
     output_stem.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(output_stem.with_suffix(".png"), dpi=180)
     figure.savefig(output_stem.with_suffix(".pdf"))
@@ -372,6 +384,8 @@ def render_report(results: dict[str, Any], scientific_sha: str) -> str:
     j_rank = sorted(pair_rows, key=lambda row: row["T_J"], reverse=True)
     j_rank_text = ", ".join(f"{row['pair']}={fmt(row['T_J'])}" for row in j_rank)
     subject_j = results["subject_J_summary"]
+    pair_j = {row["pair"]: row["T_J"] for row in pair_rows}
+    hand_nonhand_j = float(np.mean([pair_j[name] for name in ("LF", "LT", "RF", "RT")]))
     return f"""# BNCI2014_001 Angular Relation Anatomy V0
 
 ## Verdict and provenance
@@ -466,6 +480,32 @@ from LR versus LF/LT/RF/RT/FT costs and contrasts, not elevated into a new
 primary test. Static-versus-movement implications are not identified by this
 frozen movement matrix alone.
 
+At the current resolution, the anatomy is:
+
+- **Common class structure:** partial and heterogeneous, not broad and uniform.
+  Raw and adjusted `G_s` correlations are positive on average but well below
+  one. The mean profile chiefly separates tongue from left hand (`LT` is the
+  largest raw and adjusted relation), whereas `LR` and `RF` are the two
+  smallest adjusted relations. This is a shared tendency, not a universal
+  subject-independent class hierarchy.
+- **Common subject structure:** also partial and class-dependent. The `H_c`
+  profile correlations and leave-one-class-out correlations are positive on
+  average but well below one, supporting descriptive reuse of some subject
+  ordering without establishing a reusable subject transformation.
+- **Subject x class-specific deformation:** visibly substantial. Pair `T_J`
+  values are uneven, and S{subject_j['largest_subject']} has four-class
+  `J_s={fmt(subject_j['largest_value'])}` versus `{fmt(subject_j['remaining_mean'])}`
+  averaged over the other subjects. The parent inferential interaction is
+  therefore accompanied by pronounced subject/pair concentration, not a
+  uniform offset across all subjects and classes.
+- **Coarse hand-versus-nonhand organization:** insufficient as a complete
+  description. The four hand/nonhand `T_J` components average
+  `{fmt(hand_nonhand_j)}`, but they range from LF `{fmt(pair_j['LF'])}` to LT
+  `{fmt(pair_j['LT'])}`; the nonhand FT component `{fmt(pair_j['FT'])}` exceeds
+  LR `{fmt(pair_j['LR'])}`. The dominant feature is more specifically the LT
+  relation and its subject concentration, not a consistent binary hand/nonhand
+  split.
+
 ## Result-to-claim decision table
 
 | Observed pattern | What may be said | What may not be said |
@@ -503,6 +543,9 @@ frozen movement matrix alone.
 - Focused post-result tests: `{results['tests']['focused_after']}`
 - Full repository tests: `{results['tests']['full_after']}`
 - Scientific settings changed after protocol freeze: false
+- Post-result changes: presentation only (shared heatmap colorbar layout and
+  expanded interpretation of already-frozen tables); documented in
+  `provenance/post_result_presentation_note.json`
 - Runtime: `{results['runtime_seconds']:.6f}` seconds
 """
 

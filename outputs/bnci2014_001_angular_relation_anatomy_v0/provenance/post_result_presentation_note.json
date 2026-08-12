@@ -1,0 +1,16 @@
+{
+  "scientific_definition_changed": false,
+  "changes": [
+    "Heatmap shared-colorbar layout was corrected after visual inspection.",
+    "The report narrative was expanded to state the descriptive anatomy already present in the frozen output tables."
+  ],
+  "unchanged": [
+    "frozen c_ang input",
+    "six-pair definitions and aggregation",
+    "S/C/J values",
+    "reconstruction tolerance and gates",
+    "G/H and baseline-adjustment definitions",
+    "profile similarities and commonality values",
+    "inference hierarchy"
+  ]
+}
