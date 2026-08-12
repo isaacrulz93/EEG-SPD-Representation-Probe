@@ -203,7 +203,7 @@
   "protocol_freeze_sha": "54154436aeabd818cacaa8c6973400b93de7a9ea",
   "protocol_source_hash": "b1391a9b54e473b0f1a6e5d5af5ff3e9bdde9b4116ffec19610c0c98b5ea7039",
   "runtime_seconds": 1.3977909579407424,
-  "scientific_result_sha": "PENDING_SCIENTIFIC_RESULT_COMMIT",
+  "scientific_result_sha": "130ac0ce929b203b29778caa56073a26425c8cfc",
   "scientific_setting_changed_after_protocol_freeze": false,
   "six_pair_group": [
     {

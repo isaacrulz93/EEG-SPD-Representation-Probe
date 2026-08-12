@@ -10,7 +10,7 @@
 - Parent protocol freeze: `95c330de9596fa4c4eb4ee377d5af8d99896f4c3`
 - Parent scientific result: `0dfa4ab4f94dd35c4d5ec8e74a5b51940083d3ca`
 - Protocol freeze SHA: `54154436aeabd818cacaa8c6973400b93de7a9ea`
-- Scientific result SHA: `PENDING_SCIENTIFIC_RESULT_COMMIT`
+- Scientific result SHA: `130ac0ce929b203b29778caa56073a26425c8cfc`
 - Frozen D SHA-256: `51af2be73930a8ad77e617dd1b473b0249423c74d030ea2966d489603a250091`
 
 Only the frozen directed 36 by 36 squared angular cost matrix was used. No EEG,
