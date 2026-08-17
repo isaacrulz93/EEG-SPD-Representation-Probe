@@ -1,0 +1,23 @@
+gate,observed,expected,passed
+whole_shape,"(2592, 22, 22)","(2592, 22, 22)",True
+window5_shape,"(12960, 22, 22)","(12960, 22, 22)",True
+channel_count,22,22,True
+whole_rows,2592,2592,True
+window_rows,12960,12960,True
+whole_covariance_index,sequential,sequential,True
+window_covariance_index,sequential,sequential,True
+subjects,"(1, 2, 3, 4, 5, 6, 7, 8, 9)","(1, 2, 3, 4, 5, 6, 7, 8, 9)",True
+session,"('0train',)","('0train',)",True
+classes,"('left_hand', 'right_hand', 'feet', 'tongue')","('left_hand', 'right_hand', 'feet', 'tongue')",True
+whole_finite,True,True,True
+window_finite,True,True,True
+whole_symmetric,0.0,<=1e-12 relative,True
+window_symmetric,0.0,<=1e-12 relative,True
+whole_spd,4.0468769381754756e-14,>0,True
+window_spd,8.112917602659012e-14,>0,True
+trials_per_subject,"{1: 288, 2: 288, 3: 288, 4: 288, 5: 288, 6: 288, 7: 288, 8: 288, 9: 288}",288 each,True
+trials_per_subject_class,[72],[72],True
+five_windows_per_trial,[np.int64(5)],[5],True
+window_order,True,True,True
+window_identity_constant,True,True,True
+whole_window_identity_alignment,True,True,True

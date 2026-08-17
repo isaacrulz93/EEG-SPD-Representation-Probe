@@ -1,0 +1,4 @@
+array,sha256,shape,dtype
+mov_len,6ff50e772b7ad2345e9ba68166c155bbecde91662b58ec81d81d2af8ae6d61ae,"[2592, 4]",float64
+mov_gram,fc2bd021d1ad1cce1531e87c8a5f39af644cec052df8cad0cc31841b0df4a705,"[2592, 10]",float64
+mov_sensor,4fd922a43fbc237068256114bb419b3a194aa812cb3c0de11ace626bd55b9df5,"[2592, 1012]",float64

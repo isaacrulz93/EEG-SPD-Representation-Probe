@@ -1,0 +1,20 @@
+{
+  "scope": "NPZ string serialization only",
+  "reason": "The first scientific execution revealed that pandas-backed string Series produced NumPy object arrays unless to_numpy(dtype=str) was explicit.",
+  "protocol_freeze_commit": "6fac9f0c5cb48dc2b5b265480b51c1d30b625435",
+  "executed_source_sha256": "385cf23798601150017a7426301cb239146a6bfa1ec28be509427da8750dba73",
+  "repaired_source_sha256": "46694950f376151e5af33875e7335c4bb47e4070b9df61bc004a8e0af7a92402",
+  "changed_expressions": [
+    "trial_uid.to_numpy(dtype=str)",
+    "class_label.to_numpy(dtype=str)",
+    "session.to_numpy(dtype=str)"
+  ],
+  "feature_definitions_changed": false,
+  "primary_comparison_changed": false,
+  "target_split_changed": false,
+  "classifier_or_scaler_changed": false,
+  "statistical_test_changed": false,
+  "terminal_rule_changed": false,
+  "output_schema_changed": false,
+  "scientific_features_or_results_changed": false
+}

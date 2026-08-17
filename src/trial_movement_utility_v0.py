@@ -1192,11 +1192,11 @@ def execute_audit(project_root: str | Path, config_path: str | Path, pre_result_
         mov_len=movement.mov_len,
         mov_gram=movement.mov_gram,
         mov_sensor=movement.mov_sensor,
-        trial_uid=movement.metadata["trial_uid"].astype(str).to_numpy(),
+        trial_uid=movement.metadata["trial_uid"].astype(str).to_numpy(dtype=str),
         subject=movement.metadata["subject"].to_numpy(dtype=np.int64),
-        class_label=movement.metadata["class_label"].astype(str).to_numpy(),
+        class_label=movement.metadata["class_label"].astype(str).to_numpy(dtype=str),
         run=movement.metadata["run"].to_numpy(dtype=np.int64),
-        session=movement.metadata["session"].astype(str).to_numpy(),
+        session=movement.metadata["session"].astype(str).to_numpy(dtype=str),
     )
     feature_hashes = pd.DataFrame(
         [

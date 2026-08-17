@@ -1,0 +1,12 @@
+{
+  "cache_input_hashes": {
+    "cache/bnci2014_001/covariances.npz": "c6bd774ac5b3b53c497381433bcc7974af3b54b850a0ac0539aa2f797f6fa997",
+    "cache/bnci2014_001/whole_metadata.csv": "285eaf926fbfcec8f1228c3fd660b0b0e9ce209a7c5a13d0acd6b4eabdba0a6e",
+    "cache/bnci2014_001/window5_metadata.csv": "c0fb099a53a6b3678f4c4795fc6769b41f44dba8616bceb148c23264f2116009"
+  },
+  "changed_prior_paths": [],
+  "passed": true,
+  "post_manifest_sha256": "39acc7323e31da143051bdc6af52bff65c4192109595368e47748e65e6d085c7",
+  "prior_file_count": 438,
+  "prior_manifest_sha256": "39acc7323e31da143051bdc6af52bff65c4192109595368e47748e65e6d085c7"
+}
