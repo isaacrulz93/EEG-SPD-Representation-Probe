@@ -1,0 +1,5 @@
+{
+  "base_commit": "969f80fc29b31993df69980c23f52240ce591ff1",
+  "branch": "pilot/trial-movement-incremental-utility-v0",
+  "protocol_freeze_commit": "6fac9f0c5cb48dc2b5b265480b51c1d30b625435"
+}

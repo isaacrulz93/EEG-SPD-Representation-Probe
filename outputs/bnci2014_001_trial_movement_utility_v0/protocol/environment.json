@@ -1,0 +1,44 @@
+{
+  "captured_at_utc": "2026-08-17T07:27:42.279641+00:00",
+  "compute": {
+    "apple_mps_available": false,
+    "cpu_count": 10,
+    "cuda_available": false,
+    "cuda_device_count": 0,
+    "cuda_runtime_version": null
+  },
+  "git": {
+    "branch": "pilot/trial-movement-incremental-utility-v0",
+    "head": "6fac9f0c5cb48dc2b5b265480b51c1d30b625435"
+  },
+  "os": {
+    "machine": "arm64",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "release": "25.5.0",
+    "system": "Darwin"
+  },
+  "packages": {
+    "matplotlib": "3.11.1",
+    "mne": "1.12.1",
+    "moabb": "1.5.0",
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "pyriemann": "0.12",
+    "pyyaml": "6.0.3",
+    "scikit_learn": "1.9.0",
+    "scipy": "1.18.0",
+    "torch": null
+  },
+  "python": {
+    "executable": "/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/.venv/bin/python",
+    "implementation": "CPython",
+    "version": "3.12.8"
+  },
+  "thread_environment": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  }
+}

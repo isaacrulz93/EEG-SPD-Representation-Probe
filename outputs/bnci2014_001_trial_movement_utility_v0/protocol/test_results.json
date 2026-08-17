@@ -1,0 +1,21 @@
+{
+  "all_required_passed": false,
+  "focused_after": {
+    "log_path": "/private/tmp/trial-movement-focused-after.status.txt",
+    "log_sha256": "52d6ab73604825c96d1563558045cdd6bd1d838976e1871eb02a5ac207b1e662",
+    "passed": true,
+    "tail": "COMMAND=/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/.venv/bin/python -m pytest -q tests/test_trial_movement_utility_v0.py --junitxml=/private/tmp/trial-movement-focused-after-final.xml\nRESULT=17 passed in 10.12s\nJUNIT=/private/tmp/trial-movement-focused-after-final.xml\nTEST_EXIT_CODE=0\n"
+  },
+  "focused_before": {
+    "log_path": "/private/tmp/trial-movement-focused-before.status.txt",
+    "log_sha256": "efc7aeb2c26a3b48ffd218bd33dbea1dc2539b42349c89f831e883c46d0a8da3",
+    "passed": true,
+    "tail": "COMMAND=/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/.venv/bin/python -m pytest -q tests/test_trial_movement_utility_v0.py --junitxml=/private/tmp/trial-movement-focused-before.xml\nRESULT=17 passed in 1.55s\nJUNIT=/private/tmp/trial-movement-focused-before.xml\nTEST_EXIT_CODE=0\n"
+  },
+  "full_repository": {
+    "log_path": "/private/tmp/trial-movement-full.status.txt",
+    "log_sha256": "c696d186a6f1355fa326fd08a720f91959e7fc23acb092431709b3bff15ce8fd",
+    "passed": false,
+    "tail": "COMMAND=/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe/.venv/bin/python -m pytest -q --junitxml=/private/tmp/trial-movement-full.xml\nRESULT=297 passed, 4 skipped, 1 failed in 38.26s\nFAILURE=tests/test_local_metric_data_v0.py::test_frozen_trajectory_input_reproduces_exactly\nCAUSE=Legacy ignored cache cache/bnci2014_001_trajectory_within_subject_v1/combined_trajectory_features.npz is absent in the new worktree; FileNotFoundError is unrelated to the new audit tests.\nJUNIT=/private/tmp/trial-movement-full.xml\nTEST_EXIT_CODE=1\n"
+  }
+}

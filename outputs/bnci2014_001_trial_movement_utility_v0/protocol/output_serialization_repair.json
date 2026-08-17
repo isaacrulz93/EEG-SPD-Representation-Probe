@@ -1,0 +1,16 @@
+{
+  "artifact": "features/trial_movement_features.npz",
+  "reason": "Initial pandas-backed string arrays were serialized with NumPy object dtype and therefore required allow_pickle=True.",
+  "repair": "Re-serialized trial_uid, class_label, and session as fixed-width Unicode while preserving every numerical and string value.",
+  "before_sha256": "ec6eefa324627b10bd23cecca996bb06edd6e623c496343b742c6bc0485408bf",
+  "after_sha256": "d6694740e9e922e6e8084ffede7be4dbec37b7d459cfe68d25681d36d741c16e",
+  "allow_pickle_false_load_passed": true,
+  "numerical_array_hashes_unchanged": true,
+  "string_values_unchanged": true,
+  "scientific_features_or_results_changed": false,
+  "final_string_dtypes": {
+    "trial_uid": "<U15",
+    "class_label": "<U10",
+    "session": "<U6"
+  }
+}

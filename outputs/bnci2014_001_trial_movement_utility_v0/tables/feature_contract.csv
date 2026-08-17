@@ -1,0 +1,4 @@
+feature,rows,dimensions,expected_dimensions,finite,label_input,passed
+MOV_LEN,2592,4,4,True,False,True
+MOV_GRAM,2592,10,10,True,False,True
+MOV_SENSOR,2592,1012,1012,True,False,True

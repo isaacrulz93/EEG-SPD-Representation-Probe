@@ -1,0 +1,21 @@
+{
+  "claim_boundaries": "No causal, neural-mechanism, complete-quotient, adaptation-method, or guaranteed-SPDNet claim.",
+  "primary_protocol": "T2 complementary held-out-run target centering; directions averaged within subject",
+  "states": {
+    "DELTA_GRAM": {
+      "broad": false,
+      "supported": false
+    },
+    "DELTA_LEN": {
+      "broad": false,
+      "supported": false
+    },
+    "DELTA_SENSOR": {
+      "broad": false,
+      "supported": false
+    }
+  },
+  "static_mean_ba": 0.4976851851851851,
+  "static_sanity_threshold": 0.3,
+  "terminal_decision": "STOP_NO_TRIAL_MOVEMENT_INCREMENTAL_UTILITY"
+}

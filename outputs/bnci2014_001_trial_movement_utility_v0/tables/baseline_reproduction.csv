@@ -1,0 +1,10 @@
+target_subject,audit_static_ba,geometry_v2_airm_ba,audit_minus_v2,split_and_centering_direction_reproduced,exact_decoder_reproduction,difference_reason
+1,0.6180555555555556,0.6666666666666666,-0.04861111111111105,True,False,"audit adds source-only StandardScaler and freezes max_iter=20000,tol=1e-6; V2 used no scaler"
+2,0.33333333333333337,0.3576388888888888,-0.024305555555555414,True,False,"audit adds source-only StandardScaler and freezes max_iter=20000,tol=1e-6; V2 used no scaler"
+3,0.6458333333333334,0.71875,-0.07291666666666663,True,False,"audit adds source-only StandardScaler and freezes max_iter=20000,tol=1e-6; V2 used no scaler"
+4,0.4756944444444444,0.4826388888888889,-0.006944444444444475,True,False,"audit adds source-only StandardScaler and freezes max_iter=20000,tol=1e-6; V2 used no scaler"
+5,0.34375,0.375,-0.03125,True,False,"audit adds source-only StandardScaler and freezes max_iter=20000,tol=1e-6; V2 used no scaler"
+6,0.3402777777777778,0.3680555555555556,-0.02777777777777779,True,False,"audit adds source-only StandardScaler and freezes max_iter=20000,tol=1e-6; V2 used no scaler"
+7,0.4513888888888889,0.4965277777777778,-0.045138888888888895,True,False,"audit adds source-only StandardScaler and freezes max_iter=20000,tol=1e-6; V2 used no scaler"
+8,0.6944444444444444,0.732638888888889,-0.03819444444444453,True,False,"audit adds source-only StandardScaler and freezes max_iter=20000,tol=1e-6; V2 used no scaler"
+9,0.5763888888888888,0.5902777777777778,-0.01388888888888895,True,False,"audit adds source-only StandardScaler and freezes max_iter=20000,tol=1e-6; V2 used no scaler"

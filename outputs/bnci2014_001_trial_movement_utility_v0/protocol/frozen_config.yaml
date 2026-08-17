@@ -1,0 +1,142 @@
+protocol:
+  name: Trial-Level Ordered SPD Movement Incremental Utility Audit V0
+  version: "0.0"
+  freeze_date: "2026-08-17"
+  timezone: Asia/Seoul
+  seed: 20260817
+  base_commit: 969f80fc29b31993df69980c23f52240ce591ff1
+  branch: pilot/trial-movement-incremental-utility-v0
+  primary_metric: balanced_accuracy
+
+project:
+  output_dir: outputs/bnci2014_001_trial_movement_utility_v0
+
+inputs:
+  v1_config:
+    path: configs/bnci2014_001_5window.yaml
+    sha256: 41f1ad7b2d80a07ab19436de5ec547dfe63d86a320f06dfd05953620944cb232
+  covariances:
+    path: cache/bnci2014_001/covariances.npz
+    sha256: c6bd774ac5b3b53c497381433bcc7974af3b54b850a0ac0539aa2f797f6fa997
+  whole_metadata:
+    path: cache/bnci2014_001/whole_metadata.csv
+    sha256: 285eaf926fbfcec8f1228c3fd660b0b0e9ce209a7c5a13d0acd6b4eabdba0a6e
+  window5_metadata:
+    path: cache/bnci2014_001/window5_metadata.csv
+    sha256: c0fb099a53a6b3678f4c4795fc6769b41f44dba8616bceb148c23264f2116009
+  geometry_v2_config: configs/bnci2014_001_geometry_v2.yaml
+  geometry_v2_protocol: docs/PROTOCOL_GEOMETRY_V2.md
+  geometry_v2_results: outputs/bnci2014_001_geometry_v2/tables/loso_logistic_calibration.csv
+  relevant_sources:
+    - src/covariance.py
+    - src/metrics.py
+    - src/loso_v2.py
+    - src/alignment_v2.py
+    - src/evaluation_v2.py
+    - src/geometry_v2.py
+    - src/spd_utils.py
+    - src/local_mean_movement_v0.py
+    - src/trial_movement_utility_v0.py
+
+dataset:
+  name: BNCI2014_001
+  session: 0train
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  classes: [left_hand, right_hand, feet, tongue]
+  channels: 22
+  samples_per_trial: 1000
+  sampling_frequency_hz: 250.0
+  epoch_seconds: [0.0, 3.996]
+  bandpass_hz: [8.0, 32.0]
+  covariance_estimator: oas
+  expected_trials: 2592
+  expected_whole: 2592
+  expected_window5: 12960
+  expected_trials_per_subject: 288
+  expected_trials_per_subject_class: 72
+  expected_windows: [1, 2, 3, 4, 5]
+
+geometry:
+  static: AIRM
+  airm_mean_tol: 1.0e-9
+  airm_mean_maxiter: 100
+  delta_t_seconds: 0.8
+  movement_tolerance: 1.0e-8
+  symmetry_relative_tolerance: 1.0e-10
+  gram_psd_eigenvalue_tolerance: 1.0e-8
+  gram_diagonal_absolute_tolerance: 1.0e-8
+  invariance_relative_tolerance: 1.0e-8
+  synthetic_congruence_condition_max: 10.0
+
+evaluation:
+  T2:
+    primary: true
+    split_A:
+      calibration_runs: [0, 1, 2]
+      evaluation_runs: [3, 4, 5]
+    split_B:
+      calibration_runs: [3, 4, 5]
+      evaluation_runs: [0, 1, 2]
+    calibration_n: 144
+    evaluation_n: 144
+    subject_then_direction_average: true
+  T1:
+    primary: false
+    target_center_fit: all_288_target_covariates
+    target_evaluation: same_288_target_covariates
+    labels_used_for_centering: false
+
+features:
+  STATIC: 253
+  MOV_LEN: 4
+  MOV_GRAM: 10
+  MOV_SENSOR: 1012
+  STATIC_PLUS_LEN: 257
+  STATIC_PLUS_GRAM: 263
+  STATIC_PLUS_SENSOR: 1265
+  condition_order:
+    - STATIC
+    - MOV_LEN
+    - MOV_GRAM
+    - MOV_SENSOR
+    - STATIC_PLUS_LEN
+    - STATIC_PLUS_GRAM
+    - STATIC_PLUS_SENSOR
+
+decoder:
+  scaler: StandardScaler
+  scaler_fit_scope: source_training_rows_only
+  model: LogisticRegression
+  penalty: l2
+  C: 1.0
+  solver: lbfgs
+  max_iter: 20000
+  tol: 1.0e-6
+  random_state: 20260817
+  class_weight: null
+  pca: false
+  tuning: false
+  convergence_warning_invalidates_cell: true
+
+statistics:
+  primary_comparisons:
+    DELTA_LEN: [STATIC_PLUS_LEN, STATIC]
+    DELTA_GRAM: [STATIC_PLUS_GRAM, STATIC]
+    DELTA_SENSOR: [STATIC_PLUS_SENSOR, STATIC]
+  secondary_comparisons:
+    GRAM_OVER_LEN: [STATIC_PLUS_GRAM, STATIC_PLUS_LEN]
+    SENSOR_OVER_GRAM: [STATIC_PLUS_SENSOR, STATIC_PLUS_GRAM]
+  sign_flip_patterns: 512
+  sign_flip_alternative: greater
+  holm_family_size: 3
+  bootstrap: exact_weighted_all_9_power_9_subject_resamples
+  bootstrap_percentiles: [0.025, 0.975]
+  top_contributor_share: max_absolute_delta_divided_by_sum_absolute_deltas
+  supported:
+    mean_delta_strictly_positive: true
+    median_delta_strictly_positive: true
+    holm_p_max: 0.05
+  broad:
+    positive_subjects_min: 6
+    every_leave_one_subject_out_mean_strictly_positive: true
+  static_sanity_mean_ba_min: 0.30
