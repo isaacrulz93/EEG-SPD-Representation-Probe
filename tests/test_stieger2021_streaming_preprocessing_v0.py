@@ -68,6 +68,8 @@ def test_bounded_transfer_remains_one_file_and_four_connections() -> None:
     assert '"--max-connection-per-server=4"' in source
     assert '"--split=4"' in source
     assert '"--continue=true"' in source
+    assert "range(64)" in source
+    assert "stalled_attempts >= 3" in source
 
 
 def test_channel_normalization_and_primary_order() -> None:

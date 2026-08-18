@@ -163,12 +163,24 @@ def stream_download(source: SourceFile, destination: Path, chunk_bytes: int = 8 
             f"--out={destination.name}",
             source.url,
         ]
-        try:
-            subprocess.run(command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
-        except subprocess.CalledProcessError as exc:
+        stalled_attempts = 0
+        last_error = ""
+        for _ in range(64):
+            before = destination.stat().st_size if destination.exists() else 0
+            completed = subprocess.run(command, check=False, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+            after = destination.stat().st_size if destination.exists() else 0
+            if completed.returncode == 0 and after == source.reported_size:
+                break
+            last_error = completed.stderr[-500:]
+            stalled_attempts = stalled_attempts + 1 if after <= before else 0
+            if stalled_attempts >= 3:
+                raise StiegerDataContractError(
+                    f"bounded aria2 transfer stalled for {source.filename}; partial retained: {last_error}"
+                )
+        else:
             raise StiegerDataContractError(
-                f"bounded aria2 transfer failed for {source.filename}; partial retained: {exc.stderr[-500:]}"
-            ) from exc
+                f"bounded aria2 transfer exceeded 64 fresh-redirect attempts for {source.filename}; partial retained"
+            )
         total = destination.stat().st_size
         result = {"bytes": total, "sha256": sha256_file(destination), "md5": md5_file(destination)}
         if total != source.reported_size:
