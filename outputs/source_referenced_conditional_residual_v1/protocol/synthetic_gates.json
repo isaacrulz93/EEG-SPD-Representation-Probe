@@ -1,0 +1,54 @@
+{
+  "cases": [
+    {
+      "case": "beta_equals_delta_minus_gamma",
+      "passed": true
+    },
+    {
+      "case": "uncentered_sign_mismatch_nonzero_gamma",
+      "passed": true
+    },
+    {
+      "case": "more_labels_wrong_if_gamma_omitted",
+      "passed": true
+    },
+    {
+      "case": "source_reference_restores_beta",
+      "passed": true
+    },
+    {
+      "case": "unsigned_delta_magnitude_recovery",
+      "passed": true
+    },
+    {
+      "case": "class_permutation_invariance",
+      "passed": true
+    },
+    {
+      "case": "source_ordering_success",
+      "passed": true
+    },
+    {
+      "case": "source_ordering_violation_detected",
+      "passed": true
+    },
+    {
+      "case": "minimal_label_residualized_estimator",
+      "passed": true
+    },
+    {
+      "case": "target_label_leakage_sentinel",
+      "passed": true
+    },
+    {
+      "case": "outer_fold_source_only_reference",
+      "passed": true
+    },
+    {
+      "case": "fair_residualized_direct_baseline",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "schema_version": "source-referenced-conditional-residual-v1-synthetic"
+}

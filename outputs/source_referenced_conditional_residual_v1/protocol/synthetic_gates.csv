@@ -1,0 +1,13 @@
+case,passed
+beta_equals_delta_minus_gamma,True
+uncentered_sign_mismatch_nonzero_gamma,True
+more_labels_wrong_if_gamma_omitted,True
+source_reference_restores_beta,True
+unsigned_delta_magnitude_recovery,True
+class_permutation_invariance,True
+source_ordering_success,True
+source_ordering_violation_detected,True
+minimal_label_residualized_estimator,True
+target_label_leakage_sentinel,True
+outer_fold_source_only_reference,True
+fair_residualized_direct_baseline,True
