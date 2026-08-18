@@ -1,0 +1,14 @@
+{
+  "cpu_count": 10,
+  "machine": "arm64",
+  "packages": {
+    "PyYAML": "6.0.2",
+    "matplotlib": "3.11.1",
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "pytest": "8.4.2",
+    "scipy": "1.18.0"
+  },
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.8"
+}

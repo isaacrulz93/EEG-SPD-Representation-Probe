@@ -1,0 +1,39 @@
+{
+  "amendment_config_sha256": "97a9c2002b0fb23935d256cc2ff495465474215a8981a17eea033b7db29bc2c2",
+  "branch": "pilot/subject-class-population-structure-v1",
+  "equivalence_pass": true,
+  "failed_v1_head": "6e5cbd1bd9d8356396f89f0421609fda0a43fb96",
+  "immutable_v1_hashes": {
+    "execution_failure": "7195f8f86395a0ea18b2693659151e95376c1ab5817c0a8820a4c1e995500f93",
+    "manifest": "a8e04026c94dd32bfd814402aa0b8f24a3172fd6ff99538797faabbb9e23f974",
+    "report": "024e5bcf46c683d96d62db3a77a1f95b9001c4c835e764350d835c26a5ed0288",
+    "terminal_decision": "f7fc43d84a20efba3c1e2481ddda27eedd39f9d05719f7556c724ac8c8b73295"
+  },
+  "parent_hashes": {
+    "action_stage_a": "b1bdcb1061d72fb685ee76462ece593c56a362bbbbc81702791b474fdd9d8cd3",
+    "action_stage_b": "5e76e8cfe7c01ed69ca8bede7aad1acf3f237880560ed35f07e6a44985bd37f8",
+    "bnci_objects": "1bb487a8446308e1dd29965ac57901a810d6e92da25b020ae284569176f33f6d",
+    "bnci_observed_manifest": "994e358e9ce6cdecb997e59fa59e144b97897ed2e113a62a484a88499caddae8",
+    "openbmi_objects": "f7e2fd7517fe1f55f84ef7729823b2d3f10452833ec2399a4b7014f769c98572",
+    "openbmi_protocol_manifest": "4b956d7e3b2b1a271ec07bddecc1ce0a93460ab1515ab8902b3d1ca35ebdb0ea"
+  },
+  "real_data_accessed": false,
+  "required_commit_subject": "freeze technical amendment for subject class population structure v1.1",
+  "schema_version": "subject-class-population-structure-v1-1-freeze",
+  "scientific_file_hashes": {
+    "configs/subject_class_population_structure_v1_1.yaml": "97a9c2002b0fb23935d256cc2ff495465474215a8981a17eea033b7db29bc2c2",
+    "docs/TECHNICAL_AMENDMENT_SUBJECT_CLASS_POPULATION_STRUCTURE_V1_1.md": "4fd93d73c802e77eef7f4fe09a17bb2a10b505fa4e0b9a0ec897e3d33faca8f3",
+    "scripts/66_freeze_subject_class_structure_v1_1.py": "e4ba9e98e3f0f537b669a2bf130fa96fbc4717c1077f81d163349235396e2b4d",
+    "scripts/67_run_reliability_gate_v1_1.py": "96e8d6bf454485468880ae7cce1df1849a875dd733eceb0a19d70aa64e4cceca",
+    "scripts/68_run_openbmi_primary_v1_1.py": "80140e9e2c40d7a133ed7e48a1db440ddd073f5690bdd7181a52a928e67c9fde",
+    "scripts/69_run_openbmi_nulls_v1_1.py": "5b5ba953e6cbef69726412ea721637f1c1503865e55527f2227eeaf9e1b6fb0c",
+    "scripts/70_run_openbmi_controls_v1_1.py": "8ffad71af9d615dc9bfc6d09a135e0cd6f3dfdbc8cf090154031fe5a1c7a5896",
+    "scripts/71_run_bnci_diagnostic_v1_1.py": "b80b4e3da1f01a01e704434f98716c842510336170eecd56d96fc4c426339cc6",
+    "scripts/72_report_subject_class_structure_v1_1.py": "50c5fa921c517cc3c3426cf20ac8288ed20a0c77ddd1dab53883e5b4ebe655c5",
+    "src/subject_class_population_structure_v1_1.py": "75ce4115003eb2a2e16b38db7e346b4c59378fde62d99acef542478f464b4052",
+    "tests/test_subject_class_population_structure_v1_1.py": "32eaaf2b88d16ef868fa1479ee15696b6706ad1a094a8cb45827045c34045daa"
+  },
+  "scientific_v1_config_sha256": "72d6ab325ebe199be3320fc561ae7e161a26008d1b9d009b1eb3e4b07673f2d9",
+  "status": "READY_FOR_TECHNICAL_AMENDMENT_FREEZE_COMMIT",
+  "synthetic_pass": true
+}

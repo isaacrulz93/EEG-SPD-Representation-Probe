@@ -1,0 +1,68 @@
+amendment:
+  name: Subject-Class Population Structure V1.1 Technical Recovery
+  version: "1.1.0"
+  date: "2026-08-18"
+  timezone: Asia/Seoul
+  branch: pilot/subject-class-population-structure-v1
+  base_failed_result_commit: 6e5cbd1bd9d8356396f89f0421609fda0a43fb96
+  protocol_freeze_commit_v1: bebc2149b79ac9026703e743f2129f65d792441e
+  amendment_path: docs/TECHNICAL_AMENDMENT_SUBJECT_CLASS_POPULATION_STRUCTURE_V1_1.md
+  amendment_sha256: 4fd93d73c802e77eef7f4fe09a17bb2a10b505fa4e0b9a0ec897e3d33faca8f3
+  v1_config_path: configs/subject_class_population_structure_v1.yaml
+  v1_config_sha256: 72d6ab325ebe199be3320fc561ae7e161a26008d1b9d009b1eb3e4b07673f2d9
+  output_dir: outputs/subject_class_population_structure_v1_1
+  required_freeze_commit_subject: freeze technical amendment for subject class population structure v1.1
+
+immutable_v1_artifacts:
+  execution_failure:
+    path: outputs/subject_class_population_structure_v1/decisions/execution_failure.json
+    sha256: 7195f8f86395a0ea18b2693659151e95376c1ab5817c0a8820a4c1e995500f93
+  terminal_decision:
+    path: outputs/subject_class_population_structure_v1/decisions/terminal_decision.json
+    sha256: f7fc43d84a20efba3c1e2481ddda27eedd39f9d05719f7556c724ac8c8b73295
+  report:
+    path: outputs/subject_class_population_structure_v1/report/subject_class_population_structure_v1.md
+    sha256: 024e5bcf46c683d96d62db3a77a1f95b9001c4c835e764350d835c26a5ed0288
+  manifest:
+    path: outputs/subject_class_population_structure_v1/manifest.json
+    sha256: a8e04026c94dd32bfd814402aa0b8f24a3172fd6ff99538797faabbb9e23f974
+
+scientific_contract_sha256:
+  parent_artifacts: f37329542ddee8588072103f73ab737abb14d9e68367c090d3e6bf3fa0776a1d
+  datasets: 2f78f20d31666fa0b8950af17a1abb50b347bd00c4207714ecb6acb4f4e22d2c
+  features: 700984ffe6037ff5c50401e086b238aa991c04877478ce2a38265d1ce9848307
+  openbmi_folds: b8ce231d6f3c831f201834727daa6e24f384cd6e1d8ea3fdd0294a13e0855cc0
+  rank: 2c9d7566ed03d3003b77bff384272c7b69e1d876f220d648608b4657df1a1bce
+  nulls: 8414f6ad3a88b42ac1b91475f2f0675014585cd230fbc68fffceffd439a6f004
+  bootstrap: 47f507f56fb32e96fdfebf7d4b1aea09ac85f1a548796d28e4bc90cc204b475f
+  reliability: 07bd813382c7dd70d36201006a3e397fa2986e861f4f6b82f7cd40cf3daba399
+  controls: 04164e77ae34377e274e4db360147d8af438465776ec543122654725eaa19303
+  terminal_labels: a08430bfb2f444d2eacd07ac114f2d014051d32b924590b55610d1f2dd8f157e
+  terminal_decision_source: fa032a11e4974e51b059890f109fd8d6a838780ebe5a5dfb01a61e46c478c3d5
+
+component_roles:
+  reliability: VOTING_REQUIRED
+  openbmi_sensor_primary: VOTING_REQUIRED
+  subject_pairing_null: VOTING_REQUIRED
+  class_semantics_null: VOTING_REQUIRED
+  equal_rank_random_subspace: VOTING_REQUIRED
+  full_space_sensor_baseline: VOTING_REQUIRED
+  terminal_gates: VOTING_REQUIRED
+  magnitude_sensitivity: NON_VOTING_OPTIONAL_DIAGNOSTIC
+  same_session_pca: NON_VOTING_OPTIONAL_DIAGNOSTIC
+  ordered_z_eigenspectrum: NON_VOTING_OPTIONAL_DIAGNOSTIC
+  generalized_eigen_signature: NON_VOTING_OPTIONAL_DIAGNOSTIC
+  action_overlap: NON_VOTING_OPTIONAL_DIAGNOSTIC
+  selected_mode_split_half: NON_VOTING_OPTIONAL_DIAGNOSTIC
+  bnci_multiclass: NON_VOTING_OPTIONAL_DIAGNOSTIC
+
+control_statuses:
+  success: CONTROL_COMPLETED
+  numerical_degeneracy: CONTROL_UNASSESSED_NUMERICAL_DEGENERACY
+  data_contract: CONTROL_UNASSESSED_DATA_CONTRACT_FAILURE
+  execution: CONTROL_UNASSESSED_EXECUTION_FAILURE
+
+orchestration_changes:
+  secondary_failure_isolation: true
+  output_namespace_change: true
+  scientific_parameter_change: false
