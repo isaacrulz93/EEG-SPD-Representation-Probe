@@ -12,6 +12,7 @@ import math
 import os
 import re
 import shutil
+import subprocess
 import tempfile
 import urllib.request
 from dataclasses import dataclass
@@ -145,6 +146,35 @@ def stream_download(source: SourceFile, destination: Path, chunk_bytes: int = 8 
         result = {"bytes": total, "sha256": sha.hexdigest(), "md5": md5.hexdigest()}
         if result["md5"].lower() != source.reported_md5.lower():
             raise StiegerDataContractError(f"MD5 mismatch for completed retained {source.filename}")
+        return result
+    aria2 = shutil.which("aria2c")
+    if aria2:
+        command = [
+            aria2,
+            "--continue=true",
+            "--max-connection-per-server=4",
+            "--split=4",
+            "--min-split-size=32M",
+            "--file-allocation=none",
+            "--auto-file-renaming=false",
+            "--allow-overwrite=false",
+            "--summary-interval=0",
+            f"--dir={destination.parent}",
+            f"--out={destination.name}",
+            source.url,
+        ]
+        try:
+            subprocess.run(command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+        except subprocess.CalledProcessError as exc:
+            raise StiegerDataContractError(
+                f"bounded aria2 transfer failed for {source.filename}; partial retained: {exc.stderr[-500:]}"
+            ) from exc
+        total = destination.stat().st_size
+        result = {"bytes": total, "sha256": sha256_file(destination), "md5": md5_file(destination)}
+        if total != source.reported_size:
+            raise StiegerDataContractError(f"size mismatch for {source.filename}: {total} != {source.reported_size}")
+        if result["md5"].lower() != source.reported_md5.lower():
+            raise StiegerDataContractError(f"MD5 mismatch for {source.filename}")
         return result
     headers = {"User-Agent": "EEG-SPD-Representation-Probe/1.0"}
     if 0 < total < source.reported_size:
