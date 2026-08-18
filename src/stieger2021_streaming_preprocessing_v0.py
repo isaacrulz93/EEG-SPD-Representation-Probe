@@ -141,6 +141,11 @@ def stream_download(source: SourceFile, destination: Path, chunk_bytes: int = 8 
             while chunk := existing.read(chunk_bytes):
                 sha.update(chunk)
                 md5.update(chunk)
+    if total == source.reported_size:
+        result = {"bytes": total, "sha256": sha.hexdigest(), "md5": md5.hexdigest()}
+        if result["md5"].lower() != source.reported_md5.lower():
+            raise StiegerDataContractError(f"MD5 mismatch for completed retained {source.filename}")
+        return result
     headers = {"User-Agent": "EEG-SPD-Representation-Probe/1.0"}
     if 0 < total < source.reported_size:
         headers["Range"] = f"bytes={total}-"

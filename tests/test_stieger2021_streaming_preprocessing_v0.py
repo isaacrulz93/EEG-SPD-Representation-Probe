@@ -51,6 +51,18 @@ def test_source_manifest_is_order_independent_and_hash_complete() -> None:
     assert len(first["canonical_sha256"]) == 64
 
 
+def test_completed_retained_download_is_hash_verified_without_network(tmp_path: Path) -> None:
+    payload = b"already complete"
+    retained = tmp_path / "complete.mat"; retained.write_bytes(payload)
+    source = streaming.SourceFile(
+        subject=1, session=2, figshare_file_id=1, filename="complete.mat", url="https://network.must.not.be.used.invalid",
+        reported_size=len(payload), reported_md5=hashlib.md5(payload).hexdigest(),  # nosec B324 official-integrity fixture
+    )
+    result = streaming.stream_download(source, retained)
+    assert result["bytes"] == len(payload)
+    assert result["sha256"] == hashlib.sha256(payload).hexdigest()
+
+
 def test_channel_normalization_and_primary_order() -> None:
     config, _ = load_config(ROOT, verify_protocol=False)
     assert streaming.normalize_channel_name("CPZ") == "CPz"
