@@ -1,0 +1,63 @@
+{
+  "config_sha256": "72d6ab325ebe199be3320fc561ae7e161a26008d1b9d009b1eb3e4b07673f2d9",
+  "gates": [
+    {
+      "expected_terminal": "GO_POPULATION_STRUCTURED_LOW_DIMENSIONAL_INTERACTION",
+      "left_max_principal_angle_rad": 0.1117637891544184,
+      "median_selected_rank": 2.5,
+      "null_median": 0.00816666582205695,
+      "observed": 0.5211276890151175,
+      "p_value": 0.01,
+      "passed": true,
+      "right_max_principal_angle_rad": 0.10315867009795829,
+      "synthetic": "known_paired_low_rank"
+    },
+    {
+      "expected_terminal": "GO_STRUCTURED_BUT_NOT_LOW_DIMENSIONAL",
+      "left_max_principal_angle_rad": 0.0,
+      "median_selected_rank": 12.0,
+      "null_median": 0.0,
+      "observed": 0.9465343890018789,
+      "p_value": 0.005,
+      "passed": true,
+      "right_max_principal_angle_rad": 0.0,
+      "synthetic": "full_rank_stable"
+    },
+    {
+      "expected_terminal": "STOP_NO_HELDOUT_POPULATION_STRUCTURE",
+      "left_max_principal_angle_rad": 0.0,
+      "median_selected_rank": 1.0,
+      "null_median": 0.002319469111808368,
+      "observed": -0.026478832573542554,
+      "p_value": 0.75,
+      "passed": true,
+      "right_max_principal_angle_rad": 0.0,
+      "synthetic": "no_cross_session_pairing"
+    },
+    {
+      "expected_terminal": "STOP_RANDOM_SUBSPACE_EQUIVALENT",
+      "left_max_principal_angle_rad": 0.0,
+      "median_selected_rank": 1.0,
+      "null_median": 0.006112622706742847,
+      "observed": -0.026478832573542554,
+      "p_value": 0.73,
+      "passed": true,
+      "right_max_principal_angle_rad": 0.0,
+      "synthetic": "random_subspace_equivalence"
+    },
+    {
+      "expected_terminal": "UNASSESSED_MEASUREMENT_RELIABILITY_FAILURE",
+      "left_max_principal_angle_rad": 0.0,
+      "median_selected_rank": 0.0,
+      "null_median": 0.0,
+      "observed": -0.03486355385960952,
+      "p_value": 1.0,
+      "passed": true,
+      "right_max_principal_angle_rad": 0.0,
+      "synthetic": "measurement_unreliability"
+    }
+  ],
+  "passed": true,
+  "replicates_per_null": 99,
+  "schema_version": "subject-class-population-structure-synthetic-v1"
+}
