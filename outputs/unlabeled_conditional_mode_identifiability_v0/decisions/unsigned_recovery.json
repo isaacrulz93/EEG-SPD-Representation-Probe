@@ -1,0 +1,46 @@
+{
+  "bootstrap_ci": [
+    0.45985203150114196,
+    0.8220680467789596
+  ],
+  "decision": "UNSIGNED_CONDITIONAL_ENERGY_RECOVERY_SUPPORTED",
+  "leave_one_subject_sign_stable": true,
+  "matched_random_direction_p": 0.0005,
+  "passed": true,
+  "pooled_pearson": 0.9538919422495502,
+  "pooled_spearman": 0.6692120794782382,
+  "primary_estimator": "SOURCE_WITHIN_CORRECTED_PROJECTED_VARIANCE",
+  "schema_version": "unlabeled-conditional-mode-v0-unsigned",
+  "session_spearman": [
+    0.624496828637982,
+    0.7273685450913854
+  ],
+  "source_within_by_fold_session": [
+    [
+      0.23548879593665892,
+      0.12648580628613096
+    ],
+    [
+      0.11419838460505084,
+      0.12107076809290897
+    ],
+    [
+      0.10927872513553043,
+      0.11883334147417572
+    ],
+    [
+      0.14098444690773826,
+      0.12956750489260405
+    ],
+    [
+      0.11274700284553142,
+      0.09902019456574848
+    ],
+    [
+      0.11275790265185417,
+      0.1026071599089576
+    ]
+  ],
+  "subject_permutation_p": 0.0005,
+  "symmetry_gate_pass": true
+}

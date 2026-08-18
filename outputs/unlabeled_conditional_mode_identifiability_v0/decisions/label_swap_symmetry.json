@@ -1,0 +1,15 @@
+{
+  "maximum_errors": {
+    "V_between": 0.0,
+    "absolute_beta": 0.0,
+    "pooled_trial_object": 0.0,
+    "primary_unsigned_estimate": 0.0,
+    "projected_y": 0.0,
+    "signed_alpha_negation": 0.0,
+    "signed_beta_negation": 0.0
+  },
+  "passed": true,
+  "signed_zero_label_identification": "NONIDENTIFIABLE_UP_TO_CLASS_PERMUTATION",
+  "status": "PASS",
+  "tolerance": 2e-12
+}

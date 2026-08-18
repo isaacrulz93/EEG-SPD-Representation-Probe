@@ -1,0 +1,4 @@
+object,maximum_relative_frobenius_error,tolerance,passed
+marginal_means,6.8284688706836092e-15,2e-12,True
+class_means,9.3813584650302269e-15,2e-12,True
+U,1.0834530459044211e-12,2e-12,True

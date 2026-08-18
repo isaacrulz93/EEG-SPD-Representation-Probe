@@ -1,0 +1,22 @@
+{
+  "branch": "pilot/unlabeled-conditional-mode-identifiability-v0",
+  "first_real_access_tree_was_clean": true,
+  "parent_head": "9dee7642ac573f37756b8427a75864a50c32044e",
+  "pr16_snapshot_sha256": "5adc73f87c9347d6e2f7ced6b293f51fa2f83a4814c7fdef9c8044bb4a3634f3",
+  "protocol_freeze_commit": "d0855c3e9d1431f2f89d4d389e5a82cc48d7812d",
+  "schema_version": "unlabeled-conditional-mode-v0-git-provenance",
+  "scientific_file_hashes": {
+    "configs/unlabeled_conditional_mode_identifiability_v0.yaml": "b8aa989985a96dda805b4c1b6da7958c5198d48778d37e4868e3a746adbf7877",
+    "docs/AUDIT_UNLABELED_CONDITIONAL_MODE_V0.md": "8805eb21f5137cf1ec82987d728e15a45a29d74b351801cc86af15558df4dc7a",
+    "docs/PROTOCOL_UNLABELED_CONDITIONAL_MODE_IDENTIFIABILITY_V0.md": "03a74ed75a2ff41a61034ae2934921e36416a13726210066d36c380f72b76fbf",
+    "docs/SIGNED_COORDINATE_NONIDENTIFIABILITY.md": "6a5abfaccdf0ce89735e07fdd51b270c79cf5f349031be89ac5278e8f220aba2",
+    "scripts/80_freeze_unlabeled_conditional_mode_v0.py": "0b95d3538b31c55c2e5bd910e5717bf77ab5ab9d4858cebb15c4062dd74d30e6",
+    "scripts/81_run_mode_identity_audit_v0.py": "4188efbd691e9fdf6703a5f510e32f9c3a7e4925ece9d2caf2122815ab19f2dc",
+    "scripts/82_run_trial_mode_compatibility_v0.py": "ecee51ebe637dc237daa9051f2f87e7669cd5249630587b31238c3c7674d46db",
+    "scripts/83_run_unsigned_recovery_v0.py": "690743f370029c098aa141e50da3483674b4ee372195b67631b3a44933617b17",
+    "scripts/84_run_minimal_anchor_v0.py": "c6b58fe45cc5ae165def03e85160a6dc18a0eb922b5320e36fa81809f913822d",
+    "scripts/85_report_unlabeled_conditional_mode_v0.py": "4ee14587f5b97a91ef637c64713a6bca22001fd0f9d3653db10c234f983f79cc",
+    "src/unlabeled_conditional_mode_identifiability_v0.py": "07f39d75e7ce8f6601b765f9d7556aeb697ebcce56aaf88ed62d90cc78390e6b",
+    "tests/test_unlabeled_conditional_mode_identifiability_v0.py": "a218202cd84edf036945f9a0198159e8024e4a5e6bb8dc2d77ef32f23becd5a2"
+  }
+}

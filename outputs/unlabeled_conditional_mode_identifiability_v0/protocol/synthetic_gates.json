@@ -1,0 +1,42 @@
+{
+  "cases": [
+    {
+      "case": "balanced_rank1_unsigned_recovery",
+      "passed": true
+    },
+    {
+      "case": "class_swap_unlabeled_invariance",
+      "passed": true
+    },
+    {
+      "case": "recoverable_unsigned_separation",
+      "passed": true
+    },
+    {
+      "case": "signed_nonidentifiability",
+      "passed": true
+    },
+    {
+      "case": "varying_within_noise",
+      "passed": true
+    },
+    {
+      "case": "no_between_separation",
+      "passed": true
+    },
+    {
+      "case": "random_direction_equivalence",
+      "passed": true
+    },
+    {
+      "case": "minimal_anchor_sign_resolution",
+      "passed": true
+    },
+    {
+      "case": "target_label_leakage_sentinel",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "schema_version": "unlabeled-conditional-mode-v0-synthetic"
+}

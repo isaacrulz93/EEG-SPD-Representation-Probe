@@ -1,0 +1,49 @@
+{
+  "controls": [
+    {
+      "calibration_intercept": 0.001800519451879591,
+      "calibration_slope": 0.7401114640581811,
+      "control": "same_session_PCA",
+      "estimator": "same_session_PCA",
+      "mae": 0.05906654714657014,
+      "n": 108,
+      "nonnegative_r2": 0.6366354056187861,
+      "normalized_mae": 0.6515775630922901,
+      "pearson": 0.8648953229977003,
+      "raw_r2": 0.6366354056187861,
+      "session": "pooled",
+      "spearman": 0.596283170123088
+    },
+    {
+      "control": "overall_covariance_magnitude",
+      "spearman_with_learned_mode_V_between": 0.09452494593538921
+    },
+    {
+      "control": "total_tangent_space_variance",
+      "spearman_with_learned_mode_V_between": 0.1661093486524336
+    },
+    {
+      "calibration_intercept": -0.006468950633449121,
+      "calibration_slope": 0.8802100793973194,
+      "control": "shuffled_source_within_model",
+      "estimator": "shuffled_source_within_model",
+      "mae": 0.03707766680804102,
+      "n": 108,
+      "nonnegative_r2": 0.8807050660304738,
+      "normalized_mae": 0.3989594223814003,
+      "pearson": 0.9520111329286606,
+      "raw_r2": 0.8807050660304738,
+      "session": "pooled",
+      "spearman": 0.7034658857580096
+    },
+    {
+      "control": "trial_count",
+      "status": "CONSTANT_100_TRIALS_PER_SUBJECT_SESSION"
+    },
+    {
+      "control": "acquisition_order_removal",
+      "maximum_estimate_difference": 6.661338147750939e-16,
+      "status": "PASS"
+    }
+  ]
+}
