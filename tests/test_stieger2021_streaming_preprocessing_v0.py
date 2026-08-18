@@ -109,9 +109,33 @@ def test_recorded_struct_electrode_coordinates_are_parsed() -> None:
         def __init__(self, label: str, x: float) -> None:
             self.label, self.X, self.Y, self.Z = label, x, 0.1, 0.2
     bci = {"chaninfo": {"electrodes": np.asarray([Electrode("C3", -0.1), Electrode("CZ", 0.0)], dtype=object)}}
-    positions = streaming._extract_recorded_positions(bci, ["C3", "Cz"])
+    positions = streaming._extract_electrode_coordinates_raw(bci, ["C3", "Cz"])
     assert positions is not None
     np.testing.assert_allclose(positions["C3"], [-0.1, 0.1, 0.2])
+
+
+def test_generic_file_coordinates_fall_back_when_positions_not_recorded() -> None:
+    raw = {"C3": np.asarray([-1.0, 0.2, 0.3]), "Cz": np.asarray([0.0, 0.0, 1.0])}
+    positions, source, unit, factor = streaming.interpolation_position_contract(False, raw, ["C3", "Cz"])
+    assert positions is None
+    assert source == "standard_1005_fallback"
+    assert unit == "not_used_generic_file_coordinates"
+    assert factor == 0.0
+
+
+def test_explicit_recorded_coordinate_units_are_strictly_converted() -> None:
+    labels = ["C3", "Cz"]
+    centimeters = {"C3": np.asarray([-8.0, 1.0, 5.0]), "Cz": np.asarray([0.0, 0.0, 10.0])}
+    positions, source, unit, factor = streaming.interpolation_position_contract(True, centimeters, labels)
+    assert source == "recorded_file_coordinates"
+    assert unit == "centimeters" and factor == 0.01
+    np.testing.assert_allclose(positions["Cz"], [0.0, 0.0, 0.1])
+
+
+def test_ambiguous_explicit_recorded_coordinate_units_fail_closed() -> None:
+    raw = {"C3": np.asarray([-1.0, 0.2, 0.3]), "Cz": np.asarray([0.0, 0.0, 1.0])}
+    with pytest.raises(streaming.StiegerDataContractError, match="ambiguous recorded electrode coordinate scale"):
+        streaming.interpolation_position_contract(True, raw, ["C3", "Cz"])
 
 
 def test_oas_covariance_strict_spd_symmetric() -> None:

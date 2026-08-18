@@ -29,3 +29,18 @@ assertion, which was not a declared Stieger gate. The pushed correction history
 is retained rather than rewritten. The final executable contract therefore
 uses the originally frozen `ddof=1`; no estimator, direction, gate, null, or
 threshold changed.
+
+Before cohort lock, source-session warnings exposed a second official-schema
+distinction. The dataset paper states that `electrodes` contains generic 10-10
+coordinates even when `positionsrecorded` is false. The initial direct parser
+treated every populated `electrodes` table as individually recorded and thus
+bypassed the frozen `standard_1005` fallback. Streaming was stopped with its
+current raw partial retained. The parser now uses file coordinates only when
+the official `positionsrecorded` flag is true; otherwise it uses the frozen
+standard montage. The literal file coordinate table, its hash, the unit
+decision, and the interpolation-position source are retained in compact
+provenance. Explicitly recorded coordinates pass a strict meter/centimeter/
+millimeter scale gate; ambiguous scale fails closed. All 31 pre-lock compact
+objects produced by the earlier path were moved intact to an ignored quarantine
+and are regenerated from the same hash-locked source files. No cohort, fold,
+population, interaction, semantic, or recovery statistic had been computed.

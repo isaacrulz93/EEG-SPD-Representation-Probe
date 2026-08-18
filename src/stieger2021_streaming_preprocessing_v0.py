@@ -288,7 +288,8 @@ def _noise_indices(bci: Any, n_channels: int) -> list[int]:
     return values
 
 
-def _extract_recorded_positions(bci: Any, labels: Sequence[str]) -> dict[str, np.ndarray] | None:
+def _extract_electrode_coordinates_raw(bci: Any, labels: Sequence[str]) -> dict[str, np.ndarray] | None:
+    """Extract the literal file coordinate table without assuming its unit."""
     chaninfo = _field(bci, "chaninfo")
     candidates = (
         _field(chaninfo, "coordinates"),
@@ -321,14 +322,46 @@ def _extract_recorded_positions(bci: Any, labels: Sequence[str]) -> dict[str, np
             array = array.T
         if array.shape != (len(labels), 3) or not np.all(np.isfinite(array)):
             continue
-        norms = np.linalg.norm(array, axis=1)
-        if np.any(norms <= 0):
+        if np.any(np.linalg.norm(array, axis=1) <= 0):
             continue
-        scale = np.median(norms)
-        if scale > 1.0:
-            array = array / 1000.0 if scale > 10.0 else array / 100.0
         return {label: array[i] for i, label in enumerate(labels)}
     return None
+
+
+def recorded_positions_in_meters(
+    raw_positions: Mapping[str, np.ndarray], labels: Sequence[str]
+) -> tuple[dict[str, np.ndarray], str, float]:
+    """Convert explicitly recorded Cartesian coordinates using a strict unit gate."""
+    array = np.stack([np.asarray(raw_positions[label], dtype=np.float64) for label in labels])
+    if array.shape != (len(labels), 3) or not np.all(np.isfinite(array)):
+        raise StiegerDataContractError("invalid recorded electrode coordinate table")
+    median_norm = float(np.median(np.linalg.norm(array, axis=1)))
+    if 0.03 <= median_norm <= 0.30:
+        unit, factor = "meters", 1.0
+    elif 3.0 <= median_norm <= 30.0:
+        unit, factor = "centimeters", 1.0e-2
+    elif 30.0 < median_norm <= 300.0:
+        unit, factor = "millimeters", 1.0e-3
+    else:
+        raise StiegerDataContractError(
+            f"ambiguous recorded electrode coordinate scale: median norm {median_norm}"
+        )
+    converted = array * factor
+    return {label: converted[index] for index, label in enumerate(labels)}, unit, factor
+
+
+def interpolation_position_contract(
+    positions_recorded: bool,
+    raw_positions: Mapping[str, np.ndarray] | None,
+    labels: Sequence[str],
+) -> tuple[dict[str, np.ndarray] | None, str, str, float]:
+    """Select file coordinates only when the official flag declares them recorded."""
+    if not positions_recorded:
+        return None, "standard_1005_fallback", "not_used_generic_file_coordinates", 0.0
+    if raw_positions is None:
+        raise StiegerDataContractError("positionsrecorded is true but coordinates could not be parsed")
+    converted, unit, factor = recorded_positions_in_meters(raw_positions, labels)
+    return converted, "recorded_file_coordinates", unit, factor
 
 
 def interpolation_matrix(
@@ -464,9 +497,10 @@ def parse_and_preprocess_mat(
     chaninfo = _field(bci, "chaninfo")
     positions_value = _field(bci, "positionsrecorded", _field(chaninfo, "positionsrecorded", 0))
     positions_recorded = bool(_int_field({"value": positions_value}, "value", default=0))
-    recorded_positions = _extract_recorded_positions(bci, labels)
-    if positions_recorded and recorded_positions is None:
-        raise StiegerDataContractError("positionsrecorded is true but coordinates could not be parsed")
+    raw_electrode_positions = _extract_electrode_coordinates_raw(bci, labels)
+    recorded_positions, interpolation_position_source, coordinate_unit, coordinate_scale_factor = interpolation_position_contract(
+        positions_recorded, raw_electrode_positions, labels
+    )
     interpolation = interpolation_matrix(labels, noise_indices, recorded_positions)
     primary_indices = np.asarray([label_index[name] for name in primary_order], dtype=np.int64)
 
@@ -600,7 +634,14 @@ def parse_and_preprocess_mat(
         "recorded_channel_order": np.asarray(labels, dtype="U8"),
         "noise_channel_indices_zero_based": np.asarray(noise_indices, dtype=np.int16),
         "positionsrecorded": np.asarray(positions_recorded, dtype=np.bool_),
-        "recorded_positions_used": np.asarray(recorded_positions is not None, dtype=np.bool_),
+        "recorded_positions_used": np.asarray(interpolation_position_source == "recorded_file_coordinates", dtype=np.bool_),
+        "interpolation_position_source": np.asarray(interpolation_position_source, dtype="U40"),
+        "electrode_coordinate_unit": np.asarray(coordinate_unit, dtype="U40"),
+        "electrode_coordinate_scale_to_meters": np.asarray(coordinate_scale_factor, dtype=np.float64),
+        "electrode_coordinates_raw": (
+            np.stack([raw_electrode_positions[label] for label in labels]).astype(np.float64)
+            if raw_electrode_positions is not None else np.empty((0, 3), dtype=np.float64)
+        ),
         "time_vector_unit": np.asarray(sorted(observed_time_units), dtype="U16"),
         "MBSRsubject": np.asarray(mbsr_subject, dtype=np.int8),
         "all_tasknumber": np.asarray(all_tasknumber, dtype=np.int8),
@@ -633,7 +674,14 @@ def parse_and_preprocess_mat(
         "noise_channel_indices_zero_based": noise_indices,
         "primary_bad_count": len(primary_bad),
         "positionsrecorded": positions_recorded,
-        "recorded_positions_used": recorded_positions is not None,
+        "recorded_positions_used": interpolation_position_source == "recorded_file_coordinates",
+        "interpolation_position_source": interpolation_position_source,
+        "electrode_coordinate_unit": coordinate_unit,
+        "electrode_coordinate_scale_to_meters": coordinate_scale_factor,
+        "electrode_coordinates_raw_sha256": (
+            hashlib.sha256(np.stack([raw_electrode_positions[label] for label in labels]).astype(np.float64).tobytes()).hexdigest()
+            if raw_electrode_positions is not None else None
+        ),
         "time_vector_units": sorted(observed_time_units),
         "MBSRsubject": mbsr_subject,
         "all_trials": len(all_tasknumber),
@@ -659,6 +707,8 @@ def validate_compact_object(path: Path, source: SourceFile, config: Mapping[str,
         "subject",
         "session",
         "primary_channel_order",
+        "interpolation_position_source",
+        "electrode_coordinates_raw",
     }
     with np.load(path, allow_pickle=False) as data:
         missing = required - set(data.files)
@@ -676,6 +726,13 @@ def validate_compact_object(path: Path, source: SourceFile, config: Mapping[str,
             raise StiegerDataContractError("invalid compact labels")
         if list(data["primary_channel_order"].astype(str)) != list(config["channels"]["primary_order"]):
             raise StiegerDataContractError("compact primary channel order mismatch")
+        positions_recorded = bool(data["positionsrecorded"])
+        source_name = str(data["interpolation_position_source"])
+        if positions_recorded != (source_name == "recorded_file_coordinates"):
+            raise StiegerDataContractError("compact interpolation-position source contract failure")
+        coordinate_table = np.asarray(data["electrode_coordinates_raw"], dtype=np.float64)
+        if coordinate_table.shape not in {(0, 3), (len(data["recorded_channel_order"]), 3)}:
+            raise StiegerDataContractError("compact electrode-coordinate provenance shape failure")
         for stack in (covariance, pretarget):
             if not np.all(np.isfinite(stack)) or not np.allclose(stack, stack.transpose(0, 2, 1), atol=0.0, rtol=0.0):
                 raise StiegerDataContractError("compact covariance finite/symmetry failure")
