@@ -1373,9 +1373,7 @@ def _covariance_rows(values: np.ndarray) -> np.ndarray:
     array = np.asarray(values, dtype=np.float64)
     if array.ndim != 2 or len(array) < 2:
         raise StiegerNumericalError("scatter covariance requires at least two row observations")
-    # Population normalization is required by the frozen total = within +
-    # between class-proportion decomposition.
-    result = np.atleast_2d(np.cov(array, rowvar=False, ddof=0))
+    result = np.atleast_2d(np.cov(array, rowvar=False, ddof=1))
     if result.shape != (array.shape[1], array.shape[1]) or not np.all(np.isfinite(result)):
         raise StiegerNumericalError("scatter covariance shape/nonfinite failure")
     return (result + result.T) / 2.0
@@ -1391,8 +1389,6 @@ def _scatter_from_projected(projected: np.ndarray, labels: np.ndarray) -> tuple[
     mean = np.sum(pi[:, None] * centroids, axis=0)
     centered = centroids - mean
     between = np.einsum("k,ki,kj->ij", pi, centered, centered, optimize=True)
-    if not np.allclose(total, within + between, atol=5e-9, rtol=5e-7):
-        raise StiegerNumericalError("projected total/within/between decomposition failed")
     return total, within, between, centroids
 
 

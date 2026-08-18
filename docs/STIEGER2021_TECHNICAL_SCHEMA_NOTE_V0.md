@@ -19,12 +19,13 @@ not contribute to any statistic and would only have raised `NameError` before
 the observed summary was written. It was removed without changing model
 fitting, scores, folds, ranks, nulls, thresholds, or terminal logic.
 
-The same pre-access review found that the strict frozen scatter decomposition
-had been implemented with `ddof=1` class covariances weighted by observed class
-proportions. That combination does not satisfy the declared empirical
-`S_total = S_within + S_between` identity. Covariance normalization was changed
-to `ddof=0`, which is the population-moment convention in the frozen formula,
-and an exact unequal-class-count decomposition regression test was added. A
-missing reporting-only calculation of predicted scatter ranks was also placed
-in the scatter summary where it belongs. No estimator, direction, gate, null,
-or threshold was selected or changed.
+A missing reporting-only calculation of predicted scatter ranks was placed in
+the scatter summary where it belongs. During that review, an attempted
+finite-sample decomposition assertion briefly changed scatter covariance to
+`ddof=0`. Rechecking the immutable YAML showed that `scatter.covariance_ddof`
+was frozen literally as `1`; before cohort lock or any population/scatter
+statistic access, a subsequent commit restored `ddof=1` and removed the extra
+assertion, which was not a declared Stieger gate. The pushed correction history
+is retained rather than rewritten. The final executable contract therefore
+uses the originally frozen `ddof=1`; no estimator, direction, gate, null, or
+threshold changed.
