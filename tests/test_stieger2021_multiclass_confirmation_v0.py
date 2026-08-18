@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import inspect
+import json
 from pathlib import Path
 
 import numpy as np
@@ -96,6 +97,32 @@ def test_m4_contract_is_one_label_per_class() -> None:
     assert config["inference"]["calibration_budgets"] == [0, 4, 8, 16, 32]
     assert 2 not in config["inference"]["calibration_budgets"]
     assert 4 // 4 == 1
+
+
+def test_population_summary_serializes_without_external_local_state(tmp_path: Path) -> None:
+    config, _ = module.load_config(ROOT, verify_protocol=False)
+    (tmp_path / "objects").mkdir()
+    (tmp_path / "tables").mkdir()
+    result = {
+        "statistic": 0.4,
+        "forward_median": 0.3,
+        "reverse_median": 0.2,
+        "full_space_statistic": 0.1,
+        "selected_ranks": np.asarray([1]),
+        "subject_average": np.asarray([0.2, 0.4]),
+        "subject_forward": np.asarray([0.1, 0.3]),
+        "subject_reverse": np.asarray([0.3, 0.5]),
+        "subject_full_space": np.asarray([0.1, 0.2]),
+        "subject_fold": np.asarray([0, 0]),
+        "leave_one_subject": np.asarray([0.2, 0.4]),
+        "fold_records": [],
+        "all_rank_records": [],
+        "modes_left": [np.ones((630, 1))],
+        "modes_right": [np.ones((630, 1))],
+    }
+    summary = module._save_population_result(tmp_path, "synthetic", result, config)
+    assert summary["statistic"] == 0.4
+    assert json.loads((tmp_path / "tables" / "synthetic_summary.json").read_text())["selected_ranks"] == [1]
 
 
 def test_task_and_target_label_leakage_sentinels_are_explicit() -> None:

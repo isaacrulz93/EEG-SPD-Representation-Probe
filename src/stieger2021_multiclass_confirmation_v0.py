@@ -915,14 +915,6 @@ def run_reliability(repo_root: str | Path) -> dict[str, Any]:
 
 
 def _save_population_result(output: Path, stem: str, result: Mapping[str, Any], config: Mapping[str, Any]) -> dict[str, Any]:
-    predicted_ranks: list[int] = []
-    fold_for_subject = np.empty(n, dtype=np.int64)
-    for fold_index, fold in enumerate(locked.folds):
-        fold_for_subject[fold] = fold_index
-    for index in range(n):
-        rank = int(selected[fold_for_subject[index]])
-        for q in range(2):
-            predicted_ranks.append(int(np.linalg.matrix_rank(estimates[index, q, :rank, :rank])))
     summary = {
         "statistic": float(result["statistic"]),
         "forward_median": float(result["forward_median"]),

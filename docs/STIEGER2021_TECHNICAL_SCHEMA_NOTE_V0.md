@@ -11,3 +11,10 @@ A completed retained raw file is now locally re-hashed and reused without reopen
 After the first compact object validated the direct parser, measured single-stream throughput implied an avoidable 14–20-hour transfer. The downloader now uses at most four range connections to one source file when `aria2c` is available, with exactly one raw source file in flight. It still resumes the retained partial, verifies official bytes and MD5 plus local SHA-256 before parsing, and retains any failed partial. This is the bounded one-file streaming option permitted by the frozen storage contract; it does not alter source selection or any scientific setting.
 
 Figshare redirects to short-lived signed S3 URLs. A bounded transfer can make progress and then receive HTTP exit 22 after that redirect expires. The runner therefore re-invokes the original official Figshare URL for a fresh redirect while resuming the same partial. It permits at most 64 invocations and fails after three consecutive no-progress attempts. Final parsing remains blocked until exact byte count and official MD5 pass. After five source sessions demonstrated stable range-resume integrity, the per-file bound was raised from four to eight connections to reduce transfer wall time; exactly one raw file remains in flight, and final compact bytes are checksum-defined rather than transport-defined.
+
+Before cohort lock or any population-statistic access, static review found a
+serialization-only defect in `_save_population_result`: an unused block copied
+from the scatter-summary path referenced undefined local names. The block did
+not contribute to any statistic and would only have raised `NameError` before
+the observed summary was written. It was removed without changing model
+fitting, scores, folds, ranks, nulls, thresholds, or terminal logic.
