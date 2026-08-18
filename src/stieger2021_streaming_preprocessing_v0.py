@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import re
 import shutil
@@ -251,7 +252,22 @@ def _extract_recorded_positions(bci: Any, labels: Sequence[str]) -> dict[str, np
     for candidate in candidates:
         if candidate is None:
             continue
-        array = np.asarray(candidate, dtype=float).squeeze()
+        candidate_array = np.asarray(candidate).squeeze()
+        if candidate_array.dtype == object:
+            parsed: dict[str, np.ndarray] = {}
+            for record in candidate_array.reshape(-1):
+                label = _field(record, "label")
+                coordinates = [_field(record, axis) for axis in ("X", "Y", "Z")]
+                if label is None or any(value is None for value in coordinates):
+                    continue
+                parsed[normalize_channel_name(label)] = np.asarray(coordinates, dtype=np.float64)
+            if all(label in parsed for label in labels):
+                return {label: parsed[label] for label in labels}
+            continue
+        try:
+            array = np.asarray(candidate, dtype=float).squeeze()
+        except (TypeError, ValueError):
+            continue
         if array.ndim != 2:
             continue
         if array.shape == (3, len(labels)):
@@ -336,6 +352,21 @@ def crop_epoch(resampled: np.ndarray, source_time_start: float, window: Sequence
     return resampled[:, mask]
 
 
+def time_vector_seconds(exact_time: np.ndarray, raw_sfreq: float) -> tuple[np.ndarray, str]:
+    """Convert the official exact time vector to seconds without changing it in provenance."""
+    values = np.asarray(exact_time, dtype=np.float64).reshape(-1)
+    step = float(np.median(np.diff(values)))
+    seconds_step = 1.0 / float(raw_sfreq)
+    if math.isclose(step, seconds_step, rel_tol=1e-8, abs_tol=1e-12):
+        return values.copy(), "seconds"
+    milliseconds_step = 1000.0 / float(raw_sfreq)
+    if math.isclose(step, milliseconds_step, rel_tol=1e-8, abs_tol=1e-9):
+        return values / 1000.0, "milliseconds"
+    raise StiegerDataContractError(
+        f"unrecognized time-vector unit: step={step}, sampling_rate={raw_sfreq}"
+    )
+
+
 def oas_covariance(epoch: np.ndarray) -> np.ndarray:
     values = np.asarray(epoch, dtype=np.float64)
     if values.ndim != 2 or values.shape[1] < 2:
@@ -386,7 +417,7 @@ def parse_and_preprocess_mat(
     chaninfo = _field(bci, "chaninfo")
     positions_value = _field(bci, "positionsrecorded", _field(chaninfo, "positionsrecorded", 0))
     positions_recorded = bool(_int_field({"value": positions_value}, "value", default=0))
-    recorded_positions = _extract_recorded_positions(bci, labels) if positions_recorded else None
+    recorded_positions = _extract_recorded_positions(bci, labels)
     if positions_recorded and recorded_positions is None:
         raise StiegerDataContractError("positionsrecorded is true but coordinates could not be parsed")
     interpolation = interpolation_matrix(labels, noise_indices, recorded_positions)
@@ -422,6 +453,7 @@ def parse_and_preprocess_mat(
     unique_time_vectors: list[np.ndarray] = []
     unique_time_lookup: dict[str, int] = {}
     all_time_vector_index: list[int] = []
+    observed_time_units: set[str] = set()
 
     windows = config["preprocessing"]
     for index, (trial, trial_time, record) in enumerate(zip(data_trials, time_trials, trial_records, strict=True)):
@@ -434,6 +466,8 @@ def parse_and_preprocess_mat(
         exact_times = np.asarray(trial_time, dtype=np.float64).reshape(-1)
         if exact_times.size < 2 or not np.all(np.isfinite(exact_times)) or not np.all(np.diff(exact_times) > 0):
             raise StiegerDataContractError(f"invalid exact time vector at acquisition index {index}")
+        times_seconds, time_unit = time_vector_seconds(exact_times, raw_sfreq)
+        observed_time_units.add(time_unit)
         time_digest = hashlib.sha256(exact_times.tobytes(order="C")).hexdigest()
         if time_digest not in unique_time_lookup:
             unique_time_lookup[time_digest] = len(unique_time_vectors)
@@ -462,7 +496,7 @@ def parse_and_preprocess_mat(
             artifact_count[str(target)] += 1
             continue
         artifact_free_count[str(target)] += 1
-        times = exact_times
+        times = times_seconds
         interpolated = _apply_interpolation(np.asarray(trial), interpolation)[primary_indices]
         resampled = filter_resample_trial(interpolated, raw_sfreq, float(windows["resample_hz"]))
         primary = crop_epoch(resampled, float(times[0]), windows["epoch_primary_seconds"])
@@ -519,6 +553,8 @@ def parse_and_preprocess_mat(
         "recorded_channel_order": np.asarray(labels, dtype="U8"),
         "noise_channel_indices_zero_based": np.asarray(noise_indices, dtype=np.int16),
         "positionsrecorded": np.asarray(positions_recorded, dtype=np.bool_),
+        "recorded_positions_used": np.asarray(recorded_positions is not None, dtype=np.bool_),
+        "time_vector_unit": np.asarray(sorted(observed_time_units), dtype="U16"),
         "MBSRsubject": np.asarray(mbsr_subject, dtype=np.int8),
         "all_tasknumber": np.asarray(all_tasknumber, dtype=np.int8),
         "all_targetnumber": np.asarray(all_targetnumber, dtype=np.int8),
@@ -551,6 +587,7 @@ def parse_and_preprocess_mat(
         "primary_bad_count": len(primary_bad),
         "positionsrecorded": positions_recorded,
         "recorded_positions_used": recorded_positions is not None,
+        "time_vector_units": sorted(observed_time_units),
         "MBSRsubject": mbsr_subject,
         "all_trials": len(all_tasknumber),
         "unique_exact_time_vectors": len(unique_time_vectors),

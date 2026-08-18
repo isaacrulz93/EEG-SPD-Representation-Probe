@@ -75,6 +75,24 @@ def test_filter_resample_and_exact_epoch_lengths() -> None:
     assert pretarget.shape == (20, 100)
 
 
+def test_official_millisecond_time_vector_converts_to_seconds() -> None:
+    raw = np.arange(-2000, 9041, dtype=np.float64)
+    seconds, unit = streaming.time_vector_seconds(raw, 1000.0)
+    assert unit == "milliseconds"
+    assert seconds[2000] == 0.0
+    assert seconds[-1] == 9.04
+
+
+def test_recorded_struct_electrode_coordinates_are_parsed() -> None:
+    class Electrode:
+        def __init__(self, label: str, x: float) -> None:
+            self.label, self.X, self.Y, self.Z = label, x, 0.1, 0.2
+    bci = {"chaninfo": {"electrodes": np.asarray([Electrode("C3", -0.1), Electrode("CZ", 0.0)], dtype=object)}}
+    positions = streaming._extract_recorded_positions(bci, ["C3", "Cz"])
+    assert positions is not None
+    np.testing.assert_allclose(positions["C3"], [-0.1, 0.1, 0.2])
+
+
 def test_oas_covariance_strict_spd_symmetric() -> None:
     covariance = streaming.oas_covariance(np.random.default_rng(3).normal(size=(20, 150)))
     assert covariance.shape == (20, 20)
