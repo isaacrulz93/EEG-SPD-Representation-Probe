@@ -1192,6 +1192,31 @@ def _metric_summary(truth: np.ndarray, prediction: np.ndarray) -> dict[str, floa
     }
 
 
+def _fit_source_only_affine(source_trial: np.ndarray, source_prototype: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Fit class/coordinate affine maps using source rows only.
+
+    Both inputs have shape subject x class x coordinate.  This is a frozen,
+    non-voting sensitivity; no held-out value is accepted by the function.
+    """
+    trial = np.asarray(source_trial, dtype=np.float64)
+    prototype = np.asarray(source_prototype, dtype=np.float64)
+    if trial.shape != prototype.shape or trial.ndim != 3 or trial.shape[0] < 3:
+        raise StiegerDataContractError("invalid source-only affine inputs")
+    slopes = np.empty(trial.shape[1:], dtype=np.float64)
+    intercepts = np.empty_like(slopes)
+    for class_index in range(trial.shape[1]):
+        for coordinate in range(trial.shape[2]):
+            x = trial[:, class_index, coordinate]
+            y = prototype[:, class_index, coordinate]
+            design = np.column_stack((x, np.ones(len(x), dtype=np.float64)))
+            coefficient, _, _, _ = np.linalg.lstsq(design, y, rcond=None)
+            slopes[class_index, coordinate] = coefficient[0]
+            intercepts[class_index, coordinate] = coefficient[1]
+    if not np.all(np.isfinite(slopes)) or not np.all(np.isfinite(intercepts)):
+        raise StiegerNumericalError("source-only affine fit is nonfinite")
+    return slopes, intercepts
+
+
 def run_source_reference(repo_root: str | Path) -> dict[str, Any]:
     root = Path(repo_root).resolve(); config, _ = load_config(root); validate_parent_hashes(root, config)
     output = root / str(config["project"]["output_dir"]); locked = load_locked_objects(root, config)
@@ -1201,8 +1226,10 @@ def run_source_reference(repo_root: str | Path) -> dict[str, Any]:
     n, max_rank = len(locked.subjects), int(np.max(selected))
     D = np.full((n, 2, 4, max_rank), np.nan); D_fold = np.full((6, n, 2, 4, max_rank), np.nan); beta = np.full_like(D, np.nan)
     projected_z = np.full_like(D, np.nan); trial_centroid = np.full_like(D, np.nan)
-    beta_prediction = np.full_like(D, np.nan); gamma_all = np.full((6, 2, 4, max_rank), np.nan)
+    beta_prediction = np.full_like(D, np.nan); beta_affine = np.full_like(D, np.nan)
+    gamma_all = np.full((6, 2, 4, max_rank), np.nan)
     correction_all = np.full_like(gamma_all, np.nan); directions_all = np.full((6, 2, 210, max_rank), np.nan)
+    affine_slopes = np.full_like(gamma_all, np.nan); affine_intercepts = np.full_like(gamma_all, np.nan)
     identity_errors: list[float] = []; fold_rows: list[dict[str, Any]] = []
     for fold_index, test in enumerate(locked.folds):
         train = np.setdiff1d(np.arange(n), test); rank = int(selected[fold_index])
@@ -1226,8 +1253,12 @@ def run_source_reference(repo_root: str | Path) -> dict[str, Any]:
             for index in train:
                 tangent, labels = _load_tangent(root, config, int(locked.subjects[index]), int(SESSIONS[q]))
                 centroid, _ = _class_trial_centroids(tangent, labels, directions); source_centroids.append(centroid)
-            correction = np.mean(total_coordinate[train] - np.stack(source_centroids), axis=0)
+            source_centroid_array = np.stack(source_centroids)
+            correction = np.mean(total_coordinate[train] - source_centroid_array, axis=0)
             correction_all[fold_index, q, :, :rank] = correction
+            slopes, intercepts = _fit_source_only_affine(source_centroid_array, total_coordinate[train])
+            affine_slopes[fold_index, q, :, :rank] = slopes
+            affine_intercepts[fold_index, q, :, :rank] = intercepts
             for index in test:
                 tangent, labels = _load_tangent(root, config, int(locked.subjects[index]), int(SESSIONS[q]))
                 centroid, _ = _class_trial_centroids(tangent, labels, directions); target_centroids.append(centroid)
@@ -1235,6 +1266,9 @@ def run_source_reference(repo_root: str | Path) -> dict[str, Any]:
             prediction_residual = target_centroid_array + correction[None] - gamma[None]
             prediction_centered = _weighted_center_classes(prediction_residual, pi[test, q])
             beta_prediction[test, q, :, :rank] = prediction_centered
+            affine_total = target_centroid_array * slopes[None] + intercepts[None]
+            affine_residual = affine_total - gamma[None]
+            beta_affine[test, q, :, :rank] = _weighted_center_classes(affine_residual, pi[test, q])
             fold_rows.append(
                 {
                     "fold": fold_index,
@@ -1249,10 +1283,29 @@ def run_source_reference(repo_root: str | Path) -> dict[str, Any]:
     identity_pass = bool(max(identity_errors) <= tolerance)
     valid = np.isfinite(beta) & np.isfinite(beta_prediction)
     metrics = _metric_summary(beta[valid], beta_prediction[valid])
+    affine_valid = np.isfinite(beta) & np.isfinite(beta_affine)
+    affine_metrics = _metric_summary(beta[affine_valid], beta_affine[affine_valid])
     session_metrics = []
     for q in range(2):
         valid_q = np.isfinite(beta[:, q]) & np.isfinite(beta_prediction[:, q])
         session_metrics.append({"session": int(SESSIONS[q]), **_metric_summary(beta[:, q][valid_q], beta_prediction[:, q][valid_q])})
+    class_metrics = []
+    for class_index, class_name in enumerate(CLASS_NAMES):
+        valid_class = np.isfinite(beta[:, :, class_index]) & np.isfinite(beta_prediction[:, :, class_index])
+        class_metrics.append(
+            {"class": class_name, **_metric_summary(beta[:, :, class_index][valid_class], beta_prediction[:, :, class_index][valid_class])}
+        )
+    normalized_frobenius_error: list[float] = []
+    for fold_index, test in enumerate(locked.folds):
+        rank = int(selected[fold_index])
+        for index in test:
+            for q in range(2):
+                truth = beta[index, q, :, :rank]
+                estimate = beta_prediction[index, q, :, :rank]
+                denominator = float(np.linalg.norm(truth))
+                normalized_frobenius_error.append(
+                    float(np.linalg.norm(estimate - truth) / denominator) if denominator > 0.0 else math.inf
+                )
     np.savez_compressed(
         output / "objects" / "source_reference_core.npz",
         D=D,
@@ -1261,8 +1314,11 @@ def run_source_reference(repo_root: str | Path) -> dict[str, Any]:
         projected_z=projected_z,
         trial_centroid=trial_centroid,
         beta_prediction=beta_prediction,
+        beta_affine_sensitivity=beta_affine,
         gamma=gamma_all,
         correction=correction_all,
+        affine_slopes=affine_slopes,
+        affine_intercepts=affine_intercepts,
         trial_directions=directions_all,
         selected_ranks=selected,
     )
@@ -1272,7 +1328,10 @@ def run_source_reference(repo_root: str | Path) -> dict[str, Any]:
         "identity_max_abs_error": max(identity_errors),
         "identity_tolerance": tolerance,
         "correction_metrics": metrics,
+        "median_normalized_frobenius_error": float(np.median(normalized_frobenius_error)),
         "session_metrics": session_metrics,
+        "class_metrics": class_metrics,
+        "source_only_affine_sensitivity_metrics": affine_metrics,
         "fold_session_summary": fold_rows,
         "population_prerequisite": population["terminal"],
     }
@@ -1350,12 +1409,46 @@ def run_semantic_permutation(repo_root: str | Path) -> dict[str, Any]:
         per_class_correct=per_class_correct,
         leave_one_subject_accuracy=loo_target_accuracy,
     )
+    pair_accuracy = {
+        f"{CLASS_NAMES[first]}__{CLASS_NAMES[second]}": float(
+            np.mean(per_class_correct[:, :, first] & per_class_correct[:, :, second])
+        )
+        for first in range(4)
+        for second in range(first + 1, 4)
+    }
+    permutations = all_class_permutations()
+    cost_rows: list[dict[str, Any]] = []
+    for index, subject in enumerate(locked.subjects):
+        for q, session_id in enumerate(SESSIONS):
+            ordering = np.argsort(cost_array[index, q], kind="stable")
+            ranks = np.empty(24, dtype=np.int64); ranks[ordering] = np.arange(1, 25)
+            for permutation_index, permutation in enumerate(permutations):
+                cost_rows.append(
+                    {
+                        "subject": int(subject),
+                        "session": int(session_id),
+                        "permutation_index": permutation_index,
+                        "permutation": "|".join(map(str, permutation)),
+                        "cost": float(cost_array[index, q, permutation_index]),
+                        "cost_rank": int(ranks[permutation_index]),
+                        "is_identity": permutation == (0, 1, 2, 3),
+                    }
+                )
+    pd.DataFrame(cost_rows).to_csv(output / "tables" / "semantic_permutation_all_costs.csv", index=False)
     summary = {
         "decision": decision,
         "pooled_top1_accuracy": pooled_accuracy,
         "session_top1_accuracy": session_accuracy.tolist(),
         "pooled_top2_accuracy": float(np.mean(top2)),
+        "session_top2_accuracy": np.mean(top2, axis=0).tolist(),
         "per_class_accuracy": np.mean(per_class_correct, axis=(0, 1)).tolist(),
+        "per_class_pair_correct_assignment_accuracy": pair_accuracy,
+        "median_correct_permutation_cost_margin": float(np.median(margins)),
+        "session_median_cost_margin": np.median(margins, axis=0).tolist(),
+        "cross_session_best_permutation_consistency": float(
+            np.mean(np.all(best_permutations[:, 0] == best_permutations[:, 1], axis=1))
+        ),
+        "cross_session_identity_success": float(np.mean(np.all(success, axis=1))),
         "bootstrap_ci": list(ci),
         "exact_binomial_p": p_value,
         "chance": chance,
@@ -1402,6 +1495,8 @@ def run_unlabeled_scatter(repo_root: str | Path) -> dict[str, Any]:
     estimates = np.full((n, 2, max_rank, max_rank), np.nan)
     oracle = np.full_like(estimates, np.nan); total_store = np.full_like(estimates, np.nan); source_within_store = np.full((6, 2, max_rank, max_rank), np.nan)
     subject_score = np.full((n, 2), np.nan); normalized_error = np.full((n, 2), np.nan)
+    trace_error = np.full((n, 2), np.nan); eigenvalue_error = np.full((n, 2), np.nan)
+    estimated_rank = np.full((n, 2), -1, dtype=np.int16); oracle_rank = np.full((n, 2), -1, dtype=np.int16)
     sensor_total = np.empty((n, 2, 210, 210)); sensor_within = np.empty_like(sensor_total); sensor_between = np.empty_like(sensor_total)
     tangent_cache: dict[tuple[int, int], tuple[np.ndarray, np.ndarray]] = {}
     for index, subject in enumerate(locked.subjects):
@@ -1426,6 +1521,19 @@ def run_unlabeled_scatter(repo_root: str | Path) -> dict[str, Any]:
                 subject_score[index, q] = frobenius_cosine(prediction, truth)
                 denominator = float(np.linalg.norm(truth))
                 normalized_error[index, q] = float(np.linalg.norm(prediction - truth) / denominator) if denominator > 0 else math.inf
+                truth_trace = float(np.trace(truth))
+                trace_error[index, q] = (
+                    float(abs(np.trace(prediction) - truth_trace) / abs(truth_trace)) if truth_trace != 0.0 else math.inf
+                )
+                truth_eigenvalues = np.linalg.eigvalsh(truth)
+                prediction_eigenvalues = np.linalg.eigvalsh(prediction)
+                eigen_denominator = float(np.linalg.norm(truth_eigenvalues))
+                eigenvalue_error[index, q] = (
+                    float(np.linalg.norm(prediction_eigenvalues - truth_eigenvalues) / eigen_denominator)
+                    if eigen_denominator > 0.0 else math.inf
+                )
+                estimated_rank[index, q] = int(np.linalg.matrix_rank(prediction))
+                oracle_rank[index, q] = int(np.linalg.matrix_rank(truth))
     # Freeze estimates without labels before writing the oracle evaluation object.
     np.savez_compressed(
         output / "objects" / "unlabeled_scatter_estimates.npz",
@@ -1439,6 +1547,10 @@ def run_unlabeled_scatter(repo_root: str | Path) -> dict[str, Any]:
         oracle=oracle,
         frobenius_cosine=subject_score,
         normalized_error=normalized_error,
+        normalized_trace_error=trace_error,
+        normalized_eigenvalue_error=eigenvalue_error,
+        estimated_rank=estimated_rank,
+        oracle_rank=oracle_rank,
     )
     pooled_subject = np.mean(subject_score, axis=1); observed = float(np.median(pooled_subject))
     session_statistics = np.median(subject_score, axis=0)
@@ -1478,14 +1590,7 @@ def run_unlabeled_scatter(repo_root: str | Path) -> dict[str, Any]:
         prerequisite and np.all(session_statistics > 0) and ci[0] > 0 and p_permutation <= 0.05 and p_random <= 0.05 and np.all(influence > 0)
     )
     decision = config["decisions"]["scatter_pass"] if passed else config["decisions"]["scatter_negative"]
-    fold_for_subject = np.empty(n, dtype=np.int64)
-    for fold_index, fold in enumerate(locked.folds):
-        fold_for_subject[fold] = fold_index
-    predicted_ranks = [
-        int(np.linalg.matrix_rank(estimates[index, q, : int(selected[fold_for_subject[index]]), : int(selected[fold_for_subject[index]])]))
-        for index in range(n)
-        for q in range(2)
-    ]
+    predicted_ranks = estimated_rank.reshape(-1).astype(int).tolist()
     summary = {
         "decision": decision,
         "primary_statistic_median_frobenius_cosine": observed,
@@ -1494,8 +1599,16 @@ def run_unlabeled_scatter(repo_root: str | Path) -> dict[str, Any]:
         "subject_permutation_p": p_permutation,
         "random_direction_p": p_random,
         "median_normalized_frobenius_error": float(np.median(normalized_error)),
+        "session_median_normalized_frobenius_error": np.median(normalized_error, axis=0).tolist(),
+        "median_normalized_trace_error": float(np.median(trace_error)),
+        "session_median_normalized_trace_error": np.median(trace_error, axis=0).tolist(),
+        "median_normalized_eigenvalue_error": float(np.median(eigenvalue_error)),
+        "session_median_normalized_eigenvalue_error": np.median(eigenvalue_error, axis=0).tolist(),
         "leave_one_subject_minimum": float(np.min(influence)),
         "predicted_rank_frequency": {str(rank): int(predicted_ranks.count(rank)) for rank in sorted(set(predicted_ranks))},
+        "oracle_rank_frequency": {
+            str(rank): int(np.count_nonzero(oracle_rank == rank)) for rank in sorted(set(oracle_rank.reshape(-1).tolist()))
+        },
     }
     atomic_write_json(output / "decisions" / "unlabeled_scatter_decision.json", summary)
     return summary
@@ -1564,6 +1677,8 @@ def run_component_assignment(repo_root: str | Path) -> dict[str, Any]:
         directions = np.asarray(data["trial_directions"]); selected = np.asarray(data["selected_ranks"], dtype=int)
     n = len(locked.subjects); source_mapping_success = np.zeros((n, 2), dtype=bool)
     balanced_accuracy = np.full((n, 2), np.nan); ari = np.full((n, 2), np.nan); purity = np.full((n, 2), np.nan)
+    per_class_accuracy = np.full((n, 2, 4), np.nan); source_cost_margin = np.full((n, 2), np.nan)
+    source_mapping_unique = np.zeros((n, 2), dtype=bool)
     source_permutations = np.full((n, 2, 4), -1, dtype=np.int8); component_means = np.full((n, 2, 4, int(np.max(selected))), np.nan)
     component_assignments: list[np.ndarray] = []
     from sklearn.metrics import adjusted_rand_score
@@ -1580,6 +1695,8 @@ def run_component_assignment(repo_root: str | Path) -> dict[str, Any]:
                 target_template = _normalize_class_template(total_component, np.full(4, 0.25))
                 match = semantic_permutation_costs(source_template, target_template, config["inference"]["tie_tolerance"])
                 source_permutation = tuple(int(v) for v in match["best_permutation"])
+                source_cost_margin[index, q] = float(match["margin"])
+                source_mapping_unique[index, q] = bool(match["unique"])
                 source_permutations[index, q] = source_permutation
                 component_means[index, q, :, :rank] = model.means_
                 predicted_components = model.predict(y); component_assignments.append(predicted_components.astype(np.int8))
@@ -1591,6 +1708,7 @@ def run_component_assignment(repo_root: str | Path) -> dict[str, Any]:
                 predicted_class = inverse[predicted_components]
                 true_class = labels - 1
                 per_class = [np.mean(predicted_class[true_class == c] == c) for c in range(4)]
+                per_class_accuracy[index, q] = per_class
                 balanced_accuracy[index, q] = float(np.mean(per_class))
                 ari[index, q] = float(adjusted_rand_score(true_class, predicted_components))
                 purity[index, q] = float(
@@ -1604,6 +1722,9 @@ def run_component_assignment(repo_root: str | Path) -> dict[str, Any]:
         purity=purity,
         source_permutations=source_permutations,
         component_means=component_means,
+        per_class_accuracy=per_class_accuracy,
+        source_cost_margin=source_cost_margin,
+        source_mapping_unique=source_mapping_unique,
     )
     summary = {
         "status": "COMPONENT_ASSIGNMENT_COMPLETED",
@@ -1612,6 +1733,9 @@ def run_component_assignment(repo_root: str | Path) -> dict[str, Any]:
         "median_adjusted_rand_index": float(np.median(ari)),
         "median_component_purity": float(np.median(purity)),
         "median_class_balanced_assignment_accuracy": float(np.median(balanced_accuracy)),
+        "per_class_assignment_accuracy": np.mean(per_class_accuracy, axis=(0, 1)).tolist(),
+        "median_source_template_cost_margin": float(np.median(source_cost_margin)),
+        "source_template_tie_count": int(np.count_nonzero(~source_mapping_unique)),
         "numerically_valid_records": int(np.count_nonzero(np.isfinite(ari))),
     }
     atomic_write_json(output / "decisions" / "component_assignment_decision.json", summary)
@@ -1665,6 +1789,8 @@ def run_minimal_anchor(repo_root: str | Path) -> dict[str, Any]:
     budgets = [int(value) for value in config["inference"]["calibration_budgets"]]
     proposed_mae = np.full((len(budgets), n, 2, draws), np.nan); direct_mae = np.full_like(proposed_mae, np.nan)
     assignment_correct = np.zeros((len(budgets), n, 2, draws), dtype=bool)
+    assignment_class_correct = np.zeros((len(budgets), n, 2, draws, 4), dtype=bool)
+    beta_zero_mae = np.full((n, 2), np.nan); source_template_mae = np.full((n, 2), np.nan)
     for fold_index, test in enumerate(locked.folds):
         train = np.setdiff1d(np.arange(n), test); rank = int(selected[fold_index])
         for q in range(2):
@@ -1681,6 +1807,12 @@ def run_minimal_anchor(repo_root: str | Path) -> dict[str, Any]:
                 responsibilities = model.predict_proba(y); class_indices = [np.flatnonzero(labels == c) for c in range(1, 5)]
                 truth = beta[index, q, :, :rank]; target_pi = locked.proportions[("primary", "F")][index, q]
                 oracle_component = _oracle_component_permutation(model.predict(y), labels)
+                beta_zero_mae[index, q] = float(np.mean(np.abs(truth)))
+                source_template_total = source_raw
+                source_template_residual = _weighted_center_classes(
+                    (source_template_total - gamma[fold_index, q, :, :rank])[None], target_pi[None]
+                )[0]
+                source_template_mae[index, q] = float(np.mean(np.abs(source_template_residual - truth)))
                 for budget_position, budget in enumerate(budgets):
                     per_class_count = budget // 4 if budget else 0
                     for draw in range(draws):
@@ -1703,6 +1835,9 @@ def run_minimal_anchor(repo_root: str | Path) -> dict[str, Any]:
                         )[0]
                         proposed_mae[budget_position, index, q, draw] = float(np.mean(np.abs(proposed - truth)))
                         assignment_correct[budget_position, index, q, draw] = permutation == oracle_component
+                        assignment_class_correct[budget_position, index, q, draw] = (
+                            np.asarray(permutation, dtype=np.int64) == np.asarray(oracle_component, dtype=np.int64)
+                        )
                         if budget > 0:
                             direct_trial = np.stack([np.mean(y[indices], axis=0) for indices in selected_indices])
                             direct_total = direct_trial + correction[fold_index, q, :, :rank]
@@ -1719,6 +1854,11 @@ def run_minimal_anchor(repo_root: str | Path) -> dict[str, Any]:
             "proposed_expected_per_draw_mae": float(np.mean(proposed_expected)),
             "session_proposed_mae": np.mean(proposed_expected, axis=0).tolist(),
             "semantic_permutation_accuracy": float(np.mean(assignment_correct[budget_position])),
+            "per_class_assignment_accuracy": np.mean(
+                assignment_class_correct[budget_position], axis=(0, 1, 2)
+            ).tolist(),
+            "beta_zero_residual_baseline_mae": float(np.mean(beta_zero_mae)),
+            "source_template_only_baseline_mae": float(np.mean(source_template_mae)),
             "metric_label": "EXPECTED_PER_CALIBRATION_DRAW",
         }
         if budget > 0:
@@ -1753,7 +1893,9 @@ def run_minimal_anchor(repo_root: str | Path) -> dict[str, Any]:
     decision = config["decisions"]["anchor_pass"] if efficient_budget is not None else config["decisions"]["anchor_negative"]
     np.savez_compressed(
         output / "objects" / "minimal_anchor_core.npz",
-        budgets=np.asarray(budgets), proposed_mae=proposed_mae, direct_mae=direct_mae, assignment_correct=assignment_correct
+        budgets=np.asarray(budgets), proposed_mae=proposed_mae, direct_mae=direct_mae,
+        assignment_correct=assignment_correct, assignment_class_correct=assignment_class_correct,
+        beta_zero_mae=beta_zero_mae, source_template_mae=source_template_mae,
     )
     pd.DataFrame(rows).to_json(output / "tables" / "minimal_anchor.json", orient="records", indent=2)
     summary = {"decision": decision, "efficient_budget": efficient_budget, "budgets": rows}

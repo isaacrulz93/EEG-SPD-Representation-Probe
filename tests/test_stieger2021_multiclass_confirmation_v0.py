@@ -54,6 +54,27 @@ def test_exact_multiclass_beta_identity_and_source_isolation() -> None:
     np.testing.assert_array_equal(gamma_changed, gamma)
 
 
+def test_source_only_affine_sensitivity_recovers_declared_map_without_target_rows() -> None:
+    rng = np.random.default_rng(51)
+    source_trial = rng.normal(size=(20, 4, 3))
+    expected_slope = rng.uniform(0.5, 1.5, size=(4, 3))
+    expected_intercept = rng.normal(size=(4, 3))
+    source_prototype = source_trial * expected_slope[None] + expected_intercept[None]
+    slope, intercept = module._fit_source_only_affine(source_trial, source_prototype)
+    np.testing.assert_allclose(slope, expected_slope, atol=1e-12)
+    np.testing.assert_allclose(intercept, expected_intercept, atol=1e-12)
+
+    target_trial = rng.normal(size=(5, 4, 3))
+    prediction = target_trial * slope[None] + intercept[None]
+    changed_target = target_trial + 1000.0
+    slope_after_target_change, intercept_after_target_change = module._fit_source_only_affine(
+        source_trial, source_prototype
+    )
+    np.testing.assert_array_equal(slope_after_target_change, slope)
+    np.testing.assert_array_equal(intercept_after_target_change, intercept)
+    assert not np.array_equal(prediction, changed_target * slope[None] + intercept[None])
+
+
 def test_fold_signature_excludes_heldout_template() -> None:
     source = inspect.getsource(module.fold_signatures)
     assert "train_sum" in source
