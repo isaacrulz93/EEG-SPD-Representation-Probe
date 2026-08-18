@@ -1,0 +1,23 @@
+{
+  "blocker": {
+    "exception": "NumericalContractError",
+    "message": "projected training-score scale is degenerate",
+    "phase": "OpenBMI secondary ordered-Z spectrum control, inner rank selection",
+    "script": "scripts/62_run_openbmi_structure_v1.py"
+  },
+  "class_semantics_p": null,
+  "config_sha256": "72d6ab325ebe199be3320fc561ae7e161a26008d1b9d009b1eb3e4b07673f2d9",
+  "equal_rank_random_subspace_p": null,
+  "full_space_statistic": null,
+  "nulls_executed": false,
+  "parent_hashes": {
+    "bnci_objects": "1bb487a8446308e1dd29965ac57901a810d6e92da25b020ae284569176f33f6d",
+    "openbmi_objects": "f7e2fd7517fe1f55f84ef7729823b2d3f10452833ec2399a4b7014f769c98572"
+  },
+  "primary_statistic": null,
+  "reliability_pass": true,
+  "schema_version": "subject-class-population-structure-terminal-v1",
+  "selected_ranks": [],
+  "subject_pairing_p": null,
+  "terminal_decision": "UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE"
+}

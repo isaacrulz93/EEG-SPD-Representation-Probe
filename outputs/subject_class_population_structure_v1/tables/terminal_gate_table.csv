@@ -1,0 +1,11 @@
+gate,observed,criterion,passed
+parent lineage and artifact contract,PASS,PASS,true
+OpenBMI session 0 split-half reliability,"T=0.4312948826899997; p=0.0005; influence=true",positive and p<=0.05 and influence,true
+OpenBMI session 1 split-half reliability,"T=0.3727954266583491; p=0.0005; influence=true",positive and p<=0.05 and influence,true
+frozen observed/control pipeline,NUMERICAL_CONTRACT_FAILURE,complete without degeneracy,false
+primary statistic,UNASSESSED,complete observed pipeline,false
+subject-pairing null,NOT_RUN,complete observed pipeline,false
+class-semantics null,NOT_RUN,complete observed pipeline,false
+equal-rank random-subspace control,NOT_RUN,complete observed pipeline,false
+selected-rank gates,UNASSESSED,complete observed pipeline,false
+BNCI secondary diagnostic,NOT_RUN,OpenBMI primary completion,false

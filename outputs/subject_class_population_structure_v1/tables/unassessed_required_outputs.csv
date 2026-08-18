@@ -1,0 +1,15 @@
+artifact,status,reason
+rank-by-rank held-out scores,UNASSESSED,numerical contract failure before observed pipeline completion
+outer-fold selected ranks,UNASSESSED,numerical contract failure before observed pipeline completion
+subject-level directional separation,UNASSESSED,numerical contract failure before observed pipeline completion
+primary null summaries,NOT_RUN,observed pipeline did not complete
+random-subspace summaries,NOT_RUN,observed pipeline did not complete
+full-space/PCA/spectrum controls,UNASSESSED,spectrum control triggered the numerical contract failure
+leave-one-subject influence,UNASSESSED,observed pipeline did not complete
+BNCI multi-class diagnostic,NOT_RUN,secondary diagnostic cannot rescue a failed primary pipeline
+held-out score versus rank figure,NOT_GENERATED,real rank is not interpretable
+selected-rank distribution figure,NOT_GENERATED,real rank is not interpretable
+primary null figures,NOT_GENERATED,null pipelines were not run
+latent similarity and score figures,NOT_GENERATED,partial primary result is not interpreted
+BNCI class-mode loading figure,NOT_GENERATED,BNCI diagnostic was not run
+sensor-space versus spectrum figure,NOT_GENERATED,spectrum pipeline failed its numerical contract

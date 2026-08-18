@@ -2195,6 +2195,17 @@ def validate_report_consistency(repo_root: str | Path) -> None:
     report = (output / "report/subject_class_population_structure_v1.md").read_text(encoding="utf-8")
     if decision["terminal_decision"] not in report:
         raise DataContractError("report terminal does not match JSON")
+    if decision["terminal_decision"] == "UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE":
+        failure_path = output / "decisions/execution_failure.json"
+        if not failure_path.is_file():
+            raise DataContractError("numerical-failure report lacks execution record")
+        failure = json.loads(failure_path.read_text(encoding="utf-8"))
+        if failure.get("partial_primary_result_interpreted") is not False:
+            raise DataContractError("numerical-failure report interpreted a partial primary result")
+        if (output / "decisions/openbmi_observed.json").exists():
+            raise DataContractError("numerical-failure output unexpectedly contains an observed result")
+        validate_no_nonfinite_outputs(output)
+        return
     observed = json.loads((output / "decisions/openbmi_observed.json").read_text(encoding="utf-8"))
     if f"{observed['statistic']:.6f}" not in report:
         raise DataContractError("report primary statistic does not match observed JSON")
