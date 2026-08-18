@@ -1,0 +1,32 @@
+{
+  "cross_session_target_order_consistency": 0.8888888888888888,
+  "decision": "SOURCE_SEMANTIC_ORDERING_SUPPORTED_RETROSPECTIVELY",
+  "exact_binomial_p": 1.1769417672279284e-21,
+  "interpretation": "retrospective OpenBMI evidence under an explicit source-ordering assumption; not intrinsic zero-label sign identifiability",
+  "leave_one_training_subject_order_stable": true,
+  "passed": true,
+  "pooled_accuracy": 0.9259259259259259,
+  "pooled_accuracy_ci": [
+    0.8703703703703703,
+    0.9722222222222222
+  ],
+  "schema_version": "source-reference-v1-ordering",
+  "session_accuracies": [
+    0.9629629629629629,
+    0.8888888888888888
+  ],
+  "session_binomial_p": [
+    8.248957072964913e-14,
+    1.6282650783239203e-09
+  ],
+  "violating_subject_sessions": 8,
+  "violating_subjects": [
+    11,
+    15,
+    16,
+    27,
+    34,
+    35,
+    48
+  ]
+}

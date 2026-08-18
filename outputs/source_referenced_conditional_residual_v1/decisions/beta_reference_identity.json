@@ -1,0 +1,18 @@
+{
+  "beta_mean": -0.004792590854305051,
+  "d_proto_mean": 0.1981888590364686,
+  "decision": "BETA_REFERENCE_IDENTITY_VERIFIED",
+  "gamma_mean": 0.2029814498907736,
+  "gamma_session_means": [
+    0.20456627723612172,
+    0.20139662254542548
+  ],
+  "gamma_session_std": [
+    0.008492054499907802,
+    0.01296569970835875
+  ],
+  "maximum_absolute_error": 1.1102230246251565e-16,
+  "passed": true,
+  "schema_version": "source-reference-v1-beta-identity",
+  "sign_change_proportion": 0.5833333333333334
+}

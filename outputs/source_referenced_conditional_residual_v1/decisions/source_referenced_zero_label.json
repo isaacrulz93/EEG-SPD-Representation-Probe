@@ -1,0 +1,44 @@
+{
+  "beta_sign_accuracy_ci": [
+    0.7592592592592593,
+    0.9166666666666666
+  ],
+  "decision": "SOURCE_REFERENCED_ZERO_LABEL_RECOVERY_SUPPORTED",
+  "identification_boundary": "NONIDENTIFIABLE_UP_TO_CLASS_PERMUTATION without the explicit source-ordering assumption",
+  "improvement_ci": [
+    0.01436984229473751,
+    0.11243570888478602
+  ],
+  "label": "ZERO_LABEL_UNDER_SOURCE_ORDER_ASSUMPTION",
+  "leave_one_subject_improvement_positive": true,
+  "mean_mae_improvement_over_beta_zero": 0.0607657792919142,
+  "metrics": {
+    "beta_sign_accuracy": 0.8425925925925926,
+    "calibration_intercept": -0.0012852161502194676,
+    "calibration_slope": 0.7066312213174429,
+    "mae": 0.10064330353913416,
+    "normalized_mae": 0.6235293688179897,
+    "pearson": 0.8455615145332542,
+    "projected_prototype_reconstruction_error": 0.10064330353913416,
+    "signed_r2": 0.5917391091511364,
+    "spearman": 0.6726475412995007
+  },
+  "mixture_metrics": {
+    "beta_sign_accuracy": 0.8333333333333334,
+    "calibration_intercept": -0.0012616619831791985,
+    "calibration_slope": 0.7680559410826162,
+    "mae": 0.08876895537588335,
+    "normalized_mae": 0.5499625784306108,
+    "pearson": 0.864923356910547,
+    "projected_prototype_reconstruction_error": 0.08876895537588335,
+    "signed_r2": 0.6798678136037805,
+    "spearman": 0.6240672809171678
+  },
+  "paired_sign_flip_p": 0.0075,
+  "passed": true,
+  "schema_version": "source-reference-v1-zero-label-under-assumption",
+  "session_improvements": [
+    0.04619066248753675,
+    0.07534089609629165
+  ]
+}
