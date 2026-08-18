@@ -1,0 +1,10 @@
+case,passed
+balanced_rank1_unsigned_recovery,True
+class_swap_unlabeled_invariance,True
+recoverable_unsigned_separation,True
+signed_nonidentifiability,True
+varying_within_noise,True
+no_between_separation,True
+random_direction_equivalence,True
+minimal_anchor_sign_resolution,True
+target_label_leakage_sentinel,True

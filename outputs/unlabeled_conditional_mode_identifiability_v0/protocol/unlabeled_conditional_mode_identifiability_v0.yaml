@@ -1,0 +1,207 @@
+protocol:
+  name: Unlabeled Conditional-Mode Identifiability and Minimal Semantic Anchoring V0
+  version: "0.1.0"
+  freeze_date: "2026-08-18"
+  timezone: Asia/Seoul
+  master_seed: 20260818
+  branch: pilot/unlabeled-conditional-mode-identifiability-v0
+  parent_branch: pilot/subject-class-population-structure-v1
+  parent_head: 9dee7642ac573f37756b8427a75864a50c32044e
+  parent_pr: 16
+  protocol_path: docs/PROTOCOL_UNLABELED_CONDITIONAL_MODE_IDENTIFIABILITY_V0.md
+  protocol_sha256: 03a74ed75a2ff41a61034ae2934921e36416a13726210066d36c380f72b76fbf
+  required_freeze_commit_subject: freeze unlabeled conditional mode identifiability v0
+
+project:
+  output_dir: outputs/unlabeled_conditional_mode_identifiability_v0
+  cache_dir: cache/unlabeled_conditional_mode_identifiability_v0
+  audit_path: docs/AUDIT_UNLABELED_CONDITIONAL_MODE_V0.md
+  theory_path: docs/SIGNED_COORDINATE_NONIDENTIFIABILITY.md
+  mode_audit_path: docs/MODE_IDENTITY_AUDIT_V0.md
+
+parent_artifacts:
+  v1_scientific_config:
+    path: configs/subject_class_population_structure_v1.yaml
+    sha256: 72d6ab325ebe199be3320fc561ae7e161a26008d1b9d009b1eb3e4b07673f2d9
+  v1_1_config:
+    path: configs/subject_class_population_structure_v1_1.yaml
+    sha256: 97a9c2002b0fb23935d256cc2ff495465474215a8981a17eea033b7db29bc2c2
+  v1_1_observed_modes:
+    path: outputs/subject_class_population_structure_v1_1/objects/openbmi_observed_core.npz
+    sha256: ecf0657d1ccf51e7aa3392a5e95608d849e9069dda2f27e2a76e321429fac168
+  v1_1_terminal:
+    path: outputs/subject_class_population_structure_v1_1/decisions/terminal_decision.json
+    sha256: 8d4eaa8e4effb1efc124965e5400d247dd472f1b3c06283f20dc4a583f41b631
+  v0_openbmi_objects:
+    path: outputs/subject_class_interaction_v0/objects/openbmi_core_interaction_objects.npz
+    sha256: f7e2fd7517fe1f55f84ef7729823b2d3f10452833ec2399a4b7014f769c98572
+  openbmi_source_manifest:
+    path: outputs/subject_class_interaction_v0/provenance/openbmi_source_manifest.json
+    sha256: 5133a0d8521f4cdd121362663c4980fed500e72875f26bb3dc4ce830d8c5e409
+  openbmi_protocol_manifest:
+    path: outputs/subject_class_interaction_v0/provenance/openbmi_protocol_manifest.json
+    sha256: 4b956d7e3b2b1a271ec07bddecc1ce0a93460ab1515ab8902b3d1ca35ebdb0ea
+  immutable_output_directories:
+    - outputs/subject_class_population_structure_v1
+    - outputs/subject_class_population_structure_v1_1
+
+dataset:
+  name: OpenBMI / Lee2019-MI
+  role: PRIMARY_ONLY
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
+  sessions: ["0", "1"]
+  source_sessions: [1, 2]
+  classes: [left_hand, right_hand]
+  channels: [FC5, FC3, FC1, FC2, FC4, FC6, C5, C3, C1, Cz, C2, C4, C6, CP5, CP3, CP1, CPz, CP2, CP4, CP6]
+  trials_per_subject_session: 100
+  trials_per_class: 50
+  expected_covariance_shape: [10800, 20, 20]
+  raw_root_mne_config_key: MNE_DATASETS_LEE2019-MI_PATH
+  raw_relative_root: MNE-lee2019-mi-data/gigadb-datasets/live/pub/10.5524/100001_101000/100542
+  allow_canonical_download_on_hash_or_size_mismatch: true
+  alternative_preprocessing_forbidden: true
+
+parent_fold_contract:
+  source: configs/subject_class_population_structure_v1.yaml#openbmi_folds
+  canonical_sha256: bcbef19ed8d1b5bf385a600e967a929c185fe70582d8ee0557e30f7096afb500
+  outer_test:
+    - [4, 10, 11, 18, 31, 37, 43, 45, 46]
+    - [16, 29, 30, 36, 38, 49, 51, 52, 54]
+    - [1, 8, 9, 14, 17, 19, 40, 42, 50]
+    - [2, 12, 13, 20, 21, 25, 32, 39, 41]
+    - [3, 7, 15, 22, 23, 26, 33, 35, 53]
+    - [5, 6, 24, 27, 28, 34, 44, 47, 48]
+  inner_folds_must_equal_parent: true
+
+preprocessing:
+  implementation: src.openbmi_pipeline_v0._prepare_one
+  bandpass_hz: [8.0, 30.0]
+  filter_family: Butterworth
+  filter_order: 5
+  filter_phase: zero
+  resample_hz: 100.0
+  epoch_seconds_half_open: [1.0, 3.5]
+  samples_per_trial: 250
+  covariance_estimator: oas
+  covariance_dtype: float64
+  extra_regularization: none
+  eigenvalue_clipping: false
+  airm_mean_tol: 1.0e-9
+  airm_mean_maxiter: 100
+  mean_reproduction_relative_tolerance: 2.0e-12
+
+mode:
+  rank: 1
+  feature_dimension: 210
+  svec_order: upper_triangle_row_major
+  off_diagonal_scale: sqrt_2
+  parent_selected_ranks_required: [1, 1, 1, 1, 1, 1]
+  fit: training_only_two_view_cross_covariance_svd
+  normalization: frozen_unit_subject_signature
+  fold_sign_alignment_for_visualization: paired_views_align_by_session0_dot_with_fold0
+  stability_refit: leave_one_training_subject_out
+  haar_replicates: 1999
+  identity_absolute_cosine_tolerance: 1.0e-10
+
+unlabeled_projection:
+  marginal: all_100_pooled_target_trials_airm_mean
+  strip_fields: [class_label, event_code, block, run, acquisition_order, semantic_trial_order]
+  shuffle_namespace: pooled_unlabeled_trial_order
+  evaluation_labels_separate: true
+  variance_ddof: 0
+
+bridge:
+  primary_association: spearman
+  aggregate_gate_statistic: minimum_session_spearman
+  null_replicates: 1999
+  subject_permutation_namespace: bridge_subject_permutation
+  random_direction_namespace: bridge_haar_random_direction
+  alpha: 0.05
+  normalized_absolute_error_denominator: mean_absolute_beta
+  leave_one_subject_requires_both_session_signs: true
+
+unsigned_recovery:
+  primary_estimator: SOURCE_WITHIN_CORRECTED_PROJECTED_VARIANCE
+  primary_target: V_between
+  secondary_estimators:
+    - TOTAL_PROJECTED_VARIANCE
+    - SYMMETRIC_TWO_COMPONENT_MIXTURE
+    - UNORDERED_TWO_MEANS_SEPARATION
+  source_within_aggregation: arithmetic_mean_across_outer_training_subjects
+  nonnegative_truncation: max_zero
+  primary_association: spearman
+  null_replicates: 1999
+  subject_permutation_namespace: unsigned_subject_target_permutation
+  random_direction_namespace: unsigned_haar_random_direction
+  shuffled_within_namespace: shuffled_source_within_model
+  bootstrap_replicates: 10000
+  bootstrap_namespace: unsigned_subject_bootstrap
+  confidence: 0.95
+  mixture:
+    equal_weights: true
+    shared_variance: true
+    component_order_identified: false
+    deterministic_initial_separation_quantiles: [0.15, 0.25, 0.35, 0.5, 0.65, 0.75, 0.85]
+    maximum_iterations: 500
+    convergence_tolerance: 1.0e-10
+  unordered_two_means:
+    maximum_iterations: 500
+    convergence_tolerance: 1.0e-12
+  descriptive_controls:
+    same_session_pca: first_training_session_principal_direction
+    overall_covariance_magnitude: log_frobenius_norm_of_subject_session_airm_marginal
+    total_tangent_space_variance: sum_coordinate_population_variances
+    shuffled_source_within_model: cyclic_outer_fold_shift_plus_one_within_session
+    trial_count: exact_constant_100
+    acquisition_order_verification: reverse_projected_trial_order
+
+symmetry:
+  tolerance: 2.0e-12
+  signed_zero_label_status: NONIDENTIFIABLE_UP_TO_CLASS_PERMUTATION
+  failure_status: UNASSESSED_LABEL_LEAKAGE_OR_SYMMETRY_FAILURE
+
+minimal_anchor:
+  budgets: [0, 2, 4, 8, 16, 32]
+  eligible_efficiency_budgets: [2, 4, 8]
+  calibration_subsamples: 200
+  stratified_equal_per_class: true
+  proposed: all_unlabeled_sqrt_between_energy_plus_m_label_orientation
+  equal_label_baseline: direct_m_label_class_contrast
+  source_baseline: training_population_mean_absolute_beta_plus_m_label_orientation
+  signed_target: beta
+  null_replicates: 1999
+  paired_permutation_namespace: anchor_paired_sign_flip
+  bootstrap_replicates: 10000
+  bootstrap_namespace: anchor_subject_bootstrap
+  confidence: 0.95
+  alpha: 0.05
+  selection: smallest_eligible_budget_passing_all_gates
+
+decisions:
+  signed:
+    pass: NONIDENTIFIABLE_UP_TO_CLASS_PERMUTATION
+    failure: UNASSESSED_SYMMETRY_CONTRACT_FAILURE
+  bridge:
+    pass: TRIAL_TO_PROTOTYPE_MODE_COMPATIBLE
+    failure: UNASSESSED_TRIAL_TO_PROTOTYPE_MODE_INCOMPATIBILITY
+  unsigned:
+    pass: UNSIGNED_CONDITIONAL_ENERGY_RECOVERY_SUPPORTED
+    negative: UNSIGNED_CONDITIONAL_ENERGY_RECOVERY_NOT_SUPPORTED
+  anchor:
+    pass: MINIMAL_SEMANTIC_ANCHOR_EFFICIENT
+    negative: MINIMAL_SEMANTIC_ANCHOR_NOT_EFFICIENT
+  trial_object_failure: UNASSESSED_TRIAL_LEVEL_OBJECT_INSUFFICIENT
+  numerical_failure: UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE
+  next_question_if_supported: Can unsigned conditional-energy recovery and minimal semantic anchoring prospectively replicate across repeated sessions in an unseen multiclass dataset under a pre-frozen class-permutation protocol?
+  next_question_otherwise: What additional structural assumption or semantic target supervision is required when pooled unlabeled dispersion does not recover the stable conditional mode efficiently?
+
+forbidden_datasets: [BNCI2014_001, Stieger2021, HGD, Rogala_ASD, Sheffield_ASD, faces_chairs_ASD]
+forbidden_methods: [downstream_classification, domain_adaptation, TTA, pseudo_labeling, neural_networks, new_losses]
+
+resources:
+  workers: 1
+  blas_threads: 1
+  source_hash_checkpoint_each_file: true
+  trial_cache_committed: false
+  peak_rss_gib_budget: 4.0
+  wall_clock_hours_budget: 6.0
