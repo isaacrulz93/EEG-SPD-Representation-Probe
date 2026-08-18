@@ -1,0 +1,30 @@
+{
+  "aggregate_statistic": 0.9921478940346863,
+  "decision": "TRIAL_TO_PROTOTYPE_MODE_COMPATIBLE",
+  "leave_one_subject_sign_stable": true,
+  "matched_random_direction_p": 0.0005,
+  "null_replicates": 1999,
+  "passed": true,
+  "schema_version": "unlabeled-conditional-mode-v0-bridge",
+  "session_metrics": [
+    {
+      "intercept_beta_on_trial_delta": -0.20632563089728756,
+      "normalized_absolute_error": 1.3809568266075005,
+      "pearson": 0.9992410163481643,
+      "session": "0",
+      "sign_agreement": 0.4074074074074074,
+      "slope_beta_on_trial_delta": 0.9786300170500102,
+      "spearman": 0.9977892128835524
+    },
+    {
+      "intercept_beta_on_trial_delta": -0.20385931238301674,
+      "normalized_absolute_error": 1.2216248825887595,
+      "pearson": 0.998609868073819,
+      "session": "1",
+      "sign_agreement": 0.42592592592592593,
+      "slope_beta_on_trial_delta": 0.9798727123418258,
+      "spearman": 0.9921478940346863
+    }
+  ],
+  "subject_permutation_p": 0.0005
+}

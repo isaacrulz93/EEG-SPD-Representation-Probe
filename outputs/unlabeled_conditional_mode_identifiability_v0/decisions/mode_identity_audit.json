@@ -1,0 +1,12 @@
+{
+  "haar_median_absolute_cosine": 0.04705680749739177,
+  "median_cross_view_absolute_cosine": 0.9083782807846639,
+  "median_fold_pair_absolute_cosine": 0.9838015899281332,
+  "median_leave_one_refit_absolute_cosine": 0.9993453889697537,
+  "minimum_leave_one_refit_absolute_cosine": 0.993508288569644,
+  "minimum_parent_identity_absolute_cosine": 0.9999999999999984,
+  "mode_audit_is_descriptive": true,
+  "schema_version": "unlabeled-conditional-mode-v0-mode-audit",
+  "trial_level_object_gate": "PASS_EXACT_PARENT_PREPROCESSING_REBUILT",
+  "trial_manifest_sha256": "d1cda390e44f503eebad73b679f85da4bab0e266ee37bebaca83d342f68a384a"
+}
