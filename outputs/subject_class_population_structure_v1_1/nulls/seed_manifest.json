@@ -1,0 +1,10 @@
+{
+  "bit_generator": "PCG64DXSM",
+  "class_mappings_sha256": "efcac7e6ef64a031983b658c6fb0cbe1ddceadef742041e8f727677303f1dd50",
+  "derivation": "canonical JSON -> SHA256 -> first 128 bits as little-endian uint32 words",
+  "identical_to_v1_namespaces": true,
+  "master_seed": 20260818,
+  "pairing_inner_sha256": "d0a6449a9911a150b95565d5373e9e71c129bbd22fb13c11158175eeca71189b",
+  "pairing_outer_sha256": "837367cea0527e74dd0099794591501a7f2bd32c46a0565949bd756aa1f25971",
+  "random_mapping": "keyed by replicate/fold/view; bases not persisted"
+}

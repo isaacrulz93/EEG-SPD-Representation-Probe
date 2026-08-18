@@ -1,0 +1,10 @@
+{
+  "action_taken": "Stopped without changing any frozen threshold, solver, fold, rank grid, feature construction, or preprocessing rule.",
+  "exception": "NumericalContractError",
+  "message": "projected training-score scale is degenerate",
+  "partial_primary_result_interpreted": false,
+  "phase": "OpenBMI secondary ordered-Z spectrum control, inner rank selection",
+  "population_nulls_accessed": false,
+  "secondary_bnci_accessed": false,
+  "terminal_decision": "UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE"
+}

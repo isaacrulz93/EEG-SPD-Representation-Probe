@@ -1,0 +1,20 @@
+{
+  "branch": "pilot/subject-class-population-structure-v1",
+  "failed_v1_result_commit": "6e5cbd1bd9d8356396f89f0421609fda0a43fb96",
+  "first_real_access_tree_was_clean": true,
+  "schema_version": "subject-class-population-structure-v1-1-git-provenance",
+  "scientific_file_hashes": {
+    "configs/subject_class_population_structure_v1_1.yaml": "97a9c2002b0fb23935d256cc2ff495465474215a8981a17eea033b7db29bc2c2",
+    "docs/TECHNICAL_AMENDMENT_SUBJECT_CLASS_POPULATION_STRUCTURE_V1_1.md": "4fd93d73c802e77eef7f4fe09a17bb2a10b505fa4e0b9a0ec897e3d33faca8f3",
+    "scripts/66_freeze_subject_class_structure_v1_1.py": "e4ba9e98e3f0f537b669a2bf130fa96fbc4717c1077f81d163349235396e2b4d",
+    "scripts/67_run_reliability_gate_v1_1.py": "96e8d6bf454485468880ae7cce1df1849a875dd733eceb0a19d70aa64e4cceca",
+    "scripts/68_run_openbmi_primary_v1_1.py": "80140e9e2c40d7a133ed7e48a1db440ddd073f5690bdd7181a52a928e67c9fde",
+    "scripts/69_run_openbmi_nulls_v1_1.py": "5b5ba953e6cbef69726412ea721637f1c1503865e55527f2227eeaf9e1b6fb0c",
+    "scripts/70_run_openbmi_controls_v1_1.py": "8ffad71af9d615dc9bfc6d09a135e0cd6f3dfdbc8cf090154031fe5a1c7a5896",
+    "scripts/71_run_bnci_diagnostic_v1_1.py": "b80b4e3da1f01a01e704434f98716c842510336170eecd56d96fc4c426339cc6",
+    "scripts/72_report_subject_class_structure_v1_1.py": "50c5fa921c517cc3c3426cf20ac8288ed20a0c77ddd1dab53883e5b4ebe655c5",
+    "src/subject_class_population_structure_v1_1.py": "75ce4115003eb2a2e16b38db7e346b4c59378fde62d99acef542478f464b4052",
+    "tests/test_subject_class_population_structure_v1_1.py": "32eaaf2b88d16ef868fa1479ee15696b6706ad1a094a8cb45827045c34045daa"
+  },
+  "technical_amendment_commit": "3243f1ab7f43ede3a683bd5b6ef887e5519bf902"
+}

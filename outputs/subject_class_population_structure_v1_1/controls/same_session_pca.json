@@ -1,0 +1,15 @@
+{
+  "control": "same_session_pca",
+  "result": {
+    "selected_ranks": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "statistic": 0.36812986851867013
+  },
+  "status": "CONTROL_COMPLETED"
+}

@@ -1,0 +1,7 @@
+control,status,statistic,forward_median,reverse_median,selected_ranks,votes_primary,message
+magnitude_sensitivity,CONTROL_COMPLETED,0.07345521247051481,0.09395817377803786,0.06882833017332482,1|1|1|2|2|2,False,
+same_session_pca,CONTROL_COMPLETED,0.36812986851867013,UNASSESSED,UNASSESSED,1|1|1|1|1|1,False,
+ordered_z_eigenspectrum,CONTROL_UNASSESSED_NUMERICAL_DEGENERACY,UNASSESSED,UNASSESSED,UNASSESSED,,False,projected training-score scale is degenerate
+generalized_eigen_signature,CONTROL_COMPLETED,0.0470754177986947,0.05078648030492804,0.005006861018119674,2|1|2|5|8|1,False,
+selected_mode_split_half,CONTROL_COMPLETED,UNASSESSED,UNASSESSED,UNASSESSED,,False,
+action_overlap,CONTROL_UNASSESSED_DATA_CONTRACT_FAILURE,UNASSESSED,UNASSESSED,UNASSESSED,,False,PR #4 action gains are BNCI-subject quantities and cannot be associated with OpenBMI subjects; BNCI association is attempted separately.

@@ -1,0 +1,18 @@
+{
+  "control": "generalized_eigen_signature",
+  "result": {
+    "forward_median": 0.05078648030492804,
+    "full_space_statistic": 0.07300208731413721,
+    "reverse_median": 0.005006861018119674,
+    "selected_ranks": [
+      2,
+      1,
+      2,
+      5,
+      8,
+      1
+    ],
+    "statistic": 0.0470754177986947
+  },
+  "status": "CONTROL_COMPLETED"
+}

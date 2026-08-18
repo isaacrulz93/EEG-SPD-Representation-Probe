@@ -1,0 +1,38 @@
+{
+  "artifact_hashes": {
+    "decisions/execution_failure.json": "7195f8f86395a0ea18b2693659151e95376c1ab5817c0a8820a4c1e995500f93",
+    "decisions/reliability_gate.json": "879c7eb982d298c20a993da93cbf292b8cf02b817a286f0f8d125b8d187eef64",
+    "decisions/terminal_decision.json": "f7fc43d84a20efba3c1e2481ddda27eedd39f9d05719f7556c724ac8c8b73295",
+    "environment.json": "1fec7f27998f4f7483e573d0550d834e89f80506a1f941b6699d1a0e1d13a34d",
+    "figures/figure_7_split_half_reliability.csv": "5368c119ecd1c547e967b7da8873cae562cab195d2ceda93dc453f69966515c9",
+    "figures/figure_7_split_half_reliability.pdf": "a3e4d3487e2396d328c1edbf34b693a2196d23928aaedca7a5c1be93019ddf71",
+    "figures/figure_7_split_half_reliability.png": "b29a0c229017b745ce250bafe2bff901ad522fe43aff9224f769acdf9293369d",
+    "git_provenance.json": "24503acb9838d5034433ab51dfc0becf9b24e398785e2b5b23208afa9cc46067",
+    "nulls/reliability_pairing_null.npz": "7aba2047fc540dbe3b7568de5788a5b5dd63db2e8e22f719a90ff81a080a58eb",
+    "protocol/AUDIT_SUBJECT_CLASS_POPULATION_STRUCTURE_V1.md": "ad904438ceec8c639cc682eef431ad0afe4491cf37096875ac996cae80baabb6",
+    "protocol/PROTOCOL_SUBJECT_CLASS_POPULATION_STRUCTURE_V1.md": "88467532c68f89388a2566570f3fb7a99ec0373b47093d7c1d86c06c54be19ca",
+    "protocol/subject_class_population_structure_v1.yaml": "72d6ab325ebe199be3320fc561ae7e161a26008d1b9d009b1eb3e4b07673f2d9",
+    "protocol/synthetic_gates.csv": "b1848663698c6e4ce1761eb06d802c2f652087906312cd2ab77561b58a7bb722",
+    "protocol/synthetic_gates.json": "3b350e096f152aa31461a34af232769e68f649745988de054e901cb614e25a17",
+    "report/subject_class_population_structure_v1.md": "024e5bcf46c683d96d62db3a77a1f95b9001c4c835e764350d835c26a5ed0288",
+    "tables/dataset_object_contract.csv": "df940a0317fb6c64cca4f42c649925e7c882672bfa291b758eaad15282f6ecee",
+    "tables/reliability_influence.csv": "4ed4b3c95c63393dfcd3d618f7f3012b48c0fd1d0e5c4eb9a25a918ff410cecb",
+    "tables/reliability_statistics.csv": "cb87cd3290fcbc5ac50a926c97b291d9c828792310516f92094abfdf1374f8f8",
+    "tables/reliability_subject_scores.csv": "3a04fef7f4c88c5c5291dab2349c6249f42e549c8411d887f91d8fda0068a332",
+    "tables/terminal_gate_table.csv": "0587607fc2a2db6a7a2de2b1ab7b6247aecabfa7f731d50593895ebb73447ab3",
+    "tables/unassessed_required_outputs.csv": "0e44690cfd2febf2b29583d673a7363c9dcfece862f28f63e8fc99f036edc486"
+  },
+  "base_commit": "d9a67a130aeeea7eb8a93d76878e43f636802e93",
+  "bnci_secondary_executed": false,
+  "config_sha256": "72d6ab325ebe199be3320fc561ae7e161a26008d1b9d009b1eb3e4b07673f2d9",
+  "parent_hashes": {
+    "bnci_objects": "1bb487a8446308e1dd29965ac57901a810d6e92da25b020ae284569176f33f6d",
+    "openbmi_objects": "f7e2fd7517fe1f55f84ef7729823b2d3f10452833ec2399a4b7014f769c98572"
+  },
+  "population_nulls_executed": false,
+  "primary_statistic_access": "UNASSESSED",
+  "protocol_freeze_commit": "bebc2149b79ac9026703e743f2129f65d792441e",
+  "report_sha256": "024e5bcf46c683d96d62db3a77a1f95b9001c4c835e764350d835c26a5ed0288",
+  "schema_version": "subject-class-population-structure-final-manifest-v1",
+  "terminal_decision": "UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE"
+}

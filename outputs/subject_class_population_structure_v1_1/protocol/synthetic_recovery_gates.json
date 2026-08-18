@@ -1,0 +1,31 @@
+{
+  "amendment_config_sha256": "97a9c2002b0fb23935d256cc2ff495465474215a8981a17eea033b7db29bc2c2",
+  "cases": [
+    {
+      "case": "A_primary_valid_spectrum_degenerate",
+      "expected": "PRIMARY_AND_NULLS_COMPLETE_SPECTRUM_UNASSESSED_TERMINAL_COMPUTED",
+      "observed": "VOTING_COMPLETED|VOTING_COMPLETED|CONTROL_UNASSESSED_NUMERICAL_DEGENERACY|GO_POPULATION_STRUCTURED_LOW_DIMENSIONAL_INTERACTION",
+      "passed": true
+    },
+    {
+      "case": "B_primary_sensor_degenerate",
+      "expected": "UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE",
+      "observed": "UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE",
+      "passed": true
+    },
+    {
+      "case": "C_generalized_eigen_failure",
+      "expected": "CONTROL_UNASSESSED_DATA_CONTRACT_FAILURE_PRIMARY_UNAFFECTED",
+      "observed": "CONTROL_UNASSESSED_DATA_CONTRACT_FAILURE",
+      "passed": true
+    },
+    {
+      "case": "D_bnci_failure_after_terminal",
+      "expected": "OPENBMI_TERMINAL_RETAINED_BNCI_UNASSESSED",
+      "observed": "STOP_RANDOM_SUBSPACE_EQUIVALENT|CONTROL_UNASSESSED_EXECUTION_FAILURE",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "schema_version": "subject-class-population-structure-v1-1-synthetic"
+}

@@ -1,0 +1,8 @@
+{
+  "control": "selected_mode_split_half",
+  "result": {
+    "session0_median": 0.2742265385914371,
+    "session1_median": 0.35528976611168994
+  },
+  "status": "CONTROL_COMPLETED"
+}

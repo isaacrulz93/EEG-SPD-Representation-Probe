@@ -1,0 +1,13 @@
+gate,observed,criterion,passed
+V1 history and scientific equivalence,PASS,PASS,True
+measurement reliability,PASS,"both sessions positive, p<=0.05, influence",True
+primary statistic,0.4136394700198354,>0,True
+session 0->1 direction,0.4038986537314476,>0,True
+session 1->0 direction,0.40405666314585303,>0,True
+subject-pairing null,0.0005,p<=0.05,True
+class-semantics null,0.001,p<=0.05,True
+equal-rank random subspace,0.0005,p<=0.05,True
+median selected rank,1.0,<=8,True
+fold rank frequency,6,>=4 of 6,True
+leave-one-subject sign,PASS,all >0,True
+full-space stability,PASS,T>0 and pairing p<=0.05,True

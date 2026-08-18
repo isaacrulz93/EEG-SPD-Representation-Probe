@@ -1,0 +1,36 @@
+{
+  "amendment_config_sha256": "97a9c2002b0fb23935d256cc2ff495465474215a8981a17eea033b7db29bc2c2",
+  "parent_hashes": {
+    "action_stage_a": "b1bdcb1061d72fb685ee76462ece593c56a362bbbbc81702791b474fdd9d8cd3",
+    "action_stage_b": "5e76e8cfe7c01ed69ca8bede7aad1acf3f237880560ed35f07e6a44985bd37f8",
+    "bnci_objects": "1bb487a8446308e1dd29965ac57901a810d6e92da25b020ae284569176f33f6d",
+    "bnci_observed_manifest": "994e358e9ce6cdecb997e59fa59e144b97897ed2e113a62a484a88499caddae8",
+    "openbmi_objects": "f7e2fd7517fe1f55f84ef7729823b2d3f10452833ec2399a4b7014f769c98572",
+    "openbmi_protocol_manifest": "4b956d7e3b2b1a271ec07bddecc1ce0a93460ab1515ab8902b3d1ca35ebdb0ea"
+  },
+  "passed": true,
+  "replicates": 1999,
+  "schema_version": "subject-class-population-structure-v1-1-reliability",
+  "scientific_v1_config_sha256": "72d6ab325ebe199be3320fc561ae7e161a26008d1b9d009b1eb3e4b07673f2d9",
+  "sessions": [
+    {
+      "effect": 0.46814207070448904,
+      "leave_one_subject_sign_pass": true,
+      "null_median": -0.03684718801448934,
+      "observed": 0.4312948826899997,
+      "p_value": 0.0005,
+      "passed": true,
+      "session": "0"
+    },
+    {
+      "effect": 0.41005570889479087,
+      "leave_one_subject_sign_pass": true,
+      "null_median": -0.03726028223644181,
+      "observed": 0.3727954266583491,
+      "p_value": 0.0005,
+      "passed": true,
+      "session": "1"
+    }
+  ],
+  "terminal_if_failed": null
+}

@@ -1,0 +1,20 @@
+{
+  "control": "action_overlap",
+  "result": {
+    "action_successful_coordinate_norm_median": 0.6840356897605159,
+    "action_unsuccessful_coordinate_norm_median": 0.8943015474319095,
+    "associations": [
+      {
+        "association": "latent_coordinate_norm_vs_stage_b_gain",
+        "p_value_two_sided_descriptive": 0.831214097710308,
+        "spearman_rho": 0.08333333333333334
+      },
+      {
+        "association": "latent_session_discrepancy_vs_stage_b_gain",
+        "p_value_two_sided_descriptive": 0.8983528043506303,
+        "spearman_rho": -0.049999999999999996
+      }
+    ]
+  },
+  "status": "CONTROL_COMPLETED"
+}
