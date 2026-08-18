@@ -1,0 +1,43 @@
+{
+  "beta_sign_accuracy": 1.0,
+  "beta_sign_accuracy_ci": [
+    1.0,
+    1.0
+  ],
+  "decision": "SOURCE_REFERENCE_COORDINATE_CORRECTION_SUPPORTED",
+  "improvement_ci": [
+    0.2013922037672018,
+    0.20726531314569807
+  ],
+  "leave_one_subject_improvement_positive": true,
+  "mean_mae_improvement": 0.2043876826712619,
+  "paired_sign_flip_p": 0.0005,
+  "passed": true,
+  "primary_metrics": {
+    "beta_sign_accuracy": 1.0,
+    "calibration_intercept": 1.0194407474214646e-05,
+    "calibration_slope": 0.9721793493023979,
+    "mae": 0.004949059957768716,
+    "normalized_mae": 0.03066159519008633,
+    "pearson": 0.9999619178262147,
+    "projected_prototype_reconstruction_error": 0.004949059957768716,
+    "signed_r2": 0.9991045351871157,
+    "spearman": 0.9998761515523927
+  },
+  "schema_version": "source-reference-v1-correction",
+  "session_improvements": [
+    0.2059938507427202,
+    0.2027815145998034
+  ],
+  "uncentered_metrics": {
+    "beta_sign_accuracy": 0.4166666666666667,
+    "calibration_intercept": -0.20511313858125965,
+    "calibration_slope": 0.9793511375850894,
+    "mae": 0.20933674262903054,
+    "normalized_mae": 1.2969328550621253,
+    "pearson": 0.998849571082344,
+    "projected_prototype_reconstruction_error": 0.20933674262903054,
+    "signed_r2": 0.1051569764083009,
+    "spearman": 0.9947793115931673
+  }
+}

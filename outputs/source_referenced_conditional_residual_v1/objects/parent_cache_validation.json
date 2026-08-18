@@ -1,0 +1,9 @@
+{
+  "committed_projected_y_reproduced": true,
+  "covariance_sha256": "8fc43ff837c9ab1651f639c30a2aa4a09e760a6a2192b4c5407848fd9da04b28",
+  "marginal_means_within_tolerance": true,
+  "raw_rebuild_performed": false,
+  "status": "PASS",
+  "tangent_sha256": "36b56818cdfca24212666e5181cca120c20a0ccc553f51cde9009663fbb1be39",
+  "trial_ids_exact": true
+}

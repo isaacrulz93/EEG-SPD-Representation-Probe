@@ -1,0 +1,22 @@
+{
+  "branch": "pilot/source-referenced-conditional-residual-v1",
+  "first_real_access_tree_was_clean": true,
+  "parent_head": "8346a3e0f731c80668bd7147a2fe0fd12da6b914",
+  "parent_snapshot_sha256": "abf862304423ab4fd3ff2c8119e25a60d561f93adc995dfacb6c41690a41be6f",
+  "protocol_freeze_commit": "383eee4d5740a715511804e60e00c67c35a25284",
+  "schema_version": "source-reference-v1-git-provenance",
+  "scientific_file_hashes": {
+    "configs/source_referenced_conditional_residual_v1.yaml": "c68af921b8f1d7da09478820123e5e95ebcd224d46bea03f593567e3f8978e8f",
+    "docs/AUDIT_SOURCE_REFERENCED_CONDITIONAL_RESIDUAL_V1.md": "8d77b6a64281ceb27d639974dc0c9750450a19efb28876d6c20aac949ea77199",
+    "docs/BETA_REFERENCE_IDENTITY.md": "6c9b4100e32b3e03d1ad7afe8267ac869881a46f3a9c717966f450a5f9d7d54d",
+    "docs/PROTOCOL_SOURCE_REFERENCED_CONDITIONAL_RESIDUAL_V1.md": "a1c695e96b7573eb35c32de565fdc7422953fbbe8f6b4467af694773a031d252",
+    "scripts/90_freeze_source_reference_v1.py": "3eb1861ea0e47e669ff64065bb5dda97a5122c3d27eeeed204f849a5a1d93c02",
+    "scripts/91_run_beta_identity_audit_v1.py": "6502109f1c6260aa492730824a17e4e3b4e977b57d48216a7b70c7edf5e8e895",
+    "scripts/92_run_source_reference_correction_v1.py": "537021523ebd918b7834ecc3f509a7c174a7ebd36624a44082e2dfbbf731c2c1",
+    "scripts/93_run_source_ordering_assumption_v1.py": "44d11c8587d41efce6f3e64f25ed56a5add619272c42f9a63ea42b7842df0e95",
+    "scripts/94_run_corrected_minimal_anchor_v1.py": "9280cce1b8111f31500f5e05e404a3f644d7e3fbd9db7074b7a11a9a532bb74e",
+    "scripts/95_report_source_reference_v1.py": "91abd1b60d2178aaf0af7ea69e85b70b604472fc0f6aa0c80a8beb78ae21246d",
+    "src/source_referenced_conditional_residual_v1.py": "273db5d87703ba87f4fe9033a7a7ecee4fd3786c4b33aab30095b4a2ff468dcd",
+    "tests/test_source_referenced_conditional_residual_v1.py": "f8904fe92084bb87180b2671c1113c5978d137f13c4bd8df85c09a1bd3e84f7a"
+  }
+}
