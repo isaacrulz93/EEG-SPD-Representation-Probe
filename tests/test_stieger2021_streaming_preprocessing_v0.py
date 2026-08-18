@@ -63,10 +63,10 @@ def test_completed_retained_download_is_hash_verified_without_network(tmp_path: 
     assert result["sha256"] == hashlib.sha256(payload).hexdigest()
 
 
-def test_bounded_transfer_remains_one_file_and_four_connections() -> None:
+def test_bounded_transfer_remains_one_file_and_eight_connections() -> None:
     source = inspect.getsource(streaming.stream_download)
-    assert '"--max-connection-per-server=4"' in source
-    assert '"--split=4"' in source
+    assert '"--max-connection-per-server=8"' in source
+    assert '"--split=8"' in source
     assert '"--continue=true"' in source
     assert "range(64)" in source
     assert "stalled_attempts >= 3" in source

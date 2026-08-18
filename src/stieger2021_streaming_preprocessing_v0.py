@@ -152,8 +152,8 @@ def stream_download(source: SourceFile, destination: Path, chunk_bytes: int = 8 
         command = [
             aria2,
             "--continue=true",
-            "--max-connection-per-server=4",
-            "--split=4",
+            "--max-connection-per-server=8",
+            "--split=8",
             "--min-split-size=32M",
             "--file-allocation=none",
             "--auto-file-renaming=false",
