@@ -1,0 +1,52 @@
+{
+  "amendment_config_sha256": "97a9c2002b0fb23935d256cc2ff495465474215a8981a17eea033b7db29bc2c2",
+  "exception": null,
+  "executed": true,
+  "message": null,
+  "openbmi_terminal_retained": "GO_POPULATION_STRUCTURED_LOW_DIMENSIONAL_INTERACTION",
+  "openbmi_terminal_sha256_before_after": "8d4eaa8e4effb1efc124965e5400d247dd472f1b3c06283f20dc4a583f41b631",
+  "result": {
+    "action_overlap": {
+      "control": "action_overlap",
+      "result": {
+        "action_successful_coordinate_norm_median": 0.6840356897605159,
+        "action_unsuccessful_coordinate_norm_median": 0.8943015474319095,
+        "associations": [
+          {
+            "association": "latent_coordinate_norm_vs_stage_b_gain",
+            "p_value_two_sided_descriptive": 0.831214097710308,
+            "spearman_rho": 0.08333333333333334
+          },
+          {
+            "association": "latent_session_discrepancy_vs_stage_b_gain",
+            "p_value_two_sided_descriptive": 0.8983528043506303,
+            "spearman_rho": -0.049999999999999996
+          }
+        ]
+      },
+      "status": "CONTROL_COMPLETED"
+    },
+    "class_p": 0.002,
+    "forward_median": 0.6424446232742304,
+    "full_space_statistic": 0.8633071073515447,
+    "influence_sign_pass": true,
+    "interpretation": "SECONDARY_MULTI_CLASS_DIAGNOSTIC_ONLY",
+    "pairing_p": 0.0505,
+    "reverse_median": 0.6930635542927637,
+    "selected_ranks": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "statistic": 0.627880155328838
+  },
+  "schema_version": "subject-class-population-structure-v1-1-bnci",
+  "scientific_v1_config_sha256": "72d6ab325ebe199be3320fc561ae7e161a26008d1b9d009b1eb3e4b07673f2d9",
+  "status": "CONTROL_COMPLETED"
+}

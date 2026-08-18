@@ -1,0 +1,6 @@
+{
+  "control": "action_overlap",
+  "exception": "CrossDatasetIdentityContract",
+  "message": "PR #4 action gains are BNCI-subject quantities and cannot be associated with OpenBMI subjects; BNCI association is attempted separately.",
+  "status": "CONTROL_UNASSESSED_DATA_CONTRACT_FAILURE"
+}
