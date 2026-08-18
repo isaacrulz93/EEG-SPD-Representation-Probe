@@ -114,3 +114,8 @@ def test_bad_primary_channel_limit_frozen() -> None:
     assert config["channels"]["maximum_bad_primary_channels"] == 4
     assert config["preprocessing"]["include_if_artifact_equals"] == 0
     assert config["dataset"]["minimum_trials_per_class_session"] == 25
+
+
+def test_noisechan_reads_official_nested_chaninfo_path() -> None:
+    bci = {"chaninfo": {"noisechan": np.asarray([1, 3])}}
+    assert streaming._noise_indices(bci, 4) == [0, 2]

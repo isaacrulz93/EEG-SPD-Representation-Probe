@@ -132,9 +132,27 @@ def stream_download(source: SourceFile, destination: Path, chunk_bytes: int = 8 
     destination.parent.mkdir(parents=True, exist_ok=True)
     sha = hashlib.sha256()
     md5 = hashlib.md5()  # nosec B324 - official Figshare checksum
-    total = 0
-    request = urllib.request.Request(source.url, headers={"User-Agent": "EEG-SPD-Representation-Probe/1.0"})
-    with urllib.request.urlopen(request, timeout=300) as response, destination.open("wb") as output:  # nosec B310
+    total = destination.stat().st_size if destination.exists() else 0
+    if total > source.reported_size:
+        raise StiegerDataContractError(f"partial file exceeds official size for {source.filename}")
+    if total:
+        with destination.open("rb") as existing:
+            while chunk := existing.read(chunk_bytes):
+                sha.update(chunk)
+                md5.update(chunk)
+    headers = {"User-Agent": "EEG-SPD-Representation-Probe/1.0"}
+    if 0 < total < source.reported_size:
+        headers["Range"] = f"bytes={total}-"
+    request = urllib.request.Request(source.url, headers=headers)
+    mode = "ab" if total else "wb"
+    with urllib.request.urlopen(request, timeout=300) as response, destination.open(mode) as output:  # nosec B310
+        if total and total < source.reported_size:
+            status = getattr(response, "status", response.getcode())
+            content_range = str(response.headers.get("Content-Range", ""))
+            if int(status) != 206 or not content_range.startswith(f"bytes {total}-"):
+                raise StiegerDataContractError(
+                    f"server did not honor safe resume for {source.filename}; partial is retained"
+                )
         while chunk := response.read(chunk_bytes):
             output.write(chunk)
             sha.update(chunk)
@@ -212,7 +230,8 @@ def _channel_labels(bci: Any) -> list[str]:
 
 
 def _noise_indices(bci: Any, n_channels: int) -> list[int]:
-    raw = _field(bci, "noisechan", [])
+    chaninfo = _field(bci, "chaninfo")
+    raw = _field(bci, "noisechan", _field(chaninfo, "noisechan", []))
     if raw is None or np.asarray(raw).size == 0:
         return []
     values = sorted({int(round(float(v))) - 1 for v in np.asarray(raw).reshape(-1)})
@@ -364,7 +383,9 @@ def parse_and_preprocess_mat(
     primary_bad = sorted(set(noise_indices) & {label_index[name] for name in primary_order})
     if len(primary_bad) > int(config["channels"]["maximum_bad_primary_channels"]):
         raise StiegerDataContractError(f"too many bad primary channels: {len(primary_bad)}")
-    positions_recorded = bool(_int_field(bci, "positionsrecorded", default=0))
+    chaninfo = _field(bci, "chaninfo")
+    positions_value = _field(bci, "positionsrecorded", _field(chaninfo, "positionsrecorded", 0))
+    positions_recorded = bool(_int_field({"value": positions_value}, "value", default=0))
     recorded_positions = _extract_recorded_positions(bci, labels) if positions_recorded else None
     if positions_recorded and recorded_positions is None:
         raise StiegerDataContractError("positionsrecorded is true but coordinates could not be parsed")
@@ -598,8 +619,6 @@ def process_source_file(source: SourceFile, config: Mapping[str, Any], cache_dir
         return record
 
     raw_path = raw_dir / source.filename
-    if raw_path.exists():
-        raw_path.unlink()
     download = stream_download(source, raw_path)
     raw_deleted = False
     try:
