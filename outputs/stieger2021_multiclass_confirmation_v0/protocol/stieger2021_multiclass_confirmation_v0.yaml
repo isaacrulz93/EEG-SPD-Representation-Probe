@@ -1,0 +1,240 @@
+protocol:
+  name: Stieger2021 Prospective Multiclass Source-Reference Confirmation V0
+  version: "0.1.0"
+  freeze_date: "2026-08-18"
+  timezone: Asia/Seoul
+  master_seed: 20260818
+  branch: pilot/stieger2021-multiclass-prospective-confirmation-v0
+  parent_branch: pilot/source-referenced-conditional-residual-v1
+  parent_head: 19a3ad1cdc6b57c89526e618779cd24b7db8c99c
+  parent_pr: 18
+  required_freeze_commit_subject: freeze Stieger2021 multiclass prospective protocol v0
+  required_lock_commit_subject: lock Stieger2021 cohort and compact objects v0
+  protocol_path: docs/PROTOCOL_STIEGER2021_MULTICLASS_CONFIRMATION_V0.md
+  protocol_sha256: 8e2272a56690312eebc02a4aa881d7af1bcea811215da7dc29846b269a173896
+
+project:
+  output_dir: outputs/stieger2021_multiclass_confirmation_v0
+  cache_dir: cache/stieger2021_multiclass_confirmation_v0
+  source_manifest_dir: outputs/stieger2021_multiclass_confirmation_v0/source_manifest
+  article_id: 13123148
+  article_version: 1
+  article_doi: 10.6084/m9.figshare.13123148.v1
+  article_api: https://api.figshare.com/v2/articles/13123148
+
+parent_contract:
+  pr16_manifest:
+    path: outputs/subject_class_population_structure_v1_1/manifest.json
+    sha256: a92c9fdd36ad70a7d3dda6d710b49da7287482e103260da1a3558a1b684d2d6e
+  pr17_manifest:
+    path: outputs/unlabeled_conditional_mode_identifiability_v0/manifest.json
+    sha256: 661658b10594d747a0de5c5878549c7ee846111fb6214c7169da5ec159257b23
+  pr18_manifest:
+    path: outputs/source_referenced_conditional_residual_v1/manifest.json
+    sha256: 76370c6d9114f33b42c1f46d96ea46e4f2628892e3b4d5ab8cfef409c13cb4f1
+  immutable_output_dirs:
+    - outputs/subject_class_population_structure_v1
+    - outputs/subject_class_population_structure_v1_1
+    - outputs/unlabeled_conditional_mode_identifiability_v0
+    - outputs/source_referenced_conditional_residual_v1
+
+dataset:
+  name: Stieger2021
+  role: PROSPECTIVE_EXTERNAL_EEG_STATISTIC_CONFIRMATION
+  subjects: {start: 1, stop: 62}
+  sessions: [2, 3]
+  primary_tasknumber: 3
+  class_order: [right_hand, left_hand, both_hand, rest]
+  targetnumber_order: [1, 2, 3, 4]
+  minimum_eligible_subjects: 40
+  minimum_trials_per_class_session: 25
+  secondary_tasks:
+    task1: [right_hand, left_hand]
+    task2: [both_hand, rest]
+
+channels:
+  primary_order:
+    - FC5
+    - FC3
+    - FC1
+    - FC2
+    - FC4
+    - FC6
+    - C5
+    - C3
+    - C1
+    - Cz
+    - C2
+    - C4
+    - C6
+    - CP5
+    - CP3
+    - CP1
+    - CPz
+    - CP2
+    - CP4
+    - CP6
+  maximum_bad_primary_channels: 4
+  bad_channel_indexing: one_based
+  interpolation: MNE_spherical_spline_complete_recorded_montage
+  fallback_montage: standard_1005
+  recorded_coordinates_preferred: true
+
+preprocessing:
+  filter_context: complete_available_trial
+  filter:
+    family: butterworth
+    order: 5
+    phase: zero
+    low_hz: 8.0
+    high_hz: 30.0
+  resample_hz: 100.0
+  epoch_primary_seconds: [0.5, 2.0]
+  epoch_pretarget_seconds: [-1.0, 0.0]
+  epoch_feedback_sensitivity_seconds: [2.0, 3.0]
+  interval: left_closed_right_open
+  dtype: float64
+  eeg_input_unit: microvolt
+  eeg_analysis_unit: volt
+  covariance: OAS
+  covariance_regularization: none_beyond_OAS
+  baseline_correction: false
+  include_if_artifact_equals: 0
+  forbidden_inclusion_fields: [result, forcedresult, targethitnumber, performance, triallength]
+  symmetry: exact_average_with_transpose
+  spd_min_eigenvalue: 0.0
+
+geometry:
+  metric: AIRM
+  mean_tol: 1.0e-09
+  mean_maxiter: 100
+  karcher_residual_max: 1.0e-07
+  covariance_condition_number_max: 1.0e12
+
+splits:
+  split_half: alternating_acquisition_order_within_class
+  outer_folds: 6
+  inner_folds: 5
+  subject_pairing_locked: true
+  stratification: MBSRsubject_if_available
+  algorithm: namespaced_hash_sort_stratum_round_robin_then_size_balance
+
+features:
+  svec: frobenius_isometric_upper_triangle_row_major
+  svec_off_diagonal_scale: 1.4142135623730951
+  helmert4:
+    - [0.7071067811865475, -0.7071067811865475, 0.0, 0.0]
+    - [0.4082482904638631, 0.4082482904638631, -0.8164965809277261, 0.0]
+    - [0.2886751345948129, 0.2886751345948129, 0.2886751345948129, -0.8660254037844386]
+  signature_dimension: 630
+  primary_normalization: unit_global_frobenius_norm
+  magnitude_sensitivity: non_voting
+  coordinate_standard_scaler: forbidden
+  training_column_centering: true
+
+population_model:
+  model: two_view_cross_covariance_svd
+  rank_grid: [1, 2, 3, 5, 8, 13]
+  rank_max: min_feature_dimension_and_n_train_minus_2
+  inner_score: median_same_subject_cross_session_separation
+  rank_rule: smallest_within_one_standard_error_of_best_mean
+  latent_scaling: training_projected_score_std_only
+  low_rank_cap: 3
+  low_rank_fold_count: 4
+
+trial_projection:
+  rule: leading_right_singular_sensor_direction_per_selected_multiclass_mode
+  multiclass_mode_shape: [3, 210]
+  cross_rank_orthogonalization: deterministic_modified_gram_schmidt
+  sign_rule: largest_absolute_svec_coordinate_positive
+  note: training_only_operational_bridge_not_unique_anatomical_decomposition
+
+inference:
+  null_replicates: 1999
+  bootstrap_replicates: 10000
+  calibration_subsamples: 200
+  alpha: 0.05
+  confidence: 0.95
+  class_permutations: 24
+  calibration_budgets: [0, 4, 8, 16, 32]
+  eligible_minimal_anchor_budgets: [4, 8]
+  fixed_point_free_pairing: true
+  tie_tolerance: 1.0e-12
+  identity_atol: 5.0e-10
+  identity_rtol: 5.0e-10
+  pretarget_confound_gate:
+    - heldout_statistic_positive
+    - both_directions_positive
+    - class_semantics_p_at_most_alpha
+
+source_reference:
+  gamma: outer_training_mean_total_class_coordinate
+  beta: D_minus_Gamma_then_target_proportion_weighted_centering
+  trial_correction: SOURCE_MEAN_ADDITIVE_CORRECTION
+  affine_sensitivity: SOURCE_ONLY_AFFINE_CALIBRATION_NON_VOTING
+  target_label_fitting: forbidden
+
+semantic_permutation:
+  group: S4
+  matching: enumerate_all_24_frobenius_squared_costs
+  template_centering: class_proportion_weighted
+  template_normalization: unit_frobenius
+  target_rotation_or_reflection: forbidden
+  exact_tie: failure
+  true_mapping: identity_literal_class_order
+
+scatter:
+  estimator: PSD_PROJECTED_TOTAL_MINUS_SOURCE_WITHIN
+  covariance_ddof: 1
+  psd_projection: symmetric_eigendecomposition_clip_negative_to_zero
+  primary_score: median_frobenius_cosine
+  oracle_labels: evaluation_only_after_estimate_saved
+
+mixture:
+  prerequisite: semantic_permutation_and_scatter_pass
+  components: 4
+  covariance_type: tied
+  equal_weight_initialization: true
+  deterministic_multistarts: 20
+  reg_covar: 1.0e-6
+  component_deletion: forbidden
+  template_centering: equal_component_weight
+  calibration_assignment: enumerate_S4_minimize_labeled_negative_log_responsibility_tie_break_source_cost
+
+decisions:
+  data_locked: DATA_LOCKED_NO_SCIENTIFIC_RESULT_YET
+  insufficient_cohort: UNASSESSED_INSUFFICIENT_MULTICLASS_COHORT
+  numerical_failure: UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE
+  reliability_failure: UNASSESSED_STIEGER_MEASUREMENT_RELIABILITY_FAILURE
+  pretarget_failure: UNASSESSED_PRETARGET_CLASS_OR_SEQUENCE_CONFOUND
+  structure_low_rank: STIEGER_MULTICLASS_STRUCTURE_CONFIRMED_LOW_RANK
+  structure_not_low_rank: STIEGER_MULTICLASS_STRUCTURE_CONFIRMED_NOT_LOW_RANK
+  structure_stop: STOP_STIEGER_NO_HELDOUT_MULTICLASS_STRUCTURE
+  identity_pass: BETA_MULTICLASS_REFERENCE_IDENTITY_VERIFIED
+  identity_failure: UNASSESSED_MULTICLASS_REFERENCE_IDENTITY_FAILURE
+  permutation_pass: SOURCE_CLASS_PERMUTATION_PRESERVATION_SUPPORTED_PROSPECTIVELY
+  permutation_negative: SOURCE_CLASS_PERMUTATION_PRESERVATION_NOT_SUPPORTED
+  scatter_pass: MULTICLASS_UNLABELED_SCATTER_RECOVERY_SUPPORTED
+  scatter_negative: MULTICLASS_UNLABELED_SCATTER_RECOVERY_NOT_SUPPORTED
+  anchor_pass: MULTICLASS_MINIMAL_ANCHOR_EFFICIENT
+  anchor_negative: MULTICLASS_MINIMAL_ANCHOR_NOT_EFFICIENT
+
+resources:
+  source_files_expected: 124
+  source_bytes_expected: 77689711027
+  source_gib_expected: 72.3542
+  raw_download_mode: one_file_at_a_time
+  raw_retention: delete_only_after_hash_serialization_reread_and_metadata_validation
+  commit_raw_mat: false
+  commit_trial_covariance_cache: false
+  workers: 1
+  blas_threads: 1
+
+forbidden_methods:
+  - classifier
+  - domain_adaptation
+  - TTA
+  - pseudo_labeling
+  - neural_network
+  - new_loss
+  - ASD_model

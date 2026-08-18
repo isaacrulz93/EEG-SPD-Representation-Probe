@@ -1,0 +1,1131 @@
+{
+  "article_id": 13123148,
+  "article_url": "https://api.figshare.com/v2/articles/13123148",
+  "canonical_sha256": "ee37f1b381577c76136647f7b0c9ebf3a41c9957e02c0176f6169c6f49486eea",
+  "doi": "10.6084/m9.figshare.13123148.v1",
+  "files": [
+    {
+      "figshare_file_id": 25265252,
+      "filename": "S1_Session_2.mat",
+      "reported_md5": "b631b175b2a978b61ef01abb846f4a7f",
+      "reported_size": 594653325,
+      "session": 2,
+      "subject": 1,
+      "url": "https://ndownloader.figshare.com/files/25265252"
+    },
+    {
+      "figshare_file_id": 25265255,
+      "filename": "S1_Session_3.mat",
+      "reported_md5": "e8552335c23fee2df920435d6e153911",
+      "reported_size": 616288784,
+      "session": 3,
+      "subject": 1,
+      "url": "https://ndownloader.figshare.com/files/25265255"
+    },
+    {
+      "figshare_file_id": 25265294,
+      "filename": "S2_Session_2.mat",
+      "reported_md5": "3b70b5a69db4538cb3c2cea729688007",
+      "reported_size": 614798496,
+      "session": 2,
+      "subject": 2,
+      "url": "https://ndownloader.figshare.com/files/25265294"
+    },
+    {
+      "figshare_file_id": 25265297,
+      "filename": "S2_Session_3.mat",
+      "reported_md5": "b43d02b5c3c7b9f9bcc1b0c5e68c4acd",
+      "reported_size": 617644819,
+      "session": 3,
+      "subject": 2,
+      "url": "https://ndownloader.figshare.com/files/25265297"
+    },
+    {
+      "figshare_file_id": 25265408,
+      "filename": "S3_Session_2.mat",
+      "reported_md5": "98ac0e15b442c6b2d03d9c9bea7e645f",
+      "reported_size": 617766608,
+      "session": 2,
+      "subject": 3,
+      "url": "https://ndownloader.figshare.com/files/25265408"
+    },
+    {
+      "figshare_file_id": 25265411,
+      "filename": "S3_Session_3.mat",
+      "reported_md5": "4a19a476a469ea7fa7c369b13244f4b5",
+      "reported_size": 608251275,
+      "session": 3,
+      "subject": 3,
+      "url": "https://ndownloader.figshare.com/files/25265411"
+    },
+    {
+      "figshare_file_id": 25265447,
+      "filename": "S4_Session_2.mat",
+      "reported_md5": "eec7328ee8d4325d537c725ad1d0ef33",
+      "reported_size": 574616937,
+      "session": 2,
+      "subject": 4,
+      "url": "https://ndownloader.figshare.com/files/25265447"
+    },
+    {
+      "figshare_file_id": 25265450,
+      "filename": "S4_Session_3.mat",
+      "reported_md5": "d5819ee190da813f01a9cf8d7c5c69e4",
+      "reported_size": 756472164,
+      "session": 3,
+      "subject": 4,
+      "url": "https://ndownloader.figshare.com/files/25265450"
+    },
+    {
+      "figshare_file_id": 25265531,
+      "filename": "S5_Session_2.mat",
+      "reported_md5": "d3d853a929c66f7359f57a3c53c91d63",
+      "reported_size": 576536830,
+      "session": 2,
+      "subject": 5,
+      "url": "https://ndownloader.figshare.com/files/25265531"
+    },
+    {
+      "figshare_file_id": 25265543,
+      "filename": "S5_Session_3.mat",
+      "reported_md5": "3bd1324518d8532cec81a78586a2dd2d",
+      "reported_size": 559657412,
+      "session": 3,
+      "subject": 5,
+      "url": "https://ndownloader.figshare.com/files/25265543"
+    },
+    {
+      "figshare_file_id": 25265585,
+      "filename": "S6_Session_2.mat",
+      "reported_md5": "523279b8cd844ca88f97d3152d67d605",
+      "reported_size": 648997968,
+      "session": 2,
+      "subject": 6,
+      "url": "https://ndownloader.figshare.com/files/25265585"
+    },
+    {
+      "figshare_file_id": 25265588,
+      "filename": "S6_Session_3.mat",
+      "reported_md5": "62484bf5383efc98fa9c415f0261e6db",
+      "reported_size": 593221032,
+      "session": 3,
+      "subject": 6,
+      "url": "https://ndownloader.figshare.com/files/25265588"
+    },
+    {
+      "figshare_file_id": 25265645,
+      "filename": "S7_Session_2.mat",
+      "reported_md5": "3b7156ee9e48243cd021f05f8ea56fa7",
+      "reported_size": 535196300,
+      "session": 2,
+      "subject": 7,
+      "url": "https://ndownloader.figshare.com/files/25265645"
+    },
+    {
+      "figshare_file_id": 25265654,
+      "filename": "S7_Session_3.mat",
+      "reported_md5": "92bdf747fcbaeaf5af088a5cd00e06f3",
+      "reported_size": 631441168,
+      "session": 3,
+      "subject": 7,
+      "url": "https://ndownloader.figshare.com/files/25265654"
+    },
+    {
+      "figshare_file_id": 25265702,
+      "filename": "S8_Session_2.mat",
+      "reported_md5": "3b61a5525f5381b69a8422f77d2dd262",
+      "reported_size": 610700358,
+      "session": 2,
+      "subject": 8,
+      "url": "https://ndownloader.figshare.com/files/25265702"
+    },
+    {
+      "figshare_file_id": 25265708,
+      "filename": "S8_Session_3.mat",
+      "reported_md5": "d0ef87b22be38bcaf8e491bbf95cd718",
+      "reported_size": 575386476,
+      "session": 3,
+      "subject": 8,
+      "url": "https://ndownloader.figshare.com/files/25265708"
+    },
+    {
+      "figshare_file_id": 25265771,
+      "filename": "S9_Session_2.mat",
+      "reported_md5": "9f6e50085d03bac27eb68b233b668814",
+      "reported_size": 607550223,
+      "session": 2,
+      "subject": 9,
+      "url": "https://ndownloader.figshare.com/files/25265771"
+    },
+    {
+      "figshare_file_id": 25265780,
+      "filename": "S9_Session_3.mat",
+      "reported_md5": "b8c00b8110004f5fba1ec7da123fac25",
+      "reported_size": 635272751,
+      "session": 3,
+      "subject": 9,
+      "url": "https://ndownloader.figshare.com/files/25265780"
+    },
+    {
+      "figshare_file_id": 25265834,
+      "filename": "S10_Session_2.mat",
+      "reported_md5": "9be626dec51ab947797df81f681afaf3",
+      "reported_size": 918380444,
+      "session": 2,
+      "subject": 10,
+      "url": "https://ndownloader.figshare.com/files/25265834"
+    },
+    {
+      "figshare_file_id": 25265840,
+      "filename": "S10_Session_3.mat",
+      "reported_md5": "d814aa58fcfc37a98f5ef7a87ffdbe61",
+      "reported_size": 704717056,
+      "session": 3,
+      "subject": 10,
+      "url": "https://ndownloader.figshare.com/files/25265840"
+    },
+    {
+      "figshare_file_id": 25265897,
+      "filename": "S11_Session_2.mat",
+      "reported_md5": "9f53b6d172d24a4ec39832b7eb8891c6",
+      "reported_size": 802210974,
+      "session": 2,
+      "subject": 11,
+      "url": "https://ndownloader.figshare.com/files/25265897"
+    },
+    {
+      "figshare_file_id": 25265903,
+      "filename": "S11_Session_3.mat",
+      "reported_md5": "20fb91d05da2ec88a254f3b91badac32",
+      "reported_size": 590312296,
+      "session": 3,
+      "subject": 11,
+      "url": "https://ndownloader.figshare.com/files/25265903"
+    },
+    {
+      "figshare_file_id": 25265951,
+      "filename": "S12_Session_2.mat",
+      "reported_md5": "7c8965985381ad75ce77a9e28952160a",
+      "reported_size": 562875351,
+      "session": 2,
+      "subject": 12,
+      "url": "https://ndownloader.figshare.com/files/25265951"
+    },
+    {
+      "figshare_file_id": 25265960,
+      "filename": "S12_Session_3.mat",
+      "reported_md5": "38ba59d9c87f9a53bb658e1a4bbf0cfb",
+      "reported_size": 603313863,
+      "session": 3,
+      "subject": 12,
+      "url": "https://ndownloader.figshare.com/files/25265960"
+    },
+    {
+      "figshare_file_id": 25266050,
+      "filename": "S13_Session_2.mat",
+      "reported_md5": "16bb361bce7362aa4af207427b96a891",
+      "reported_size": 619795313,
+      "session": 2,
+      "subject": 13,
+      "url": "https://ndownloader.figshare.com/files/25266050"
+    },
+    {
+      "figshare_file_id": 25266065,
+      "filename": "S13_Session_3.mat",
+      "reported_md5": "beebc4c10fa5953b9c17461db92e5336",
+      "reported_size": 623351069,
+      "session": 3,
+      "subject": 13,
+      "url": "https://ndownloader.figshare.com/files/25266065"
+    },
+    {
+      "figshare_file_id": 25266131,
+      "filename": "S14_Session_2.mat",
+      "reported_md5": "91b33bd090604f4675e73a201939c732",
+      "reported_size": 822011594,
+      "session": 2,
+      "subject": 14,
+      "url": "https://ndownloader.figshare.com/files/25266131"
+    },
+    {
+      "figshare_file_id": 25266140,
+      "filename": "S14_Session_3.mat",
+      "reported_md5": "884f066884a7caf3a516c052cd3db3d6",
+      "reported_size": 612574920,
+      "session": 3,
+      "subject": 14,
+      "url": "https://ndownloader.figshare.com/files/25266140"
+    },
+    {
+      "figshare_file_id": 25266179,
+      "filename": "S15_Session_2.mat",
+      "reported_md5": "7122f76db2d0197a9e4c66b790a3d6c0",
+      "reported_size": 796492311,
+      "session": 2,
+      "subject": 15,
+      "url": "https://ndownloader.figshare.com/files/25266179"
+    },
+    {
+      "figshare_file_id": 25266185,
+      "filename": "S15_Session_3.mat",
+      "reported_md5": "29d5243b05c7ae520b3634bcd53cf29a",
+      "reported_size": 629256272,
+      "session": 3,
+      "subject": 15,
+      "url": "https://ndownloader.figshare.com/files/25266185"
+    },
+    {
+      "figshare_file_id": 25266230,
+      "filename": "S16_Session_2.mat",
+      "reported_md5": "b6a0f0dcdb057e478a56304ac08a8195",
+      "reported_size": 630141720,
+      "session": 2,
+      "subject": 16,
+      "url": "https://ndownloader.figshare.com/files/25266230"
+    },
+    {
+      "figshare_file_id": 25266233,
+      "filename": "S16_Session_3.mat",
+      "reported_md5": "253d3733776765c23efe6e6a8ca113e3",
+      "reported_size": 642047915,
+      "session": 3,
+      "subject": 16,
+      "url": "https://ndownloader.figshare.com/files/25266233"
+    },
+    {
+      "figshare_file_id": 25266275,
+      "filename": "S17_Session_2.mat",
+      "reported_md5": "72d7c65e56bc662786a38815d35813b0",
+      "reported_size": 583295316,
+      "session": 2,
+      "subject": 17,
+      "url": "https://ndownloader.figshare.com/files/25266275"
+    },
+    {
+      "figshare_file_id": 25266278,
+      "filename": "S17_Session_3.mat",
+      "reported_md5": "f0511516441d20bbd3f2b7cc5874a5dd",
+      "reported_size": 567515284,
+      "session": 3,
+      "subject": 17,
+      "url": "https://ndownloader.figshare.com/files/25266278"
+    },
+    {
+      "figshare_file_id": 25266368,
+      "filename": "S18_Session_2.mat",
+      "reported_md5": "a31607c8c4646aac65257a2f3f7e41b9",
+      "reported_size": 649663702,
+      "session": 2,
+      "subject": 18,
+      "url": "https://ndownloader.figshare.com/files/25266368"
+    },
+    {
+      "figshare_file_id": 25266398,
+      "filename": "S18_Session_3.mat",
+      "reported_md5": "f8b8f549fc5f2cefbfb6ec20a1055d69",
+      "reported_size": 589360714,
+      "session": 3,
+      "subject": 18,
+      "url": "https://ndownloader.figshare.com/files/25266398"
+    },
+    {
+      "figshare_file_id": 25266449,
+      "filename": "S19_Session_2.mat",
+      "reported_md5": "2bd288e42b5c30183d3dacb9318308cc",
+      "reported_size": 857232503,
+      "session": 2,
+      "subject": 19,
+      "url": "https://ndownloader.figshare.com/files/25266449"
+    },
+    {
+      "figshare_file_id": 25266455,
+      "filename": "S19_Session_3.mat",
+      "reported_md5": "c2b113189367873c33a2522c8b2e2a4c",
+      "reported_size": 847118107,
+      "session": 3,
+      "subject": 19,
+      "url": "https://ndownloader.figshare.com/files/25266455"
+    },
+    {
+      "figshare_file_id": 25266551,
+      "filename": "S20_Session_2.mat",
+      "reported_md5": "4babd72aea703b221e1ec42c6eb472fb",
+      "reported_size": 510903213,
+      "session": 2,
+      "subject": 20,
+      "url": "https://ndownloader.figshare.com/files/25266551"
+    },
+    {
+      "figshare_file_id": 25266554,
+      "filename": "S20_Session_3.mat",
+      "reported_md5": "de57bb5cc8336332d035659e420eb579",
+      "reported_size": 590462971,
+      "session": 3,
+      "subject": 20,
+      "url": "https://ndownloader.figshare.com/files/25266554"
+    },
+    {
+      "figshare_file_id": 25266584,
+      "filename": "S21_Session_2.mat",
+      "reported_md5": "ff285c9bd83d0070ebfcdc6c211924cf",
+      "reported_size": 647539830,
+      "session": 2,
+      "subject": 21,
+      "url": "https://ndownloader.figshare.com/files/25266584"
+    },
+    {
+      "figshare_file_id": 25266587,
+      "filename": "S21_Session_3.mat",
+      "reported_md5": "187da9977b999d674b5933d5f56dadc1",
+      "reported_size": 629662422,
+      "session": 3,
+      "subject": 21,
+      "url": "https://ndownloader.figshare.com/files/25266587"
+    },
+    {
+      "figshare_file_id": 25266620,
+      "filename": "S22_Session_2.mat",
+      "reported_md5": "dc64e90de20fe4a0052fb6fe7df0a0b2",
+      "reported_size": 661072948,
+      "session": 2,
+      "subject": 22,
+      "url": "https://ndownloader.figshare.com/files/25266620"
+    },
+    {
+      "figshare_file_id": 25266626,
+      "filename": "S22_Session_3.mat",
+      "reported_md5": "8163a1b70c9eb8e2bf85cb553acdff6d",
+      "reported_size": 580336250,
+      "session": 3,
+      "subject": 22,
+      "url": "https://ndownloader.figshare.com/files/25266626"
+    },
+    {
+      "figshare_file_id": 25266668,
+      "filename": "S23_Session_2.mat",
+      "reported_md5": "707fa1edbea53562946c00056b7c5e56",
+      "reported_size": 671118009,
+      "session": 2,
+      "subject": 23,
+      "url": "https://ndownloader.figshare.com/files/25266668"
+    },
+    {
+      "figshare_file_id": 25266671,
+      "filename": "S23_Session_3.mat",
+      "reported_md5": "c07f645eef4ba0c155907949a9b9db31",
+      "reported_size": 574649646,
+      "session": 3,
+      "subject": 23,
+      "url": "https://ndownloader.figshare.com/files/25266671"
+    },
+    {
+      "figshare_file_id": 25266743,
+      "filename": "S24_Session_2.mat",
+      "reported_md5": "7e7ff508a8f86fa9a36786930d6320b4",
+      "reported_size": 592484743,
+      "session": 2,
+      "subject": 24,
+      "url": "https://ndownloader.figshare.com/files/25266743"
+    },
+    {
+      "figshare_file_id": 25266782,
+      "filename": "S24_Session_3.mat",
+      "reported_md5": "fda9eb8985a4ec35ef432b4e083e3a3f",
+      "reported_size": 613856058,
+      "session": 3,
+      "subject": 24,
+      "url": "https://ndownloader.figshare.com/files/25266782"
+    },
+    {
+      "figshare_file_id": 25266866,
+      "filename": "S25_Session_2.mat",
+      "reported_md5": "2eb44a9ab640c301767fdd59776dcf64",
+      "reported_size": 602408070,
+      "session": 2,
+      "subject": 25,
+      "url": "https://ndownloader.figshare.com/files/25266866"
+    },
+    {
+      "figshare_file_id": 25266872,
+      "filename": "S25_Session_3.mat",
+      "reported_md5": "8a0eb087cdce3876f29349e6adb27d0e",
+      "reported_size": 616556449,
+      "session": 3,
+      "subject": 25,
+      "url": "https://ndownloader.figshare.com/files/25266872"
+    },
+    {
+      "figshare_file_id": 25266920,
+      "filename": "S26_Session_2.mat",
+      "reported_md5": "8a4ef7617413e3a5e5f822e4cba3718c",
+      "reported_size": 542754658,
+      "session": 2,
+      "subject": 26,
+      "url": "https://ndownloader.figshare.com/files/25266920"
+    },
+    {
+      "figshare_file_id": 25266923,
+      "filename": "S26_Session_3.mat",
+      "reported_md5": "968937854feb4ae2ea7b54c9406e359d",
+      "reported_size": 601794483,
+      "session": 3,
+      "subject": 26,
+      "url": "https://ndownloader.figshare.com/files/25266923"
+    },
+    {
+      "figshare_file_id": 25266971,
+      "filename": "S27_Session_2.mat",
+      "reported_md5": "22ee918f56b1fa3b317e234b1d8bad9f",
+      "reported_size": 663082073,
+      "session": 2,
+      "subject": 27,
+      "url": "https://ndownloader.figshare.com/files/25266971"
+    },
+    {
+      "figshare_file_id": 25266974,
+      "filename": "S27_Session_3.mat",
+      "reported_md5": "d7ff45f61b700751835b70a6eb8cb147",
+      "reported_size": 659311411,
+      "session": 3,
+      "subject": 27,
+      "url": "https://ndownloader.figshare.com/files/25266974"
+    },
+    {
+      "figshare_file_id": 25267103,
+      "filename": "S28_Session_2.mat",
+      "reported_md5": "ab60b43c17ed903d0c9f27194dd1e3fa",
+      "reported_size": 588326111,
+      "session": 2,
+      "subject": 28,
+      "url": "https://ndownloader.figshare.com/files/25267103"
+    },
+    {
+      "figshare_file_id": 25267112,
+      "filename": "S28_Session_3.mat",
+      "reported_md5": "2ffb888e49d93e1aad72be51090e5ed3",
+      "reported_size": 546839548,
+      "session": 3,
+      "subject": 28,
+      "url": "https://ndownloader.figshare.com/files/25267112"
+    },
+    {
+      "figshare_file_id": 25267280,
+      "filename": "S29_Session_2.mat",
+      "reported_md5": "45c3af100b2359d61e50349837563d01",
+      "reported_size": 613661868,
+      "session": 2,
+      "subject": 29,
+      "url": "https://ndownloader.figshare.com/files/25267280"
+    },
+    {
+      "figshare_file_id": 25267286,
+      "filename": "S29_Session_3.mat",
+      "reported_md5": "b250412e6c6f03b4214976d7f23897f7",
+      "reported_size": 619541063,
+      "session": 3,
+      "subject": 29,
+      "url": "https://ndownloader.figshare.com/files/25267286"
+    },
+    {
+      "figshare_file_id": 25267433,
+      "filename": "S30_Session_2.mat",
+      "reported_md5": "cebbeb805e92f8fddea3ada50551e99b",
+      "reported_size": 567673167,
+      "session": 2,
+      "subject": 30,
+      "url": "https://ndownloader.figshare.com/files/25267433"
+    },
+    {
+      "figshare_file_id": 25267448,
+      "filename": "S30_Session_3.mat",
+      "reported_md5": "d32918fbb01c90870952314449dc882c",
+      "reported_size": 596675119,
+      "session": 3,
+      "subject": 30,
+      "url": "https://ndownloader.figshare.com/files/25267448"
+    },
+    {
+      "figshare_file_id": 25267523,
+      "filename": "S31_Session_2.mat",
+      "reported_md5": "b6ba41afa2fe091116c3ce4118bbc4ff",
+      "reported_size": 631085451,
+      "session": 2,
+      "subject": 31,
+      "url": "https://ndownloader.figshare.com/files/25267523"
+    },
+    {
+      "figshare_file_id": 25267526,
+      "filename": "S31_Session_3.mat",
+      "reported_md5": "a81aeac7811013af5bd0414fc1c736e7",
+      "reported_size": 572800191,
+      "session": 3,
+      "subject": 31,
+      "url": "https://ndownloader.figshare.com/files/25267526"
+    },
+    {
+      "figshare_file_id": 25267577,
+      "filename": "S32_Session_2.mat",
+      "reported_md5": "a7e9483b1640c39834eeb1b855b5164e",
+      "reported_size": 553878365,
+      "session": 2,
+      "subject": 32,
+      "url": "https://ndownloader.figshare.com/files/25267577"
+    },
+    {
+      "figshare_file_id": 25267580,
+      "filename": "S32_Session_3.mat",
+      "reported_md5": "8619030895e50ee74b9b95cd30c28b98",
+      "reported_size": 581831656,
+      "session": 3,
+      "subject": 32,
+      "url": "https://ndownloader.figshare.com/files/25267580"
+    },
+    {
+      "figshare_file_id": 25267706,
+      "filename": "S33_Session_2.mat",
+      "reported_md5": "c32731850ef0b6608869bf7d301d2517",
+      "reported_size": 840308993,
+      "session": 2,
+      "subject": 33,
+      "url": "https://ndownloader.figshare.com/files/25267706"
+    },
+    {
+      "figshare_file_id": 25267712,
+      "filename": "S33_Session_3.mat",
+      "reported_md5": "ea5912416104d79e4d6ce54e6db714b1",
+      "reported_size": 869705896,
+      "session": 3,
+      "subject": 33,
+      "url": "https://ndownloader.figshare.com/files/25267712"
+    },
+    {
+      "figshare_file_id": 25267787,
+      "filename": "S34_Session_2.mat",
+      "reported_md5": "63879f25d47310d2817ad77cf3332eed",
+      "reported_size": 598483294,
+      "session": 2,
+      "subject": 34,
+      "url": "https://ndownloader.figshare.com/files/25267787"
+    },
+    {
+      "figshare_file_id": 25267793,
+      "filename": "S34_Session_3.mat",
+      "reported_md5": "25e81055b1dd28f4fa7a25563ab02dfe",
+      "reported_size": 599364984,
+      "session": 3,
+      "subject": 34,
+      "url": "https://ndownloader.figshare.com/files/25267793"
+    },
+    {
+      "figshare_file_id": 25267841,
+      "filename": "S35_Session_2.mat",
+      "reported_md5": "e9c620b7ab74938a1eb32d7d2fbe3235",
+      "reported_size": 672173297,
+      "session": 2,
+      "subject": 35,
+      "url": "https://ndownloader.figshare.com/files/25267841"
+    },
+    {
+      "figshare_file_id": 25267844,
+      "filename": "S35_Session_3.mat",
+      "reported_md5": "c60ff24dc83077ce91891a70d30cb9f0",
+      "reported_size": 699017142,
+      "session": 3,
+      "subject": 35,
+      "url": "https://ndownloader.figshare.com/files/25267844"
+    },
+    {
+      "figshare_file_id": 25267892,
+      "filename": "S36_Session_2.mat",
+      "reported_md5": "6eeedd9a354a142a5c3174aee2cedcbe",
+      "reported_size": 582629876,
+      "session": 2,
+      "subject": 36,
+      "url": "https://ndownloader.figshare.com/files/25267892"
+    },
+    {
+      "figshare_file_id": 25267895,
+      "filename": "S36_Session_3.mat",
+      "reported_md5": "0638d4e59d6c5bf189ad16da8daf31c9",
+      "reported_size": 608435079,
+      "session": 3,
+      "subject": 36,
+      "url": "https://ndownloader.figshare.com/files/25267895"
+    },
+    {
+      "figshare_file_id": 25268195,
+      "filename": "S37_Session_2.mat",
+      "reported_md5": "35fb0e2e31016d22f9083cdb80cd56a5",
+      "reported_size": 645304293,
+      "session": 2,
+      "subject": 37,
+      "url": "https://ndownloader.figshare.com/files/25268195"
+    },
+    {
+      "figshare_file_id": 25268279,
+      "filename": "S37_Session_3.mat",
+      "reported_md5": "a39a2e50ea3d1eb583eda4069412328c",
+      "reported_size": 628933598,
+      "session": 3,
+      "subject": 37,
+      "url": "https://ndownloader.figshare.com/files/25268279"
+    },
+    {
+      "figshare_file_id": 25268768,
+      "filename": "S38_Session_2.mat",
+      "reported_md5": "7bfc8b3227a06cb7389294b4a13ff441",
+      "reported_size": 603448460,
+      "session": 2,
+      "subject": 38,
+      "url": "https://ndownloader.figshare.com/files/25268768"
+    },
+    {
+      "figshare_file_id": 25268843,
+      "filename": "S38_Session_3.mat",
+      "reported_md5": "39812d1a3706c67075b31b9b9c8f7e33",
+      "reported_size": 837480199,
+      "session": 3,
+      "subject": 38,
+      "url": "https://ndownloader.figshare.com/files/25268843"
+    },
+    {
+      "figshare_file_id": 25269260,
+      "filename": "S39_Session_2.mat",
+      "reported_md5": "084d9a097a4f738140a040528a641571",
+      "reported_size": 572077691,
+      "session": 2,
+      "subject": 39,
+      "url": "https://ndownloader.figshare.com/files/25269260"
+    },
+    {
+      "figshare_file_id": 25269338,
+      "filename": "S39_Session_3.mat",
+      "reported_md5": "b6c175f95dbc915f0c506de0eb9a47ea",
+      "reported_size": 479592641,
+      "session": 3,
+      "subject": 39,
+      "url": "https://ndownloader.figshare.com/files/25269338"
+    },
+    {
+      "figshare_file_id": 25269710,
+      "filename": "S40_Session_2.mat",
+      "reported_md5": "bdd91a79a19135987457e45d26382b46",
+      "reported_size": 574247885,
+      "session": 2,
+      "subject": 40,
+      "url": "https://ndownloader.figshare.com/files/25269710"
+    },
+    {
+      "figshare_file_id": 25269815,
+      "filename": "S40_Session_3.mat",
+      "reported_md5": "a28bcc69c5ba0e30115e707d6fda764e",
+      "reported_size": 622532832,
+      "session": 3,
+      "subject": 40,
+      "url": "https://ndownloader.figshare.com/files/25269815"
+    },
+    {
+      "figshare_file_id": 25270406,
+      "filename": "S41_Session_2.mat",
+      "reported_md5": "17d6e459ed8c7c1dfb7c6f2b23a947a6",
+      "reported_size": 662227441,
+      "session": 2,
+      "subject": 41,
+      "url": "https://ndownloader.figshare.com/files/25270406"
+    },
+    {
+      "figshare_file_id": 25270427,
+      "filename": "S41_Session_3.mat",
+      "reported_md5": "8bc71a015e33f6234d62f9512128bd2b",
+      "reported_size": 673269808,
+      "session": 3,
+      "subject": 41,
+      "url": "https://ndownloader.figshare.com/files/25270427"
+    },
+    {
+      "figshare_file_id": 25270505,
+      "filename": "S42_Session_2.mat",
+      "reported_md5": "52f80460a045727282aa50f4347bb90e",
+      "reported_size": 645738586,
+      "session": 2,
+      "subject": 42,
+      "url": "https://ndownloader.figshare.com/files/25270505"
+    },
+    {
+      "figshare_file_id": 25270511,
+      "filename": "S42_Session_3.mat",
+      "reported_md5": "024a8cc1a4e85488d3f17919b702b4ef",
+      "reported_size": 614558150,
+      "session": 3,
+      "subject": 42,
+      "url": "https://ndownloader.figshare.com/files/25270511"
+    },
+    {
+      "figshare_file_id": 25270568,
+      "filename": "S43_Session_2.mat",
+      "reported_md5": "cedd7aa403ac6297edc882184f583368",
+      "reported_size": 597598894,
+      "session": 2,
+      "subject": 43,
+      "url": "https://ndownloader.figshare.com/files/25270568"
+    },
+    {
+      "figshare_file_id": 25270571,
+      "filename": "S43_Session_3.mat",
+      "reported_md5": "be22d5b2b733c8d90eec1d9f82489f13",
+      "reported_size": 589482400,
+      "session": 3,
+      "subject": 43,
+      "url": "https://ndownloader.figshare.com/files/25270571"
+    },
+    {
+      "figshare_file_id": 25270601,
+      "filename": "S44_Session_2.mat",
+      "reported_md5": "47d548e74e9f6cef0e9d68bd6ec8cd88",
+      "reported_size": 607128874,
+      "session": 2,
+      "subject": 44,
+      "url": "https://ndownloader.figshare.com/files/25270601"
+    },
+    {
+      "figshare_file_id": 25270604,
+      "filename": "S44_Session_3.mat",
+      "reported_md5": "28cf0cf60681da91995e94aae51409dd",
+      "reported_size": 547031065,
+      "session": 3,
+      "subject": 44,
+      "url": "https://ndownloader.figshare.com/files/25270604"
+    },
+    {
+      "figshare_file_id": 25270718,
+      "filename": "S45_Session_2.mat",
+      "reported_md5": "1609abe0307542a8894824053952a06e",
+      "reported_size": 624804291,
+      "session": 2,
+      "subject": 45,
+      "url": "https://ndownloader.figshare.com/files/25270718"
+    },
+    {
+      "figshare_file_id": 25270742,
+      "filename": "S45_Session_3.mat",
+      "reported_md5": "ecec6f6023dcdaaff362cabc96efb8d4",
+      "reported_size": 616170606,
+      "session": 3,
+      "subject": 45,
+      "url": "https://ndownloader.figshare.com/files/25270742"
+    },
+    {
+      "figshare_file_id": 25270766,
+      "filename": "S46_Session_2.mat",
+      "reported_md5": "23d670578cf73938a34fe314890a148c",
+      "reported_size": 659344018,
+      "session": 2,
+      "subject": 46,
+      "url": "https://ndownloader.figshare.com/files/25270766"
+    },
+    {
+      "figshare_file_id": 25270769,
+      "filename": "S46_Session_3.mat",
+      "reported_md5": "6dad68a71fb18268865ab6ef9daba868",
+      "reported_size": 639477643,
+      "session": 3,
+      "subject": 46,
+      "url": "https://ndownloader.figshare.com/files/25270769"
+    },
+    {
+      "figshare_file_id": 25270814,
+      "filename": "S47_Session_2.mat",
+      "reported_md5": "087e89d51114e2cc5b25c3c8874c3e9d",
+      "reported_size": 632167018,
+      "session": 2,
+      "subject": 47,
+      "url": "https://ndownloader.figshare.com/files/25270814"
+    },
+    {
+      "figshare_file_id": 25270823,
+      "filename": "S47_Session_3.mat",
+      "reported_md5": "8cbbd6f1447df954b248ba8c172ec2a2",
+      "reported_size": 652013351,
+      "session": 3,
+      "subject": 47,
+      "url": "https://ndownloader.figshare.com/files/25270823"
+    },
+    {
+      "figshare_file_id": 25270904,
+      "filename": "S48_Session_2.mat",
+      "reported_md5": "db902fe686bc215dc5328459370cf600",
+      "reported_size": 529045529,
+      "session": 2,
+      "subject": 48,
+      "url": "https://ndownloader.figshare.com/files/25270904"
+    },
+    {
+      "figshare_file_id": 25270907,
+      "filename": "S48_Session_3.mat",
+      "reported_md5": "f1e2d0f159b2a2599bede4c2755c831f",
+      "reported_size": 575559746,
+      "session": 3,
+      "subject": 48,
+      "url": "https://ndownloader.figshare.com/files/25270907"
+    },
+    {
+      "figshare_file_id": 25270928,
+      "filename": "S49_Session_2.mat",
+      "reported_md5": "54c63f165fb42c9b8413e7e2b5c95426",
+      "reported_size": 572823086,
+      "session": 2,
+      "subject": 49,
+      "url": "https://ndownloader.figshare.com/files/25270928"
+    },
+    {
+      "figshare_file_id": 25270940,
+      "filename": "S49_Session_3.mat",
+      "reported_md5": "16431753c43d902e2637bc60de26bf54",
+      "reported_size": 585734958,
+      "session": 3,
+      "subject": 49,
+      "url": "https://ndownloader.figshare.com/files/25270940"
+    },
+    {
+      "figshare_file_id": 25270976,
+      "filename": "S50_Session_2.mat",
+      "reported_md5": "7d974d2aa2b35a1cd9e51bdffd5383a8",
+      "reported_size": 614743855,
+      "session": 2,
+      "subject": 50,
+      "url": "https://ndownloader.figshare.com/files/25270976"
+    },
+    {
+      "figshare_file_id": 25270979,
+      "filename": "S50_Session_3.mat",
+      "reported_md5": "b0a527022ea9f0830909b18540bcf675",
+      "reported_size": 627788940,
+      "session": 3,
+      "subject": 50,
+      "url": "https://ndownloader.figshare.com/files/25270979"
+    },
+    {
+      "figshare_file_id": 25271030,
+      "filename": "S51_Session_2.mat",
+      "reported_md5": "69f668d9f208f7b4a629e185f3f8696c",
+      "reported_size": 607780585,
+      "session": 2,
+      "subject": 51,
+      "url": "https://ndownloader.figshare.com/files/25271030"
+    },
+    {
+      "figshare_file_id": 25271036,
+      "filename": "S51_Session_3.mat",
+      "reported_md5": "610796fb8790f4773852f0be63dbc67e",
+      "reported_size": 614588557,
+      "session": 3,
+      "subject": 51,
+      "url": "https://ndownloader.figshare.com/files/25271036"
+    },
+    {
+      "figshare_file_id": 25281164,
+      "filename": "S52_Session_2.mat",
+      "reported_md5": "d28026565eccb6b939b174b711f01a7e",
+      "reported_size": 637480871,
+      "session": 2,
+      "subject": 52,
+      "url": "https://ndownloader.figshare.com/files/25281164"
+    },
+    {
+      "figshare_file_id": 25281176,
+      "filename": "S52_Session_3.mat",
+      "reported_md5": "ab2d0163773800a82e94d804216dddcc",
+      "reported_size": 582303519,
+      "session": 3,
+      "subject": 52,
+      "url": "https://ndownloader.figshare.com/files/25281176"
+    },
+    {
+      "figshare_file_id": 25281266,
+      "filename": "S53_Session_2.mat",
+      "reported_md5": "9db2b089a44606b4ac75afee11588e18",
+      "reported_size": 625368340,
+      "session": 2,
+      "subject": 53,
+      "url": "https://ndownloader.figshare.com/files/25281266"
+    },
+    {
+      "figshare_file_id": 25281275,
+      "filename": "S53_Session_3.mat",
+      "reported_md5": "e821ab292912508ef5e175be9571fae8",
+      "reported_size": 590230124,
+      "session": 3,
+      "subject": 53,
+      "url": "https://ndownloader.figshare.com/files/25281275"
+    },
+    {
+      "figshare_file_id": 25281434,
+      "filename": "S54_Session_2.mat",
+      "reported_md5": "0859673d8059bf4806b6807c160b12da",
+      "reported_size": 633585008,
+      "session": 2,
+      "subject": 54,
+      "url": "https://ndownloader.figshare.com/files/25281434"
+    },
+    {
+      "figshare_file_id": 25281446,
+      "filename": "S54_Session_3.mat",
+      "reported_md5": "5d38c64b8c6cb89d71c373419ae934fc",
+      "reported_size": 650125599,
+      "session": 3,
+      "subject": 54,
+      "url": "https://ndownloader.figshare.com/files/25281446"
+    },
+    {
+      "figshare_file_id": 25281524,
+      "filename": "S55_Session_2.mat",
+      "reported_md5": "8fc0ea94ff48fdad18a145fac82a7cb7",
+      "reported_size": 631607455,
+      "session": 2,
+      "subject": 55,
+      "url": "https://ndownloader.figshare.com/files/25281524"
+    },
+    {
+      "figshare_file_id": 25281536,
+      "filename": "S55_Session_3.mat",
+      "reported_md5": "1726bc741eb54e6ee9325d6594c4c999",
+      "reported_size": 599104459,
+      "session": 3,
+      "subject": 55,
+      "url": "https://ndownloader.figshare.com/files/25281536"
+    },
+    {
+      "figshare_file_id": 25281665,
+      "filename": "S56_Session_2.mat",
+      "reported_md5": "f6c243563cea72e8d3504c6c53aecb65",
+      "reported_size": 645840070,
+      "session": 2,
+      "subject": 56,
+      "url": "https://ndownloader.figshare.com/files/25281665"
+    },
+    {
+      "figshare_file_id": 25281683,
+      "filename": "S56_Session_3.mat",
+      "reported_md5": "da9f8264cb1465528a1c21594e384e9c",
+      "reported_size": 703462235,
+      "session": 3,
+      "subject": 56,
+      "url": "https://ndownloader.figshare.com/files/25281683"
+    },
+    {
+      "figshare_file_id": 25281746,
+      "filename": "S57_Session_2.mat",
+      "reported_md5": "bf4b27cc6189abd1b9c493ae2b99f3d9",
+      "reported_size": 613867749,
+      "session": 2,
+      "subject": 57,
+      "url": "https://ndownloader.figshare.com/files/25281746"
+    },
+    {
+      "figshare_file_id": 25281758,
+      "filename": "S57_Session_3.mat",
+      "reported_md5": "f27dab9b04d4372112f8a10158bf98ee",
+      "reported_size": 581843845,
+      "session": 3,
+      "subject": 57,
+      "url": "https://ndownloader.figshare.com/files/25281758"
+    },
+    {
+      "figshare_file_id": 25281821,
+      "filename": "S58_Session_2.mat",
+      "reported_md5": "ddd2ebc588f9e6d7157a25c506816311",
+      "reported_size": 590280216,
+      "session": 2,
+      "subject": 58,
+      "url": "https://ndownloader.figshare.com/files/25281821"
+    },
+    {
+      "figshare_file_id": 25281830,
+      "filename": "S58_Session_3.mat",
+      "reported_md5": "83a6c87ea9ffcd57c96def3fb4b21c38",
+      "reported_size": 605686118,
+      "session": 3,
+      "subject": 58,
+      "url": "https://ndownloader.figshare.com/files/25281830"
+    },
+    {
+      "figshare_file_id": 25281941,
+      "filename": "S59_Session_2.mat",
+      "reported_md5": "a66308e26888b8dd5033111cac502153",
+      "reported_size": 644689146,
+      "session": 2,
+      "subject": 59,
+      "url": "https://ndownloader.figshare.com/files/25281941"
+    },
+    {
+      "figshare_file_id": 25281971,
+      "filename": "S59_Session_3.mat",
+      "reported_md5": "3ec18df24afdec7e423a16d6a785795e",
+      "reported_size": 624918276,
+      "session": 3,
+      "subject": 59,
+      "url": "https://ndownloader.figshare.com/files/25281971"
+    },
+    {
+      "figshare_file_id": 25282199,
+      "filename": "S60_Session_2.mat",
+      "reported_md5": "64713959ced995d42f277a5e738e9bd1",
+      "reported_size": 525875729,
+      "session": 2,
+      "subject": 60,
+      "url": "https://ndownloader.figshare.com/files/25282199"
+    },
+    {
+      "figshare_file_id": 25282208,
+      "filename": "S60_Session_3.mat",
+      "reported_md5": "dcfe8c106784cdefcf5a3da7c0c6db86",
+      "reported_size": 553748419,
+      "session": 3,
+      "subject": 60,
+      "url": "https://ndownloader.figshare.com/files/25282208"
+    },
+    {
+      "figshare_file_id": 25282265,
+      "filename": "S61_Session_2.mat",
+      "reported_md5": "7d24552aaa7a826526e350fae1e601a6",
+      "reported_size": 626605977,
+      "session": 2,
+      "subject": 61,
+      "url": "https://ndownloader.figshare.com/files/25282265"
+    },
+    {
+      "figshare_file_id": 25282280,
+      "filename": "S61_Session_3.mat",
+      "reported_md5": "6bd2404127490d73b0eb13bcea637496",
+      "reported_size": 626091488,
+      "session": 3,
+      "subject": 61,
+      "url": "https://ndownloader.figshare.com/files/25282280"
+    },
+    {
+      "figshare_file_id": 25281089,
+      "filename": "S62_Session_2.mat",
+      "reported_md5": "97089cf244b041223b5e5425d7a8292d",
+      "reported_size": 612293980,
+      "session": 2,
+      "subject": 62,
+      "url": "https://ndownloader.figshare.com/files/25281089"
+    },
+    {
+      "figshare_file_id": 25281098,
+      "filename": "S62_Session_3.mat",
+      "reported_md5": "df24dd111c138e88f7ee46e7dcb8b454",
+      "reported_size": 605463420,
+      "session": 3,
+      "subject": 62,
+      "url": "https://ndownloader.figshare.com/files/25281098"
+    }
+  ],
+  "license": {
+    "name": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "value": 1
+  },
+  "selected_count": 124,
+  "selected_total_bytes": 77689711027
+}

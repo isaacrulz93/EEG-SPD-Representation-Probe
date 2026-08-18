@@ -1,0 +1,13 @@
+{
+  "branch": "pilot/stieger2021-multiclass-prospective-confirmation-v0",
+  "head_at_freeze_run": "19a3ad1cdc6b57c89526e618779cd24b7db8c99c",
+  "parent_hashes": {
+    "pr16_manifest": "a92c9fdd36ad70a7d3dda6d710b49da7287482e103260da1a3558a1b684d2d6e",
+    "pr17_manifest": "661658b10594d747a0de5c5878549c7ee846111fb6214c7169da5ec159257b23",
+    "pr18_manifest": "76370c6d9114f33b42c1f46d96ea46e4f2628892e3b4d5ab8cfef409c13cb4f1"
+  },
+  "parent_head": "19a3ad1cdc6b57c89526e618779cd24b7db8c99c",
+  "parent_pr": 18,
+  "real_eeg_accessed": false,
+  "source_manifest_sha256": "ee37f1b381577c76136647f7b0c9ebf3a41c9957e02c0176f6169c6f49486eea"
+}

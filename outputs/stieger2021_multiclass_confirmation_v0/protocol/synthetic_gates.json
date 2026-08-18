@@ -1,0 +1,29 @@
+{
+  "case_count": 23,
+  "cases": {
+    "all_24_permutations": true,
+    "beta_identity": true,
+    "class_permutation_destruction": true,
+    "cohort_eligibility_determinism": true,
+    "full_rank_stable": true,
+    "heldout_source_isolation": true,
+    "helmert_orthogonality": true,
+    "known_low_rank_two_view": true,
+    "m4_one_per_class": true,
+    "mbsr_stratified_fold_determinism": true,
+    "no_cross_session_structure": true,
+    "nonrecoverable_varying_within": true,
+    "permutation_tie_failure": true,
+    "pretarget_negative_control": true,
+    "raw_deletion_order": true,
+    "recoverable_between_scatter": true,
+    "semantic_permutation_violation": true,
+    "source_template_component_assignment": true,
+    "streaming_hash_validation": true,
+    "svec_frobenius_isometry": true,
+    "target_label_leakage_sentinel": true,
+    "task_context_leakage_sentinel": true,
+    "unique_correct_semantic_permutation": true
+  },
+  "passed": true
+}
