@@ -125,6 +125,17 @@ def test_population_summary_serializes_without_external_local_state(tmp_path: Pa
     assert json.loads((tmp_path / "tables" / "synthetic_summary.json").read_text())["selected_ranks"] == [1]
 
 
+def test_multiclass_scatter_decomposition_with_unequal_counts() -> None:
+    rng = np.random.default_rng(2021)
+    counts = [7, 11, 13, 17]
+    labels = np.concatenate([np.full(count, class_value) for class_value, count in enumerate(counts, start=1)])
+    projected = np.vstack(
+        [rng.normal(loc=class_value, scale=0.5 + class_value / 10, size=(count, 3)) for class_value, count in enumerate(counts, start=1)]
+    )
+    total, within, between, _ = module._scatter_from_projected(projected, labels)
+    np.testing.assert_allclose(total, within + between, atol=1e-12, rtol=1e-12)
+
+
 def test_task_and_target_label_leakage_sentinels_are_explicit() -> None:
     source_stream = inspect.getsource(module._load_tangent)
     source_scatter = inspect.getsource(module.run_unlabeled_scatter)

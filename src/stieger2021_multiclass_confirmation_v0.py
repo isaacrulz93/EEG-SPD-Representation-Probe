@@ -1373,7 +1373,9 @@ def _covariance_rows(values: np.ndarray) -> np.ndarray:
     array = np.asarray(values, dtype=np.float64)
     if array.ndim != 2 or len(array) < 2:
         raise StiegerNumericalError("scatter covariance requires at least two row observations")
-    result = np.atleast_2d(np.cov(array, rowvar=False, ddof=1))
+    # Population normalization is required by the frozen total = within +
+    # between class-proportion decomposition.
+    result = np.atleast_2d(np.cov(array, rowvar=False, ddof=0))
     if result.shape != (array.shape[1], array.shape[1]) or not np.all(np.isfinite(result)):
         raise StiegerNumericalError("scatter covariance shape/nonfinite failure")
     return (result + result.T) / 2.0
@@ -1480,6 +1482,14 @@ def run_unlabeled_scatter(repo_root: str | Path) -> dict[str, Any]:
         prerequisite and np.all(session_statistics > 0) and ci[0] > 0 and p_permutation <= 0.05 and p_random <= 0.05 and np.all(influence > 0)
     )
     decision = config["decisions"]["scatter_pass"] if passed else config["decisions"]["scatter_negative"]
+    fold_for_subject = np.empty(n, dtype=np.int64)
+    for fold_index, fold in enumerate(locked.folds):
+        fold_for_subject[fold] = fold_index
+    predicted_ranks = [
+        int(np.linalg.matrix_rank(estimates[index, q, : int(selected[fold_for_subject[index]]), : int(selected[fold_for_subject[index]])]))
+        for index in range(n)
+        for q in range(2)
+    ]
     summary = {
         "decision": decision,
         "primary_statistic_median_frobenius_cosine": observed,

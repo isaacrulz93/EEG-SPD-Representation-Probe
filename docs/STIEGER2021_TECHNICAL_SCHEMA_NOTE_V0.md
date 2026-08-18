@@ -18,3 +18,13 @@ from the scatter-summary path referenced undefined local names. The block did
 not contribute to any statistic and would only have raised `NameError` before
 the observed summary was written. It was removed without changing model
 fitting, scores, folds, ranks, nulls, thresholds, or terminal logic.
+
+The same pre-access review found that the strict frozen scatter decomposition
+had been implemented with `ddof=1` class covariances weighted by observed class
+proportions. That combination does not satisfy the declared empirical
+`S_total = S_within + S_between` identity. Covariance normalization was changed
+to `ddof=0`, which is the population-moment convention in the frozen formula,
+and an exact unequal-class-count decomposition regression test was added. A
+missing reporting-only calculation of predicted scatter ranks was also placed
+in the scatter summary where it belongs. No estimator, direction, gate, null,
+or threshold was selected or changed.
