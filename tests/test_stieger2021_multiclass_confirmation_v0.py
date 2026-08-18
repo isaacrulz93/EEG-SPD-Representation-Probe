@@ -162,6 +162,14 @@ def test_task_and_target_label_leakage_sentinels_are_explicit() -> None:
     assert config["dataset"]["primary_tasknumber"] == 3
 
 
+def test_feedback_sensitivity_is_retention_only_and_nonvoting() -> None:
+    source = inspect.getsource(module.lock_cohort_and_objects)
+    assert "feedback_compact_indices" in source
+    assert "feedback_window_retention.csv" in source
+    population_source = inspect.getsource(module.run_primary_nulls)
+    assert "feedback" not in population_source
+
+
 def test_deterministic_stratified_folds_cover_once_and_preserve_groups() -> None:
     config, _ = module.load_config(ROOT, verify_protocol=False)
     subjects = np.arange(1, 61); groups = np.asarray([0, 1] * 30)

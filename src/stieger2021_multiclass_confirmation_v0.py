@@ -577,6 +577,7 @@ def lock_cohort_and_objects(repo_root: str | Path) -> dict[str, Any]:
     }
     accumulator: dict[tuple[str, str, str], list[np.ndarray]] = {}
     tangent_manifest_rows: list[dict[str, Any]] = []
+    feedback_retention_rows: list[dict[str, Any]] = []
     tangent_dir = cache / "tangents"
     tangent_dir.mkdir(parents=True, exist_ok=True)
     for subject in eligible:
@@ -587,10 +588,34 @@ def lock_cohort_and_objects(repo_root: str | Path) -> dict[str, Any]:
             with np.load(session_path, allow_pickle=False) as data:
                 labels = np.asarray(data["targetnumber"], dtype=np.int64)
                 acquisition = np.asarray(data["acquisition_index"], dtype=np.int64)
+                triallength = np.asarray(data["triallength"], dtype=np.float64)
+                feedback_indices = np.asarray(data["feedback_compact_indices"], dtype=np.int64)
                 epoch_covariances = {
                     "primary": np.asarray(data["primary_covariances"], dtype=np.float64),
                     "pretarget": np.asarray(data["pretarget_covariances"], dtype=np.float64),
                 }
+            retained_feedback = np.zeros(len(labels), dtype=bool)
+            retained_feedback[feedback_indices] = True
+            for class_value, class_name in enumerate(CLASS_NAMES, 1):
+                class_mask = labels == class_value
+                retained_mask = class_mask & retained_feedback
+                excluded_mask = class_mask & ~retained_feedback
+                feedback_retention_rows.append(
+                    {
+                        "subject": subject,
+                        "session": session_id,
+                        "class": class_name,
+                        "primary_trials": int(np.count_nonzero(class_mask)),
+                        "feedback_window_trials": int(np.count_nonzero(retained_mask)),
+                        "feedback_retention_fraction": float(np.mean(retained_feedback[class_mask])),
+                        "mean_triallength_retained": (
+                            float(np.mean(triallength[retained_mask])) if np.any(retained_mask) else math.nan
+                        ),
+                        "mean_triallength_excluded": (
+                            float(np.mean(triallength[excluded_mask])) if np.any(excluded_mask) else math.nan
+                        ),
+                    }
+                )
             tangent_arrays: dict[str, np.ndarray] = {
                 "subject": np.asarray(subject, dtype=np.int16),
                 "session": np.asarray(session_id, dtype=np.int8),
@@ -636,6 +661,7 @@ def lock_cohort_and_objects(repo_root: str | Path) -> dict[str, Any]:
     tangent_manifest = {"records": tangent_manifest_rows, "count": len(tangent_manifest_rows)}
     tangent_manifest["canonical_sha256"] = hashlib.sha256(_json_bytes(tangent_manifest)).hexdigest()
     atomic_write_json(output / "objects" / "trial_tangent_cache_manifest.json", tangent_manifest)
+    pd.DataFrame(feedback_retention_rows).to_csv(output / "tables" / "feedback_window_retention.csv", index=False)
     cohort_manifest = {
         "status": config["decisions"]["data_locked"],
         "eligible_subject_count": n_subjects,
