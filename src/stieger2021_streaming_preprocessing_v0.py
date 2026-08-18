@@ -380,6 +380,8 @@ def interpolation_matrix(
         montage = mne.channels.make_dig_montage(ch_pos=dict(recorded_positions), coord_frame="head")
     else:
         montage = mne.channels.make_standard_montage("standard_1005")
+        # Compumedics/Curry defines Neuroscan CB1/CB2 as the I1/I2 locations.
+        montage.rename_channels({"I1": "CB1", "I2": "CB2"})
     try:
         info.set_montage(montage, match_case=False, on_missing="raise", verbose=False)
         raw = mne.io.RawArray(np.eye(n_channels, dtype=np.float64), info, verbose=False)

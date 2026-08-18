@@ -44,3 +44,11 @@ millimeter scale gate; ambiguous scale fails closed. All 31 pre-lock compact
 objects produced by the earlier path were moved intact to an ignored quarantine
 and are regenerated from the same hash-locked source files. No cohort, fold,
 population, interaction, semantic, or recovery statistic had been computed.
+
+The first corrected fallback parse then failed closed because MNE's
+`standard_1005` names do not include the Neuroscan labels `CB1` and `CB2`.
+Compumedics/Curry's published release notes explicitly define the corresponding
+locations as `CB1 = I1` and `CB2 = I2`. The fallback montage therefore performs
+only that vendor-defined deterministic rename before complete-montage
+interpolation. The retained checksum-complete raw source is reused; no EEG
+selection or scientific parameter is changed.

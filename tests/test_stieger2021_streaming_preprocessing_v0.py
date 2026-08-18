@@ -138,6 +138,13 @@ def test_ambiguous_explicit_recorded_coordinate_units_fail_closed() -> None:
         streaming.interpolation_position_contract(True, raw, ["C3", "Cz"])
 
 
+def test_standard_fallback_supports_vendor_cb1_cb2_aliases() -> None:
+    labels = ["C3", "Cz", "CB1", "CB2"]
+    matrix = streaming.interpolation_matrix(labels, [2], recorded_positions=None)
+    assert matrix.shape == (4, 4)
+    assert np.all(np.isfinite(matrix))
+
+
 def test_oas_covariance_strict_spd_symmetric() -> None:
     covariance = streaming.oas_covariance(np.random.default_rng(3).normal(size=(20, 150)))
     assert covariance.shape == (20, 20)
