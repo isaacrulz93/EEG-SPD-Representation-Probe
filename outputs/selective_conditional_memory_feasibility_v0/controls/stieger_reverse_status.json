@@ -1,0 +1,6 @@
+{
+  "exception_type": "NumericalContractError",
+  "message": "selective gate optimization failed: STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+  "status": "CONTROL_UNASSESSED_OPTIMIZATION_FAILURE",
+  "voting": false
+}

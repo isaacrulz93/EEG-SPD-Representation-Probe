@@ -1,0 +1,19 @@
+{
+  "parent_hashes_unchanged": true,
+  "focused_tests": {
+    "passed": 24,
+    "skipped": 0
+  },
+  "full_repository_tests": {
+    "passed": 496,
+    "skipped": 1,
+    "warnings": 2
+  },
+  "git_diff_check": "PASS",
+  "result_manifest_hash_validation": "PASS",
+  "snapshot": {
+    "canonical_sha256": "cdc2cf75a8c3902fee58aed927354098cbbe14f034c7d50a5bc106fc3533bae0",
+    "count": 374
+  },
+  "target_label_gate_input": false
+}

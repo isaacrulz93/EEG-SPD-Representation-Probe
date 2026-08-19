@@ -1,0 +1,292 @@
+{
+  "canonical_sha256": "aed01cd15ada2246bd8cb52185d181f338bf154e9e788d81d08c90d229c9a052",
+  "count": 57,
+  "records": [
+    {
+      "bytes": 219,
+      "path": "controls/stieger_reverse_status.json",
+      "sha256": "b110b6ca146ef171623c34b4055fa64474483f36ffa33c0a84b71877c6e1e5d2"
+    },
+    {
+      "bytes": 427,
+      "path": "decisions/final_validation.json",
+      "sha256": "b03c58bfff8e361a28cebcbe32b7fd022cccdf4e65f0079823d525cacda54398"
+    },
+    {
+      "bytes": 3528,
+      "path": "decisions/openbmi_chronological_observed.json",
+      "sha256": "013294ed665437f76fb1c3977548b1762d90da73e07a45da02ce0401fe790fee"
+    },
+    {
+      "bytes": 3459,
+      "path": "decisions/openbmi_reverse_observed.json",
+      "sha256": "a356d034b33db13a2648a7f01ffd912ec47ee4f1a05a94ccec788fb9756505e6"
+    },
+    {
+      "bytes": 2547,
+      "path": "decisions/oracle_ceiling.json",
+      "sha256": "920b27060bd415eb9b3c0f90b091ac5c4266db773b6724b6af2a2d634892d0c3"
+    },
+    {
+      "bytes": 506,
+      "path": "decisions/protocol_freeze_status.json",
+      "sha256": "f4b01502272a757540552fe49b4129306c4a3de81e097ae427b67621310ed088"
+    },
+    {
+      "bytes": 3521,
+      "path": "decisions/stieger_chronological_observed.json",
+      "sha256": "1b2892f28f3d1177286b3f76b14e2876f3502b28812f2701227e29cebc33816b"
+    },
+    {
+      "bytes": 1584,
+      "path": "decisions/stieger_selective_memory_nulls.json",
+      "sha256": "3d197a1bc633619821a322960c3de9c93a24908311a71075033f81c3b5906658"
+    },
+    {
+      "bytes": 7725,
+      "path": "decisions/terminal_decision.json",
+      "sha256": "87d78309e7afdbe895f53f25712f1ccd6659f89d7db4b98a89f636ba13c3436c"
+    },
+    {
+      "bytes": 198,
+      "path": "environment.json",
+      "sha256": "dfd75472bb1d8050c63ded0a72c5b30d2d5c0204923ffd932da259d37e7b459d"
+    },
+    {
+      "bytes": 15069,
+      "path": "figures/figure_01_stieger_methods.pdf",
+      "sha256": "027142bcd5982beb5005aaaf646eaad1ac3e6f4c5344bcd6102df3bbeffff59b"
+    },
+    {
+      "bytes": 46709,
+      "path": "figures/figure_01_stieger_methods.png",
+      "sha256": "eed0042168cbafed303fe0e95bb3274b5bb74a5a3089981f90d15b096adf260a"
+    },
+    {
+      "bytes": 15364,
+      "path": "figures/figure_02_subject_gains.pdf",
+      "sha256": "5c1bdbffd9b05105002b05e3839178622aef726cb7476fc533d9f61ba9321535"
+    },
+    {
+      "bytes": 31084,
+      "path": "figures/figure_02_subject_gains.png",
+      "sha256": "9b09c1821d9e891dc159c02b7e1e82e5104e262da5e1c0321f367bcb0d28bad9"
+    },
+    {
+      "bytes": 16184,
+      "path": "figures/figure_03_kappa_gain.pdf",
+      "sha256": "0c2199fa31b36451ed7544b59de8dbaa0ad748cfd56d5b5bce51b1d4ef439752"
+    },
+    {
+      "bytes": 54778,
+      "path": "figures/figure_03_kappa_gain.png",
+      "sha256": "aa988aa6a156cd8427b818f08a5bba8a9f5c785442f969fd1a52be5bceafe60b"
+    },
+    {
+      "bytes": 13319,
+      "path": "figures/figure_04_nulls.pdf",
+      "sha256": "7ebd394b1031c2473f092f70dc2489596d3a546a59e95cb569b3bc5316905c1a"
+    },
+    {
+      "bytes": 30389,
+      "path": "figures/figure_04_nulls.png",
+      "sha256": "b2b31209a5c98dffe17a14c92e5219e705ade535978b03f4bd646a271e656d39"
+    },
+    {
+      "bytes": 11860,
+      "path": "figures/figure_05_external_replication.pdf",
+      "sha256": "a1bdd003f9170346dcb0e511c8547b1ae8a5529ea10ad752b3a7b1ffea0d7d40"
+    },
+    {
+      "bytes": 24433,
+      "path": "figures/figure_05_external_replication.png",
+      "sha256": "f1c13cdd1e32ca4ef62262e28d37eda3e3e0cf73fc39307b5b5be8744789a9a8"
+    },
+    {
+      "bytes": 204,
+      "path": "git_provenance.json",
+      "sha256": "78858fe8bcc057efdb5bc02a9b5e867e589eba2b2d9db2d652518c8a6ebac498"
+    },
+    {
+      "bytes": 60912,
+      "path": "nulls/stieger_selective_memory_nulls.npz",
+      "sha256": "a71489474e42ac46ec5243200384a7b12f7e2afc46b0f3e457edafac5833824f"
+    },
+    {
+      "bytes": 172369,
+      "path": "objects/openbmi_chronological_gate_objects.npz",
+      "sha256": "893141911cbc02cd95085f1a0f60f87339973140821c896c9da0aebfbf8cbdb1"
+    },
+    {
+      "bytes": 5858,
+      "path": "objects/openbmi_chronological_selections.json",
+      "sha256": "c4daf285a473df3fe14b2b8d58d4206a0d7e8e3d24a87a9ae74678a608fed1e3"
+    },
+    {
+      "bytes": 172201,
+      "path": "objects/openbmi_reverse_gate_objects.npz",
+      "sha256": "d5449b842ed318861bd75f0f4516b69ce8ec486b440f38eeab1d5b2017f1f721"
+    },
+    {
+      "bytes": 5859,
+      "path": "objects/openbmi_reverse_selections.json",
+      "sha256": "df911dac5c0384725d647c824dbee361ef1582b91fb26e73225e98e35af7c50c"
+    },
+    {
+      "bytes": 512800,
+      "path": "objects/stieger_chronological_gate_objects.npz",
+      "sha256": "0e789cbc55d65664d93fe1916c992dcf5268f12abd3b7f818998ddcd7e2d07ad"
+    },
+    {
+      "bytes": 6442,
+      "path": "objects/stieger_chronological_selections.json",
+      "sha256": "5f0a0d4f78a715ff88c9544353246c0313c1d94469f95d20d5b79d6450cb9c17"
+    },
+    {
+      "bytes": 8351,
+      "path": "protocol/PROTOCOL_SELECTIVE_CONDITIONAL_MEMORY_FEASIBILITY_V0.md",
+      "sha256": "696d499e5fd2368fd030db8b6e54a84685692f7c612cbe7587779723523b8325"
+    },
+    {
+      "bytes": 1491,
+      "path": "protocol/cache_audit.json",
+      "sha256": "06774cac818db57b6e3160d29bf3394881c9857a6412f23c436036d55f3fa8ab"
+    },
+    {
+      "bytes": 9915,
+      "path": "protocol/exact_openbmi_folds.csv",
+      "sha256": "e3d102a5c9d1b0e26dbe906d17722a9fff8067ee17181520eb5ddb297ff0931a"
+    },
+    {
+      "bytes": 6156,
+      "path": "protocol/exact_stieger_folds.json",
+      "sha256": "f5df81c88f64dd4125db98edae6f60437a450a3ec5cd2b2c5a0e137d8ab41c34"
+    },
+    {
+      "bytes": 75687,
+      "path": "protocol/parent_artifact_hashes.json",
+      "sha256": "fa8570c084a8e35cf191fd9076ccaf5f5a3af08a1eb5d0a86ea39f437ddc30f3"
+    },
+    {
+      "bytes": 6385,
+      "path": "protocol/selective_conditional_memory_feasibility_v0.yaml",
+      "sha256": "e2b80ed16b6780ac72336fb6b4f3930aa2e878d6cc8d0d7a2ee855ef893f0a51"
+    },
+    {
+      "bytes": 1248,
+      "path": "protocol/synthetic_gates.csv",
+      "sha256": "c2a37880bbc81fbeb464f5fc51ce3c6d6f405c85deed416ea1ef185a71a8ee98"
+    },
+    {
+      "bytes": 2647,
+      "path": "protocol/synthetic_gates.json",
+      "sha256": "7ec3a84349dc5a9abec143d765bd86bde9d6196f467b4ea4d6f3e24e3e5612a5"
+    },
+    {
+      "bytes": 1732,
+      "path": "report/selective_conditional_memory_feasibility_v0.md",
+      "sha256": "c68be2b3ecbbebe9eb49aade707a45b138c8b20270b73a1cb69ebc2ce34cebd2"
+    },
+    {
+      "bytes": 1374,
+      "path": "tables/openbmi_chronological_aggregate_metrics.csv",
+      "sha256": "64232dd67c470fc392050f53949e7ace83c1cb8f71a595fc4c5cfe5013856688"
+    },
+    {
+      "bytes": 652,
+      "path": "tables/openbmi_chronological_gate_models.csv",
+      "sha256": "4983d1d6f7457947a2676e3a0555f6fea04f2085259a0c22bc9ee7c5faa02866"
+    },
+    {
+      "bytes": 26041,
+      "path": "tables/openbmi_chronological_inner_selection.csv",
+      "sha256": "9ba0a1de7aa19ccce15ae8b69f92e644f0f4b8faa07190d1629f86de1a6c7e58"
+    },
+    {
+      "bytes": 101734,
+      "path": "tables/openbmi_chronological_per_subject_metrics.csv",
+      "sha256": "0c46aab6cf2fa1b1eb9e6aad1c7328bc8012a23d513ad3f0786b8357fa2503f8"
+    },
+    {
+      "bytes": 27533,
+      "path": "tables/openbmi_chronological_reliability_features.csv",
+      "sha256": "0326a0c62beb73187aa16ae8aa65a2ab5f15f866fe74bb7df5f03a7cc00b4cd8"
+    },
+    {
+      "bytes": 1322,
+      "path": "tables/openbmi_reverse_aggregate_metrics.csv",
+      "sha256": "ce0dcf078bb8685309427c7bf17984c351daa6766eb4d777f7c530fb9612d429"
+    },
+    {
+      "bytes": 636,
+      "path": "tables/openbmi_reverse_gate_models.csv",
+      "sha256": "5c7f2956cfccf331681370bea9a800e1af6fa9fb30d290ff743430c9780708ab"
+    },
+    {
+      "bytes": 25976,
+      "path": "tables/openbmi_reverse_inner_selection.csv",
+      "sha256": "915452706a020c256062fdae7038cefa8faf09b6150c1052f1a63eb89a8f2043"
+    },
+    {
+      "bytes": 98072,
+      "path": "tables/openbmi_reverse_per_subject_metrics.csv",
+      "sha256": "7748222c11d9560b54aad55c4f756123b54b21e52a696e85f420619c92518e05"
+    },
+    {
+      "bytes": 27413,
+      "path": "tables/openbmi_reverse_reliability_features.csv",
+      "sha256": "407b81662dff1ccdd4662af7d55269cc567ac49987bc92b54ef04ae2a181f21d"
+    },
+    {
+      "bytes": 53071,
+      "path": "tables/oracle_identity_or_population_subjects.csv",
+      "sha256": "7a8e18cdd932d24d5a75c99698325fbec6c563d01bf82bb6b8a4539f9f4f80a1"
+    },
+    {
+      "bytes": 231,
+      "path": "tables/parent_cache_contract.csv",
+      "sha256": "8ab75594c6b88d74af01100521ec4c74a48e5df77d1e55162ba0a91fb9c0e5ba"
+    },
+    {
+      "bytes": 1478,
+      "path": "tables/primary_comparisons.csv",
+      "sha256": "0cc04ee1c595693810a3d03612987f019d895c6876bfccaa0c278dac9d04ae6d"
+    },
+    {
+      "bytes": 1360,
+      "path": "tables/stieger_chronological_aggregate_metrics.csv",
+      "sha256": "7a80d0d32914d861032ad8a815cdf1dd6a8d9e753886c7288012ab7eec3c743e"
+    },
+    {
+      "bytes": 657,
+      "path": "tables/stieger_chronological_gate_models.csv",
+      "sha256": "0f11c2c744725713896bfc53e6dcafad2d753e95ba1858abdd498a38e85182d7"
+    },
+    {
+      "bytes": 26057,
+      "path": "tables/stieger_chronological_inner_selection.csv",
+      "sha256": "621f2cedac9348a19b4197eed64ec8f9c3157b7dce7168f2bb2ba335eedbcaa4"
+    },
+    {
+      "bytes": 141747,
+      "path": "tables/stieger_chronological_per_subject_metrics.csv",
+      "sha256": "5a6facf0903019f774deaaec42011d2f56d8930380a7e66b94c9691e95a6e650"
+    },
+    {
+      "bytes": 31833,
+      "path": "tables/stieger_chronological_reliability_features.csv",
+      "sha256": "9a938ecf8bf294c0903484cf45d2e020de7e222123569aaae55ac43c81e0a991"
+    },
+    {
+      "bytes": 794,
+      "path": "tables/stieger_selective_memory_nulls.csv",
+      "sha256": "44d0fb0f0ab9226fc6fd36581f10a812b81ab7b340fae264870d44f27cca3e3b"
+    },
+    {
+      "bytes": 312,
+      "path": "tables/terminal_gates.csv",
+      "sha256": "0c1370966ef55ddad8842ecbf16aa76719824a3ee4c0ab67ea386409c1f62e83"
+    }
+  ],
+  "schema_version": "selective-conditional-memory-feasibility-v0-results"
+}

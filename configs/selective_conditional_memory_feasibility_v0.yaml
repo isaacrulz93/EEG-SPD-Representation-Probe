@@ -1,0 +1,135 @@
+protocol:
+  name: Selective Conditional Memory Feasibility Audit V0
+  version: "0.1.0"
+  freeze_date: "2026-08-20"
+  timezone: Asia/Seoul
+  master_seed: 20260820
+  branch: pilot/selective-conditional-memory-feasibility-v0
+  parent_branch: pilot/returning-user-conditional-memory-v0
+  parent_head: 9c95e5b19eb4c44acc411c1e0d72a5cdd4d9ef63
+  parent_pr: 20
+  parent_terminal: STOP_NO_CROSS_SESSION_DOWNSTREAM_UTILITY
+  protocol_path: docs/PROTOCOL_SELECTIVE_CONDITIONAL_MEMORY_FEASIBILITY_V0.md
+  protocol_sha256: 696d499e5fd2368fd030db8b6e54a84685692f7c612cbe7587779723523b8325
+  required_freeze_commit_subject: freeze selective conditional memory feasibility v0
+
+project:
+  output_dir: outputs/selective_conditional_memory_feasibility_v0
+  parent_output_dir: outputs/returning_user_conditional_memory_v0
+  stieger_cache_dir: cache/stieger2021_multiclass_confirmation_v0
+  openbmi_cache_dir: cache/unlabeled_conditional_mode_identifiability_v0
+
+parent_contract:
+  immutable_output_dirs:
+    - outputs/subject_class_population_structure_v1
+    - outputs/subject_class_population_structure_v1_1
+    - outputs/unlabeled_conditional_mode_identifiability_v0
+    - outputs/source_referenced_conditional_residual_v1
+    - outputs/stieger2021_multiclass_confirmation_v0
+    - outputs/returning_user_conditional_memory_v0
+  manifests:
+    pr16: {path: outputs/subject_class_population_structure_v1_1/manifest.json, sha256: a92c9fdd36ad70a7d3dda6d710b49da7287482e103260da1a3558a1b684d2d6e}
+    pr17: {path: outputs/unlabeled_conditional_mode_identifiability_v0/manifest.json, sha256: 661658b10594d747a0de5c5878549c7ee846111fb6214c7169da5ec159257b23}
+    pr18: {path: outputs/source_referenced_conditional_residual_v1/manifest.json, sha256: 76370c6d9114f33b42c1f46d96ea46e4f2628892e3b4d5ab8cfef409c13cb4f1}
+    pr19: {path: outputs/stieger2021_multiclass_confirmation_v0/manifest.json, sha256: 8a404388512a65121d0945424d1cbec2f3e1529fc3f24c558321117086474e46}
+    pr20: {path: outputs/returning_user_conditional_memory_v0/manifest.json, sha256: b544d853192492e1d4250cf30aba1b20149084323ae33063b6eb1820c06ed9db}
+  pr20_manifest_canonical_sha256: cc8d6484dfc1cf355455a9e38a00b09319583299dd4b616717ee51b311d7d68f
+  pr20_predictions:
+    stieger_chronological: {path: outputs/returning_user_conditional_memory_v0/objects/stieger_chronological_predictions.npz, sha256: 88fa4dc453bd02fe4a6c3ada30144af02eee9e5ebc857bd8c041904d4e469eb0}
+    stieger_reverse: {path: outputs/returning_user_conditional_memory_v0/objects/stieger_reverse_predictions.npz, sha256: 86480cd8a1cfdebe45b72618f09b9a56ff3324c41002d62f2a9fd713122fbad1}
+    openbmi_chronological: {path: outputs/returning_user_conditional_memory_v0/objects/openbmi_chronological_predictions.npz, sha256: e4dc1ab53ee9023dc0ec120866fbc8bb9b627979eedb4ac171013032a2a72139}
+    openbmi_reverse: {path: outputs/returning_user_conditional_memory_v0/objects/openbmi_reverse_predictions.npz, sha256: 6a75c6ba7230978c904d3f8e63979e592de2b3527722dd44081f7f03955934b7}
+
+stieger:
+  role: PRIMARY
+  subjects: 62
+  enrollment_session: 2
+  deployment_session: 3
+  tasknumber: 3
+  class_order: [right_hand, left_hand, both_hand, rest]
+  feature_dimension: 210
+
+openbmi:
+  role: EXTERNAL_REPLICATION
+  subjects: 54
+  enrollment_source_session: 1
+  deployment_source_session: 2
+  enrollment_array_index: 0
+  deployment_array_index: 1
+  class_order: [left_hand, right_hand]
+  feature_dimension: 210
+
+features:
+  split_rule: acquisition_order_alternating_within_class
+  split_assignment: [A_even_rank, B_odd_rank]
+  residual_reference: outer_training_population_enrollment_template
+  reliability_epsilon: 1.0e-12
+  class_features:
+    - split_half_cosine
+    - split_half_difference_energy
+    - split_half_mean_energy
+    - reliability_ratio
+    - within_class_tangent_variance_trace
+    - trial_count
+    - enrollment_population_prototype_distance
+    - nearest_other_enrollment_class_prototype_distance
+  subject_aggregations: [mean, minimum, maximum]
+  subject_feature_dimension: 24
+  scaling: outer_source_mean_and_population_std
+  zero_scale_rule: scale_one
+  deployment_input_to_gate: forbidden
+
+model:
+  name: SELECTIVE_GATE
+  kappa: sigmoid_linear_subject_global
+  l2_grid: [1.0e-4, 1.0e-3, 1.0e-2, 1.0e-1, 1.0, 10.0]
+  inner_folds: 5
+  objective: mean_source_subject_deployment_cross_entropy
+  optimizer: scipy_L-BFGS-B
+  optimizer_initialization: all_zero
+  optimizer_maxiter: 500
+  optimizer_ftol: 1.0e-12
+  optimizer_gtol: 1.0e-8
+  tie_break: largest_l2
+  temperature: 1.0
+  global_kappa_grid: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+  oracle_kappa_grid_points: 101
+
+baselines:
+  frozen: [POPULATION_ONLY, IDENTITY_RESIDUAL_CARRY, PAST_PROTOTYPE_DIRECT, LRCM_HISTORICAL_CONTROL]
+  primary: [SELECTIVE_GATE, GLOBAL_KAPPA]
+  secondary: [FIXED_RELIABILITY_KAPPA, CLASSWISE_SELECTIVE_GATE, ORACLE_CONTINUOUS_KAPPA]
+
+inference:
+  bootstrap_replicates: 10000
+  permutation_replicates: 1999
+  null_replicates: 1999
+  alpha: 0.05
+  ece_bins: 10
+  primary_comparisons: [IDENTITY_RESIDUAL_CARRY, POPULATION_ONLY, GLOBAL_KAPPA]
+  nulls:
+    - ENROLLMENT_SUBJECT_MEMORY_PERMUTATION
+    - RELIABILITY_FEATURE_PERMUTATION
+    - ENROLLMENT_CLASS_SEMANTICS_PERMUTATION
+    - UNPAIRED_SOURCE_SESSION_GATE_TRAINING
+  unpaired_null_selection: observed_outer_source_l2_fixed
+  unpaired_null_note: conditional randomization of source longitudinal pairing; no target outcome tuning
+
+decisions:
+  go: GO_SELECTIVE_MEMORY_FOR_SPDNET
+  stieger_only: GO_STIEGER_SELECTIVE_MEMORY_NEEDS_REPLICATION
+  gate_stop: STOP_RELIABILITY_GATE_CANNOT_SELECT_MEMORY
+  oracle_stop: STOP_NO_SELECTIVE_MEMORY_ORACLE_HEADROOM
+  cache_failure: UNASSESSED_REQUIRED_TRIAL_CACHE_MISSING_OR_INVALID
+  leakage_failure: UNASSESSED_TARGET_LABEL_LEAKAGE_OR_SPLIT_FAILURE
+  numerical_failure: UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE
+  next_if_go: Implement SelectiveMemSPDNet with a shared SPD backbone, current-session marginal normalization, persistent enrollment residual memory, and the validated reliability gate; low-rank correction remains optional and requires separate validation.
+  next_if_stop: Persistent conditional-memory SPDNet development terminates under this lineage; no low-rank-map rescue is authorized.
+
+resources:
+  workers: 1
+  blas_threads: 1
+  raw_download_forbidden: true
+  raw_rebuild_forbidden: true
+  parent_write_forbidden: true
+  compact_outputs_only: true

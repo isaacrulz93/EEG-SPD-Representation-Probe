@@ -1,0 +1,13 @@
+gate,passed
+oracle_ci_positive,True
+identity_gain_ci_holm,False
+population_gain_ci_holm,True
+global_gain_ci_holm,False
+macro_f1_gain_positive,False
+nll_population_noninferior,True
+memory_null,True
+reliability_null,False
+semantics_null,True
+unpaired_null,True
+loo_identity_positive,False
+openbmi_replication,True

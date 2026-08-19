@@ -1,0 +1,48 @@
+{
+  "dataset": "stieger",
+  "direction": "chronological",
+  "nulls": [
+    {
+      "null": "ENROLLMENT_SUBJECT_MEMORY_PERMUTATION",
+      "null_95_high": -0.009327733669792082,
+      "null_95_low": -0.021567953516123978,
+      "null_mean": -0.015268072111321954,
+      "null_median": -0.015159809454647991,
+      "observed_selective_minus_identity": -0.004996605382275891,
+      "p_value": 0.0005,
+      "replicates": 1999
+    },
+    {
+      "null": "RELIABILITY_FEATURE_PERMUTATION",
+      "null_95_high": 0.000241442673484192,
+      "null_95_low": -0.008337591733224242,
+      "null_mean": -0.003947182931319728,
+      "null_median": -0.003910948418011062,
+      "observed_selective_minus_identity": -0.004996605382275891,
+      "p_value": 0.6875,
+      "replicates": 1999
+    },
+    {
+      "null": "ENROLLMENT_CLASS_SEMANTICS_PERMUTATION",
+      "null_95_high": -0.012180696458557077,
+      "null_95_low": -0.025397167689671762,
+      "null_mean": -0.018939301786725198,
+      "null_median": -0.019017740572765868,
+      "observed_selective_minus_identity": -0.004996605382275891,
+      "p_value": 0.0005,
+      "replicates": 1999
+    },
+    {
+      "null": "UNPAIRED_SOURCE_SESSION_GATE_TRAINING",
+      "null_95_high": -0.005437060313923474,
+      "null_95_low": -0.01071905503299374,
+      "null_mean": -0.008202686100152505,
+      "null_median": -0.008223595408926311,
+      "observed_selective_minus_identity": -0.004996605382275891,
+      "p_value": 0.015,
+      "replicates": 1999
+    }
+  ],
+  "observed_gain": -0.004996605382275891,
+  "total_seconds": 922.7064055000083
+}

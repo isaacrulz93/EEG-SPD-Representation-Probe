@@ -1,0 +1,122 @@
+{
+  "aggregate_metrics": [
+    {
+      "dataset": "stieger",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.3463520798458036,
+      "mean_brier": 0.7729896853245563,
+      "mean_ece10": 0.15223630582882436,
+      "mean_macro_f1": 0.3236805549013331,
+      "mean_nll": 1.4995882750118004,
+      "method": "SELECTIVE_GATE"
+    },
+    {
+      "dataset": "stieger",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.35614686914224075,
+      "mean_brier": 0.7840886190852479,
+      "mean_ece10": 0.1717410316102698,
+      "mean_macro_f1": 0.3351052308028866,
+      "mean_nll": 1.6013418783759548,
+      "method": "GLOBAL_KAPPA"
+    },
+    {
+      "dataset": "stieger",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.35445828084499376,
+      "mean_brier": 0.7796752827479729,
+      "mean_ece10": 0.16971523549876666,
+      "mean_macro_f1": 0.331945072333318,
+      "mean_nll": 1.5876488089403502,
+      "method": "FIXED_RELIABILITY_KAPPA"
+    },
+    {
+      "dataset": "stieger",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.34877245143438157,
+      "mean_brier": 0.79334550775596,
+      "mean_ece10": 0.1772309999566507,
+      "mean_macro_f1": 0.3276583649498942,
+      "mean_nll": 1.6723027605713907,
+      "method": "CLASSWISE_SELECTIVE_GATE"
+    },
+    {
+      "dataset": "stieger",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.39029118380687894,
+      "mean_brier": 0.7788245272071328,
+      "mean_ece10": 0.16544195748281673,
+      "mean_macro_f1": 0.3744167245380739,
+      "mean_nll": 1.594566651879308,
+      "method": "ORACLE_CONTINUOUS_KAPPA"
+    },
+    {
+      "dataset": "stieger",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.3370236466952143,
+      "mean_brier": 0.7802225977105469,
+      "mean_ece10": 0.1574285296074466,
+      "mean_macro_f1": 0.31068801593761913,
+      "mean_nll": 1.5058040922187452,
+      "method": "POPULATION_ONLY"
+    },
+    {
+      "dataset": "stieger",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.35134868522807955,
+      "mean_brier": 0.8241918842573442,
+      "mean_ece10": 0.21148459762120606,
+      "mean_macro_f1": 0.33626970176676696,
+      "mean_nll": 1.885534074924504,
+      "method": "IDENTITY_RESIDUAL_CARRY"
+    },
+    {
+      "dataset": "stieger",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.3463366257231108,
+      "mean_brier": 0.8203682953495439,
+      "mean_ece10": 0.20591296390349972,
+      "mean_macro_f1": 0.33027891990618713,
+      "mean_nll": 1.8492337937827381,
+      "method": "PAST_PROTOTYPE_DIRECT"
+    },
+    {
+      "dataset": "stieger",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.3315558928597135,
+      "mean_brier": 0.793507266655939,
+      "mean_ece10": 0.16407827939778677,
+      "mean_macro_f1": 0.3092326871613096,
+      "mean_nll": 1.6304028588896449,
+      "method": "LRCM_HISTORICAL_CONTROL"
+    }
+  ],
+  "dataset": "stieger",
+  "direction": "chronological",
+  "kappa_summary": {
+    "maximum": 0.979847335978485,
+    "mean": 0.18829962207888157,
+    "median": 0.15554170819804827,
+    "minimum": 5.991059173085188e-06
+  },
+  "outer_target_deployment_labels_used_for_gate": false,
+  "selected_global_kappa": [
+    0.6,
+    0.6,
+    0.5,
+    0.5,
+    0.4,
+    0.6
+  ],
+  "selected_l2": [
+    0.01,
+    10.0,
+    0.01,
+    0.1,
+    0.001,
+    0.01
+  ],
+  "subjects": 62,
+  "total_seconds": 66.23053437497583,
+  "voting": true
+}
