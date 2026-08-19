@@ -199,3 +199,10 @@ def test_decision_literals_and_no_classifier_boundary() -> None:
     assert config["decisions"]["structure_low_rank"] == "STIEGER_MULTICLASS_STRUCTURE_CONFIRMED_LOW_RANK"
     assert config["decisions"]["permutation_pass"] == "SOURCE_CLASS_PERMUTATION_PRESERVATION_SUPPORTED_PROSPECTIVELY"
     assert "classifier" in config["forbidden_methods"]
+
+
+def test_final_report_marks_real_eeg_access_and_terminal_provenance() -> None:
+    source = inspect.getsource(module.generate_report)
+    assert '"real_eeg_accessed": True' in source
+    assert '"head_at_result_generation"' in source
+    assert '"population_terminal"' in source

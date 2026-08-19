@@ -1,0 +1,11 @@
+{
+  "class_semantics_p": 0.0005,
+  "observed": 0.32284642779110173,
+  "pairing_p": 0.0035,
+  "pretarget_class_semantics_p": 0.2085,
+  "pretarget_forward_median": 0.011624235185265806,
+  "pretarget_observed": 0.020325818562722076,
+  "pretarget_reverse_median": 0.009285129457099094,
+  "random_subspace_p": 0.0005,
+  "replicates": 1999
+}

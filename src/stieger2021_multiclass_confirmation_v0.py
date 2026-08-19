@@ -1965,6 +1965,20 @@ def generate_report(repo_root: str | Path) -> dict[str, Any]:
         "next_scientific_question": "Does the frozen multiclass source-reference structure reproduce in a second prospectively locked repeated-session cohort, and can its semantic-template assumption be externally calibrated without target outcome information?",
     }
     atomic_write_json(output / "decisions" / "terminal_decisions.json", final)
+    provenance_path = output / "git_provenance.json"
+    provenance = json.loads(provenance_path.read_text())
+    provenance.update(
+        {
+            "real_eeg_accessed": True,
+            "head_at_result_generation": subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], cwd=root, text=True
+            ).strip(),
+            "result_generated_at_unix": time.time(),
+            "cohort_lock_status": cohort.get("status", "NOT_LOCKED"),
+            "population_terminal": population.get("terminal", "NOT_RUN"),
+        }
+    )
+    atomic_write_json(provenance_path, provenance)
     lines = [
         "# Stieger2021 Multiclass Confirmation V0 — Final Report",
         "",

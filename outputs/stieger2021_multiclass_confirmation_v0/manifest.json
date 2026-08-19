@@ -1,85 +1,207 @@
 {
-  "config_sha256": "fcbe2eaa1cc940ffed780b5bcf856467fd9f858e5ec0f9a5dafc2de29fb394e8",
-  "eligible_subject_count": 62,
-  "eligible_subjects": [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    31,
-    32,
-    33,
-    34,
-    35,
-    36,
-    37,
-    38,
-    39,
-    40,
-    41,
-    42,
-    43,
-    44,
-    45,
-    46,
-    47,
-    48,
-    49,
-    50,
-    51,
-    52,
-    53,
-    54,
-    55,
-    56,
-    57,
-    58,
-    59,
-    60,
-    61,
-    62
+  "artifact_count": 39,
+  "artifacts": [
+    {
+      "bytes": 1456,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/cohort/cohort_object_manifest.json",
+      "sha256": "9662b84c772b5f74766fc942325eeab82732715f13da833bb579e14870f1b343"
+    },
+    {
+      "bytes": 2029,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/cohort/eligibility.csv",
+      "sha256": "b634fc1a67846715187fb9eaef6141f833fb4d1c9b9dfb84b1e370090e213cfa"
+    },
+    {
+      "bytes": 6156,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/cohort/exact_folds.json",
+      "sha256": "f5df81c88f64dd4125db98edae6f60437a450a3ec5cd2b2c5a0e137d8ab41c34"
+    },
+    {
+      "bytes": 210,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/decisions/component_assignment_decision.json",
+      "sha256": "8fe7512b95b591ca737a16499835d380f384ae553998be9da4c7985a439934b6"
+    },
+    {
+      "bytes": 111,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/decisions/minimal_anchor_decision.json",
+      "sha256": "0a19e33573ffb6c68910f9fe7c08d9819d4dbb5cd28d9b3017e850ebe33e81a6"
+    },
+    {
+      "bytes": 11234,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/decisions/population_structure_decision.json",
+      "sha256": "90ecda008ea631818ea164e2d6a49824db55e47f5f49043f026790b80772a9be"
+    },
+    {
+      "bytes": 603,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/decisions/reliability_decision.json",
+      "sha256": "19a57cd04db23d7d31cb88eaa70d8ccc2c88d415499f9c7d7949e1d6c0b95281"
+    },
+    {
+      "bytes": 1910,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/decisions/semantic_permutation_decision.json",
+      "sha256": "60761b1bc1c9e44b51d1ebcea610dcd4a2dd6053e059666ba19dd5a4064b3225"
+    },
+    {
+      "bytes": 4978,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/decisions/source_reference_decision.json",
+      "sha256": "57f5bed7a8b098d5808e9d28e6c327836c92cdaba7cfca93296178a17a2bfa3a"
+    },
+    {
+      "bytes": 24575,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/decisions/terminal_decisions.json",
+      "sha256": "1fa09f5481fc3e5528b9df14e1c44f96754eea3020c210842d6f57f264199d4e"
+    },
+    {
+      "bytes": 796,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/decisions/unlabeled_scatter_decision.json",
+      "sha256": "89fa9af40b59d841d9644d13c52cad7541d7e522b7a948f458cf4b485fa9bfc4"
+    },
+    {
+      "bytes": 207,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/environment.json",
+      "sha256": "d68a2c9e23b6be2a272d675ba89b4143e615b30a1de4354ebafc88aed3587973"
+    },
+    {
+      "bytes": 904,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/git_provenance.json",
+      "sha256": "99012ceffb75eb741c4a645e4799f0220b320c1dc9dd719942c91ae653ad4d5e"
+    },
+    {
+      "bytes": 247891,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/nulls/primary_nulls.npz",
+      "sha256": "3fcef2da14f2959c3d8d55fa7e12f34462f0445de539fed3a172bdaf3e4c23c7"
+    },
+    {
+      "bytes": 6939,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/nulls/unlabeled_scatter_nulls.npz",
+      "sha256": "27520526f567ac9a77292598e55887a7cf24595119f99f9234346cf2a51d3b6b"
+    },
+    {
+      "bytes": 13352767,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/objects/locked_geometry_objects.npz",
+      "sha256": "bce785c13d3e851fb73e5554a5efc990592e832946b53b64fcdc08a708c83515"
+    },
+    {
+      "bytes": 189632,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/objects/pretarget_population_observed_core.npz",
+      "sha256": "a5ef3b30ef6ec09f265136a9df1c431a2b3818ea19469d5cb4ab5dc6def8efc7"
+    },
+    {
+      "bytes": 83412,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/objects/primary_population_observed_core.npz",
+      "sha256": "b02bf4d9d30d8b1389d99292c97472088374f53974ec3a0c8c449160e5b45a76"
+    },
+    {
+      "bytes": 31949,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/objects/reliability_core.npz",
+      "sha256": "8451f2bb40cba110b1b94382b94a1de04ed743255e5fbd9ea28dab326cd7f658"
+    },
+    {
+      "bytes": 25590,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/objects/semantic_permutation_core.npz",
+      "sha256": "3c62fde34013f808e920a91837c3cfe22be3366378637aa8b4cb7c72d66c9ca5"
+    },
+    {
+      "bytes": 97737,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/objects/source_reference_core.npz",
+      "sha256": "a0c9c13c6413c991f39a3eb7a6e03d0bf14717711eaf9bca3823f35b1c0b153a"
+    },
+    {
+      "bytes": 30614,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/objects/trial_tangent_cache_manifest.json",
+      "sha256": "c3951e33ff8d83e2a25cc7a8d33ed0eaac528ab5f724b5014019b1bd2ce45463"
+    },
+    {
+      "bytes": 4545,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/objects/unlabeled_scatter_estimates.npz",
+      "sha256": "b9e5d6be5b198829c53ae9a607931c0ce847c633ed7a2ffddfe74c45d173a66c"
+    },
+    {
+      "bytes": 5202,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/objects/unlabeled_scatter_oracle_evaluation.npz",
+      "sha256": "179e6d53d0a098951a9b9693bc5d15f5240832e9df2de57b6d0bead7a9f2f036"
+    },
+    {
+      "bytes": 13145,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/protocol/PROTOCOL_STIEGER2021_MULTICLASS_CONFIRMATION_V0.md",
+      "sha256": "8e2272a56690312eebc02a4aa881d7af1bcea811215da7dc29846b269a173896"
+    },
+    {
+      "bytes": 8191,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/protocol/stieger2021_multiclass_confirmation_v0.yaml",
+      "sha256": "fcbe2eaa1cc940ffed780b5bcf856467fd9f858e5ec0f9a5dafc2de29fb394e8"
+    },
+    {
+      "bytes": 959,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/protocol/synthetic_gates.json",
+      "sha256": "990e14f6dda39a7c31082e716db8378e4af1c7449553e0e2de29b3adafb5da84"
+    },
+    {
+      "bytes": 14687,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/report/stieger2021_multiclass_confirmation_v0.md",
+      "sha256": "918b86ef534edd70cd76239f0eadb176f6d9c41e93b9905b707133d7aab528d3"
+    },
+    {
+      "bytes": 35609,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/source_manifest/official_selected_files.json",
+      "sha256": "a7924583f55d936239f71d8036b8cd54ac9f66f6a802c825e2b34ee73a159561"
+    },
+    {
+      "bytes": 228151,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/source_manifest/streamed_source_and_compact_records.json",
+      "sha256": "e73609ec721f92a18646c14aa3f65d86b759d6091b4accbcabd1069e6e9aeaf0"
+    },
+    {
+      "bytes": 1456,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/status/cohort_lock_status.json",
+      "sha256": "9662b84c772b5f74766fc942325eeab82732715f13da833bb579e14870f1b343"
+    },
+    {
+      "bytes": 157,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/status/protocol_freeze_status.json",
+      "sha256": "9357f988dd1c9171338f3f6990eee4aea903d3ecc4acd07588ece222439e9fc8"
+    },
+    {
+      "bytes": 21485,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/tables/feedback_window_retention.csv",
+      "sha256": "7b7e25d6d42e9a1387dfef47ff7f8648a0bb7df7c0214db9994019844909dfc4"
+    },
+    {
+      "bytes": 9330,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/tables/pretarget_population_observed_summary.json",
+      "sha256": "4a35ba87d419d791f78796c45b2688342dd68ba91dc96a0b8d0eab77ba883525"
+    },
+    {
+      "bytes": 336,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/tables/primary_null_summary.json",
+      "sha256": "7ce4e7f388917b2e7d08ab0311aea02875763dc5fe93ca20be24ae865bda29cb"
+    },
+    {
+      "bytes": 9228,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/tables/primary_population_observed_summary.json",
+      "sha256": "3a77ab873256c9a9d5c4339a368a110d20912508469c8662e879a4bc8c4f6444"
+    },
+    {
+      "bytes": 275,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/tables/reliability.csv",
+      "sha256": "e83b73bb20110e9fbea409f4a05381b01b884e0212c9a2db51f2682ec857965d"
+    },
+    {
+      "bytes": 127390,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/tables/semantic_permutation_all_costs.csv",
+      "sha256": "13a167575c2bae91c1d7e793a6d790304c2940f80021b1052cd439ed750150a8"
+    },
+    {
+      "bytes": 922,
+      "path": "outputs/stieger2021_multiclass_confirmation_v0/tables/source_reference_fold_session.csv",
+      "sha256": "d86a34b6f8cfb2eb1a091327a12952c25b7a864023b8fdfe59baba2d6130851d"
+    }
   ],
-  "excluded_subject_count": 0,
-  "folds_sha256": "a3bf9afddb83ab0c0f192b7e337a44dabe24790a2bb083316aa4d18c0347610d",
-  "locked_geometry_object_sha256": "bce785c13d3e851fb73e5554a5efc990592e832946b53b64fcdc08a708c83515",
   "namespace": "stieger2021_multiclass_confirmation_v0",
   "parent_hashes": {
     "pr16_manifest": "a92c9fdd36ad70a7d3dda6d710b49da7287482e103260da1a3558a1b684d2d6e",
     "pr17_manifest": "661658b10594d747a0de5c5878549c7ee846111fb6214c7169da5ec159257b23",
     "pr18_manifest": "76370c6d9114f33b42c1f46d96ea46e4f2628892e3b4d5ab8cfef409c13cb4f1"
   },
-  "phase": "COHORT_AND_COMPACT_OBJECT_LOCK",
-  "protocol_sha256": "8e2272a56690312eebc02a4aa881d7af1bcea811215da7dc29846b269a173896",
-  "scientific_population_statistic_accessed": false,
-  "source_manifest_sha256": "a7924583f55d936239f71d8036b8cd54ac9f66f6a802c825e2b34ee73a159561",
-  "status": "DATA_LOCKED_NO_SCIENTIFIC_RESULT_YET",
-  "streamed_manifest_sha256": "60aa67ccf0eaee9ef2618e4c775eec5f8f4c60bb40d1c8eb0c3b244dbe53f465",
-  "synthetic_gates_sha256": "990e14f6dda39a7c31082e716db8378e4af1c7449553e0e2de29b3adafb5da84",
-  "trial_tangent_manifest_sha256": "9eaeda751afd6529b45a11c7e50c59d7631985f559c54eff318d0aacb2d11f06"
+  "phase": "FINAL_RESULT"
 }
