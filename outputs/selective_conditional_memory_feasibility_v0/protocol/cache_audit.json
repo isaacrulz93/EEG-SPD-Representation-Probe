@@ -1,0 +1,29 @@
+{
+  "acquisition_order_recoverable": true,
+  "config_sha256": "e2b80ed16b6780ac72336fb6b4f3930aa2e878d6cc8d0d7a2ee855ef893f0a51",
+  "openbmi_feature_shape": [
+    54,
+    2,
+    100,
+    210
+  ],
+  "parent_hashes": {
+    "pr16": "a92c9fdd36ad70a7d3dda6d710b49da7287482e103260da1a3558a1b684d2d6e",
+    "pr17": "661658b10594d747a0de5c5878549c7ee846111fb6214c7169da5ec159257b23",
+    "pr18": "76370c6d9114f33b42c1f46d96ea46e4f2628892e3b4d5ab8cfef409c13cb4f1",
+    "pr19": "8a404388512a65121d0945424d1cbec2f3e1529fc3f24c558321117086474e46",
+    "pr20": "b544d853192492e1d4250cf30aba1b20149084323ae33063b6eb1820c06ed9db",
+    "prediction_openbmi_chronological": "e4dc1ab53ee9023dc0ec120866fbc8bb9b627979eedb4ac171013032a2a72139",
+    "prediction_openbmi_reverse": "6a75c6ba7230978c904d3f8e63979e592de2b3527722dd44081f7f03955934b7",
+    "prediction_stieger_chronological": "88fa4dc453bd02fe4a6c3ada30144af02eee9e5ebc857bd8c041904d4e469eb0",
+    "prediction_stieger_reverse": "86480cd8a1cfdebe45b72618f09b9a56ff3324c41002d62f2a9fd713122fbad1"
+  },
+  "parent_head": "9c95e5b19eb4c44acc411c1e0d72a5cdd4d9ef63",
+  "parent_snapshot_canonical_sha256": "cdc2cf75a8c3902fee58aed927354098cbbe14f034c7d50a5bc106fc3533bae0",
+  "parent_snapshot_count": 374,
+  "parent_terminal_unchanged": "STOP_NO_CROSS_SESSION_DOWNSTREAM_UTILITY",
+  "raw_download_or_rebuild": false,
+  "scientific_selective_statistic_accessed": false,
+  "status": "PASS_PARENT_AND_TRIAL_CACHE_CONTRACT",
+  "stieger_subject_sessions": 124
+}

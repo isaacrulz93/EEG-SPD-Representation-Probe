@@ -1,0 +1,16 @@
+gate,passed,detail
+reliability_ratio_bounds,True,"[0.9994182310949963, 0.9993061231365569, 0.9991383667787741, 0.9997104706634539]"
+subject_feature_dimension,True,24
+kappa_zero_population_endpoint,True,2.220446049250313e-16
+kappa_one_identity_endpoint,True,4.440892098500626e-16
+convex_shrinkage_segment,True,2.220446049250313e-16
+quadratic_distance_identity,True,1.4210854715202004e-14
+known_reliability_gate_recovery,True,0.9587558602879308
+subject_memory_derangement,True,"[5, 10, 6, 4, 1, 0, 8, 11, 2, 7, 3, 9]"
+class_semantics_nonidentity,True,"[2, 0, 1, 3]"
+reliability_feature_derangement,True,"[8, 6, 7, 11, 0, 9, 3, 4, 5, 10, 2, 1]"
+oracle_selective_ceiling,True,0.09999999999999998
+outer_source_only_scaling,True,True
+target_label_and_deployment_feature_sentinel,True,"['bundle', 'proto', 'target_index', 'gamma_e', 'order', 'epsilon']"
+deterministic_seed_namespaces,True,True
+expected_terminal_labels,True,"['GO_SELECTIVE_MEMORY_FOR_SPDNET', 'GO_STIEGER_SELECTIVE_MEMORY_NEEDS_REPLICATION', 'STOP_NO_SELECTIVE_MEMORY_ORACLE_HEADROOM', 'STOP_RELIABILITY_GATE_CANNOT_SELECT_MEMORY', 'UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE', 'UNASSESSED_REQUIRED_TRIAL_CACHE_MISSING_OR_INVALID', 'UNASSESSED_TARGET_LABEL_LEAKAGE_OR_SPLIT_FAILURE']"

@@ -1,0 +1,10 @@
+{
+  "cache_gate": "PASS_PARENT_AND_TRIAL_CACHE_CONTRACT",
+  "config_sha256": "e2b80ed16b6780ac72336fb6b4f3930aa2e878d6cc8d0d7a2ee855ef893f0a51",
+  "parent_head": "9c95e5b19eb4c44acc411c1e0d72a5cdd4d9ef63",
+  "parent_terminal_unchanged": "STOP_NO_CROSS_SESSION_DOWNSTREAM_UTILITY",
+  "protocol_sha256": "696d499e5fd2368fd030db8b6e54a84685692f7c612cbe7587779723523b8325",
+  "scientific_selective_statistic_accessed": false,
+  "status": "PROTOCOL_FROZEN_NO_SELECTIVE_RESULT_YET",
+  "synthetic_gate": "PASS"
+}
