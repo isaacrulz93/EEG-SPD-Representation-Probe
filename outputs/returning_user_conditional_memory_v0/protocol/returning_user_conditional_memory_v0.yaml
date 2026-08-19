@@ -1,0 +1,159 @@
+protocol:
+  name: Returning-User Low-Rank Conditional Memory Downstream Pilot V0
+  version: "0.1.0"
+  freeze_date: "2026-08-19"
+  timezone: Asia/Seoul
+  master_seed: 20260819
+  branch: pilot/returning-user-conditional-memory-v0
+  parent_branch: pilot/stieger2021-multiclass-prospective-confirmation-v0
+  parent_head: 6abb73d82a0f616e0ca9d3eaa44e23d911a2123f
+  parent_pr: 19
+  protocol_path: docs/PROTOCOL_RETURNING_USER_CONDITIONAL_MEMORY_V0.md
+  protocol_sha256: ded3ad4c3e623908f3e7b487f73f273d2f91d98c98d907327aee0d830d322dd9
+  required_freeze_commit_subject: freeze returning user conditional memory v0
+
+project:
+  output_dir: outputs/returning_user_conditional_memory_v0
+  stieger_cache_dir: cache/stieger2021_multiclass_confirmation_v0
+  openbmi_cache_dir: cache/unlabeled_conditional_mode_identifiability_v0
+
+parent_contract:
+  immutable_output_dirs:
+    - outputs/subject_class_population_structure_v1
+    - outputs/subject_class_population_structure_v1_1
+    - outputs/unlabeled_conditional_mode_identifiability_v0
+    - outputs/source_referenced_conditional_residual_v1
+    - outputs/stieger2021_multiclass_confirmation_v0
+  pr16_manifest:
+    path: outputs/subject_class_population_structure_v1_1/manifest.json
+    sha256: a92c9fdd36ad70a7d3dda6d710b49da7287482e103260da1a3558a1b684d2d6e
+  pr17_manifest:
+    path: outputs/unlabeled_conditional_mode_identifiability_v0/manifest.json
+    sha256: 661658b10594d747a0de5c5878549c7ee846111fb6214c7169da5ec159257b23
+  pr18_manifest:
+    path: outputs/source_referenced_conditional_residual_v1/manifest.json
+    sha256: 76370c6d9114f33b42c1f46d96ea46e4f2628892e3b4d5ab8cfef409c13cb4f1
+  pr19_manifest:
+    path: outputs/stieger2021_multiclass_confirmation_v0/manifest.json
+    sha256: 8a404388512a65121d0945424d1cbec2f3e1529fc3f24c558321117086474e46
+
+stieger:
+  role: PRIMARY_MULTICLASS_RETURNING_USER_EVALUATION
+  subjects: {start: 1, stop: 62}
+  enrollment_session: 2
+  deployment_session: 3
+  reverse_is_non_voting: true
+  tasknumber: 3
+  class_order: [right_hand, left_hand, both_hand, rest]
+  class_values: [1, 2, 3, 4]
+  feature_dimension: 210
+  fold_path: outputs/stieger2021_multiclass_confirmation_v0/cohort/exact_folds.json
+  fold_file_sha256: f5df81c88f64dd4125db98edae6f60437a450a3ec5cd2b2c5a0e137d8ab41c34
+  fold_canonical_sha256: a3bf9afddb83ab0c0f192b7e337a44dabe24790a2bb083316aa4d18c0347610d
+  tangent_manifest_path: outputs/stieger2021_multiclass_confirmation_v0/objects/trial_tangent_cache_manifest.json
+  tangent_manifest_file_sha256: c3951e33ff8d83e2a25cc7a8d33ed0eaac528ab5f724b5014019b1bd2ce45463
+  tangent_manifest_canonical_sha256: 9eaeda751afd6529b45a11c7e50c59d7631985f559c54eff318d0aacb2d11f06
+  locked_geometry_path: outputs/stieger2021_multiclass_confirmation_v0/objects/locked_geometry_objects.npz
+  locked_geometry_sha256: bce785c13d3e851fb73e5554a5efc990592e832946b53b64fcdc08a708c83515
+
+openbmi:
+  role: EXTERNAL_BINARY_REPLICATION
+  subjects: {start: 1, stop: 54}
+  source_chronological_sessions: [1, 2]
+  array_sessions: ["0", "1"]
+  enrollment_array_index: 0
+  deployment_array_index: 1
+  reverse_is_non_voting: true
+  class_order: [left_hand, right_hand]
+  feature_dimension: 210
+  trials_per_subject_session: 100
+  trials_per_class: 50
+  fold_path: outputs/unlabeled_conditional_mode_identifiability_v0/protocol/exact_folds.csv
+  fold_file_sha256: e3d102a5c9d1b0e26dbe906d17722a9fff8067ee17181520eb5ddb297ff0931a
+  fold_canonical_sha256: bcbef19ed8d1b5bf385a600e967a929c185fe70582d8ee0557e30f7096afb500
+  covariance_manifest_path: outputs/unlabeled_conditional_mode_identifiability_v0/objects/trial_covariance_manifest.json
+  covariance_manifest_sha256: d1cda390e44f503eebad73b679f85da4bab0e266ee37bebaca83d342f68a384a
+  covariance_cache_file: openbmi_covariances.npz
+  covariance_cache_sha256: 8fc43ff837c9ab1651f639c30a2aa4a09e760a6a2192b4c5407848fd9da04b28
+  metadata_cache_file: openbmi_metadata.csv
+  metadata_cache_sha256: f89329519b900da5585abdd495aa601dddabc030567883137088ad674bf83ea1
+  tangent_cache_file: unlabeled_tangent_features.npz
+  tangent_cache_sha256: 36b56818cdfca24212666e5181cca120c20a0ccc553f51cde9009663fbb1be39
+  analysis_core_file: analysis_core.npz
+  analysis_core_sha256: 5714d959e6696fd99f403b6c9c425c4ef8be64e9a2b9485a3d072ead554d26e8
+  evaluation_labels_path: outputs/unlabeled_conditional_mode_identifiability_v0/objects/evaluation_labels_separate.npz
+  evaluation_labels_sha256: 7eaf5df6982c58fb45d7053c7da0e0f95e0c65515408ecfbb8cb23a59e5a6b5f
+
+features:
+  representation: frozen_session_marginal_centered_tangent_svec
+  svec: frobenius_isometric_upper_triangle_row_major
+  svec_off_diagonal_scale: 1.4142135623730951
+  coordinate_standard_scaler: forbidden
+  signature_unit_normalization: forbidden
+  deployment_label_storage: sealed_evaluation_only
+
+model:
+  name: LRCM
+  expansion: Low-Rank Conditional Memory
+  rank_grid: [1, 2, 3, 5, 8, 13]
+  ridge_lambda_grid: [1.0e-5, 1.0e-4, 1.0e-3, 1.0e-2, 1.0e-1, 1.0, 10.0, 100.0]
+  temperature_grid: [0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0]
+  inner_folds: 5
+  inner_metric: mean_subject_balanced_accuracy
+  tie_breaks: [smallest_rank, largest_ridge_lambda, temperature_closest_to_one]
+  solve: symmetric_eigendecomposition_or_solve_no_explicit_inverse
+  classifier: PREDICTED_PROTOTYPE_NCM
+  class_priors: equal
+
+baselines:
+  voting: [POPULATION_ONLY, PAST_PROTOTYPE_DIRECT, IDENTITY_RESIDUAL_CARRY]
+  low_rank_audit: [FULL_RIDGE_TRANSFER, ENROLLMENT_PCA_TRANSFER, RANDOM_RANK_MATCHED]
+  oracle: [CURRENT_SESSION_KSHOT, CURRENT_SESSION_FULL_ORACLE]
+  non_voting: [CLASS_INDEPENDENT_SUBJECT_OFFSET]
+
+inference:
+  bootstrap_replicates: 10000
+  permutation_replicates: 1999
+  null_replicates: 1999
+  alpha: 0.05
+  confidence: 0.95
+  primary_alternative: greater
+  holm_family: [IDENTITY_RESIDUAL_CARRY, PAST_PROTOTYPE_DIRECT, POPULATION_ONLY]
+  nll_noninferiority_margin: 0.01
+  full_ridge_ba_noninferiority_margin: 0.005
+  ece_bins: 10
+  kshot_budgets_per_class: [1, 2, 4, 8, 16]
+  kshot_subsamples: 200
+  nulls:
+    - ENROLLMENT_SUBJECT_MEMORY_PERMUTATION
+    - ENROLLMENT_CLASS_SEMANTICS_PERMUTATION
+    - RANDOM_RANK_MATCHED_OUTPUT_SUBSPACE
+    - UNPAIRED_SOURCE_SESSION_MAP
+  unpaired_null_hyperparameter_rule: conditional_on_observed_source_only_selection
+  unpaired_null_justification: exact conditional randomization of longitudinal pairing with all source-only nuisance selections fixed
+
+low_rank_gates:
+  maximum_median_rank: 3
+  minimum_folds_rank_at_most_3: 4
+  full_ridge_noninferiority_margin: 0.005
+  require_pca_superiority: true
+  require_random_subspace_superiority: true
+  require_source_pairing: true
+
+decisions:
+  replicated: GO_LOW_RANK_CONDITIONAL_MEMORY_REPLICATED
+  stieger_only: GO_STIEGER_ONLY_NEEDS_EXTERNAL_REPLICATION
+  map_not_low_rank: GO_CROSS_SESSION_MAP_BUT_LOW_RANK_NOT_SUPPORTED
+  stop: STOP_NO_CROSS_SESSION_DOWNSTREAM_UTILITY
+  cache_failure: UNASSESSED_REQUIRED_TRIAL_CACHE_MISSING_OR_INVALID
+  leakage_failure: UNASSESSED_TARGET_LABEL_LEAKAGE_OR_SPLIT_FAILURE
+  numerical_failure: UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE
+  next_if_go: Can the validated low-rank conditional memory be formulated as a probabilistic mixed-effects adapter with calibrated posterior uncertainty and retain its benefit against full published cross-session and continual-adaptation baselines?
+  next_if_stop: Stable low-dimensional subject×class interaction does not provide incremental cross-session decoding utility beyond direct enrollment-session residual transfer under the tested returning-user protocol.
+
+resources:
+  workers: 1
+  blas_threads: 1
+  raw_download_forbidden: true
+  raw_rebuild_forbidden: true
+  compact_outputs_only: true

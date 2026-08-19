@@ -1,0 +1,10 @@
+{
+  "cache_gate": "PASS_REQUIRED_TRIAL_CACHES_VALID",
+  "config_sha256": "073eff39aa2e5bb29603723b2000a18f3138f4c53339fc34cead76df73345bc7",
+  "parent_head": "6abb73d82a0f616e0ca9d3eaa44e23d911a2123f",
+  "phase": "PROTOCOL_FREEZE",
+  "protocol_sha256": "ded3ad4c3e623908f3e7b487f73f273d2f91d98c98d907327aee0d830d322dd9",
+  "scientific_downstream_statistic_accessed": false,
+  "status": "PROTOCOL_FROZEN_NO_DOWNSTREAM_RESULT_YET",
+  "synthetic_gate": "PASS"
+}

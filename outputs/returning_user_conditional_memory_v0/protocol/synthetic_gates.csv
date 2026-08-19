@@ -1,0 +1,28 @@
+gate,passed,detail
+frobenius_isometric_svec,True,0.0
+helmert_2_orthogonality,True,2.220446049250313e-16
+helmert_2_zero_mean_roundtrip,True,4.440892098500626e-16
+helmert_4_orthogonality,True,2.220446049250313e-16
+helmert_4_zero_mean_roundtrip,True,8.881784197001252e-16
+known_rank2_cross_session_map,True,"{'mapped': 0.09323859039267032, 'mean': 1.18794713293566}"
+dual_ridge_equals_primal,True,4.836964162535651e-13
+rank_truncation_output_and_memory,True,"{'shape': [2], 'bytes': 16}"
+unpaired_source_sessions_destroy_gain,True,"{'paired': 0.09323859039267032, 'unpaired': 1.8482164176532692}"
+identity_residual_carry,True,2.220446049250313e-16
+population_session_template_shift,True,6.780463583910048
+enrollment_subject_permutation,True,"[1, 8, 0, 7, 3, 6, 5, 9, 2, 4]"
+enrollment_class_permutation,True,"[1, 0, 2, 3]"
+random_rank_matched_orthogonality,True,0.0
+target_label_leakage_sentinel,True,"['method', 'target_index', 'proto', 'H', 'gamma_e', 'gamma_d', 'lrcm_core', 'rank', 'pca_model', 'enrollment_signature', 'output_basis']"
+kshot_support_query_disjoint,True,"[16, 64]"
+kshot_class_balance,True,"[4, 4, 4, 4]"
+deterministic_seeds,True,True
+expected_terminal_labels,True,"['Can the validated low-rank conditional memory be formulated as a probabilistic mixed-effects adapter with calibrated posterior uncertainty and retain its benefit against full published cross-session and continual-adaptation baselines?', 'GO_CROSS_SESSION_MAP_BUT_LOW_RANK_NOT_SUPPORTED', 'GO_LOW_RANK_CONDITIONAL_MEMORY_REPLICATED', 'GO_STIEGER_ONLY_NEEDS_EXTERNAL_REPLICATION', 'STOP_NO_CROSS_SESSION_DOWNSTREAM_UTILITY', 'Stable low-dimensional subject×class interaction does not provide incremental cross-session decoding utility beyond direct enrollment-session residual transfer under the tested returning-user protocol.', 'UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE', 'UNASSESSED_REQUIRED_TRIAL_CACHE_MISSING_OR_INVALID', 'UNASSESSED_TARGET_LABEL_LEAKAGE_OR_SPLIT_FAILURE']"
+stieger_pr19_fold_identity,True,"[10, 10, 10, 11, 11, 10]"
+openbmi_chronology_metadata,True,"[1, 2]"
+openbmi_fold_identity,True,"[9, 9, 9, 9, 9, 9]"
+full_rank_map_recovery,True,4.072822980035472e-09
+class_memory_permutation_destroys_gain,True,"{'correct': 1.0, 'permuted': 0.5}"
+enrollment_subject_memory_permutation_destroys_gain,True,"{'correct': 1.0, 'wrong': 0.57}"
+nested_source_only_hyperparameter_selection,True,"['smallest_rank', 'largest_ridge_lambda', 'temperature_closest_to_one']"
+subject_level_inference_unit,True,"[0.1, 0.2, -0.05, 0.15]"

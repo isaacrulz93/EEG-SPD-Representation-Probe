@@ -1,0 +1,3 @@
+dataset,subjects,sessions,records,feature_dimension,minimum_trials,maximum_trials,classes,outer_folds,inner_folds,all_finite
+stieger,62,2,124,210,117,150,4,6,5,True
+openbmi,54,2,108,210,100,100,2,6,5,True

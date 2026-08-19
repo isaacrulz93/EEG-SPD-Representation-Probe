@@ -1,0 +1,3 @@
+dataset,role,enrollment,deployment,classes,reverse_voting
+Stieger2021,PRIMARY,session 2,session 3,right_hand|left_hand|both_hand|rest,False
+OpenBMI,EXTERNAL_BINARY_REPLICATION,source session 1 / array 0,source session 2 / array 1,left_hand|right_hand,False

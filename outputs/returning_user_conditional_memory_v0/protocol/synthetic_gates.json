@@ -1,0 +1,231 @@
+{
+  "all_passed": true,
+  "count": 27,
+  "gates": [
+    {
+      "detail": 0.0,
+      "gate": "frobenius_isometric_svec",
+      "passed": true
+    },
+    {
+      "detail": 2.220446049250313e-16,
+      "gate": "helmert_2_orthogonality",
+      "passed": true
+    },
+    {
+      "detail": 4.440892098500626e-16,
+      "gate": "helmert_2_zero_mean_roundtrip",
+      "passed": true
+    },
+    {
+      "detail": 2.220446049250313e-16,
+      "gate": "helmert_4_orthogonality",
+      "passed": true
+    },
+    {
+      "detail": 8.881784197001252e-16,
+      "gate": "helmert_4_zero_mean_roundtrip",
+      "passed": true
+    },
+    {
+      "detail": {
+        "mapped": 0.09323859039267032,
+        "mean": 1.18794713293566
+      },
+      "gate": "known_rank2_cross_session_map",
+      "passed": true
+    },
+    {
+      "detail": 4.836964162535651e-13,
+      "gate": "dual_ridge_equals_primal",
+      "passed": true
+    },
+    {
+      "detail": {
+        "bytes": 16,
+        "shape": [
+          2
+        ]
+      },
+      "gate": "rank_truncation_output_and_memory",
+      "passed": true
+    },
+    {
+      "detail": {
+        "paired": 0.09323859039267032,
+        "unpaired": 1.8482164176532692
+      },
+      "gate": "unpaired_source_sessions_destroy_gain",
+      "passed": true
+    },
+    {
+      "detail": 2.220446049250313e-16,
+      "gate": "identity_residual_carry",
+      "passed": true
+    },
+    {
+      "detail": 6.780463583910048,
+      "gate": "population_session_template_shift",
+      "passed": true
+    },
+    {
+      "detail": [
+        1,
+        8,
+        0,
+        7,
+        3,
+        6,
+        5,
+        9,
+        2,
+        4
+      ],
+      "gate": "enrollment_subject_permutation",
+      "passed": true
+    },
+    {
+      "detail": [
+        1,
+        0,
+        2,
+        3
+      ],
+      "gate": "enrollment_class_permutation",
+      "passed": true
+    },
+    {
+      "detail": 0.0,
+      "gate": "random_rank_matched_orthogonality",
+      "passed": true
+    },
+    {
+      "detail": [
+        "method",
+        "target_index",
+        "proto",
+        "H",
+        "gamma_e",
+        "gamma_d",
+        "lrcm_core",
+        "rank",
+        "pca_model",
+        "enrollment_signature",
+        "output_basis"
+      ],
+      "gate": "target_label_leakage_sentinel",
+      "passed": true
+    },
+    {
+      "detail": [
+        16,
+        64
+      ],
+      "gate": "kshot_support_query_disjoint",
+      "passed": true
+    },
+    {
+      "detail": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "gate": "kshot_class_balance",
+      "passed": true
+    },
+    {
+      "detail": true,
+      "gate": "deterministic_seeds",
+      "passed": true
+    },
+    {
+      "detail": [
+        "Can the validated low-rank conditional memory be formulated as a probabilistic mixed-effects adapter with calibrated posterior uncertainty and retain its benefit against full published cross-session and continual-adaptation baselines?",
+        "GO_CROSS_SESSION_MAP_BUT_LOW_RANK_NOT_SUPPORTED",
+        "GO_LOW_RANK_CONDITIONAL_MEMORY_REPLICATED",
+        "GO_STIEGER_ONLY_NEEDS_EXTERNAL_REPLICATION",
+        "STOP_NO_CROSS_SESSION_DOWNSTREAM_UTILITY",
+        "Stable low-dimensional subject×class interaction does not provide incremental cross-session decoding utility beyond direct enrollment-session residual transfer under the tested returning-user protocol.",
+        "UNASSESSED_NUMERICAL_OR_DATA_CONTRACT_FAILURE",
+        "UNASSESSED_REQUIRED_TRIAL_CACHE_MISSING_OR_INVALID",
+        "UNASSESSED_TARGET_LABEL_LEAKAGE_OR_SPLIT_FAILURE"
+      ],
+      "gate": "expected_terminal_labels",
+      "passed": true
+    },
+    {
+      "detail": [
+        10,
+        10,
+        10,
+        11,
+        11,
+        10
+      ],
+      "gate": "stieger_pr19_fold_identity",
+      "passed": true
+    },
+    {
+      "detail": [
+        1,
+        2
+      ],
+      "gate": "openbmi_chronology_metadata",
+      "passed": true
+    },
+    {
+      "detail": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "gate": "openbmi_fold_identity",
+      "passed": true
+    },
+    {
+      "detail": 4.072822980035472e-09,
+      "gate": "full_rank_map_recovery",
+      "passed": true
+    },
+    {
+      "detail": {
+        "correct": 1.0,
+        "permuted": 0.5
+      },
+      "gate": "class_memory_permutation_destroys_gain",
+      "passed": true
+    },
+    {
+      "detail": {
+        "correct": 1.0,
+        "wrong": 0.57
+      },
+      "gate": "enrollment_subject_memory_permutation_destroys_gain",
+      "passed": true
+    },
+    {
+      "detail": [
+        "smallest_rank",
+        "largest_ridge_lambda",
+        "temperature_closest_to_one"
+      ],
+      "gate": "nested_source_only_hyperparameter_selection",
+      "passed": true
+    },
+    {
+      "detail": [
+        0.1,
+        0.2,
+        -0.05,
+        0.15
+      ],
+      "gate": "subject_level_inference_unit",
+      "passed": true
+    }
+  ],
+  "status": "PASS"
+}
