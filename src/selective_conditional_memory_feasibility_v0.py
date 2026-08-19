@@ -978,11 +978,25 @@ def run_dataset_observed(repo_root: str | Path, dataset: str, reverse: bool = Fa
 
 
 def run_stieger_observed(repo_root: str | Path) -> dict[str, Any]:
-    return {"chronological": run_dataset_observed(repo_root, "stieger", False), "reverse_non_voting": run_dataset_observed(repo_root, "stieger", True)}
+    chronological = run_dataset_observed(repo_root, "stieger", False)
+    try:
+        reverse: dict[str, Any] = run_dataset_observed(repo_root, "stieger", True)
+    except NumericalContractError as exc:
+        root = Path(repo_root).resolve(); config, _ = load_config(root); output = output_path(root, config)
+        reverse = {"status": "CONTROL_UNASSESSED_OPTIMIZATION_FAILURE", "exception_type": type(exc).__name__, "message": str(exc), "voting": False}
+        atomic_write_json(output / "controls" / "stieger_reverse_status.json", reverse)
+    return {"chronological": chronological, "reverse_non_voting": reverse}
 
 
 def run_openbmi_observed(repo_root: str | Path) -> dict[str, Any]:
-    return {"chronological": run_dataset_observed(repo_root, "openbmi", False), "reverse_non_voting": run_dataset_observed(repo_root, "openbmi", True)}
+    chronological = run_dataset_observed(repo_root, "openbmi", False)
+    try:
+        reverse: dict[str, Any] = run_dataset_observed(repo_root, "openbmi", True)
+    except NumericalContractError as exc:
+        root = Path(repo_root).resolve(); config, _ = load_config(root); output = output_path(root, config)
+        reverse = {"status": "CONTROL_UNASSESSED_OPTIMIZATION_FAILURE", "exception_type": type(exc).__name__, "message": str(exc), "voting": False}
+        atomic_write_json(output / "controls" / "openbmi_reverse_status.json", reverse)
+    return {"chronological": chronological, "reverse_non_voting": reverse}
 
 
 def _evaluate_target_from_record(

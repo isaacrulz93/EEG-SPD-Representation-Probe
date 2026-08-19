@@ -137,3 +137,24 @@ def test_result_manifest_excludes_itself(tmp_path: Path) -> None:
     (tmp_path/"x.txt").write_text("x"); (tmp_path/"manifest.json").write_text("old")
     manifest=module._result_manifest(tmp_path)
     assert [row["path"] for row in manifest["records"]]==["x.txt"]
+
+
+def test_reverse_diagnostic_is_non_voting_in_protocol() -> None:
+    protocol=(ROOT/"docs/PROTOCOL_SELECTIVE_CONDITIONAL_MEMORY_FEASIBILITY_V0.md").read_text()
+    assert "Reverse directions are descriptive only" in protocol
+
+
+def test_chronological_failure_boundary_precedes_reverse(monkeypatch: pytest.MonkeyPatch) -> None:
+    calls=[]
+    def fake_run(root: Path, dataset: str, reverse: bool=False):
+        calls.append(reverse)
+        if reverse:
+            raise module.NumericalContractError("reverse only")
+        return {"status":"chronological complete"}
+    monkeypatch.setattr(module,"run_dataset_observed",fake_run)
+    monkeypatch.setattr(module,"load_config",lambda root: ({"project":{"output_dir":"out"}},"hash"))
+    monkeypatch.setattr(module,"atomic_write_json",lambda *args,**kwargs: None)
+    result=module.run_stieger_observed(Path("."))
+    assert calls==[False,True]
+    assert result["chronological"]["status"]=="chronological complete"
+    assert result["reverse_non_voting"]["status"]=="CONTROL_UNASSESSED_OPTIMIZATION_FAILURE"
