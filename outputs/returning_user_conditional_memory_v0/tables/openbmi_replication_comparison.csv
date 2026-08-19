@@ -1,0 +1,2 @@
+left,right,metric,improvement_direction,mean_difference,median_difference,bootstrap_ci,p_value_raw,subject_win_rate,leave_one_subject_mean_range,worst_quartile_mean_difference,dataset,comparison,p_value_holm
+LRCM,IDENTITY_RESIDUAL_CARRY,balanced_accuracy,higher,0.043703703703703703,0.040000000000000036,"[0.02369907407407406, 0.06444444444444446]",0.00050000000000000001,0.68518518518518523,"[0.04018867924528303, 0.04660377358490567]",-0.04307692307692304,openbmi,LRCM - IDENTITY_RESIDUAL_CARRY,0.00050000000000000001

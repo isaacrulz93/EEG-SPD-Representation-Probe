@@ -1,0 +1,57 @@
+{
+  "dataset": "openbmi",
+  "observed_mean_balanced_accuracy": 0.6914814814814813,
+  "outer_target_deployment_labels_used_for_fitting": false,
+  "runtime_seconds": 57.304963500006124,
+  "summaries": [
+    {
+      "dataset": "openbmi",
+      "hyperparameter_rule": "frozen_observed_source_only_selection",
+      "null": "ENROLLMENT_SUBJECT_MEMORY_PERMUTATION",
+      "null_mean": 0.6851995442165525,
+      "null_median": 0.685,
+      "null_q025": 0.6803703703703704,
+      "null_q975": 0.6903703703703701,
+      "observed_mean_balanced_accuracy": 0.6914814814814813,
+      "p_value": 0.0085,
+      "replicates": 1999
+    },
+    {
+      "dataset": "openbmi",
+      "hyperparameter_rule": "frozen_observed_source_only_selection",
+      "null": "ENROLLMENT_CLASS_SEMANTICS_PERMUTATION",
+      "null_mean": 0.631111111111111,
+      "null_median": 0.6311111111111111,
+      "null_q025": 0.6311111111111111,
+      "null_q975": 0.6311111111111111,
+      "observed_mean_balanced_accuracy": 0.6914814814814813,
+      "p_value": 0.0005,
+      "replicates": 1999
+    },
+    {
+      "dataset": "openbmi",
+      "hyperparameter_rule": "frozen_observed_source_only_selection",
+      "null": "RANDOM_RANK_MATCHED_OUTPUT_SUBSPACE",
+      "null_mean": 0.6914087599355233,
+      "null_median": 0.6914814814814814,
+      "null_q025": 0.6903703703703704,
+      "null_q975": 0.6925925925925924,
+      "observed_mean_balanced_accuracy": 0.6914814814814813,
+      "p_value": 0.531,
+      "replicates": 1999
+    },
+    {
+      "dataset": "openbmi",
+      "hyperparameter_rule": "conditional_on_observed_source_only_selection",
+      "null": "UNPAIRED_SOURCE_SESSION_MAP",
+      "null_mean": 0.6875578530005744,
+      "null_median": 0.6885185185185186,
+      "null_q025": 0.6759259259259259,
+      "null_q975": 0.6948148148148148,
+      "observed_mean_balanced_accuracy": 0.6914814814814813,
+      "p_value": 0.2845,
+      "replicates": 1999
+    }
+  ],
+  "unpaired_source_selection_rule": "conditional_on_observed_source_only_selection"
+}

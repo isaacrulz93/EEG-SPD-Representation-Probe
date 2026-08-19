@@ -1,0 +1,3 @@
+dataset,selected_ranks,median_rank,folds_rank_at_most_3
+stieger,1|3|3|3|3|8,3.0,5
+openbmi,3|5|3|13|5|2,4.0,3

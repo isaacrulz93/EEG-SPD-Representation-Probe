@@ -1,0 +1,3 @@
+dataset,lrcm_mean_balanced_accuracy,equivalent_K_per_class,lower_bracket_K,upper_bracket_K,interpretation
+stieger,0.33155589285971349,8,4,8,descriptive interpolation-free bracket; not a literal label replacement claim
+openbmi,0.69148148148148125,,16,,descriptive interpolation-free bracket; not a literal label replacement claim
