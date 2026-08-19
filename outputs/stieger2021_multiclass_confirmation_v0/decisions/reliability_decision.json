@@ -1,0 +1,23 @@
+{
+  "sessions": [
+    {
+      "forward_median": 0.35387634288408626,
+      "leave_one_subject_minimum": 0.3500275586879411,
+      "pairing_p": 0.0005,
+      "pass": true,
+      "reverse_median": 0.36939841549127744,
+      "session": 2,
+      "statistic": 0.36057990080996727
+    },
+    {
+      "forward_median": 0.37804482554142566,
+      "leave_one_subject_minimum": 0.3804025649214879,
+      "pairing_p": 0.0005,
+      "pass": true,
+      "reverse_median": 0.35885308746788624,
+      "session": 3,
+      "statistic": 0.38342700056524626
+    }
+  ],
+  "status": "STIEGER_MEASUREMENT_RELIABILITY_PASS"
+}

@@ -1,0 +1,40 @@
+{
+  "bootstrap_ci": [
+    0.0,
+    0.5
+  ],
+  "decision": "MULTICLASS_UNLABELED_SCATTER_RECOVERY_NOT_SUPPORTED",
+  "leave_one_subject_minimum": 0.0,
+  "median_normalized_eigenvalue_error": 1.0,
+  "median_normalized_frobenius_error": 1.0,
+  "median_normalized_trace_error": 1.0,
+  "oracle_rank_frequency": {
+    "1": 104,
+    "3": 20
+  },
+  "predicted_rank_frequency": {
+    "0": 75,
+    "1": 42,
+    "2": 6,
+    "3": 1
+  },
+  "primary_statistic_median_frobenius_cosine": 0.0,
+  "random_direction_p": 1.0,
+  "session_median_normalized_eigenvalue_error": [
+    1.0,
+    1.0
+  ],
+  "session_median_normalized_frobenius_error": [
+    1.0,
+    1.0
+  ],
+  "session_median_normalized_trace_error": [
+    1.0,
+    1.0
+  ],
+  "session_statistics": [
+    0.0,
+    0.0
+  ],
+  "subject_permutation_p": 1.0
+}
