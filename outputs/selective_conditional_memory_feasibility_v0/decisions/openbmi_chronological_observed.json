@@ -1,0 +1,122 @@
+{
+  "aggregate_metrics": [
+    {
+      "dataset": "openbmi",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.679074074074074,
+      "mean_brier": 0.41623866527255543,
+      "mean_ece10": 0.10457601838114162,
+      "mean_macro_f1": 0.67800388283055,
+      "mean_nll": 0.6122084367483152,
+      "method": "SELECTIVE_GATE"
+    },
+    {
+      "dataset": "openbmi",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.6977777777777777,
+      "mean_brier": 0.41726123583237384,
+      "mean_ece10": 0.12531257220003236,
+      "mean_macro_f1": 0.6967352568018222,
+      "mean_nll": 0.6066329783432669,
+      "method": "GLOBAL_KAPPA"
+    },
+    {
+      "dataset": "openbmi",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.6733333333333333,
+      "mean_brier": 0.4127283920335659,
+      "mean_ece10": 0.10052159265828087,
+      "mean_macro_f1": 0.672328219238309,
+      "mean_nll": 0.6016359571743378,
+      "method": "FIXED_RELIABILITY_KAPPA"
+    },
+    {
+      "dataset": "openbmi",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.673148148148148,
+      "mean_brier": 0.41257565543084124,
+      "mean_ece10": 0.09811038088536167,
+      "mean_macro_f1": 0.672249504223106,
+      "mean_nll": 0.6018492541371855,
+      "method": "CLASSWISE_SELECTIVE_GATE"
+    },
+    {
+      "dataset": "openbmi",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.7248148148148151,
+      "mean_brier": 0.40473300667715995,
+      "mean_ece10": 0.13884275277187028,
+      "mean_macro_f1": 0.72406368243709,
+      "mean_nll": 0.5909704793381432,
+      "method": "ORACLE_CONTINUOUS_KAPPA"
+    },
+    {
+      "dataset": "openbmi",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.6914814814814816,
+      "mean_brier": 0.42573565730938195,
+      "mean_ece10": 0.12470275513718466,
+      "mean_macro_f1": 0.6905922002410679,
+      "mean_nll": 0.617089036549538,
+      "method": "POPULATION_ONLY"
+    },
+    {
+      "dataset": "openbmi",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.6477777777777777,
+      "mean_brier": 0.4391513149602128,
+      "mean_ece10": 0.1266960023023496,
+      "mean_macro_f1": 0.646480478515016,
+      "mean_nll": 0.6552261811040724,
+      "method": "IDENTITY_RESIDUAL_CARRY"
+    },
+    {
+      "dataset": "openbmi",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.6453703703703703,
+      "mean_brier": 0.43987809348303525,
+      "mean_ece10": 0.12692653670938958,
+      "mean_macro_f1": 0.6440732597991178,
+      "mean_nll": 0.6537066721681405,
+      "method": "PAST_PROTOTYPE_DIRECT"
+    },
+    {
+      "dataset": "openbmi",
+      "direction": "chronological",
+      "mean_balanced_accuracy": 0.6914814814814814,
+      "mean_brier": 0.42136145868306973,
+      "mean_ece10": 0.1199761090908345,
+      "mean_macro_f1": 0.69050443876136,
+      "mean_nll": 0.6101242693552583,
+      "method": "LRCM_HISTORICAL_CONTROL"
+    }
+  ],
+  "dataset": "openbmi",
+  "direction": "chronological",
+  "kappa_summary": {
+    "maximum": 0.9982209394498919,
+    "mean": 0.31056233515776627,
+    "median": 0.14995777662724266,
+    "minimum": 4.512469473701101e-16
+  },
+  "outer_target_deployment_labels_used_for_gate": false,
+  "selected_global_kappa": [
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.0,
+    0.0
+  ],
+  "selected_l2": [
+    0.001,
+    0.0001,
+    0.0001,
+    0.0001,
+    0.001,
+    0.0001
+  ],
+  "subjects": 54,
+  "total_seconds": 23.287941666989354,
+  "voting": false
+}

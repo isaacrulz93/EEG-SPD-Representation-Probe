@@ -1,0 +1,71 @@
+{
+  "gate_fitting_authorized": true,
+  "oracle_gate_pass": true,
+  "status": "ORACLE_SELECTIVE_MEMORY_HEADROOM_PRESENT",
+  "summaries": {
+    "openbmi_chronological": {
+      "dataset": "openbmi",
+      "direction": "chronological",
+      "mean_identity_balanced_accuracy": 0.6477777777777779,
+      "mean_oracle_balanced_accuracy": 0.7050000000000002,
+      "mean_oracle_gain_over_identity": 0.05722222222222222,
+      "mean_population_balanced_accuracy": 0.6914814814814816,
+      "oracle_gain_bootstrap_ci": [
+        0.04055555555555555,
+        0.0761111111111111
+      ],
+      "proportion_selecting_identity": 0.2777777777777778,
+      "proportion_selecting_population": 0.7222222222222222,
+      "subjects": 54,
+      "voting": false
+    },
+    "openbmi_reverse": {
+      "dataset": "openbmi",
+      "direction": "reverse",
+      "mean_identity_balanced_accuracy": 0.6587037037037036,
+      "mean_oracle_balanced_accuracy": 0.6977777777777777,
+      "mean_oracle_gain_over_identity": 0.03907407407407408,
+      "mean_population_balanced_accuracy": 0.6648148148148147,
+      "oracle_gain_bootstrap_ci": [
+        0.02425925925925926,
+        0.05518518518518519
+      ],
+      "proportion_selecting_identity": 0.5,
+      "proportion_selecting_population": 0.5,
+      "subjects": 54,
+      "voting": false
+    },
+    "stieger_chronological": {
+      "dataset": "stieger",
+      "direction": "chronological",
+      "mean_identity_balanced_accuracy": 0.35134868522807955,
+      "mean_oracle_balanced_accuracy": 0.37027011526076803,
+      "mean_oracle_gain_over_identity": 0.018921430032688525,
+      "mean_population_balanced_accuracy": 0.33702364669521434,
+      "oracle_gain_bootstrap_ci": [
+        0.011256125114624696,
+        0.027645365775671386
+      ],
+      "proportion_selecting_identity": 0.5806451612903226,
+      "proportion_selecting_population": 0.41935483870967744,
+      "subjects": 62,
+      "voting": true
+    },
+    "stieger_reverse": {
+      "dataset": "stieger",
+      "direction": "reverse",
+      "mean_identity_balanced_accuracy": 0.3359051377744534,
+      "mean_oracle_balanced_accuracy": 0.35562398471915674,
+      "mean_oracle_gain_over_identity": 0.019718846944703335,
+      "mean_population_balanced_accuracy": 0.3281488185320962,
+      "oracle_gain_bootstrap_ci": [
+        0.012605463364164552,
+        0.027524521124200906
+      ],
+      "proportion_selecting_identity": 0.5483870967741935,
+      "proportion_selecting_population": 0.45161290322580644,
+      "subjects": 62,
+      "voting": false
+    }
+  }
+}
