@@ -12,3 +12,10 @@ limit, feature definitions, folds, L2 grid, scaling, inference, nulls, and
 decisions are unchanged. Voting chronological numerical failures still
 propagate and fail closed. The failed reverse optimization is not regularized,
 restarted with new settings, or removed from history.
+
+Before the frozen 1,999-replicate nulls, the same scalar per-subject
+cross-entropy and analytic gradient were additionally expressed as one batched
+array operation. A regression test requires the scalar and vectorized fitted
+parameters and objectives to agree within strict floating-point tolerance. This
+changes neither the objective nor any scientific setting; it only removes
+Python-loop overhead inside the null pipeline.

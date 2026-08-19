@@ -419,6 +419,53 @@ def fit_gate(examples: Sequence[GateExample], l2: float, config: Mapping[str, An
     return GateFit(np.asarray(result.x), mean, scale, float(l2), float(result.fun), int(result.nit))
 
 
+def fit_gate_vectorized(examples: Sequence[GateExample], l2: float, config: Mapping[str, Any]) -> GateFit:
+    """Algebraically identical batched fit used by the 1,999-replicate null."""
+    raw = np.stack([example.global_features for example in examples])
+    mean, scale = _standardizer(raw)
+    augmented = np.column_stack([(raw - mean) / scale, np.ones(len(raw))])
+    maximum_trials = max(len(example.labels) for example in examples)
+    classes = examples[0].distance_a.shape[1]
+    distance_a = np.zeros((len(examples), maximum_trials, classes), dtype=np.float64)
+    distance_b = np.zeros_like(distance_a)
+    distance_c = np.stack([example.distance_c for example in examples])
+    labels = np.zeros((len(examples), maximum_trials), dtype=np.int64)
+    mask = np.zeros((len(examples), maximum_trials), dtype=np.float64)
+    for index, example in enumerate(examples):
+        count = len(example.labels)
+        distance_a[index, :count] = example.distance_a
+        distance_b[index, :count] = example.distance_b
+        labels[index, :count] = example.labels
+        mask[index, :count] = 1.0
+    counts = np.sum(mask, axis=1)
+    subject_rows = np.arange(len(examples))[:, None]
+    trial_rows = np.arange(labels.shape[1])[None, :]
+
+    def objective(parameters: np.ndarray) -> tuple[float, np.ndarray]:
+        kappas = expit(augmented @ parameters)
+        distances = distance_a + kappas[:, None, None] * distance_b + (kappas * kappas)[:, None, None] * distance_c[:, None, :]
+        logits = -distances
+        probabilities = np.exp(logits - logsumexp(logits, axis=2, keepdims=True))
+        losses = np.sum(mask * (distances[subject_rows, trial_rows, labels] + logsumexp(logits, axis=2)), axis=1) / counts
+        derivative_distance = distance_b + 2.0 * kappas[:, None, None] * distance_c[:, None, :]
+        derivatives = np.sum(mask * (
+            derivative_distance[subject_rows, trial_rows, labels] - np.sum(probabilities * derivative_distance, axis=2)
+        ), axis=1) / counts
+        chain = derivatives * kappas * (1.0 - kappas)
+        gradient = augmented.T @ chain / len(examples)
+        gradient[:-1] += float(l2) * parameters[:-1]
+        value = float(np.mean(losses) + 0.5 * float(l2) * np.dot(parameters[:-1], parameters[:-1]))
+        return value, gradient
+
+    result = minimize(
+        lambda value: objective(value), np.zeros(augmented.shape[1]), method="L-BFGS-B", jac=True,
+        options={"maxiter": int(config["model"]["optimizer_maxiter"]), "ftol": float(config["model"]["optimizer_ftol"]), "gtol": float(config["model"]["optimizer_gtol"]), "maxls": 50},
+    )
+    if not result.success or not np.isfinite(result.fun) or not np.isfinite(result.x).all():
+        raise NumericalContractError(f"vectorized selective gate optimization failed: {result.message}")
+    return GateFit(np.asarray(result.x), mean, scale, float(l2), float(result.fun), int(result.nit))
+
+
 def predict_kappa(model: GateFit, global_features: np.ndarray) -> float:
     standardized = (np.asarray(global_features, dtype=np.float64) - model.feature_mean) / model.feature_scale
     return float(expit(np.dot(model.parameters[:-1], standardized) + model.parameters[-1]))
@@ -1055,7 +1102,7 @@ def run_stieger_nulls(repo_root: str | Path) -> dict[str, Any]:
             source = cache["source"]
             source_derangement = parent.fixed_point_free(_rng(config, "null_unpaired_source", replicate, fold), len(source))
             unpaired_examples = build_source_examples(bundle, proto, source, orders, epsilon, deployment_permutation=source_derangement)
-            unpaired_model = fit_gate(unpaired_examples, float(selections[fold]["selected_l2"]), config)
+            unpaired_model = fit_gate_vectorized(unpaired_examples, float(selections[fold]["selected_l2"]), config)
             for local, target in enumerate(test):
                 target = int(target); record = records[local]
                 kappa = predict_kappa(model, record.global_features)

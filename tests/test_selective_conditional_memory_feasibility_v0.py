@@ -66,6 +66,13 @@ def test_gate_deterministic() -> None:
     np.testing.assert_array_equal(a.parameters,b.parameters)
 
 
+def test_vectorized_null_fit_matches_scalar_fit() -> None:
+    config,_=module.load_config(ROOT,verify_protocol=False); examples,_=_synthetic_examples()
+    scalar=module.fit_gate(examples,1e-2,config); vectorized=module.fit_gate_vectorized(examples,1e-2,config)
+    np.testing.assert_allclose(vectorized.parameters,scalar.parameters,atol=2e-9,rtol=2e-9)
+    assert vectorized.objective==pytest.approx(scalar.objective,abs=2e-12,rel=2e-12)
+
+
 def test_standardizer_constant_column_scale_one() -> None:
     values=np.column_stack([np.arange(5),np.ones(5)]); mean,scale=module._standardizer(values)
     assert mean[1]==1 and scale[1]==1
