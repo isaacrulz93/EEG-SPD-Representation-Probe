@@ -1,0 +1,108 @@
+{
+  "aggregate": [
+    {
+      "K_per_class": 1,
+      "dataset": "stieger",
+      "mean_expected_balanced_accuracy": 0.28870574445180397,
+      "mean_expected_macro_f1": 0.26558576979271875,
+      "subjects": 62
+    },
+    {
+      "K_per_class": 2,
+      "dataset": "stieger",
+      "mean_expected_balanced_accuracy": 0.30260762864224383,
+      "mean_expected_macro_f1": 0.28669718550825474,
+      "subjects": 62
+    },
+    {
+      "K_per_class": 4,
+      "dataset": "stieger",
+      "mean_expected_balanced_accuracy": 0.3179788843091099,
+      "mean_expected_macro_f1": 0.30508505560298405,
+      "subjects": 62
+    },
+    {
+      "K_per_class": 8,
+      "dataset": "stieger",
+      "mean_expected_balanced_accuracy": 0.3326312207341128,
+      "mean_expected_macro_f1": 0.3198115659373665,
+      "subjects": 62
+    },
+    {
+      "K_per_class": 16,
+      "dataset": "stieger",
+      "mean_expected_balanced_accuracy": 0.34589963103093146,
+      "mean_expected_macro_f1": 0.3315027869905198,
+      "subjects": 62
+    },
+    {
+      "K_per_class": "FULL_ORACLE",
+      "dataset": "stieger",
+      "mean_expected_balanced_accuracy": 0.49567465354348655,
+      "mean_expected_macro_f1": 0.48606012621446487,
+      "subjects": 62
+    },
+    {
+      "K_per_class": 1,
+      "dataset": "openbmi",
+      "mean_expected_balanced_accuracy": 0.561636432350718,
+      "mean_expected_macro_f1": 0.531101720412122,
+      "subjects": 54
+    },
+    {
+      "K_per_class": 2,
+      "dataset": "openbmi",
+      "mean_expected_balanced_accuracy": 0.5814602623456789,
+      "mean_expected_macro_f1": 0.5623017570999532,
+      "subjects": 54
+    },
+    {
+      "K_per_class": 4,
+      "dataset": "openbmi",
+      "mean_expected_balanced_accuracy": 0.6020551529790661,
+      "mean_expected_macro_f1": 0.5909933612796506,
+      "subjects": 54
+    },
+    {
+      "K_per_class": 8,
+      "dataset": "openbmi",
+      "mean_expected_balanced_accuracy": 0.6253064373897707,
+      "mean_expected_macro_f1": 0.6185415084287139,
+      "subjects": 54
+    },
+    {
+      "K_per_class": 16,
+      "dataset": "openbmi",
+      "mean_expected_balanced_accuracy": 0.6489801198257081,
+      "mean_expected_macro_f1": 0.6442850346368728,
+      "subjects": 54
+    },
+    {
+      "K_per_class": "FULL_ORACLE",
+      "dataset": "openbmi",
+      "mean_expected_balanced_accuracy": 0.7844444444444444,
+      "mean_expected_macro_f1": 0.7837372788319436,
+      "subjects": 54
+    }
+  ],
+  "calibration_equivalent": [
+    {
+      "dataset": "stieger",
+      "equivalent_K_per_class": 8,
+      "interpretation": "descriptive interpolation-free bracket; not a literal label replacement claim",
+      "lower_bracket_K": 4,
+      "lrcm_mean_balanced_accuracy": 0.3315558928597135,
+      "upper_bracket_K": 8
+    },
+    {
+      "dataset": "openbmi",
+      "equivalent_K_per_class": null,
+      "interpretation": "descriptive interpolation-free bracket; not a literal label replacement claim",
+      "lower_bracket_K": 16,
+      "lrcm_mean_balanced_accuracy": 0.6914814814814813,
+      "upper_bracket_K": null
+    }
+  ],
+  "evaluation_only": true,
+  "subject_rows": 696
+}

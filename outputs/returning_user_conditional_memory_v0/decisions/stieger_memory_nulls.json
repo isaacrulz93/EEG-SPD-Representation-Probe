@@ -1,0 +1,57 @@
+{
+  "dataset": "stieger",
+  "observed_mean_balanced_accuracy": 0.3315558928597135,
+  "outer_target_deployment_labels_used_for_fitting": false,
+  "runtime_seconds": 325.83763633301714,
+  "summaries": [
+    {
+      "dataset": "stieger",
+      "hyperparameter_rule": "frozen_observed_source_only_selection",
+      "null": "ENROLLMENT_SUBJECT_MEMORY_PERMUTATION",
+      "null_mean": 0.3354003697380918,
+      "null_median": 0.3352567214623884,
+      "null_q025": 0.3278046088146863,
+      "null_q975": 0.3432991728088455,
+      "observed_mean_balanced_accuracy": 0.3315558928597135,
+      "p_value": 0.829,
+      "replicates": 1999
+    },
+    {
+      "dataset": "stieger",
+      "hyperparameter_rule": "frozen_observed_source_only_selection",
+      "null": "ENROLLMENT_CLASS_SEMANTICS_PERMUTATION",
+      "null_mean": 0.3196536323220814,
+      "null_median": 0.31974565344652983,
+      "null_q025": 0.30618548814301755,
+      "null_q975": 0.33232185533960024,
+      "observed_mean_balanced_accuracy": 0.3315558928597135,
+      "p_value": 0.035,
+      "replicates": 1999
+    },
+    {
+      "dataset": "stieger",
+      "hyperparameter_rule": "frozen_observed_source_only_selection",
+      "null": "RANDOM_RANK_MATCHED_OUTPUT_SUBSPACE",
+      "null_mean": 0.33749864091476783,
+      "null_median": 0.3374715160416405,
+      "null_q025": 0.336381389943556,
+      "null_q975": 0.3385559489965169,
+      "observed_mean_balanced_accuracy": 0.3315558928597135,
+      "p_value": 1.0,
+      "replicates": 1999
+    },
+    {
+      "dataset": "stieger",
+      "hyperparameter_rule": "conditional_on_observed_source_only_selection",
+      "null": "UNPAIRED_SOURCE_SESSION_MAP",
+      "null_mean": 0.3361961207428868,
+      "null_median": 0.3362244194422518,
+      "null_q025": 0.3258157323876108,
+      "null_q975": 0.34531279786861596,
+      "observed_mean_balanced_accuracy": 0.3315558928597135,
+      "p_value": 0.8335,
+      "replicates": 1999
+    }
+  ],
+  "unpaired_source_selection_rule": "conditional_on_observed_source_only_selection"
+}

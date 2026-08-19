@@ -1,0 +1,329 @@
+{
+  "comparisons": [
+    {
+      "bootstrap_ci": [
+        -0.03791042605054896,
+        -0.002384321393322579
+      ],
+      "comparison": "LRCM - IDENTITY_RESIDUAL_CARRY",
+      "dataset": "stieger",
+      "improvement_direction": "higher",
+      "leave_one_subject_mean_range": [
+        -0.021941996785849877,
+        -0.015969350282573524
+      ],
+      "left": "LRCM",
+      "mean_difference": -0.01979279236836599,
+      "median_difference": -0.007467994310099618,
+      "metric": "balanced_accuracy",
+      "p_value_holm": 1.0,
+      "p_value_raw": 0.9825,
+      "right": "IDENTITY_RESIDUAL_CARRY",
+      "subject_win_rate": 0.43548387096774194,
+      "worst_quartile_mean_difference": -0.11761564195774724
+    },
+    {
+      "bootstrap_ci": [
+        -0.03266080525346409,
+        0.0023071657734116146
+      ],
+      "comparison": "LRCM - PAST_PROTOTYPE_DIRECT",
+      "dataset": "stieger",
+      "improvement_direction": "higher",
+      "leave_one_subject_mean_range": [
+        -0.01735205145591571,
+        -0.010875125867687277
+      ],
+      "left": "LRCM",
+      "mean_difference": -0.014780732863397272,
+      "median_difference": -0.009794333807491673,
+      "metric": "balanced_accuracy",
+      "p_value_holm": 1.0,
+      "p_value_raw": 0.9445,
+      "right": "PAST_PROTOTYPE_DIRECT",
+      "subject_win_rate": 0.45161290322580644,
+      "worst_quartile_mean_difference": -0.11026684579316157
+    },
+    {
+      "bootstrap_ci": [
+        -0.016581768427556407,
+        0.005159445665990298
+      ],
+      "comparison": "LRCM - POPULATION_ONLY",
+      "dataset": "stieger",
+      "improvement_direction": "higher",
+      "leave_one_subject_mean_range": [
+        -0.008075869661034353,
+        -0.0031182589010077173
+      ],
+      "left": "LRCM",
+      "mean_difference": -0.005467753835500762,
+      "median_difference": 0.0,
+      "metric": "balanced_accuracy",
+      "p_value_holm": 1.0,
+      "p_value_raw": 0.837,
+      "right": "POPULATION_ONLY",
+      "subject_win_rate": 0.4838709677419355,
+      "worst_quartile_mean_difference": -0.055857887963151116
+    },
+    {
+      "bootstrap_ci": [
+        -0.04618610322742857,
+        -0.009086192948663394
+      ],
+      "comparison": "LRCM - IDENTITY_RESIDUAL_CARRY macro-F1",
+      "dataset": "stieger",
+      "improvement_direction": "higher",
+      "leave_one_subject_mean_range": [
+        -0.029412533843992263,
+        -0.02333295269739636
+      ],
+      "left": "LRCM",
+      "mean_difference": -0.02703701460545733,
+      "median_difference": -0.015338527228533752,
+      "metric": "macro_f1",
+      "p_value_holm": 0.997,
+      "p_value_raw": 0.997,
+      "right": "IDENTITY_RESIDUAL_CARRY",
+      "subject_win_rate": 0.41935483870967744,
+      "worst_quartile_mean_difference": -0.12731172562923845
+    },
+    {
+      "bootstrap_ci": [
+        0.108181588374683,
+        0.4088531751850315
+      ],
+      "comparison": "IDENTITY_RESIDUAL_CARRY NLL - LRCM NLL",
+      "dataset": "stieger",
+      "improvement_direction": "lower",
+      "leave_one_subject_mean_range": [
+        0.2211257976924889,
+        0.2824886589265951
+      ],
+      "left": "LRCM",
+      "mean_difference": 0.2551312160348591,
+      "median_difference": 0.13034578614426073,
+      "metric": "nll",
+      "p_value_holm": 0.001,
+      "p_value_raw": 0.001,
+      "right": "IDENTITY_RESIDUAL_CARRY",
+      "subject_win_rate": 0.7258064516129032,
+      "worst_quartile_mean_difference": -0.31480614047583355
+    },
+    {
+      "bootstrap_ci": [
+        -0.01902613657827193,
+        0.0029815771082748986
+      ],
+      "comparison": "LRCM - FULL_RIDGE_TRANSFER",
+      "dataset": "stieger",
+      "improvement_direction": "higher",
+      "leave_one_subject_mean_range": [
+        -0.010942058694304549,
+        -0.005744777720492085
+      ],
+      "left": "LRCM",
+      "mean_difference": -0.008213148786029047,
+      "median_difference": 0.0,
+      "metric": "balanced_accuracy",
+      "p_value_holm": 0.917,
+      "p_value_raw": 0.917,
+      "right": "FULL_RIDGE_TRANSFER",
+      "subject_win_rate": 0.43548387096774194,
+      "worst_quartile_mean_difference": -0.06759872654609499
+    },
+    {
+      "bootstrap_ci": [
+        -0.014256725051941265,
+        0.009881354776381865
+      ],
+      "comparison": "LRCM - ENROLLMENT_PCA_TRANSFER",
+      "dataset": "stieger",
+      "improvement_direction": "higher",
+      "leave_one_subject_mean_range": [
+        -0.004475484431582492,
+        0.0013805657514737288
+      ],
+      "left": "LRCM",
+      "mean_difference": -0.001956986162518976,
+      "median_difference": 0.0001827485380117011,
+      "metric": "balanced_accuracy",
+      "p_value_holm": 0.648,
+      "p_value_raw": 0.648,
+      "right": "ENROLLMENT_PCA_TRANSFER",
+      "subject_win_rate": 0.5,
+      "worst_quartile_mean_difference": -0.056799562720615364
+    },
+    {
+      "bootstrap_ci": [
+        0.02369907407407406,
+        0.06444444444444446
+      ],
+      "comparison": "LRCM - IDENTITY_RESIDUAL_CARRY",
+      "dataset": "openbmi",
+      "improvement_direction": "higher",
+      "leave_one_subject_mean_range": [
+        0.04018867924528303,
+        0.04660377358490567
+      ],
+      "left": "LRCM",
+      "mean_difference": 0.0437037037037037,
+      "median_difference": 0.040000000000000036,
+      "metric": "balanced_accuracy",
+      "p_value_holm": 0.0005,
+      "p_value_raw": 0.0005,
+      "right": "IDENTITY_RESIDUAL_CARRY",
+      "subject_win_rate": 0.6851851851851852,
+      "worst_quartile_mean_difference": -0.04307692307692304
+    }
+  ],
+  "gates": {
+    "at_least_4_of_6_ranks_at_most_3": true,
+    "correct_source_pairing_required": false,
+    "enrollment_class_semantics_permutation_p_at_most_005": true,
+    "enrollment_subject_memory_permutation_p_at_most_005": false,
+    "exceeds_enrollment_pca": false,
+    "exceeds_random_rank_matched": false,
+    "full_ridge_noninferiority_margin_0005": false,
+    "gain_over_identity_residual_carry_ci_above_zero": false,
+    "gain_over_identity_residual_carry_holm_p_at_most_005": false,
+    "gain_over_identity_residual_carry_positive": false,
+    "gain_over_past_prototype_direct_ci_above_zero": false,
+    "gain_over_past_prototype_direct_holm_p_at_most_005": false,
+    "gain_over_past_prototype_direct_positive": false,
+    "gain_over_population_only_ci_above_zero": false,
+    "gain_over_population_only_holm_p_at_most_005": false,
+    "gain_over_population_only_positive": false,
+    "identity_leave_one_subject_gain_positive": false,
+    "macro_f1_gain_over_identity_positive": false,
+    "median_selected_rank_at_most_3": true,
+    "nll_noninferior_within_001": true,
+    "openbmi_ci_above_zero": true,
+    "openbmi_gain_positive": true,
+    "openbmi_p_at_most_005": true,
+    "unpaired_source_session_map_p_at_most_005": false
+  },
+  "low_rank_pass": false,
+  "memory_specific_pass": false,
+  "next_question_or_statement": "Stable low-dimensional subject×class interaction does not provide incremental cross-session decoding utility beyond direct enrollment-session residual transfer under the tested returning-user protocol.",
+  "openbmi_nulls": {
+    "ENROLLMENT_CLASS_SEMANTICS_PERMUTATION": {
+      "dataset": "openbmi",
+      "hyperparameter_rule": "frozen_observed_source_only_selection",
+      "null": "ENROLLMENT_CLASS_SEMANTICS_PERMUTATION",
+      "null_mean": 0.631111111111111,
+      "null_median": 0.6311111111111111,
+      "null_q025": 0.6311111111111111,
+      "null_q975": 0.6311111111111111,
+      "observed_mean_balanced_accuracy": 0.6914814814814813,
+      "p_value": 0.0005,
+      "replicates": 1999
+    },
+    "ENROLLMENT_SUBJECT_MEMORY_PERMUTATION": {
+      "dataset": "openbmi",
+      "hyperparameter_rule": "frozen_observed_source_only_selection",
+      "null": "ENROLLMENT_SUBJECT_MEMORY_PERMUTATION",
+      "null_mean": 0.6851995442165525,
+      "null_median": 0.685,
+      "null_q025": 0.6803703703703704,
+      "null_q975": 0.6903703703703701,
+      "observed_mean_balanced_accuracy": 0.6914814814814813,
+      "p_value": 0.0085,
+      "replicates": 1999
+    },
+    "RANDOM_RANK_MATCHED_OUTPUT_SUBSPACE": {
+      "dataset": "openbmi",
+      "hyperparameter_rule": "frozen_observed_source_only_selection",
+      "null": "RANDOM_RANK_MATCHED_OUTPUT_SUBSPACE",
+      "null_mean": 0.6914087599355233,
+      "null_median": 0.6914814814814814,
+      "null_q025": 0.6903703703703704,
+      "null_q975": 0.6925925925925924,
+      "observed_mean_balanced_accuracy": 0.6914814814814813,
+      "p_value": 0.531,
+      "replicates": 1999
+    },
+    "UNPAIRED_SOURCE_SESSION_MAP": {
+      "dataset": "openbmi",
+      "hyperparameter_rule": "conditional_on_observed_source_only_selection",
+      "null": "UNPAIRED_SOURCE_SESSION_MAP",
+      "null_mean": 0.6875578530005744,
+      "null_median": 0.6885185185185186,
+      "null_q025": 0.6759259259259259,
+      "null_q975": 0.6948148148148148,
+      "observed_mean_balanced_accuracy": 0.6914814814814813,
+      "p_value": 0.2845,
+      "replicates": 1999
+    }
+  },
+  "openbmi_replication_pass": true,
+  "openbmi_selected_ranks": [
+    3,
+    5,
+    3,
+    13,
+    5,
+    2
+  ],
+  "parent_results_reinterpreted": false,
+  "stieger_nulls": {
+    "ENROLLMENT_CLASS_SEMANTICS_PERMUTATION": {
+      "dataset": "stieger",
+      "hyperparameter_rule": "frozen_observed_source_only_selection",
+      "null": "ENROLLMENT_CLASS_SEMANTICS_PERMUTATION",
+      "null_mean": 0.3196536323220814,
+      "null_median": 0.31974565344652983,
+      "null_q025": 0.30618548814301755,
+      "null_q975": 0.33232185533960024,
+      "observed_mean_balanced_accuracy": 0.3315558928597135,
+      "p_value": 0.035,
+      "replicates": 1999
+    },
+    "ENROLLMENT_SUBJECT_MEMORY_PERMUTATION": {
+      "dataset": "stieger",
+      "hyperparameter_rule": "frozen_observed_source_only_selection",
+      "null": "ENROLLMENT_SUBJECT_MEMORY_PERMUTATION",
+      "null_mean": 0.3354003697380918,
+      "null_median": 0.3352567214623884,
+      "null_q025": 0.3278046088146863,
+      "null_q975": 0.3432991728088455,
+      "observed_mean_balanced_accuracy": 0.3315558928597135,
+      "p_value": 0.829,
+      "replicates": 1999
+    },
+    "RANDOM_RANK_MATCHED_OUTPUT_SUBSPACE": {
+      "dataset": "stieger",
+      "hyperparameter_rule": "frozen_observed_source_only_selection",
+      "null": "RANDOM_RANK_MATCHED_OUTPUT_SUBSPACE",
+      "null_mean": 0.33749864091476783,
+      "null_median": 0.3374715160416405,
+      "null_q025": 0.336381389943556,
+      "null_q975": 0.3385559489965169,
+      "observed_mean_balanced_accuracy": 0.3315558928597135,
+      "p_value": 1.0,
+      "replicates": 1999
+    },
+    "UNPAIRED_SOURCE_SESSION_MAP": {
+      "dataset": "stieger",
+      "hyperparameter_rule": "conditional_on_observed_source_only_selection",
+      "null": "UNPAIRED_SOURCE_SESSION_MAP",
+      "null_mean": 0.3361961207428868,
+      "null_median": 0.3362244194422518,
+      "null_q025": 0.3258157323876108,
+      "null_q975": 0.34531279786861596,
+      "observed_mean_balanced_accuracy": 0.3315558928597135,
+      "p_value": 0.8335,
+      "replicates": 1999
+    }
+  },
+  "stieger_selected_ranks": [
+    1,
+    3,
+    3,
+    3,
+    3,
+    8
+  ],
+  "stieger_utility_pass": false,
+  "terminal": "STOP_NO_CROSS_SESSION_DOWNSTREAM_UTILITY"
+}

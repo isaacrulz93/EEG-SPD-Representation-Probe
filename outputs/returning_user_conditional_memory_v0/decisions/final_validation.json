@@ -1,0 +1,18 @@
+{
+  "cache_contracts": "PASS",
+  "focused_tests": {
+    "passed": 33,
+    "skipped": 0
+  },
+  "full_repository_tests": {
+    "passed": 472,
+    "skipped": 1,
+    "warnings": 2,
+    "warnings_scope": "pre-existing Stieger standard-montage interpolation test"
+  },
+  "git_diff_check": "PASS",
+  "parent_artifact_hash_count": 278,
+  "parent_artifact_hash_verification": "PASS",
+  "result_artifact_hash_verification": "PASS",
+  "terminal": "STOP_NO_CROSS_SESSION_DOWNSTREAM_UTILITY"
+}
