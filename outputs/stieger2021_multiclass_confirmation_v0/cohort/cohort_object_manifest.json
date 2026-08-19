@@ -68,18 +68,13 @@
   "excluded_subject_count": 0,
   "folds_sha256": "a3bf9afddb83ab0c0f192b7e337a44dabe24790a2bb083316aa4d18c0347610d",
   "locked_geometry_object_sha256": "bce785c13d3e851fb73e5554a5efc990592e832946b53b64fcdc08a708c83515",
-  "namespace": "stieger2021_multiclass_confirmation_v0",
   "parent_hashes": {
     "pr16_manifest": "a92c9fdd36ad70a7d3dda6d710b49da7287482e103260da1a3558a1b684d2d6e",
     "pr17_manifest": "661658b10594d747a0de5c5878549c7ee846111fb6214c7169da5ec159257b23",
     "pr18_manifest": "76370c6d9114f33b42c1f46d96ea46e4f2628892e3b4d5ab8cfef409c13cb4f1"
   },
-  "phase": "COHORT_AND_COMPACT_OBJECT_LOCK",
-  "protocol_sha256": "8e2272a56690312eebc02a4aa881d7af1bcea811215da7dc29846b269a173896",
   "scientific_population_statistic_accessed": false,
-  "source_manifest_sha256": "a7924583f55d936239f71d8036b8cd54ac9f66f6a802c825e2b34ee73a159561",
   "status": "DATA_LOCKED_NO_SCIENTIFIC_RESULT_YET",
   "streamed_manifest_sha256": "60aa67ccf0eaee9ef2618e4c775eec5f8f4c60bb40d1c8eb0c3b244dbe53f465",
-  "synthetic_gates_sha256": "990e14f6dda39a7c31082e716db8378e4af1c7449553e0e2de29b3adafb5da84",
   "trial_tangent_manifest_sha256": "9eaeda751afd6529b45a11c7e50c59d7631985f559c54eff318d0aacb2d11f06"
 }
