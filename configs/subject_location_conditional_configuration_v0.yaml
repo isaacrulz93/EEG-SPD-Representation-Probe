@@ -1,0 +1,92 @@
+protocol:
+  name: Cross-Session Subject Location to Conditional Configuration Prediction V0
+  version: "0.1.0"
+  freeze_date: "2026-08-27"
+  timezone: Asia/Seoul
+  master_seed: 20260827
+  branch: pilot/subject-location-conditional-configuration-v0
+  parent_pr: 19
+  parent_branch: pilot/stieger2021-multiclass-prospective-confirmation-v0
+  parent_head: 6abb73d82a0f616e0ca9d3eaa44e23d911a2123f
+  protocol_path: docs/PROTOCOL_SUBJECT_LOCATION_CONDITIONAL_CONFIGURATION_V0.md
+  protocol_sha256: ffe45f713fc5c03eed0cd4c2638b1381145f124ecb4ce94165d19c1708e86a38
+
+project:
+  output_dir: outputs/subject_location_conditional_configuration_v0
+  parent_output_dir: outputs/stieger2021_multiclass_confirmation_v0
+
+parent_contract:
+  locked_geometry_path: outputs/stieger2021_multiclass_confirmation_v0/objects/locked_geometry_objects.npz
+  locked_geometry_sha256: bce785c13d3e851fb73e5554a5efc990592e832946b53b64fcdc08a708c83515
+  folds_path: outputs/stieger2021_multiclass_confirmation_v0/cohort/exact_folds.json
+  folds_canonical_sha256: a3bf9afddb83ab0c0f192b7e337a44dabe24790a2bb083316aa4d18c0347610d
+  cohort_manifest_path: outputs/stieger2021_multiclass_confirmation_v0/cohort/cohort_object_manifest.json
+  streamed_manifest_path: outputs/stieger2021_multiclass_confirmation_v0/source_manifest/streamed_source_and_compact_records.json
+  streamed_manifest_canonical_sha256: 60aa67ccf0eaee9ef2618e4c775eec5f8f4c60bb40d1c8eb0c3b244dbe53f465
+  manifest_path: outputs/stieger2021_multiclass_confirmation_v0/manifest.json
+
+data:
+  dataset: Stieger2021
+  subjects: 62
+  sessions: [2, 3]
+  task_number: 3
+  class_order: [right_hand, left_hand, both_hand, rest]
+  outer_folds: 6
+  inner_folds: 5
+  epoch: primary
+  split: F
+  spd_dimension: 20
+  svec_dimension: 210
+
+geometry:
+  metric: AIRM
+  mean_tol: 1.0e-9
+  mean_maxiter: 100
+  karcher_residual_max: 1.0e-7
+  condition_number_max: 1.0e12
+  svec: frobenius_isometric_upper_triangle_row_major
+  off_diagonal_scale: 1.4142135623730951
+  class_centering: equal_class
+
+model:
+  name: source_only_reduced_rank_dual_ridge
+  output_ranks: [0, 1, 2, 3, 5, 8, 13]
+  ridge_multipliers: [1.0e-4, 1.0e-3, 1.0e-2, 1.0e-1, 1.0, 10.0, 100.0, 1000.0]
+  inner_loss: normalized_conditional_sse
+  selection: one_standard_error_smallest_rank_then_largest_ridge
+  input_standardization: forbidden
+  training_column_mean_centering: true
+
+directions:
+  FORWARD: [2, 3]
+  REVERSE: [3, 2]
+
+inference:
+  bootstrap_replicates: 10000
+  null_replicates: 1999
+  sign_flip_replicates_when_exact_infeasible: 99999
+  alpha: 0.05
+
+terminal:
+  minimum_pooled_r2: 0.05
+  minimum_positive_unit_fraction: 0.60
+
+state_order:
+  - PARENT_VALIDATED
+  - PROTOCOL_FROZEN
+  - OBJECTS_LOCKED_NO_TARGET_OUTCOME_ACCESSED
+  - PRIMARY_PREDICTIONS_FROZEN
+  - TARGET_OUTCOMES_RELEASED_FOR_EVALUATION
+  - NULLS_COMPLETE
+  - TERMINAL_WRITTEN
+  - STOPPED
+
+forbidden:
+  - raw_stieger_access
+  - classifier_training
+  - neural_network_training
+  - target_model_selection
+  - target_adaptation
+  - subject_identity_feature
+  - conditional_alignment
+  - PR20_or_PR21_model_inheritance

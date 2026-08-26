@@ -1,0 +1,59 @@
+{
+  "accepted_parent_facts": {
+    "class_order": [
+      "right_hand",
+      "left_hand",
+      "both_hand",
+      "rest"
+    ],
+    "dataset": "Stieger2021",
+    "folds_canonical_sha256": "a3bf9afddb83ab0c0f192b7e337a44dabe24790a2bb083316aa4d18c0347610d",
+    "locked_geometry_sha256": "bce785c13d3e851fb73e5554a5efc990592e832946b53b64fcdc08a708c83515",
+    "parent_head": "6abb73d82a0f616e0ca9d3eaa44e23d911a2123f",
+    "parent_pr": 19,
+    "sessions": [
+      2,
+      3
+    ],
+    "streamed_manifest_canonical_sha256": "60aa67ccf0eaee9ef2618e4c775eec5f8f4c60bb40d1c8eb0c3b244dbe53f465",
+    "subjects": 62,
+    "task_number": 3
+  },
+  "active_hypothesis": "label-free subject SPD location predicts cross-session subject-by-class interaction",
+  "artifact_hashes": {
+    "outputs/subject_location_conditional_configuration_v0/environment.json": "5f1a5b0773b925e900f4e6d20e348eb3de60803c29a2ebb29b9b818dc279d295",
+    "outputs/subject_location_conditional_configuration_v0/git_provenance.json": "b27deba586d19fd834f4da18f30fa60549abeba7e5a7c095bf26951fddb88036",
+    "outputs/subject_location_conditional_configuration_v0/protocol/PROTOCOL_SUBJECT_LOCATION_CONDITIONAL_CONFIGURATION_V0.md": "ffe45f713fc5c03eed0cd4c2638b1381145f124ecb4ce94165d19c1708e86a38",
+    "outputs/subject_location_conditional_configuration_v0/protocol/subject_location_conditional_configuration_v0.yaml": "aa2c7a64bf31f5d4eb27bfaf98ae501f72fcded6713a4cefa1e4532500c5d28e",
+    "outputs/subject_location_conditional_configuration_v0/protocol/synthetic_gates.json": "0978dfe7f76e4d7fbb56c705ae892b3e8c8106743ae259ca01b395a6b55c19cd",
+    "outputs/subject_location_conditional_configuration_v0/status/01_parent_validated.json": "81952456ae1647ce79b4988ac4ef602003c438fc1136d8a927d591d5b1e4408c",
+    "outputs/subject_location_conditional_configuration_v0/status/02_protocol_frozen.json": "9f172bb891c4079f646e026f17e903426dd15b5212fd9dd2e92f4424cb0fe0d6",
+    "outputs/subject_location_conditional_configuration_v0/tables/01_parent_artifact_validation.json": "29c5d16e10021916dfd70dafe61fb1c4ef3196fdfc97a5139a722f62aab293ee",
+    "outputs/subject_location_conditional_configuration_v0/tables/02_locked_object_schema.csv": "1e9148a988b727e6318d6020d2292168ffb1ab44274de50b120af326f81704d7"
+  },
+  "completed_gates": [
+    "exact_parent_head",
+    "parent_manifest_artifacts",
+    "compact_schema",
+    "outer_inner_folds",
+    "all_62x2x4_objects",
+    "synthetic_gates",
+    "protocol_hash",
+    "no_target_conditional_outcome_access"
+  ],
+  "current_state": "PROTOCOL_FROZEN",
+  "exact_next_question": null,
+  "fixed_research_question": "Can the label-free geometric location of a subject in a source-population SPD coordinate system predict that subject's class-centered conditional configuration in another session?",
+  "forbidden_claims": [
+    "deployable TTA method",
+    "target class-semantic identification",
+    "classifier improvement",
+    "conditional density recovery",
+    "causal subject factor",
+    "physiology or source anatomy",
+    "ASD generalization",
+    "universal EEG coordinates"
+  ],
+  "terminal": null,
+  "updated_utc_epoch_seconds": 1787788609.3042939
+}

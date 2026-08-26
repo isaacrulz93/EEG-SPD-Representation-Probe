@@ -1,0 +1,45 @@
+{
+  "case_count": 6,
+  "cases": {
+    "fold_reference_leakage": {
+      "passed": true,
+      "source_hash_after": "ac9ceb6b1e501574ef9520294a1044151c33a143e23ba5747fc464c9e0c81892",
+      "source_hash_before": "ac9ceb6b1e501574ef9520294a1044151c33a143e23ba5747fc464c9e0c81892"
+    },
+    "known_low_rank": {
+      "heldout_r2": 0.9999966015429916,
+      "passed": true,
+      "selected_rank": 2,
+      "shuffled_r2": 0.009945617663350337
+    },
+    "no_relationship": {
+      "heldout_r2": 0.0,
+      "passed": true,
+      "selected_rank": 0
+    },
+    "outcome_vault_barrier": {
+      "passed": true,
+      "predictor_loads_locked_parent": false,
+      "predictor_mentions_outcome_vault": false
+    },
+    "session_specific_nuisance": {
+      "cross_session_r2": [
+        -0.31374829826437445,
+        -0.1498741260274612
+      ],
+      "passed": true,
+      "same_session_r2": [
+        0.9445579453183185,
+        0.9401256567958725
+      ]
+    },
+    "shared_subject_main_effect_only": {
+      "class_center_error": 1.9984014443252818e-15,
+      "heldout_r2": -0.02714877221768619,
+      "passed": true
+    }
+  },
+  "content_sha256": "5c31300cab21f3dc2580c8ebe798a8d74e6b55e9c24ce79e895b7848189f4989",
+  "passed": true,
+  "target_conditional_outcome_accessed": false
+}
