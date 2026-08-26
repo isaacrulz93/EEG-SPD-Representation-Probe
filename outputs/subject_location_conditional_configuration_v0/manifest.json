@@ -2,11 +2,14 @@
   "automatic_merge": false,
   "branch": "pilot/subject-location-conditional-configuration-v0",
   "classifier_trained": false,
+  "input_packet_count": 12,
+  "locked_packet_manifest_sha256": "35bbe4551e03b5350803ebd6627ffc6af83b85ca6de6d46f156763a40fa21200",
   "namespace": "subject_location_conditional_configuration_v0",
   "neural_network_trained": false,
   "parent_head": "6abb73d82a0f616e0ca9d3eaa44e23d911a2123f",
-  "phase": "PROTOCOL_FROZEN_NO_TARGET_CONDITIONAL_OUTCOME_ACCESSED",
+  "phase": "OBJECTS_LOCKED_NO_TARGET_OUTCOME_ACCESSED",
   "pr20_pr21_code_inherited": false,
   "raw_eeg_opened": false,
+  "sealed_vault_count": 12,
   "tta_performed": false
 }

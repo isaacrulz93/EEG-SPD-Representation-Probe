@@ -1,0 +1,24 @@
+{
+  "content_sha256": "5361aa3edff3eaf9a9200a1f2bf7cd23ec6e07256e9006a198cf1b180eadd5a8",
+  "direction": "FORWARD",
+  "fold": 5,
+  "heldout_subjects": [
+    2,
+    7,
+    12,
+    14,
+    25,
+    39,
+    46,
+    50,
+    51,
+    54,
+    58
+  ],
+  "prediction_process_access_permitted": false,
+  "schema": "sealed_target_conditional_outcome_vault_v0",
+  "scientific_target_outcome_accessed": false,
+  "sealed": true,
+  "vault_path": "outputs/subject_location_conditional_configuration_v0/outcome_vault/FORWARD/fold_05.npz",
+  "vault_sha256": "00ead63e4a28f449544891ff8f33a395df16914b28864ef95d722ed2135879e0"
+}

@@ -1,0 +1,55 @@
+{
+  "accepted_parent_facts": {
+    "class_order": [
+      "right_hand",
+      "left_hand",
+      "both_hand",
+      "rest"
+    ],
+    "dataset": "Stieger2021",
+    "folds_canonical_sha256": "a3bf9afddb83ab0c0f192b7e337a44dabe24790a2bb083316aa4d18c0347610d",
+    "locked_geometry_sha256": "bce785c13d3e851fb73e5554a5efc990592e832946b53b64fcdc08a708c83515",
+    "parent_head": "6abb73d82a0f616e0ca9d3eaa44e23d911a2123f",
+    "parent_pr": 19,
+    "sessions": [
+      2,
+      3
+    ],
+    "streamed_manifest_canonical_sha256": "60aa67ccf0eaee9ef2618e4c775eec5f8f4c60bb40d1c8eb0c3b244dbe53f465",
+    "subjects": 62,
+    "task_number": 3
+  },
+  "active_hypothesis": "label-free subject SPD location predicts cross-session subject-by-class interaction",
+  "completed_gates": [
+    "exact_parent_head",
+    "parent_manifest_artifacts",
+    "compact_schema",
+    "outer_inner_folds",
+    "all_62x2x4_objects",
+    "synthetic_gates",
+    "protocol_hash",
+    "no_target_conditional_outcome_access",
+    "source_only_fold_references",
+    "inner_fold_recomputation",
+    "zero_sum_class_configuration",
+    "sealed_outcome_vault",
+    "prediction_input_separation"
+  ],
+  "content_sha256": "006b66351741dd87c8ca838721341b5492e80bb4337b3f6ea7d9024ce49d4fc2",
+  "current_state": "OBJECTS_LOCKED_NO_TARGET_OUTCOME_ACCESSED",
+  "exact_next_question": null,
+  "fixed_research_question": "Can the label-free geometric location of a subject in a source-population SPD coordinate system predict that subject's class-centered conditional configuration in another session?",
+  "forbidden_claims": [
+    "deployable TTA method",
+    "target class-semantic identification",
+    "classifier improvement",
+    "conditional density recovery",
+    "causal subject factor",
+    "physiology or source anatomy",
+    "ASD generalization",
+    "universal EEG coordinates"
+  ],
+  "terminal": null,
+  "updated_utc_epoch_seconds": 1787788663.205962,
+  "validated_prior_artifact_count": 60
+}
