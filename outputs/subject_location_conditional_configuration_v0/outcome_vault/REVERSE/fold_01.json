@@ -1,0 +1,23 @@
+{
+  "content_sha256": "064f2b1fbf500185f72f2d522eca77621f04693841686218491d38f835fdeee6",
+  "direction": "REVERSE",
+  "fold": 1,
+  "heldout_subjects": [
+    5,
+    11,
+    15,
+    26,
+    28,
+    37,
+    41,
+    48,
+    56,
+    60
+  ],
+  "prediction_process_access_permitted": false,
+  "schema": "sealed_target_conditional_outcome_vault_v0",
+  "scientific_target_outcome_accessed": false,
+  "sealed": true,
+  "vault_path": "outputs/subject_location_conditional_configuration_v0/outcome_vault/REVERSE/fold_01.npz",
+  "vault_sha256": "439cc7d1d6e34e59236687b3fe82631627cc2dca6c4bed06767590c56991f8f9"
+}

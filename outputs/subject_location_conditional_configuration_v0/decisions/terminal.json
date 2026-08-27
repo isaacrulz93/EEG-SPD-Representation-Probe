@@ -1,0 +1,21 @@
+{
+  "automatic_followup_executed": false,
+  "content_sha256": "42f2e20285bd273345fd5d705b6beab633718d18f9257c609254b4dc29e8a02f",
+  "exact_next_question": "What target-observable statistic other than global subject location is required to identify unseen-subject class-conditional deformation?",
+  "gates": {
+    "all_engineering_gates": true,
+    "forward_r2_positive": false,
+    "leave_one_subject_minimum_positive": false,
+    "pooled_bootstrap_lower_positive": false,
+    "pooled_r2_at_least_0_05": false,
+    "positive_subject_direction_fraction_at_least_0_60": false,
+    "reverse_r2_positive": false,
+    "source_pairing_null_p_at_most_0_05": false,
+    "subject_gain_sign_flip_p_at_most_0_05": true
+  },
+  "positive_subject_direction_count": 29,
+  "positive_subject_direction_fraction": 0.23387096774193547,
+  "source_pairing_pooled_null_p": 0.796,
+  "subject_direction_unit_count": 124,
+  "terminal": "STOP_LOCATION_DOES_NOT_PREDICT_CONDITIONAL_CONFIGURATION"
+}

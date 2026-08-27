@@ -1,0 +1,10 @@
+{
+  "branch": "pilot/subject-location-conditional-configuration-v0",
+  "config_sha256": "aa2c7a64bf31f5d4eb27bfaf98ae501f72fcded6713a4cefa1e4532500c5d28e",
+  "head_at_freeze": "6abb73d82a0f616e0ca9d3eaa44e23d911a2123f",
+  "parent_head": "6abb73d82a0f616e0ca9d3eaa44e23d911a2123f",
+  "pr20_pr21_model_code_inspected_or_inherited": false,
+  "pr20_reference_head": "9c95e5b19eb4c44acc411c1e0d72a5cdd4d9ef63",
+  "pr21_reference_head": "94fed2b46701814d7bc3d0747106e4d64c6b0c1f",
+  "protocol_sha256": "ffe45f713fc5c03eed0cd4c2638b1381145f124ecb4ce94165d19c1708e86a38"
+}

@@ -1,0 +1,30 @@
+{
+  "contains_prediction_error": false,
+  "contains_true_delta": false,
+  "content_sha256": "63614966ef2f702e285b3f6615a1d2995621859c7da4de3b5210da2b4a34e316",
+  "direction": "REVERSE",
+  "fold": 6,
+  "heldout_subjects": [
+    6,
+    9,
+    18,
+    21,
+    23,
+    27,
+    31,
+    32,
+    36,
+    38
+  ],
+  "model_path": "outputs/subject_location_conditional_configuration_v0/predictions/REVERSE/fold_06_model.npz",
+  "model_sha256": "63ba6340a3b109123a698f8032bfde76e5892fd202fb737ef310d7f00b2639d5",
+  "prediction_class_zero_sum_max_error": 1.030404883990451e-16,
+  "prediction_path": "outputs/subject_location_conditional_configuration_v0/predictions/REVERSE/fold_06.npz",
+  "prediction_sha256": "756ac0d0647b3e9d9663bad9d49c29f7f65bf598d1a8a16c5252a732e242c752",
+  "schema": "frozen_conditional_configuration_prediction_v0",
+  "selected_rank": 2,
+  "selected_ridge_multiplier": 100.0,
+  "selection_path": "outputs/subject_location_conditional_configuration_v0/predictions/REVERSE/fold_06_selection.json",
+  "selection_sha256": "64f996e1bd0dfdfeb3f4fe5d1a2f95fa9a9f23bf1c7f5956eae25f1cd4b7135e",
+  "target_outcome_accessed": false
+}

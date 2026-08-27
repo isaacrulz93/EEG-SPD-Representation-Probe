@@ -1,0 +1,91 @@
+{
+  "non_voting": true,
+  "selections": [
+    {
+      "direction": "SAME_SESSION_2",
+      "fold": 1,
+      "selected_rank": 0,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "SAME_SESSION_2",
+      "fold": 2,
+      "selected_rank": 3,
+      "selected_ridge_multiplier": 100.0
+    },
+    {
+      "direction": "SAME_SESSION_2",
+      "fold": 3,
+      "selected_rank": 1,
+      "selected_ridge_multiplier": 1.0
+    },
+    {
+      "direction": "SAME_SESSION_2",
+      "fold": 4,
+      "selected_rank": 0,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "SAME_SESSION_2",
+      "fold": 5,
+      "selected_rank": 0,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "SAME_SESSION_2",
+      "fold": 6,
+      "selected_rank": 0,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "SAME_SESSION_3",
+      "fold": 1,
+      "selected_rank": 1,
+      "selected_ridge_multiplier": 100.0
+    },
+    {
+      "direction": "SAME_SESSION_3",
+      "fold": 2,
+      "selected_rank": 0,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "SAME_SESSION_3",
+      "fold": 3,
+      "selected_rank": 2,
+      "selected_ridge_multiplier": 10.0
+    },
+    {
+      "direction": "SAME_SESSION_3",
+      "fold": 4,
+      "selected_rank": 0,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "SAME_SESSION_3",
+      "fold": 5,
+      "selected_rank": 2,
+      "selected_ridge_multiplier": 100.0
+    },
+    {
+      "direction": "SAME_SESSION_3",
+      "fold": 6,
+      "selected_rank": 1,
+      "selected_ridge_multiplier": 1.0
+    }
+  ],
+  "summary": {
+    "SAME_SESSION_2": {
+      "mean_error_gain": -0.015033893711088441,
+      "positive_gain_count": 7,
+      "r2_cond": -0.011865415026290016,
+      "subject_count": 62
+    },
+    "SAME_SESSION_3": {
+      "mean_error_gain": -0.036582459735201855,
+      "positive_gain_count": 22,
+      "r2_cond": -0.02228322375735514,
+      "subject_count": 62
+    }
+  }
+}

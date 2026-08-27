@@ -1,0 +1,91 @@
+{
+  "non_voting": true,
+  "selections": [
+    {
+      "direction": "FORWARD",
+      "fixed_output_rank": 1,
+      "fold": 1,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "FORWARD",
+      "fixed_output_rank": 0,
+      "fold": 2,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "FORWARD",
+      "fixed_output_rank": 1,
+      "fold": 3,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "FORWARD",
+      "fixed_output_rank": 2,
+      "fold": 4,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "FORWARD",
+      "fixed_output_rank": 0,
+      "fold": 5,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "FORWARD",
+      "fixed_output_rank": 3,
+      "fold": 6,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "REVERSE",
+      "fixed_output_rank": 0,
+      "fold": 1,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "REVERSE",
+      "fixed_output_rank": 0,
+      "fold": 2,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "REVERSE",
+      "fixed_output_rank": 0,
+      "fold": 3,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "REVERSE",
+      "fixed_output_rank": 1,
+      "fold": 4,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "REVERSE",
+      "fixed_output_rank": 0,
+      "fold": 5,
+      "selected_ridge_multiplier": 1000.0
+    },
+    {
+      "direction": "REVERSE",
+      "fixed_output_rank": 2,
+      "fold": 6,
+      "selected_ridge_multiplier": 1000.0
+    }
+  ],
+  "summary": {
+    "FORWARD": {
+      "mean_error_gain": -4.887530789673071e-05,
+      "positive_gain_count": 15,
+      "r2_cond": -2.977108237001147e-05,
+      "subject_count": 62
+    },
+    "REVERSE": {
+      "mean_error_gain": -0.00019736036127566834,
+      "positive_gain_count": 9,
+      "r2_cond": -0.00015576554160068312,
+      "subject_count": 62
+    }
+  }
+}
