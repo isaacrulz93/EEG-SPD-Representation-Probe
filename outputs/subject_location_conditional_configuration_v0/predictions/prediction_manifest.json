@@ -1,0 +1,69 @@
+{
+  "all_prediction_hashes_valid": true,
+  "content_sha256": "70c71f53d645c2858d81c9aebf65b0ff89678dedde4d4f110c507db55743ea91",
+  "prediction_count": 12,
+  "records": [
+    {
+      "direction": "FORWARD",
+      "fold": 1,
+      "prediction_sha256": "ec4349cfb1789fa107cc08bf8003cc9afe802efe74339819119ee5c595805e66"
+    },
+    {
+      "direction": "FORWARD",
+      "fold": 2,
+      "prediction_sha256": "982b0476a978c4becdcfa12a0647b692c90f7adae45406be0f2c8bc2d2b41976"
+    },
+    {
+      "direction": "FORWARD",
+      "fold": 3,
+      "prediction_sha256": "c8bde4e2877ee3d6c6cdc90d37b404118d5c58226d56a9ad9a620e50aa39d984"
+    },
+    {
+      "direction": "FORWARD",
+      "fold": 4,
+      "prediction_sha256": "da2288640415232b420815f08f54aa6954ae5fec70262a0773c8ed459d68e651"
+    },
+    {
+      "direction": "FORWARD",
+      "fold": 5,
+      "prediction_sha256": "2f231848016220ff94d7b649a08555417809247d85a96c8f9b493ca0cb9c27b1"
+    },
+    {
+      "direction": "FORWARD",
+      "fold": 6,
+      "prediction_sha256": "7b2b68dc6a985bcf407be1ff87281b0c340a8eb3354fd639beb70f6f01909603"
+    },
+    {
+      "direction": "REVERSE",
+      "fold": 1,
+      "prediction_sha256": "3889e38615b16e5c6d044136901e53b50164afb7e756ec8bc2e2f4dc466fe65a"
+    },
+    {
+      "direction": "REVERSE",
+      "fold": 2,
+      "prediction_sha256": "982b0476a978c4becdcfa12a0647b692c90f7adae45406be0f2c8bc2d2b41976"
+    },
+    {
+      "direction": "REVERSE",
+      "fold": 3,
+      "prediction_sha256": "dec54064145ba556b669683427a5560e8001da249edd66f6553baa2e871669b6"
+    },
+    {
+      "direction": "REVERSE",
+      "fold": 4,
+      "prediction_sha256": "2ea9c2a739ccbc1a300cdee3615380589ece40792e08bc21d6bdf9fb52287b75"
+    },
+    {
+      "direction": "REVERSE",
+      "fold": 5,
+      "prediction_sha256": "2f231848016220ff94d7b649a08555417809247d85a96c8f9b493ca0cb9c27b1"
+    },
+    {
+      "direction": "REVERSE",
+      "fold": 6,
+      "prediction_sha256": "756ac0d0647b3e9d9663bad9d49c29f7f65bf598d1a8a16c5252a732e242c752"
+    }
+  ],
+  "status": "PRIMARY_PREDICTIONS_FROZEN",
+  "target_outcomes_accessed": false
+}

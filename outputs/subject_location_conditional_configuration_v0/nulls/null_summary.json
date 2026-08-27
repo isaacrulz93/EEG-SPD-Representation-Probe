@@ -1,0 +1,70 @@
+{
+  "content_sha256": "8b69f024311f04ec70220f762778ef33bf3fd44ffca5674511dc60e400463e5d",
+  "rank_ridge_fixed_from_true_source_selection": true,
+  "replicates": 1999,
+  "source_pairing": [
+    {
+      "null_95_high": 0.008147312294045117,
+      "null_95_low": -0.011919690668057936,
+      "null_mean_r2": -0.0006477174872424407,
+      "null_median_r2": 3.770328430352521e-05,
+      "null_p_value": 0.797,
+      "observed_r2": -0.0049764953154465275,
+      "replicates": 1999,
+      "scope": "FORWARD"
+    },
+    {
+      "null_95_high": 0.0007240054685703597,
+      "null_95_low": -0.0009437831504604421,
+      "null_mean_r2": -8.454313385436205e-05,
+      "null_median_r2": -7.187887308046648e-05,
+      "null_p_value": 0.5445,
+      "observed_r2": -0.0001221172692338346,
+      "replicates": 1999,
+      "scope": "REVERSE"
+    },
+    {
+      "null_95_high": 0.004554762492574349,
+      "null_95_low": -0.006835360958875469,
+      "null_mean_r2": -0.0004024010362559892,
+      "null_median_r2": -3.934148818607319e-05,
+      "null_p_value": 0.796,
+      "observed_r2": -0.0028619480409137754,
+      "replicates": 1999,
+      "scope": "POOLED"
+    }
+  ],
+  "target_location_pairing": [
+    {
+      "null_95_high": 0.0044764538648484,
+      "null_95_low": -0.003643246936971123,
+      "null_mean_r2": 0.0005449674431832318,
+      "null_median_r2": 0.0005995769815093643,
+      "null_p_value": 0.9955,
+      "observed_r2": -0.0049764953154465275,
+      "replicates": 1999,
+      "scope": "FORWARD"
+    },
+    {
+      "null_95_high": 0.00132090586047095,
+      "null_95_low": -0.0022539002840937018,
+      "null_mean_r2": -0.0004985580099375388,
+      "null_median_r2": -0.0004938185754335134,
+      "null_p_value": 0.3465,
+      "observed_r2": -0.0001221172692338346,
+      "replicates": 1999,
+      "scope": "REVERSE"
+    },
+    {
+      "null_95_high": 0.002363943658905232,
+      "null_95_low": -0.002324926058552412,
+      "null_mean_r2": 9.041201264285944e-05,
+      "null_median_r2": 0.0001100661315396323,
+      "null_p_value": 0.9885,
+      "observed_r2": -0.0028619480409137754,
+      "replicates": 1999,
+      "scope": "POOLED"
+    }
+  ],
+  "target_results_used_for_selection": false
+}

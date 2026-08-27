@@ -1,0 +1,31 @@
+{
+  "contains_prediction_error": false,
+  "contains_true_delta": false,
+  "content_sha256": "7bb60cce2e2486991dfb52be00e83d27dea0766383248ce487997aa8290498c8",
+  "direction": "REVERSE",
+  "fold": 4,
+  "heldout_subjects": [
+    1,
+    8,
+    10,
+    13,
+    30,
+    35,
+    42,
+    52,
+    53,
+    57,
+    59
+  ],
+  "model_path": "outputs/subject_location_conditional_configuration_v0/predictions/REVERSE/fold_04_model.npz",
+  "model_sha256": "6f5bb12f876cf8b14d4e6b294cbc250aec4b0e09ced9b493ec9c6b67f1f57e43",
+  "prediction_class_zero_sum_max_error": 9.815908939727212e-17,
+  "prediction_path": "outputs/subject_location_conditional_configuration_v0/predictions/REVERSE/fold_04.npz",
+  "prediction_sha256": "2ea9c2a739ccbc1a300cdee3615380589ece40792e08bc21d6bdf9fb52287b75",
+  "schema": "frozen_conditional_configuration_prediction_v0",
+  "selected_rank": 1,
+  "selected_ridge_multiplier": 100.0,
+  "selection_path": "outputs/subject_location_conditional_configuration_v0/predictions/REVERSE/fold_04_selection.json",
+  "selection_sha256": "42fedf8c232075a6131979e712b6e480db7e47813ab3371788a088d0c5496821",
+  "target_outcome_accessed": false
+}

@@ -1,0 +1,30 @@
+{
+  "contains_prediction_error": false,
+  "contains_true_delta": false,
+  "content_sha256": "533a3757085686b91189988225e08b300c5e214df6c48c7ee313519000807666",
+  "direction": "FORWARD",
+  "fold": 3,
+  "heldout_subjects": [
+    3,
+    17,
+    20,
+    24,
+    29,
+    40,
+    43,
+    45,
+    47,
+    55
+  ],
+  "model_path": "outputs/subject_location_conditional_configuration_v0/predictions/FORWARD/fold_03_model.npz",
+  "model_sha256": "24e4eb74b17e4ecfe002108d6ae0d60d2c06c1911dd0fd3cc4122a9893b1505a",
+  "prediction_class_zero_sum_max_error": 1.573558206879671e-16,
+  "prediction_path": "outputs/subject_location_conditional_configuration_v0/predictions/FORWARD/fold_03.npz",
+  "prediction_sha256": "c8bde4e2877ee3d6c6cdc90d37b404118d5c58226d56a9ad9a620e50aa39d984",
+  "schema": "frozen_conditional_configuration_prediction_v0",
+  "selected_rank": 1,
+  "selected_ridge_multiplier": 10.0,
+  "selection_path": "outputs/subject_location_conditional_configuration_v0/predictions/FORWARD/fold_03_selection.json",
+  "selection_sha256": "1dcca839773322f51a661acafa7618f0a59445fc6859ea153a0d8cecbb9450c2",
+  "target_outcome_accessed": false
+}

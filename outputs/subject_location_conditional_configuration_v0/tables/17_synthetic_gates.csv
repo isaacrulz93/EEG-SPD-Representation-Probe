@@ -1,0 +1,7 @@
+gate,passed,details
+fold_reference_leakage,True,"{""source_hash_after"": ""ac9ceb6b1e501574ef9520294a1044151c33a143e23ba5747fc464c9e0c81892"", ""source_hash_before"": ""ac9ceb6b1e501574ef9520294a1044151c33a143e23ba5747fc464c9e0c81892""}"
+known_low_rank,True,"{""heldout_r2"": 0.9999966015429916, ""selected_rank"": 2, ""shuffled_r2"": 0.009945617663350337}"
+no_relationship,True,"{""heldout_r2"": 0.0, ""selected_rank"": 0}"
+outcome_vault_barrier,True,"{""predictor_loads_locked_parent"": false, ""predictor_mentions_outcome_vault"": false}"
+session_specific_nuisance,True,"{""cross_session_r2"": [-0.31374829826437445, -0.1498741260274612], ""same_session_r2"": [0.9445579453183185, 0.9401256567958725]}"
+shared_subject_main_effect_only,True,"{""class_center_error"": 1.9984014443252818e-15, ""heldout_r2"": -0.02714877221768619}"

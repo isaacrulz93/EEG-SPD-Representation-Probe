@@ -1,0 +1,7 @@
+{
+  "interpretation": "identity descriptively only; not conditional prediction evidence",
+  "reference": "posthoc_all_subject_M0",
+  "top1_session2_to_session3": 0.3709677419354839,
+  "top1_session3_to_session2": 0.3548387096774194,
+  "voting": false
+}

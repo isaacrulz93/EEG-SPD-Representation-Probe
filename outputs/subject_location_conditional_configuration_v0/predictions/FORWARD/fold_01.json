@@ -1,0 +1,30 @@
+{
+  "contains_prediction_error": false,
+  "contains_true_delta": false,
+  "content_sha256": "71432839dba3a2f00d0d693f87af5622be3e53e1b642ee65db1a2cbda1cb769b",
+  "direction": "FORWARD",
+  "fold": 1,
+  "heldout_subjects": [
+    5,
+    11,
+    15,
+    26,
+    28,
+    37,
+    41,
+    48,
+    56,
+    60
+  ],
+  "model_path": "outputs/subject_location_conditional_configuration_v0/predictions/FORWARD/fold_01_model.npz",
+  "model_sha256": "64be8bb106afb0bbd9a57f85ee8a71a37c7fa76564aba3ff3330713b5ed01511",
+  "prediction_class_zero_sum_max_error": 1.3419051629890602e-16,
+  "prediction_path": "outputs/subject_location_conditional_configuration_v0/predictions/FORWARD/fold_01.npz",
+  "prediction_sha256": "ec4349cfb1789fa107cc08bf8003cc9afe802efe74339819119ee5c595805e66",
+  "schema": "frozen_conditional_configuration_prediction_v0",
+  "selected_rank": 1,
+  "selected_ridge_multiplier": 1000.0,
+  "selection_path": "outputs/subject_location_conditional_configuration_v0/predictions/FORWARD/fold_01_selection.json",
+  "selection_sha256": "69456409f50803438058b417dfcc4ce2637293b140ada4493612a6e619129380",
+  "target_outcome_accessed": false
+}
