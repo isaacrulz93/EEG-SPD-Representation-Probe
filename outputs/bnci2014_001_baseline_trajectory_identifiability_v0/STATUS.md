@@ -10,6 +10,16 @@
 - next automatic action: run raw annotation/data timing audit
 - reason if stopped: n/a
 
+## 2026-09-04 - data timing audit complete
+
+- stage: Data timing audit and baseline covariance cache
+- status: PASS
+- runtime: approximately 14 seconds for corrected pass
+- new files: `data_timing_audit.json`, `DATA_TIMING_AUDIT.md`, `data_audit/*`, ignored covariance cache
+- hard-gate result: DATA PASS, including frozen session-0 WINDOW5 reproduction
+- next automatic action: freeze protocol/config/source/tests before any real outcome metric
+- reason if stopped: n/a
+
 ## 2026-09-04 - data timing audit first-pass stop
 
 - stage: Data timing audit
@@ -19,6 +29,19 @@
 - hard-gate result: apparent `RAW_EVENT_TIMING_MISMATCH`, diagnosed as runner anchor error
 - next automatic action: rerun with raw annotation fixed as cue onset and stim event as trial start
 - reason if stopped: runner added the two-second cue offset twice; no scientific outcome was accessed
+
+## 2026-09-04 - corrected data timing audit started
+
+- stage: Data timing audit and baseline covariance cache
+- status: RUNNING
+- runtime: pending
+- process PID: `20552`
+- exec session: `69429`
+- log: `outputs/bnci2014_001_baseline_trajectory_identifiability_v0/logs/data_timing_audit_20260904.log`
+- new files: pending atomic completion
+- hard-gate result: pending
+- next automatic action: freeze protocol only if DATA gate passes
+- reason if stopped: n/a
 
 ## 2026-09-04 - data timing audit started
 
