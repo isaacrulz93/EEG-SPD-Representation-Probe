@@ -97,7 +97,11 @@ def run(cache: str | Path, output: str | Path, resume: bool = True) -> None:
         for feature in FEATURES:
             chunk = chunks / f"subject_{target}_{feature.replace('-', '_')}.npz"
             if resume and chunk.exists():
-                with np.load(chunk, allow_pickle=False) as z:
+                # These trusted, locally generated chunks contain pandas column
+                # labels as an object array; scientific numeric payloads remain
+                # plain string arrays and the raw covariance cache stays
+                # allow_pickle=False.
+                with np.load(chunk, allow_pickle=True) as z:
                     cluster_rows.extend(pd.DataFrame(z["cluster"], columns=z["cluster_columns"].astype(str)).to_dict("records"))
                     assignment_rows.extend(pd.DataFrame(z["assignment"], columns=z["assignment_columns"].astype(str)).to_dict("records"))
                     neighbour_rows.extend(pd.DataFrame(z["neighbour"], columns=z["neighbour_columns"].astype(str)).to_dict("records"))
