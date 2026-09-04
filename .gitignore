@@ -44,3 +44,6 @@ data/raw/
 *.tmp
 *.temp
 *.log
+
+# Resumable Baseline Trajectory V0 scratch chunks (aggregate CSVs are tracked)
+outputs/bnci2014_001_baseline_trajectory_identifiability_v0/action_bridge/chunks/

@@ -91,3 +91,75 @@
 - hard_gate: TANGENT_MEAN_TYPE_ERROR
 - next_automatic_action: Resume Phase 0-C after fixed arithmetic tangent mean
 - reason_if_stopped: No jitter or outcome-dependent definition change
+
+## Phase 0-A task
+
+- status: COMPLETE
+- runtime_seconds: 9.033
+- new_files: task/*.csv, features/*.csv
+- hard_gate: PENDING_DECISION
+- next_automatic_action: Phase 0-B
+- reason_if_stopped: none
+
+## Phase 0-A task
+
+- status: COMPLETE
+- runtime_seconds: 9.009
+- new_files: task/*.csv, features/*.csv
+- hard_gate: PENDING_DECISION
+- next_automatic_action: Phase 0-B
+- reason_if_stopped: none
+
+## Phase 0-B identifiability
+
+- status: COMPLETE
+- runtime_seconds: 24.715
+- new_files: identifiability/*.csv
+- hard_gate: PENDING_DECISION
+- next_automatic_action: Phase 0-C
+- reason_if_stopped: none
+
+## Phase 0-C action bridge
+
+- status: COMPLETE
+- runtime_seconds: 3304.033
+- new_files: action_bridge/*.csv
+- hard_gate: PENDING_DECISION
+- next_automatic_action: Decision calculation
+- reason_if_stopped: none
+
+## Phase 0 decision
+
+- status: COMPLETE
+- runtime_seconds: 0.013
+- new_files: decisions/*.json
+- hard_gate: STOP_BASELINE_RELATIVE_TRAJECTORY_LINE
+- next_automatic_action: Final report
+- reason_if_stopped: none
+
+## Phase 0-C unrelated-target null
+
+- status: COMPLETE
+- runtime_seconds: 68.623
+- new_files: action_bridge/unrelated_target_null.csv
+- hard_gate: NON_GATING_CONTROL
+- next_automatic_action: Finalization
+- reason_if_stopped: none
+
+## Final validation
+
+- status: PASS
+- runtime_seconds: 28.450
+- new_files: REPORT.md, HANDOFF.md, output_completeness.json, figures/task_headroom.png
+- hard_gate: 308_PASSED_4_SKIPPED
+- next_automatic_action: Commit and push
+- reason_if_stopped: none
+
+## Final deliverable
+
+- status: PASS
+- runtime_seconds: 30.360
+- new_files: all aggregate outputs and HANDOFF
+- hard_gate: 309_PASSED_4_SKIPPED_OUTPUT_COMPLETE
+- next_automatic_action: Commit and push
+- reason_if_stopped: none

@@ -1,0 +1,85 @@
+{
+  "action_oracle": {
+    "f2_rank1_cells": 9,
+    "pass": false,
+    "semantic_accuracy_delta": -0.01388888888888884
+  },
+  "action_zero": {
+    "median_mapping_ba_delta": -0.00434027777777779,
+    "pass": false,
+    "wins": 4
+  },
+  "conditional_gru": {
+    "run": false
+  },
+  "data": {
+    "pass": true
+  },
+  "final_case": "CASE 0",
+  "ident_cluster": {
+    "candidates": {
+      "F2-S": {
+        "median_mapping_ba_delta": 0.016493055555555414,
+        "median_nmi_delta": -0.0601968095032346,
+        "pass": false,
+        "wins": 5
+      },
+      "F3-G": {
+        "median_mapping_ba_delta": -0.07812500000000008,
+        "median_nmi_delta": -0.0968537630143213,
+        "pass": false,
+        "wins": 2
+      }
+    },
+    "pass": false
+  },
+  "order": {
+    "mean_delta": 0.0464891975308641,
+    "p_raw": 0.001953125,
+    "pass": true,
+    "wins": 9
+  },
+  "phase_p_bridge": {
+    "reason": "NOT_RUN_EXACT_TRIAL_IDENTITY_UNAVAILABLE",
+    "status": "NOT_RUN"
+  },
+  "task": {
+    "no_ra": {
+      "F2-S": {
+        "cross_session_delta": -0.1691743827160494,
+        "cross_session_wins": 0,
+        "mean_delta": 0.033179012345679,
+        "p_holm": 0.03125,
+        "pass": false,
+        "wins": 8
+      },
+      "F3-G": {
+        "cross_session_delta": -0.3233024691358024,
+        "cross_session_wins": 0,
+        "mean_delta": -0.0949074074074074,
+        "p_holm": 0.998046875,
+        "pass": false,
+        "wins": 1
+      }
+    },
+    "ra": {
+      "F2-S": {
+        "cross_session_delta": -0.1691743827160494,
+        "cross_session_wins": 0,
+        "mean_delta": -0.1222993827160494,
+        "p_holm": 1.0,
+        "pass": false,
+        "wins": 1
+      },
+      "F3-G": {
+        "cross_session_delta": -0.3233024691358024,
+        "cross_session_wins": 0,
+        "mean_delta": -0.2432484567901235,
+        "p_holm": 1.0,
+        "pass": false,
+        "wins": 0
+      }
+    }
+  },
+  "terminal": "STOP_BASELINE_RELATIVE_TRAJECTORY_LINE"
+}

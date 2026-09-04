@@ -1,4 +1,11 @@
 {
-  "exit_code": 1,
-  "log": "/Volumes/External_SSD/isaac/EEG-SPD-Representation-Probe-baseline-trajectory-v0/outputs/bnci2014_001_baseline_trajectory_identifiability_v0/logs/weekend_v0_20260904_224120.log"
+  "implementation_failures": [
+    "tangent_mean_type_error",
+    "trusted_chunk_dtype_resume_error",
+    "pymanopt_miniter_api_error",
+    "static_component_axis_error"
+  ],
+  "outcome_definition_changed": false,
+  "scientific_terminal": "STOP_BASELINE_RELATIVE_TRAJECTORY_LINE",
+  "status": "RECOVERED"
 }
