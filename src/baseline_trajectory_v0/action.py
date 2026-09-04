@@ -119,11 +119,13 @@ def select_semantic_permutation(source: np.ndarray, target: np.ndarray):
     return rows[0]["permutation"], rows, audits
 
 
-def _mean_components(matrices, labels, groups):
+def _mean_components(matrices, labels, *, spd):
     result = []
     for label in range(4):
         selected = matrices[labels == label]
-        if selected.ndim == 3:
+        if not spd:
+            result.append(selected.mean(axis=0))
+        elif selected.ndim == 3:
             result.append(airm_mean(selected))
         else:
             result.append(np.stack([airm_mean(selected[:, t]) for t in range(selected.shape[1])]))
@@ -134,9 +136,9 @@ def _representations(bank, indices, labels, reference):
     static = bank.full[indices]
     absolute = tangent_logs(bank.local[indices], reference)
     relative = baseline_relative_logs(bank.c0[indices], bank.local[indices])
-    return {"STATIC": _mean_components(static, labels, None)[:, None],
-            "F1": _mean_components(absolute, labels, None),
-            "F2-S": _mean_components(relative, labels, None)}
+    return {"STATIC": _mean_components(static, labels, spd=True)[:, None],
+            "F1": _mean_components(absolute, labels, spd=False),
+            "F2-S": _mean_components(relative, labels, spd=False)}
 
 
 def _true_mapping(hidden_order):
@@ -214,7 +216,10 @@ def run(cache: str | Path, output: str | Path, resume: bool = True) -> None:
                 if resume and chunk.exists():
                     zero_rows.extend(pd.read_csv(chunk).to_dict("records")); continue
                 clusters = KMeans(n_clusters=4, n_init=50, random_state=seed).fit_predict(xt)
-                target_components = _mean_components(trial_matrices[representation], clusters, None)
+                target_components = _mean_components(
+                    trial_matrices[representation], clusters,
+                    spd=(representation == "STATIC"),
+                )
                 if representation == "STATIC": target_components = target_components[:, None]
                 selected, scores, audits = select_semantic_permutation(source_repr[representation], target_components)
                 mapping = _selected_component_mapping(selected); prediction = mapping[clusters]

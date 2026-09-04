@@ -55,3 +55,39 @@
 - hard-gate result: pending
 - next automatic action: freeze protocol only if DATA gate passes
 - reason if stopped: n/a
+
+## Scientific run launch
+
+- status: RUNNING
+- runtime_seconds: 0.000
+- new_files: timestamped log
+- hard_gate: DATA_PASS
+- next_automatic_action: Phase 0-A task
+- reason_if_stopped: PID=23234; exec_session=74443; log=outputs/bnci2014_001_baseline_trajectory_identifiability_v0/logs/weekend_v0_20260904_224120.log
+
+## Phase 0-A task
+
+- status: COMPLETE
+- runtime_seconds: 263.400
+- new_files: task/*.csv, features/*.csv
+- hard_gate: PENDING_DECISION
+- next_automatic_action: Phase 0-B
+- reason_if_stopped: none
+
+## Phase 0-B identifiability
+
+- status: COMPLETE
+- runtime_seconds: 51.243
+- new_files: identifiability/*.csv
+- hard_gate: PENDING_DECISION
+- next_automatic_action: Phase 0-C
+- reason_if_stopped: none
+
+## Phase 0-C first attempt
+
+- status: FAIL_CLOSED
+- runtime_seconds: 0.000
+- new_files: failure.json and retained Phase 0-A/B chunks
+- hard_gate: TANGENT_MEAN_TYPE_ERROR
+- next_automatic_action: Resume Phase 0-C after fixed arithmetic tangent mean
+- reason_if_stopped: No jitter or outcome-dependent definition change
