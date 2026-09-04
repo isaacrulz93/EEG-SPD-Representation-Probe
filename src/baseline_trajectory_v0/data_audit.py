@@ -7,8 +7,9 @@ Audited lineage, not merged:
   src/trajectory_within_subject_data_v1.py
 
 The implementation deliberately loads BNCI2014_001 run-level Raw objects.
-MOABB's event annotation is the trial start; its declared interval [2, 6]
-places cue onset exactly two seconds after that annotation. Filtering matches
+The stim event is the trial start and the raw annotation is cue onset exactly
+two seconds later. MOABB's declared interval [2, 6] reproduces the same cue
+anchor when epoching from the stim event. Filtering matches
 the audited lineage: MNE Raw.filter(8, 32, method="iir", picks="data") on the
 continuous run before any event-relative slicing.
 """
@@ -320,7 +321,7 @@ def _report(payload: dict[str, Any]) -> str:
             "",
             "- Dataset: `moabb.datasets.BNCI2014_001` under MOABB " + payload["versions"]["moabb"],
             "- Raw inventory: 18 MAT files, 9 subjects, 2 sessions, 6 runs/session.",
-            "- Event annotation: trial start; cue onset is exactly +2.0 s / +500 samples.",
+            "- Stim event: trial start; raw annotation: cue onset exactly +2.0 s / +500 samples later.",
             "- Baseline C0: `[cue-250, cue)`, exactly 250 samples.",
             "- Post-cue: `[cue, cue+1000)`, exactly 1000 samples; five non-overlapping 200-sample windows.",
             "- Channels: 22 ordered EEG channels; EOG1-3 and STI excluded from covariance.",
@@ -410,9 +411,19 @@ def run_data_timing_audit(
                 ]
                 if len(selected) != 48:
                     raise DataTimingAuditError("RAW_EVENT_TIMING_MISMATCH: 48 events/run")
+                stim_events = {
+                    int(event[0]): int(event[2])
+                    for event in mne.find_events(raw, shortest_event=0, verbose=False)
+                    if int(event[2]) in dataset.event_id.values()
+                }
                 for onset, duration, description in selected:
-                    event_sample = int(raw.time_as_index(float(onset), use_rounding=True)[0])
-                    cue_sample = event_sample + CUE_OFFSET_SAMPLES
+                    cue_sample = int(raw.time_as_index(float(onset), use_rounding=True)[0])
+                    event_sample = cue_sample - CUE_OFFSET_SAMPLES
+                    expected_code = int(dataset.event_id[str(description)])
+                    if stim_events.get(event_sample) != expected_code:
+                        raise DataTimingAuditError(
+                            "RAW_EVENT_TIMING_MISMATCH: cue annotation/stim event disagreement"
+                        )
                     baseline_start = cue_sample - BASELINE_SAMPLES
                     baseline_stop = cue_sample
                     post_start = cue_sample
@@ -427,7 +438,7 @@ def run_data_timing_audit(
                             "session": session,
                             "run": run,
                             "class_label": str(description),
-                            "event_code": int(dataset.event_id[str(description)]),
+                            "event_code": expected_code,
                             "event_sample": event_sample,
                             "trial_start_sample": event_sample,
                             "trial_start_time_seconds": event_sample / SFREQ,
@@ -488,7 +499,7 @@ def run_data_timing_audit(
         "sessions": list(SESSIONS),
         "runs_per_session": 6,
         "event_codes": dataset.event_id,
-        "event_definition": "MOABB annotation is trial start; cue onset is annotation + dataset.interval[0] = +2.0 s",
+        "event_definition": "stim event is trial start; raw annotation is cue onset at stim + dataset.interval[0] = +2.0 s",
         "sfreq": SFREQ,
         "channel_names": list(CHANNELS),
         "channel_types": ["eeg"] * 22,
