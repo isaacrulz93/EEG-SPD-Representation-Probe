@@ -1,0 +1,193 @@
+protocol:
+  name: Baseline-Referenced SPD Trajectory Identifiability V0
+  version: "0.0"
+  freeze_date: "2026-09-04"
+  timezone: Asia/Seoul
+  master_seed: 20260904
+  branch: pilot/baseline-referenced-trajectory-identifiability-v0
+  base_commit: 4a0e7966f676a02838e4300114667ff5e40cd9ae
+  wall_clock_hours_max: 72
+
+project:
+  output_dir: outputs/bnci2014_001_baseline_trajectory_identifiability_v0
+  cache_dir: cache/bnci2014_001_baseline_trajectory_identifiability_v0
+  covariance_cache: cache/bnci2014_001_baseline_trajectory_identifiability_v0/baseline_trajectory_covariances.npz
+
+dataset:
+  name: BNCI2014_001
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  sessions: [0train, 1test]
+  runs: [0, 1, 2, 3, 4, 5]
+  classes: [left_hand, right_hand, feet, tongue]
+  channels: 22
+  sfreq: 250.0
+  baseline_relative_seconds: [-1.0, 0.0]
+  postcue_relative_seconds: [0.0, 4.0]
+  baseline_samples: 250
+  postcue_samples: 1000
+  local_windows: 5
+  local_samples: 200
+  bandpass_hz: [8.0, 32.0]
+  filter_method: mne_iir_continuous_run_zero_phase
+  covariance_estimator: oas
+  covariance_dtype: float64
+  trace_normalization: false
+  added_jitter: false
+
+geometry:
+  airm_mean_tol: 1.0e-9
+  airm_mean_maxiter: 100
+  symmetry_tolerance: 1.0e-12
+  invariance_tolerance: 1.0e-8
+  eig_reconstruction_tolerance: 1.0e-10
+  f2_interpretation: partial_canonicalization_equivariant_coordinate_not_GL_invariant
+  f3g_interpretation: exact_common_congruence_invariant_extreme_control
+
+features:
+  order: [F0, F1, F2-S, F2-V, F3-G, F3-D, F2-S-SHUFFLE, F2-S-REVERSE]
+  dimensions:
+    F0: 253
+    F1: 1265
+    F2-S: 1265
+    F2-V: 1265
+    F3-G: 15
+    F3-D: 9
+    F2-S-SHUFFLE: 1265
+    F2-S-REVERSE: 1265
+  co_primary: [F2-S, F3-G]
+  shuffle_seed: 20261905
+  shuffle_nonidentity_per_trial: true
+
+classifier:
+  scaler: StandardScaler
+  model: LinearDiscriminantAnalysis
+  solver: lsqr
+  shrinkage: auto
+  hyperparameter_tuning: false
+  primary_metric: balanced_accuracy
+  secondary_metrics: [accuracy, macro_f1, confusion_matrix]
+
+evaluation:
+  P0:
+    description: within_subject_within_session_sanity
+    folds: 5
+    stratified: true
+    grouped_by_trial: true
+    seed: 20260904
+  P1:
+    description: same_subject_cross_session
+    directions: [0train_to_1test, 1test_to_0train]
+    average_directions_within_subject: true
+  P2:
+    description: cross_subject_LOSO_no_target_calibration
+    primary: true
+    source_subject_class_balancing: equal_weight
+    target_statistics_used: false
+  P3:
+    description: cross_subject_LOSO_subject_RA
+    primary: false
+    target_mean_scope: all_unlabeled_target_full_trial_covariances
+    apply_same_transform_to: [C0, C1, C2, C3, C4, C5, Cfull]
+    label_usage: none
+    designation: TRANSDUCTIVE_CALIBRATION
+
+statistics:
+  sign_flip_patterns: 512
+  sign_flip_alternative: greater
+  holm_family: [F2-S, F3-G]
+  subject_bootstrap_replicates: 20000
+  subject_bootstrap_seed: 20260904
+  tie_tolerance: 1.0e-12
+
+gates:
+  task_no_ra:
+    mean_delta_min: 0.050
+    positive_subjects_min: 6
+    holm_p_max: 0.05
+  task_ra:
+    mean_delta_min: 0.020
+    positive_subjects_min: 6
+    holm_p_max: 0.05
+  cross_session:
+    mean_delta_min: -0.010
+    positive_subjects_min: 5
+  order:
+    protocol: P2
+    ra_mode: no_ra
+    mean_delta_min: 0.010
+    positive_subjects_min: 6
+    sign_flip_p_max: 0.05
+  ident_cluster:
+    median_subject_nmi_improvement_min: 0.050
+    median_subject_hungarian_ba_improvement_min: 0.050
+    positive_subjects_hungarian_ba_min: 6
+  action_oracle:
+    semantic_permutation_accuracy_improvement_min: 0.10
+    true_permutation_rank1_cells_min: 27
+    total_cells: 36
+  action_zero:
+    median_mapping_ba_improvement_min: 0.050
+    positive_subjects_min: 6
+
+identifiability:
+  features: [F0, F1, F2-S, F2-V, F3-G]
+  scaler_fit: source_only
+  pca_fit: source_only
+  pca_components_max: 20
+  pca_whiten: false
+  kmeans_clusters: 4
+  kmeans_n_init: 50
+  kmeans_seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+  target_labels_for_fit_or_assignment: false
+  target_labels_for_final_scoring_only: true
+  neighbour_k: [1, 5]
+
+action:
+  representations: [STATIC, F1, F2-S]
+  permutations: 24
+  oracle_cells: target_subject_x_source_session_x_target_session
+  optimizer: pymanopt_2.2.1_stiefel_trust_regions
+  starts: 4
+  determinant_sectors_per_fit: {negative: 2, positive: 2}
+  max_iterations: 1000
+  gradient_tolerance: 1.0e-5
+  min_step_size: 1.0e-12
+  max_cost_evaluations: 1001
+  max_time_seconds: 3600.0
+  semantic_tie_tolerance: 1.0e-12
+  kmeans_seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
+phase_p_bridge:
+  exact_match_required: true
+  approximate_matching_forbidden: true
+  continuation_mean_knn_r2_delta_min: 0.10
+  continuation_subject2_knn_r2_delta_min: 0.10
+
+phase1:
+  conditional: true
+  allowed_cases: [CASE_2, CASE_1_CONDITIONAL]
+  case1_min_task_effect: 0.030
+  case1_wins_min: 6
+  near_miss_no_ra_delta_min: 0.020
+  near_miss_requires_order: true
+  near_miss_cross_session_min: -0.010
+  seeds: [0, 1, 2]
+  epochs: 100
+  optimizer: Adam
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  batch_size: 64
+  gradient_clip: 5.0
+  patience: 15
+  hidden_size: 64
+  latent_spd_dimension: 8
+  reig_threshold: 0.0001
+
+runtime:
+  phase0_workers: 2
+  action_workers: 8
+  OMP_NUM_THREADS: 1
+  MKL_NUM_THREADS: 1
+  OPENBLAS_NUM_THREADS: 1
+  VECLIB_MAXIMUM_THREADS: 1
+  NUMEXPR_NUM_THREADS: 1

@@ -1,0 +1,17 @@
+{
+  "data_gate": "PASS",
+  "expected_top_level": [
+    "STATUS.md",
+    "DATA_TIMING_AUDIT.md",
+    "PRIOR_EVIDENCE_AUDIT.md",
+    "LITERATURE_OVERLAP_AUDIT.md",
+    "manifest.json",
+    "environment.json",
+    "git_provenance.json",
+    "REPORT.md",
+    "HANDOFF.md"
+  ],
+  "large_cache_in_git": false,
+  "protocol": "baseline_trajectory_identifiability_v0",
+  "raw_eeg_in_git": false
+}
