@@ -117,7 +117,7 @@ def select_semantic_permutation(source: np.ndarray, target: np.ndarray, workers:
                            "iterations": ",".join(str(r["iterations"]) for r in audit["starts"])})
         return {"permutation": permutation, "score": total}, local_audits
 
-    evaluated = Parallel(n_jobs=workers, prefer="threads")(
+    evaluated = Parallel(n_jobs=workers, prefer="processes")(
         delayed(evaluate)(permutation) for permutation in PERMUTATIONS
     )
     rows = [item[0] for item in evaluated]
