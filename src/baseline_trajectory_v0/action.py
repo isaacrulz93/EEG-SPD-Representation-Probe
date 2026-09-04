@@ -19,6 +19,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import pymanopt
+from joblib import Parallel, delayed
 from pymanopt.manifolds import Stiefel
 from pymanopt.optimizers import TrustRegions
 from scipy.optimize import linear_sum_assignment
@@ -97,11 +98,11 @@ def fit_common_action(a: np.ndarray, b: np.ndarray) -> tuple[np.ndarray, dict[st
     return np.asarray(best.point), {"starts": records, "best_cost": float(best.cost)}
 
 
-def select_semantic_permutation(source: np.ndarray, target: np.ndarray):
+def select_semantic_permutation(source: np.ndarray, target: np.ndarray, workers: int = 8):
     """Select component->source mapping without a target-label argument."""
-    rows, audits = [], []
-    for permutation in PERMUTATIONS:
+    def evaluate(permutation):
         total = 0.0
+        local_audits = []
         for heldout in range(4):
             train_labels = [label for label in range(4) if label != heldout]
             a = np.concatenate([source[label] for label in train_labels])
@@ -109,12 +110,18 @@ def select_semantic_permutation(source: np.ndarray, target: np.ndarray):
             q, audit = fit_common_action(a, b)
             error = action_error(source[heldout], target[permutation[heldout]], q)
             total += error
-            audits.append({"permutation": ",".join(map(str, permutation)),
+            local_audits.append({"permutation": ",".join(map(str, permutation)),
                            "heldout": heldout, "error": error,
                            "best_cost": audit["best_cost"],
                            "determinants": ",".join(f"{r['determinant']:.8g}" for r in audit["starts"]),
                            "iterations": ",".join(str(r["iterations"]) for r in audit["starts"])})
-        rows.append({"permutation": permutation, "score": total})
+        return {"permutation": permutation, "score": total}, local_audits
+
+    evaluated = Parallel(n_jobs=workers, prefer="threads")(
+        delayed(evaluate)(permutation) for permutation in PERMUTATIONS
+    )
+    rows = [item[0] for item in evaluated]
+    audits = [audit for item in evaluated for audit in item[1]]
     rows.sort(key=lambda row: (row["score"], row["permutation"]))
     return rows[0]["permutation"], rows, audits
 
