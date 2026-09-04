@@ -227,7 +227,6 @@ def run(cache: str | Path, output: str | Path, resume: bool = True) -> None:
                     trial_matrices[representation], clusters,
                     spd=(representation == "STATIC"),
                 )
-                if representation == "STATIC": target_components = target_components[:, None]
                 selected, scores, audits = select_semantic_permutation(source_repr[representation], target_components)
                 mapping = _selected_component_mapping(selected); prediction = mapping[clusters]
                 row = {"subject": target_subject, "representation": representation, "seed": seed,
