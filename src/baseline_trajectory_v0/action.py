@@ -77,7 +77,7 @@ def fit_common_action(a: np.ndarray, b: np.ndarray) -> tuple[np.ndarray, dict[st
 
     problem = pymanopt.Problem(manifold, cost, euclidean_gradient=gradient,
                                euclidean_hessian=hessian)
-    optimizer = TrustRegions(min_iterations=3, kappa=0.1, theta=1.0,
+    optimizer = TrustRegions(miniter=3, kappa=0.1, theta=1.0,
                              rho_prime=0.1, use_rand=False,
                              rho_regularization=1000.0,
                              max_iterations=1000, max_time=3600,
