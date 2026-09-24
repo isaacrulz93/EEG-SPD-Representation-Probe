@@ -1,0 +1,7 @@
+{
+  "focused_tests": "4 passed",
+  "py_compile": "passed",
+  "git_diff_check": "passed",
+  "full_repository_collection": "blocked: pymanopt missing for 7 pre-existing modules",
+  "remaining_existing_tests": "221 passed, 2 skipped, 1 failed due absent ignored within-subject cache"
+}

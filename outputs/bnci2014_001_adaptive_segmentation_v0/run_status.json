@@ -1,0 +1,8 @@
+{
+  "stage": "UNASSESSED_ADAPTIVE_BOUNDARY_V0",
+  "data_contract": "PASS",
+  "boundary_build": "FAILED: RANDOM_MATCHED undefined for a degenerate equal-length ADAPT5 trial",
+  "classifier_fits": 0,
+  "completed_loso_folds": 0,
+  "session_1test_accessed": false
+}

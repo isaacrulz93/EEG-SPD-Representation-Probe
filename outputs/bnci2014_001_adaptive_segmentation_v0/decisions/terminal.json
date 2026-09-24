@@ -1,0 +1,12 @@
+{
+  "terminal": "UNASSESSED_ADAPTIVE_BOUNDARY_V0",
+  "stage_reached": "adaptive boundary construction",
+  "classifier_fits_started": false,
+  "target_labels_used_for_fitting": false,
+  "failure_type": "RANDOM_MATCHED_CONTROL_UNDEFINED_FOR_DEGENERATE_LENGTH_MULTiset",
+  "failure": "At least one trial has five equal ADAPT5 segment lengths. The only unique permutation of this multiset is the identity, so the required non-identity RANDOM_MATCHED boundaries cannot be constructed.",
+  "failure_observed_after_trials_processed": 1100,
+  "response": "Stopped without substituting identity boundaries or changing the frozen protocol/configuration. No classification metrics or GO/STOP evidence were produced.",
+  "data_contract_passed": true,
+  "session_1test_accessed": false
+}

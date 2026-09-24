@@ -1,0 +1,7 @@
+{
+  "pre_result_commit": "290626ddb15f902ac0de716cc0ab227797aab576",
+  "config_sha256": "e7810cc05effa81e781349854d61db25fcfcf212d4ee7f5c9b76c40f758cca67",
+  "protocol_sha256": "cf2731b898a2dd7db04fc965d1a019413e63455de011252fb582a0752df93139",
+  "branch": "pilot/adaptive-segmentation-v0",
+  "base_branch": "pilot/local-mean-movement-antidevelopment-v0"
+}
