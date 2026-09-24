@@ -1,0 +1,56 @@
+protocol:
+  name: adaptive_covariance_segmentation_falsification
+  version: 0
+  seed: 20260925
+  session: 0train
+  forbidden_session: 1test
+  subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  classes: [left_hand, right_hand, feet, tongue]
+  samples_per_trial: 1000
+  channels: 22
+  sfreq_hz: 250
+  bandpass_hz: [8.0, 32.0]
+  covariance_estimator: OAS
+  covariance_dtype: float64
+frozen_inputs:
+  source_config: configs/bnci2014_001_5window.yaml
+  source_config_sha256: 41f1ad7b2d80a07ab19436de5ec547dfe63d86a320f06dfd05953620944cb232
+  prepared_epochs_path: cache/bnci2014_001/prepared_epochs.npz
+  prepared_epochs_file_sha256: 5f59e0cbd18fcd7540715eac685ba997e6fd98fcb8c97f0b237bc07627f4a010
+  prepared_epochs_x_content_sha256: 0ea4250cd215c0049fac050ae0dbae60d81a4ab3e8d0335b12b33e29092b3972
+  prepared_metadata_path: cache/bnci2014_001/prepared_metadata.csv
+  prepared_metadata_sha256: 4ce1ce3f6af630dfb8b3ce486900e0d859a00a8f71485ea89a9e6c76305d39ae
+probe:
+  window_samples: 125
+  stride_samples: 25
+segmentation:
+  segments: 5
+  boundary_grid_samples: 25
+  minimum_segment_samples: 125
+  fixed_window_samples: 200
+  random_replicates: 20
+  matched_random_max_replicates: 20
+classifier:
+  feature: svec_log_covariance
+  scaler: StandardScaler
+  scaler_fit: source_subjects_only
+  estimator: multinomial_logistic_regression
+  C: 1.0
+  solver: lbfgs
+  max_iter: 5000
+  tuning: false
+prediction:
+  aggregation: segment_duration_weighted_probability_average
+evaluation:
+  outer_split: leave_one_subject_out
+  primary_metric: balanced_accuracy
+  paired_test: exact_one_sided_sign_flip
+  sign_configurations: 512
+  alpha: 0.05
+  terminal_gate:
+    adapt5_gt_fixed5_mean_effect: 0.0
+    p_value_max: 0.05
+    adapt5_gt_random_matched: true
+    boundary_airm_gt_random: true
+paths:
+  output_dir: outputs/bnci2014_001_adaptive_segmentation_v0
