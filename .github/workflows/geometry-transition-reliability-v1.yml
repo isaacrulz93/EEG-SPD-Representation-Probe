@@ -30,7 +30,8 @@ jobs:
           python -m pip install -r requirements.txt
       - name: Run geometry transition reliability diagnostic
         run: |
-          python scripts/42_geometry_transition_reliability_v1.py 2>&1 | tee geometry_transition_v1.log
+          set -o pipefail
+          PYTHONPATH=. python scripts/42_geometry_transition_reliability_v1.py 2>&1 | tee geometry_transition_v1.log
       - name: Package outputs
         if: always()
         run: |
